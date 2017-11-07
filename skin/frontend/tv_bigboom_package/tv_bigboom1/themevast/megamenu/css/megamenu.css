@@ -5,9 +5,9 @@ nav {
     position:relative;
     font-size: 13px;
     margin: 0 auto 0;
-    padding: 0 0 0 268px ;
+    padding: 0 0 0 180px ;
     float: left;
-    width: 100%;
+    height:60px;
     text-align: center;
 }
 /*.checkout-onepage-index .nav_megamenu,.customer-account-login .nav_megamenu{padding:0;}*/

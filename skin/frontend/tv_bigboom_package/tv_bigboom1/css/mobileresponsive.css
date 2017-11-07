@@ -10,7 +10,7 @@
     
 }
 @media (min-width: 992px) and (max-width: 1200px) {
-    .nav_megamenu { padding: 0 0 0 218px;}
+    .nav_megamenu { padding: 0 0 0 180px;}
     
     .nav_megamenu div.megamenu:hover div.dropdown { top: 45px;}
     .nav_product .products-grid li.item .item-inner { min-height: 175px;}

@@ -5,18 +5,60 @@ if(!$this->getConfig('enabled')) return;
 $_helper = $this->helper('catalog/output');
 $helpLabels = $this->helper('themevast/labels');
 $_featureImgUrl = Mage::getBaseUrl();
-
 ?>
 <style>
-    /*title*/
-    .featuredproduct{padding-bottom: 307px;}
-    .featuredproduct .bx-title .f-right{border-width: 1px 1px 1px 1px;border-style: solid;border-color: #dfdfdf;}
-    .featuredproduct .bx-title .f-right li{display: inline-block;float: left;padding: 0 15px;font-size: 14px;line-height: 40px;text-transform: uppercase;cursor: pointer;}
-    .featuredproduct .bx-title .f-right li:hover{color: #ffffff;background-color: #ff8400;}
-    .featuredproduct .bx-title .f-right li.active{color: #ffffff;background-color: #ff8400;cursor: default;}
+    /*feature title*/
+    .featuredproduct .featured-title{border-bottom: 2px solid #fc6426;}
+    .featuredproduct .bx-title .feature_title{
+        max-width: 900px;
+        height: 50px;
+        margin: 0 auto;
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-direction: row;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        -ms-flex-pack: justify;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        -ms-flex-align: center;
+        -webkit-box-align: center;
+        align-items: center;}
+    .featuredproduct .bx-title .feature_title li{
+        float: left;
+        width: 300px;
+        height: 50px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        font-size: 18px;
+        color: #010101;
+        text-align: center;
+        line-height: 50px;
+        -webkit-transition: all .2s linear;
+        transition: all .2s linear;
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-direction: row;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        -ms-flex-pack: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        -webkit-box-align: center;
+        align-items: center;cursor: pointer;}
+    .featuredproduct .bx-title .feature_title li:hover{color: #ffffff;background-color: #fc6426;}
+    .featuredproduct .bx-title .feature_title li.active{color: #ffffff;background-color: #fc6426;cursor: default;}
     /*featureBox*/
-    .featuredproduct .featuredBox{opacity:0;position: absolute;z-index: -1;left:15px;top:67px;max-width: 1170px;}
-    .featuredproduct .featuredBox.active{display: block;opacity: 1;z-index: 1;}
+    .featuredproduct .featured_out{height:768px;overflow: hidden;}
+    .featuredproduct .featuredBox{display: none;}
+    .featuredproduct .featuredBox.active{display: block;}
+    /*.featuredproduct .featuredBox{opacity:0;position: absolute;z-index: -1;left:15px;top:67px;max-width: 1170px;}
+    .featuredproduct .featuredBox.active{display: block;opacity: 1;z-index: 1;}*/
     /*btn*/
     .featuredproduct .bx-wrapper .bx-controls-direction a{top:50%;margin: 0;}
     .featuredproduct .bx-wrapper .bx-controls-direction a.bx-prev{left:0;}
@@ -27,7 +69,91 @@ $_featureImgUrl = Mage::getBaseUrl();
     .ul-tabs > li:last-child {border-bottom: 0;}
     .ul-tabs > li.active > a:before {background-color: #fff;top: 50%;content: "";display: block;height: 10px;left: -5px;margin: 0;position: absolute;right: 0;transform: rotate(-45deg);-moz-transform: rotate(-45deg);-webkit-transform: rotate(-45deg);-o-transform: rotate(-45deg);width: 10px;}
     .img-responsive {display: block;height: auto;max-width: 100%;}
+
+    /*#info-strip*/
+    #info-strip .innerContainer>ul{
+        max-width: 900px;
+        margin: 0 auto;
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-direction: row;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        -ms-flex-pack: justify;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        -ms-flex-align: center;
+        -webkit-box-align: center;
+        align-items: center;
+    }
+    #info-strip .innerContainer ul li {
+        display: inline-block;
+        float: left;
+        width: 300px;
+        height: 72px;
+    }
+    #info-strip .innerContainer ul li:hover {
+        background: #f3f3f3
+    }
+    #info-strip .innerContainer ul li a {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        text-align: left;
+        color: #343434;
+        background: url("../skin/frontend/tv_bigboom_package/tv_bigboom1/images/icon-next.png") right 10px center no-repeat;
+    }
+    #info-strip .innerContainer ul li a:hover{
+        text-decoration: none;
+    }
+    #info-strip .innerContainer ul li a>img {
+        float: left;
+        margin-right: 10px;
+        vertical-align: top;
+    }
+    #info-strip .innerContainer ul li a>h3 {
+        position: relative;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0;
+    }
+    #info-strip .innerContainer ul li a>span {
+        position: relative;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: 'Open Sans Condensed', sans-serif;
+    }
+    @media only screen and (max-width: 800px) {
+        #info-strip .innerContainer ul {
+            width: auto;
+            -ms-flex-direction: column;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+        }
+        #info-strip .innerContainer ul li {
+            display: inline;
+            margin: 0 auto;
+            float: none;
+            width: 100%;
+        }
+    }
 </style>
+<div class="container" id="info-strip">
+    <div class="innerContainer">
+        <ul class="clear_fix">
+            <li> <a href="javascript:void(0)"> <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\shipping.png'?>" alt="shipping" width="64"><h3>Fri frakt</h3> <span>Skickas nästa arbetsdag</span> </a></li>
+            <li> <a href="javascript:void(0)"> <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\fardigt.png'?>" alt="fardigt" width="45"><h3>Färdigt på15 min</h3> <span>påde flesta reparationer</span> </a></li>
+            <li> <a href="javascript:void(0)"> <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\spara.png'?>" alt="spara" width="34"><h3>Spara 50% - 75%</h3> <span>påflera reparationer påsamma enhet</span> </a></li>
+        </ul>
+    </div>
+</div>
 <div class="featuredproduct">
 	<?php
     /*echo $this->getConfig('title') ? '<div class="bx-title featured-title clearfix">
@@ -41,16 +167,16 @@ $_featureImgUrl = Mage::getBaseUrl();
     </div>' : '';
     */
 	?>
-    <div class="bx-title featured-title clearfix">
-        <h2 class="f-left" style="display: inline-block;"><?php echo $this->getConfig('title')?></h2>
+    <div class="bx-title featured-title">
         <!--add by jerry-->
-        <ul class="f-right">
-            <li class="active">Best<span> Selling</span></li>
-            <li>New<span> Arrival</span></li>
-            <li>Featured<span> Product</span></li>
+        <ul class="feature_title clearfix">
+            <li class="active">Populart</li>
+            <li>Nytt</li>
+            <li>Rea</li>
         </ul>
     </div>
 
+    <div class="featured_out">
 	<?php
 		// getConfig
 		$widthImage  	= $this->getConfig('widthImage') ? $this->getConfig('widthImage') : 135;
@@ -158,8 +284,8 @@ $_featureImgUrl = Mage::getBaseUrl();
 
 	<?php if ($slide && $rows > 1): ?>
 	</div>
+    </div>
 	<?php endif ?>
-
 	<?php if($slide) : ?>
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
@@ -175,7 +301,7 @@ $_featureImgUrl = Mage::getBaseUrl();
                     })
                 })(".featuredproduct");
 				//new add by jerry at 2017/09/05 18:13
-                $(".featuredproduct .bx-title .f-right li").click(function(){
+                $(".featuredproduct .bx-title .feature_title>li").click(function(){
                     if(!$(this).hasClass("active")){
                         $(this).addClass("active").siblings().removeClass("active");
                         var tmpIndex = $(this).index();
@@ -188,48 +314,4 @@ $_featureImgUrl = Mage::getBaseUrl();
 		</script>
 	<?php endif ?>
 </div>
-
-<!--smartphone begin-->
-<div class="container smartphone">
-    <!--div class="bx-title"><h2>smartphone</h2></div-->
-    <div class="row" style="background: #fff;">
-        <div class="col-md-3 col-sm-3 leftbox">
-            <a href="#" style="display: block;height:590px;">
-                <img class="img-responsive" src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\bl.jpg'?>" alt="">
-            </a>
-        </div>
-        <div class="col-md-9 col-sm-3">
-            <div style="border-color: #dfdfdf;border-style: solid;border-width: 1px;" class="clearfix">
-                <div class="div-tabs f-left" style="width:80.6%;height:590px;">
-                    <a class="active" href="#">
-                        <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\br1.jpg'?>" alt="br1">
-                    </a>
-                    <a href="#">
-                        <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\br2.jpg'?>" alt="br2">
-                    </a>
-                    <a href="#">
-                        <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\br3.jpg'?>" alt="br3">
-                    </a>
-                </div>
-                <ul class="ul-tabs f-right" style="width:19.4%;">
-                    <li class="active"><a href="javascript:void(0)"><img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\one1.jpg'?>" alt="one"></a></li>
-                    <li><a href="javascript:void(0)"><img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\two1.jpg'?>" alt="two"></a></li>
-                    <li><a href="javascript:void(0)"><img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\three1.jpg'?>" alt="three"></a></li>
-                </ul>
-            </div>
-            <script type="text/javascript">
-                jQuery(document).ready(function($){
-                    $(".ul-tabs li").click(function(){
-                        if(!$(this).hasClass("active")){
-                            var tmpIndex = $(this).index();
-                            $(this).addClass("active").siblings().removeClass("active")
-                                .parent().parent().find(".div-tabs>a").eq(tmpIndex).addClass("active").siblings().removeClass("active");
-                        }
-                    });
-                });
-            </script>
-        </div>
-    </div>
-</div>
-<!--smartphone finish-->
 <?php ?>

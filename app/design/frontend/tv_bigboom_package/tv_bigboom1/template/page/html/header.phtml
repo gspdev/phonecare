@@ -33,7 +33,29 @@
 	$customer_data = Mage::getModel('customer/customer')->load($session->id);
 	//print_r($customer_data->getData());exit;
 ?>
-                    
+<style>
+    /*edit by j*/
+    .header-wrapper{
+        position: fixed;
+        z-index: 1001;
+        top:0;
+        left:0;
+        width: 100%;}
+    #header-special-offer{display:none;}
+    .logo-box .logo strong{
+        position: absolute;
+        top: -999em;
+        left: -999em;
+        width: 0;
+        height: 0;
+        font-size: 0;
+        line-height: 0;
+        text-indent: -999em;
+        overflow: hidden;}
+    .header-quick-access{
+        height:60px;
+    }
+</style>
 <header class="header-wrapper">
     <div id="header-special-offer">
         <div class="container">
@@ -46,125 +68,72 @@
     <div class="header-quick-access">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-4">
-                    <div class="quick-access">
-                        
-						<div class="header-left">
-						    <span class="hidden-xs"><?php echo $this->getChildHtml('welcome') ?></span>
-							<?php if (empty($session->getId())):?>
-                             <a href="<?php echo $this->getUrl('customer/account/login')?>" title="Sign in" class="signin">Sign in</a>
-                             Or
-							 <a class="head-Join register" href="<?php echo $this->getUrl("customer/account/create")?>" title="Join">Join<span class="hidden-xs"> Free</span></a>
-                             <?php else:?>
-                             <a href="<?php echo $this->getUrl('customer/account/logout')?>">Logout</a>
-                            <?php endif;?>
-						</div>
-                    </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 logo-box">
+                    <?php if ($this->getIsHomePage()):?>
+                        <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+                    <?php else:?>
+                        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+                    <?php endif?>
                 </div>
-                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-8">
-                    <div class="header-toplinks">
-						<div class="language-currency">
-							<div class="header-language">
-									<?php echo $this->getChildHtml('store_language') ?>
-							</div>
-							<script type="text/javascript">
-								jQuery(document).ready(function($){
-									if($(document).width()<=767){
-										$(".drop-lang .drop-trigger").find("a").first().attr('href','javascript:void(0)');
-									}
-								});
-							</script>
-							<div class="header-currency">
-								<?php echo $this->getChildHtml('currency_top') ?>
-							</div>
-						</div>
-						<?php echo $this->getChildHtml('topLinks') ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="quick-access">
+                        <div class="header-left text-right">
+                            <ul class="user">
+                                <?php if (empty($session->getId())):?>
+                                    <li><a href="<?php echo $this->getUrl('customer/account/login')?>" title="Sign in" class="signin">Logga in</a></li>
+                                    <li><a class="head-Join register" href="<?php echo $this->getUrl("customer/account/create")?>" title="Join">Registrera</a></li>
+                                <?php else:?>
+                                    <li><a href="<?php echo $this->getUrl('customer/account/logout')?>">Logout</a></li>
+                                <?php endif;?>
+                            </ul>
+                            <ul class="social">
+                                <li><a class="blog" href="<?php echo $this->getUrl('social/blog')?>">Blogg</a></li>
+                                <li><a class="social_icon facebook" href="<?php echo $this->getUrl('social/facebook')?>"></a></li>
+                                <li><a class="social_icon instagram" href="<?php echo $this->getUrl('social/instagram')?>"></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="header">
-        <div class="container">
-            <div class="page-header-content">
-                <div class="row">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 search-left">
-                        <?php if ($this->getIsHomePage()):?>
-                        <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
-                        <?php else:?>
-                        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
-                        <?php endif?>
-                    </div>
-                    <div class="col-xs-9 col-sm-6 col-md-6 col-lg-6">
-                        <?php echo $this->getChildHtml('topSearch') ?>
-                    </div>
-                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 f-right search-right-box">
-						<div class="search-right clear_fix">
-							<div class="head-Cart fl">
-                                <a href="javascript:void(0)" class="visible-xs hidden-sm"></a>
-								<a href="<?php echo$this->getUrl('checkout/cart')?>" class="hidden-xs visible-sm"></a>
-								<div class="header-cart-mini">
-									<div class="topcart-mini-container">
-										<?php echo $this->getChildHtml('top_cart_mini') ?>
-									</div>
-								</div>
-							</div>
-							<div class="head-Wishlist fl hidden-xs">
-							<?php //edit herf by jerry?>
-								<a class="wishMask" href="<?php echo $this->getUrl('wishlist') ?>"></a>
-								<a class="wishText" href="javascript:void(0)">
-									<span>Wish</span>
-									<span>List</span>
-								</a>
-							</div>
-							<div class="head-My fl">
-                                <a href="javascript:void(0)" class="myAccount visible-xs hiddem-sm"></a>
-								<a href="<?php echo $this->getUrl('customer/account')?>" class="myAccount hidden-xs visible-sm"></a>
-								<a class="myText signin hidden-xs" href="<?php echo $this->getUrl('customer/account') ?>">
-                                <?php if (!empty($session->getId())):?>
-									<span>Hi,<i><?php echo $customer_data->getLastname()?></i></span>
-									<span>My Account</span>
-                                <?php else:?>
-                                	<span>Welcome !</span>
-									<span>Sign in</span>
-                                <?php endif;?>
-								</a>
-								<a class="myText signin visible-xs hidden-sm" href="<?php echo 'javascript:void(0)' ?>">
-                                <?php if (!empty($session->getId())):?>
-									<span>Hi,<i><?php echo $customer_data->getLastname()?></i></span>
-									<span>My Account</span>
-                                <?php else:?>
-                                	<span>Welcome !</span>
-									<span>Sign in</span>
-                                <?php endif;?>
-								</a>
-								<div class="top-Line"></div>
-								<div class="my-Drop">
-                                <?php if (empty($session->getId())):?>
-									<a href="<?php echo $this->getUrl('customer/account/login') ?>" title="Sign in" class="myDrop-Sign signin">Sign in</a>
-									<p class="myDrop-Join">New to Aswanu? <a href="<?php echo $this->getUrl('customer/account/create') ?>" title="Join Free" class="register">Join Free</a></p>
-                                <?php endif;?>
-									<ul class="myDrop-List">
-										<li><a href="<?php echo $this->getUrl('customer/account/')?>">My Aswasu</a></li>
-										<li><a href="<?php echo $this->getUrl('sales/order/history')?>">My Orders</a></li>
-										<li><a href="<?php echo $this->getUrl('review/customer/')?>">My Reviews</a></li>
-										<li><a href="<?php echo $this->getUrl('wishlist')?>">My Favorites</a></li>
-									</ul>
-									<a class="myDrop-Request" href="javascript:void(0)">Submit a Buying Request</a>
-									<p>Let us help you find what you need</p>
-								</div>
-							</div>
-						</div>
-					</div>
-                </div> 
-            </div>
-        </div>
-	</div>
 	<div class="nav-container-box">
 		<div class="container">
-			<?php echo $this->getChildHtml('topMenu') ?>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-md-6">
+                    <?php echo $this->getChildHtml('topMenu') ?>
+                </div>
+                <div class="col-xs-8 col-sm-4 col-md-4 col-lg-4">
+                    <?php echo $this->getChildHtml('topSearch') ?>
+                </div>
+                <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 f-right search-right-box">
+                    <div class="search-right clear_fix">
+                        <div class="head-Cart fl">
+                            <a href="javascript:void(0)" class="visible-xs hidden-sm"></a>
+                            <a href="<?php echo$this->getUrl('checkout/cart')?>" class="hidden-xs visible-sm"></a>
+                            <div class="header-cart-mini">
+                                <div class="topcart-mini-container">
+                                    <?php echo $this->getChildHtml('top_cart_mini') ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 		</div>
 	</div>
     <?php echo $this->getChildHtml('topContainer'); ?>
+    <div class="vmegamenu-menu container">
+        <div class="block-position">
+            <div class="position position1">
+                <?php $block =$this->getLayout()->createBlock('megamenu/megamenu')
+                    ->setTemplate('themevast/megamenu/vmegamenu.phtml');
+                echo $block->toHtml();
+                ?>
+            </div>
+        </div>
+    </div>
 </header>
+<div style="height: 120px;opacity: 0;z-index: 0;background: none;"></div>
+
 
