@@ -27,11 +27,24 @@
 <?php /* @var $this Mage_Catalog_Block_Product_View_Abstract */?>
 <?php $_product = $this->getProduct() ?>
 
-<p><?php echo "SKU : " . $_product->getSku()?></p>
+<p class="sku"><?php echo "Artikelnummer : " . $_product->getSku()?></p>
+<!--edit by j-->
+<ul class="dlist">
+  <?php
+  $_array = array(
+          "st kvar för hemleverans"=>1,
+      "st att hämta i Västberga"=>2,
+      "st att hämta på Kungsgatan"=>3
+  );
+  foreach ($_array as $_key=>$_val) {
+      echo '<li><i class="icon"></i><span class="num">'.$_product->getData('specter_lager_id' . $_val).'</span>'.$_key . ' '  .'</li>';
+  }
+  ?>
+</ul>
 <p>
     <?php
         $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-        echo "Stock QTY : " . floor($stock->getQty());
+        echo "Stock Qty : " . floor($stock->getQty());
     ?>
 </p>
 <?php if ($this->displayProductStockStatus()): ?>

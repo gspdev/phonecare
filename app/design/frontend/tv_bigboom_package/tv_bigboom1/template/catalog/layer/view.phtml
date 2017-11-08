@@ -58,21 +58,4 @@
         <?php endif; ?>
     </div>
 </div>
-<script type="text/javascript">
-	jQuery(document).ready(function($){
-		$("#navMenuBtn").click(function(){
-			if(!$('.block.block-layered-nav').hasClass('menuShow')){
-				$("#navMask").css('width','100%');
-				$(".block.block-layered-nav").addClass('menuShow');
-			}else{
-				$("#navMask").css('width','0');
-				$(".block.block-layered-nav").removeClass('menuShow');
-			}
-			$("#navMask").click(function(){
-				$("#navMask").css('width','0');
-				$(".block.block-layered-nav").removeClass('menuShow');
-			});
-		});
-	});
-</script>
 <?php endif; ?>
