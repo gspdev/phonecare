@@ -23,6 +23,7 @@
  * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
+$_footerImgSrc =Mage::getBaseUrl();
 ?>
 <footer class="footer-wrapper">
     <div class="container">
@@ -40,7 +41,7 @@
                             </div>
 							<div class="col-xs-12 col-sm-6">
 								<div class="transport">
-									<img src="http://192.168.1.250:90/media/wysiwyg/dhl.png"/>
+									<img src="<?php echo  $_footerImgSrc . ('skin/frontend/tv_bigboom_package/tv_bigboom1/images/dhl.gif');?>" title="DHL"/>
 								</div>
 							</div>
                         </div>
