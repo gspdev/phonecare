@@ -54,7 +54,7 @@ $_featureImgUrl = Mage::getBaseUrl();
     .featuredproduct .bx-title .feature_title li:hover{color: #ffffff;background-color: #fc6426;}
     .featuredproduct .bx-title .feature_title li.active{color: #ffffff;background-color: #fc6426;cursor: default;}
     /*featureBox*/
-    .featuredproduct .featured_out{height:768px;overflow: hidden;}
+    .featuredproduct .featured_out{}
     .featuredproduct .featuredBox{display: none;}
     .featuredproduct .featuredBox.active{display: block;}
     /*.featuredproduct .featuredBox{opacity:0;position: absolute;z-index: -1;left:15px;top:67px;max-width: 1170px;}
@@ -195,7 +195,7 @@ $_featureImgUrl = Mage::getBaseUrl();
 	<?php endif ?>
     <?php
         //edit by mivec
-        $_categoresId = array(151 , 286 , 287);
+        $_categoresId = array(29 , 24 , 146);
 
         $_status = "";
         $_count=1;
@@ -205,7 +205,7 @@ $_featureImgUrl = Mage::getBaseUrl();
             $_productCollection = Mage::getModel("catalog/product")
                 ->getCollection()
                 ->addCategoryFilter($_category)
-                ->setPageSize(10)
+                ->setPageSize(8)
                 ->setOrder("entity_id" , "DESC");
             //echo $_count . "</p>";
             if ($_count==1) {
@@ -236,7 +236,6 @@ $_featureImgUrl = Mage::getBaseUrl();
 			<?php endif ?>
 				<img class="img-face" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($widthImage, $heightImage); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
 			</a>
-			<a class="view-detail" <?php if(Mage::getStoreConfig('quickview/general/enabled')):?> id='fancybox<?php echo $_product->getId()?>'  href="<?php echo $this->getUrl('quickview/index/ajax',array('product_id'=>$_product->getId())); ?>"<?php else: ?> href="<?php echo $_product->getProductUrl() ?>" href="<?php echo $_product->getProductUrl() ?>" <?php endif ?> title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><i class="fa fa-search"></i></a>
 			</div>
 			<div class="product-shop">
 				<?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
@@ -248,28 +247,17 @@ $_featureImgUrl = Mage::getBaseUrl();
 					<?php echo $this->getPriceHtml($_product, true) ?>
 				<?php endif; ?>
 				<div class="actions">
+                    <div class="stock_box">
+                        <span class="text">Lager</span>
+                        <span class="quality">100</span>
+                    </div>
 					<?php if($cart): ?>
 						<?php if($_product->isSaleable()): ?>
-							<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><i class="fa fa-shopping-cart"></i><?php echo $this->__('Add to Cart') ?></span></span></button>
+							<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Köp') ?></span></span></button>
 						<?php else: ?>
 							<p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
 						<?php endif; ?>
 					<?php endif; ?>
-					
-					<?php if($compare || $wishlist): ?>
-						<ul class="add-to-links">
-							<?php if($compare): ?>
-						<?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
-							<li><a href="<?php echo $_compareUrl ?>" class="link-compare"><i class="fa fa-exchange"></i><?php //echo $this->__('Add to Compare') ?></a></li>
-						<?php endif; ?>
-						<?php if($wishlist): ?>
-							<?php if ($this->helper('wishlist')->isAllow()) : ?>
-								<li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><i class="fa fa-heart"></i><?php //echo $this->__('Add to Wishlist') ?></a></li>
-							<?php endif; ?>
-						<?php endif; ?>
-					<?php endif; ?>
-				</ul>
-			<?php endif; ?>
 				</div>
 			</div>
 			<?php echo $helpLabels->getLabels($_product); //Product labels ?>
@@ -286,7 +274,7 @@ $_featureImgUrl = Mage::getBaseUrl();
 	</div>
     </div>
 	<?php endif ?>
-	<?php if($slide) : ?>
+	<?php $slide = 0 ;if($slide) : ?>
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
                 (function(selector){
@@ -300,18 +288,22 @@ $_featureImgUrl = Mage::getBaseUrl();
                         autoHover: true, // stop while hover <=> slider.stopAuto(); + slider.startAuto();
                     })
                 })(".featuredproduct");
-				//new add by jerry at 2017/09/05 18:13
-                $(".featuredproduct .bx-title .feature_title>li").click(function(){
-                    if(!$(this).hasClass("active")){
-                        $(this).addClass("active").siblings().removeClass("active");
-                        var tmpIndex = $(this).index();
-                        $(".featuredproduct .featuredBox").eq(tmpIndex).addClass("active").siblings().removeClass("active");
-                    }else {
-                        return;
-                    }
-                });
 			});
 		</script>
 	<?php endif ?>
+    <script type="text/javascript">
+        //new add by jerry at 2017/09/05 18:13
+        jQuery(document).ready(function($){
+            $(".featuredproduct .bx-title .feature_title>li").click(function(){
+                if(!$(this).hasClass("active")){
+                    $(this).addClass("active").siblings().removeClass("active");
+                    var tmpIndex = $(this).index();
+                    $(".featuredproduct .featuredBox").eq(tmpIndex).addClass("active").siblings().removeClass("active");
+                }else {
+                    return;
+                }
+            });
+        });
+    </script>
 </div>
 <?php ?>

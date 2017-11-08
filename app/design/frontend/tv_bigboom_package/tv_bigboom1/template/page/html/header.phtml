@@ -101,6 +101,17 @@
 		<div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-md-6">
+                    <!--vmegamenu-menu-->
+                    <div class="vmegamenu-menu">
+                        <div class="block-position">
+                            <div class="position position1">
+                                <?php $block =$this->getLayout()->createBlock('megamenu/megamenu')
+                                    ->setTemplate('themevast/megamenu/vmegamenu.phtml');
+                                echo $block->toHtml();
+                                ?>
+                            </div>
+                        </div>
+                    </div>
                     <?php echo $this->getChildHtml('topMenu') ?>
                 </div>
                 <div class="col-xs-8 col-sm-4 col-md-4 col-lg-4">
@@ -123,16 +134,7 @@
 		</div>
 	</div>
     <?php echo $this->getChildHtml('topContainer'); ?>
-    <div class="vmegamenu-menu container">
-        <div class="block-position">
-            <div class="position position1">
-                <?php $block =$this->getLayout()->createBlock('megamenu/megamenu')
-                    ->setTemplate('themevast/megamenu/vmegamenu.phtml');
-                echo $block->toHtml();
-                ?>
-            </div>
-        </div>
-    </div>
+
 </header>
 <div style="height: 120px;opacity: 0;z-index: 0;background: none;"></div>
 

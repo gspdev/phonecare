@@ -72,21 +72,16 @@
                             <?php //echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
                             <?php echo substr($_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description'),0,245) ?>
                         </div>
-						<div class="learn-box"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a></div>
                         <div class="actions">
+                            <div class="stock_box">
+                                <span class="text">Lager</span>
+                                <span class="quality">100</span>
+                            </div>
                             <?php if($_product->isSaleable()): ?>
-                                <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><i class="fa fa-shopping-cart"></i><?php echo $this->__('Add to Cart') ?></span></span></button>
+                                <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Köp') ?></span></span></button>
                             <?php else: ?>
                                 <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
                             <?php endif; ?>
-                            <ul class="add-to-links">
-                                <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
-                                    <li class="last"><a href="<?php echo $_compareUrl ?>" title="<?php echo $this->__('Add to Compare') ?>" class="link-compare"><i class="fa fa-exchange"></i><?php //echo $this->__('Add to Compare') ?></a></li>
-                                <?php endif; ?>   
-                                <?php if ($this->helper('wishlist')->isAllow()) : ?>
-                                    <li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" title="<?php echo $this->__('Add to Wishlist') ?>" class="link-wishlist"><i class="fa fa-heart"></i><?php //echo $this->__('Add to Wishlist') ?></a></li>
-                                <?php endif; ?>
-                        </ul>
                         </div>
                 </div>
             </div> 
@@ -129,7 +124,6 @@
                         <img class="img-face-back" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image', $imagehv)->resize(300,300) ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
                     <?php endif ?>
                     <img class="img-face" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(300, 300); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
-                    <a class="view-detail" <?php if(Mage::getStoreConfig('quickview/general/enabled')):?> id='fancybox<?php echo $_product->getId()?>'  href="<?php echo $this->getUrl('quickview/index/ajax',array('product_id'=>$_product->getId())); ?>"<?php else: ?> href="<?php echo $_product->getProductUrl() ?>" href="<?php echo $_product->getProductUrl() ?>" <?php endif ?> title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><i class="fa fa-search"></i></a>
                     </div>
                     <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
                     <p class="sku">SKU:<?php echo $_product->getSku()?></p> <!-- edit by mivec -->
@@ -139,20 +133,15 @@
                     <?php endif; ?>
                     <?php echo $this->getPriceHtml($_product, true) ?>               
                     <div class="actions">
+                        <div class="stock_box">
+                            <span class="text">Lager</span>
+                            <span class="quality">100</span>
+                        </div>
                          <?php if($_product->isSaleable()): ?>
-                            <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><i class="fa fa-shopping-cart"></i><?php echo $this->__('Add to Cart') ?></span></span></button>
+                            <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Köp') ?></span></span></button>
                         <?php else: ?>
                             <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
                         <?php endif; ?>
-                        <ul class="add-to-links">
-                            <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
-                            <li class="last"><a href="<?php echo $_compareUrl ?>" title="<?php echo $this->__('Add to Compare') ?>" class="link-compare"><i class="fa fa-exchange"></i><?php //echo $this->__('Add to Compare') ?></a></li>
-                    <?php endif; ?>
-
-                    <?php if ($this->helper('wishlist')->isAllow()) : ?>
-                        <li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" title="<?php echo $this->__('Add to Wishlist') ?>" class="link-wishlist"><i class="fa fa-heart"></i><?php //echo $this->__('Add to Wishlist') ?></a></li>
-                    <?php endif; ?>
-                    </ul>
                     </div>
                     <?php echo $helpLabels->getLabels($_product); //Product labels ?>
                 </div>
