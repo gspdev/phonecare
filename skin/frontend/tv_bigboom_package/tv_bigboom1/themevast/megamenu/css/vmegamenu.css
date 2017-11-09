@@ -132,7 +132,7 @@
 .nav_vmegamenu #pt_menu_link ul li a.act,
 .nav_vmegamenu #pt_menu_link ul li a:hover,
 .nav_vmegamenu div.megamenu.act {
-    background-color: #b0d95e;/*#db4c52*/
+    background-color: #fc6908;/*#db4c52*/
     color: #fff;
 }
 .nav_vmegamenu div.megamenu .level-top a:hover .fa-angle-down:before,
@@ -175,12 +175,12 @@
 .megamenu .itemMenu a.level3:hover,
 .megamenu .itemMenu a.level4:hover {
   /*padding-left: 10px;*/
-  color:#b0d95e;
+  color:#fc6908;
 }
 .itemSubMenu>.itemMenu>a.itemMenuName:nth-child(n+9){
 	display:none;
 }
-.viewmore:hover{color:#ff0000;}
+.viewmore:hover{color:#fc6908;}
 .nav_vmegamenu .itemSubMenu a.itemMenuName {
 	font-family: Helvetica,Arial,sans-serif;
     color: #666666;
@@ -194,7 +194,7 @@
 	transition:all 0s linear;
 }
 .nav_vmegamenu .itemSubMenu a.itemMenuName:hover{
-	text-decoration-color: #b0d95e;
+	text-decoration-color: #fc6908;
 }
 .nav_vmegamenu div.column {
     float:left;

@@ -32,8 +32,8 @@
 .header-cart-mini .top-cart-content {
     width:270px;
     position: absolute;
-    top: 39px;
-    left: -39px;
+    top: 58px;
+    right: 0;
     border: 1px solid #ddd;
     border-top: 3px solid #e74c3c;
     background:#fff;

@@ -9,15 +9,15 @@ $_webMiniCartUrl = Mage::getBaseUrl();
                 <?php $_cartQty = $this->getSummaryCount() ?>
                 <div class="cart-mini-title">
                     <a class="shopping-cart hidden-xs" href="<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>">
-                    <span class="cart-count"><?php if($_cartQty<1) { echo $this->__('0'); } else { echo $_cartQty; } ?></span>
-						<span class="cartText hidden-xs">Cart</span>
-					</a>
-					<a class="shopping-cart visible-xs hidden-sm" href="<?php echo "javascript:void(0)" ?>">
-                    <span class="cart-count"><?php if($_cartQty<1) { echo $this->__('0'); } else { echo $_cartQty; } ?></span>
-						<span class="cartText hidden-xs">Cart</span>
+                    <span class="cart-count">
+                        <?php
+                        if($_cartQty<1) {
+                            echo $this->__('Tom varukorg');
+                        } else {
+                            echo Mage::helper('checkout')->formatPrice($this->getSubtotal());
+                        } ?></span>
 					</a>
                 </div>
-				<div class="top-line"></div>
                 <div class="top-cart-content">
                     <?php $_items = $this->getRecentItems() ?>
                     <?php if (count($_items)): ?>
