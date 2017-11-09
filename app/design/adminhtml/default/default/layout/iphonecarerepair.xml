@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+    <layout version="0.1.0">        
+        <adminhtml_sales_order_view>
+              <reference name="head">                
+                <action method="addItem">
+                    <type>skin_css</type>
+                    <name>css/repair.css</name>
+                </action>
+            </reference>
+            <reference name="order_items">
+                <block type="iphonecarerepair/adminhtml_sales_order_view_info_block"
+                       name="iphonecare.repair.info"
+                       template="iphonecare/repair/repair.phtml"
+                />
+            </reference>
+        </adminhtml_sales_order_view>
+    </layout>
