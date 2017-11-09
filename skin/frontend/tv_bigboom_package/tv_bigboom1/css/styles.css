@@ -710,7 +710,9 @@ p.welcome-msg { float: left; margin: 0; color: #fff; text-transform: uppercase; 
 
 
 /*-------------------------------Top Links!-----------------------------------------*/
-h1.logo{margin:18px 0 0 0;}
+h1.logo{margin:0;}
+.logo-box .logo{    display: block;
+    margin-top: 18px;}
 .header-toplinks .links { float: right;}
 .header-toplinks .links span.spanDown{display: inline-block;
     vertical-align: -3px;
