@@ -56,7 +56,9 @@ $_featureImgUrl = Mage::getBaseUrl();
     /*featureBox*/
     .featuredproduct .featured_out{}
     .featuredproduct .featuredBox{display: none;}
-    .featuredproduct .featuredBox.active{display: block;}
+    .featuredproduct .featuredBox.active{display: block;
+        width: 90%;
+        margin: 0 auto;}
     /*.featuredproduct .featuredBox{opacity:0;position: absolute;z-index: -1;left:15px;top:67px;max-width: 1170px;}
     .featuredproduct .featuredBox.active{display: block;opacity: 1;z-index: 1;}*/
     /*btn*/
@@ -107,7 +109,7 @@ $_featureImgUrl = Mage::getBaseUrl();
         box-sizing: border-box;
         text-align: left;
         color: #343434;
-        background: url("../skin/frontend/tv_bigboom_package/tv_bigboom1/images/icon-next.png") right 10px center no-repeat;
+       /* background: url("../skin/frontend/tv_bigboom_package/tv_bigboom1/images/icon-next.png") right 10px center no-repeat;*/
     }
     #info-strip .innerContainer ul li a:hover{
         text-decoration: none;
@@ -144,6 +146,7 @@ $_featureImgUrl = Mage::getBaseUrl();
             width: 100%;
         }
     }
+    .featuredBox .products-grid li.item .price-box{right:6px;}
 </style>
 <div class="container" id="info-strip">
     <div class="innerContainer">

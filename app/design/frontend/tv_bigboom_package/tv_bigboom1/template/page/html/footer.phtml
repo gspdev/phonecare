@@ -26,15 +26,18 @@
 $_footerImgSrc =Mage::getBaseUrl();
 ?>
 <footer class="footer-wrapper">
-    <div class="container">
+    <div class="container-fluid" style="padding: 0;margin: 0;">
         <div class="footer-inner">
             <div class="footer-information">
+                <div class="container">
                     <div class="row">
                         <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_info')->toHtml() ?>
                     </div>
+                </div>
             </div>
             <div class="footer-container">
                     <div class="footer">
+                        <div class="container">
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
                                 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_social')->toHtml() ?>
@@ -51,6 +54,7 @@ $_footerImgSrc =Mage::getBaseUrl();
                             </div>
 						</div>
                     </div>
+                </div>
             </div>
         </div>
     </div>

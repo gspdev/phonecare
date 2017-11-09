@@ -22,7 +22,12 @@
          *set .dropdown top
          */
         ;jQuery(document).ready(function($){
-            $("#vmegamenu-background").css('height',(40*$("#nav_vmegamenu>div").length)+'px');
+            $(".nav-container-box .nav-vcontainer").hover(function () {
+                $(".nav-vcontainer .vmegamenu-title").addClass("hover");
+            },function () {
+                $(".nav-vcontainer .vmegamenu-title").removeClass("hover");
+            });
+            $("#vmegamenu-background").css('height',(40*$(".header-wrapper #nav_vmegamenu>div").length)+'px');
             (function(){
                 jQuery(".vmegamenu-contain .megamenu").each(function(){
                     var tmpMindex = $(this).index();
@@ -50,7 +55,6 @@
                     //set other dropdown css display:none;
                     $("#nav_vmegamenu .megamenu").eq(tmpIndex).find(".dropdown").removeClass("dropdownHide").addClass("dropdownShow").end()
                         .siblings().find(".dropdown").addClass("dropdownHide").removeClass("dropdownShow");
-
                     tmpH2 = $(".dropdownShow").height();
                     var tmpHeight = tmpH1>tmpH2?tmpH1:tmpH2;
                     $("#vmegamenu-background").css('height',(tmpHeight+1)+'px');
@@ -87,6 +91,7 @@
                     //get url and add to view more
                     if(len>=8){
                         var tmpHref = $itemMenu1.find("a.itemMenuName.level1").eq(count).attr("href");
+                        if($itemMenu1.find(".itemMenu.level2").eq(count).find(".viewmore").length<1)
                         $itemMenu1.find(".itemMenu.level2").eq(count).append("<p><a class='viewmore' href='"+tmpHref+"'>view more</a></p>");
                     }
                 }
