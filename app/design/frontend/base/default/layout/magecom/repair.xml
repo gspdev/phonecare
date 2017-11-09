@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magecom
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@magecom.net so we can send you a copy immediately.
+ *
+ * @category Magecom
+ * @package Magecom_Repair
+ * @copyright Copyright (c) 2016 Magecom, Inc. (http://www.magecom.net)
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */-->
+
+<layout>
+
+    <default>
+        <reference name="head">
+            <action ifconfig="magecom_repair/general/enabled" method="addItem">
+                <type>skin_css</type>
+                <script>css/magecom/repair.css</script>
+            </action>
+
+            <action ifconfig="magecom_repair/general/enabled" method="addItem">
+                <type>skin_js</type>
+                <script>js/magecom/repair.js</script>
+            </action>
+        </reference>
+    </default>
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink">
+                <name>order_repair</name>
+                <path>sales/order/repair</path>
+                <label>Order Repair</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <!--<magecom_repair_index_repair>-->
+        <!--<label>Customer My Account Order History</label>-->
+        <!--<update handle="customer_account"/>-->
+        <!--<reference name="my.account.wrapper">-->
+            <!--<block type="magecom_repair/order_repair" name="sales.order.repair">-->
+                <!--<block type="core/text_list" name="sales.order.repair.info" as="repair-info" translate="label">-->
+                    <!--<label>Order Repair History Info</label>-->
+                <!--</block>-->
+            <!--</block>-->
+            <!--<block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>-->
+        <!--</reference>-->
+    <!--</magecom_repair_index_repair>-->
+
+    <!--<magecom_repair_index_view>-->
+        <!--&lt;!&ndash;<update handle="sales_order_view"/>&ndash;&gt;-->
+
+        <!--<reference name="my.account.wrapper">-->
+            <!--&lt;!&ndash;<block type="magecom_repair/order_repair" name="sales.order.repair.info">&ndash;&gt;-->
+                <!--&lt;!&ndash;<block type="core/text_list" name="sales.order.repair.info2" as="repair-info2" translate="label">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<label>Order Repair History Info</label>&ndash;&gt;-->
+                <!--&lt;!&ndash;</block>&ndash;&gt;-->
+            <!--&lt;!&ndash;</block>&ndash;&gt;-->
+            <!--<block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>-->
+        <!--</reference>-->
+    <!--</magecom_repair_index_view>-->
+
+    <sales_order_repair>
+        <label>Customer My Account Order History</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="magecom_repair/order_repair" name="sales.order.repair">
+                <block type="core/text_list" name="sales.order.repair.info" as="repair-info" translate="label">
+                    <label>Order Repair History Info</label>
+                </block>
+            </block>
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+        </reference>
+    </sales_order_repair>
+
+    <sales_order_viewrepair>
+        <label>Customer My Account Order View</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="sales/order_info" as="info" name="sales.order.info">
+                <block type="sales/order_info_buttons" as="buttons" name="sales.order.info.buttons" />
+            </block>
+            <!--<block type="sales/order_view" name="sales.order.view">-->
+            <block type="magecom_repair/order_view" name="sales.order.view2">
+                <block type="sales/order_items" name="order_items" template="sales/order/items.phtml">
+                    <action method="addItemRender"><type>default</type><block>sales/order_item_renderer_default</block><template>sales/order/items/renderer/default.phtml</template></action>
+                    <action method="addItemRender"><type>grouped</type><block>sales/order_item_renderer_grouped</block><template>sales/order/items/renderer/default.phtml</template></action>
+                    <block type="sales/order_totals" name="order_totals" template="sales/order/totals.phtml">
+                        <action method="setLabelProperties"><value>colspan="4" class="a-right"</value></action>
+                        <action method="setValueProperties"><value>class="last a-right"</value></action>
+                        <block type="tax/sales_order_tax" name="tax" template="tax/order/tax.phtml" />
+                    </block>
+                </block>
+            </block>
+        </reference>
+        <reference name="sales.order.info">
+            <action method="addLink" translate="label" module="sales"><name>view</name><path></path><label>Order Information</label></action>
+            <action method="addLink" translate="label" module="sales"><name>invoice</name><path>*/*/invoice</path><label>Invoices</label></action>
+            <action method="addLink" translate="label" module="sales"><name>shipment</name><path>*/*/shipment</path><label>Shipments</label></action>
+            <action method="addLink" translate="label" module="sales"><name>creditmemo</name><path>*/*/creditmemo</path><label>Refunds</label></action>
+        </reference>
+        <block type="core/text_list" name="additional.product.info" translate="label">
+            <label>Additional Product Info</label>
+        </block>
+        <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+    </sales_order_viewrepair>
+
+</layout>
