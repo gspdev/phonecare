@@ -35,6 +35,7 @@
     $_productCollection=$this->getLoadedProductCollection();
     $_helper = $this->helper('catalog/output');
     $helpLabels = $this->helper('themevast/labels');
+
 ?>
 <?php if(!$_productCollection->count()): ?>
 <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
@@ -75,10 +76,14 @@
                         <div class="actions">
                             <div class="stock_box">
                                 <span class="text">Lager</span>
-                                <span class="quality">100</span>
+                                <span class="quality">
+                                <?php
+                                $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+                                echo $stock->getQty();
+                                ?></span>
                             </div>
                             <?php if($_product->isSaleable()): ?>
-                                <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Köp') ?></span></span></button>
+                                <button type="button" title="<?php echo $this->__('Lägg i varukorgen') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Köp') ?></span></span></button>
                             <?php else: ?>
                                 <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
                             <?php endif; ?>
@@ -135,10 +140,14 @@
                     <div class="actions">
                         <div class="stock_box">
                             <span class="text">Lager</span>
-                            <span class="quality">100</span>
+                            <span class="quality">
+                                <?php
+                                $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+                                echo $stock->getQty();
+                                ?></span>
                         </div>
                          <?php if($_product->isSaleable()): ?>
-                            <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Köp') ?></span></span></button>
+                            <button type="button" title="<?php echo $this->__('Lägg i varukorgen') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Köp') ?></span></span></button>
                         <?php else: ?>
                             <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
                         <?php endif; ?>

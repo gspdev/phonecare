@@ -98,7 +98,7 @@ $_webMiniCartUrl = Mage::getBaseUrl();
                     <?php if ($_cartQty && $this->isPossibleOnepageCheckout()): ?>
                         <div class="actions clearfix">
                             <?php echo $this->getChildHtml('extra_actions') ?>
-                            <a href="<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>" class="left action_cart">UPDATE</a>
+                            <a href="<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>" class="left action_cart">View shopping Cart</a>
                             <button type="button" title="<?php echo $this->__('Checkout') ?>" class="button right" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
                         </div>
                     <?php endif ?>
@@ -108,6 +108,6 @@ $_webMiniCartUrl = Mage::getBaseUrl();
 </div>
 <script type="text/javascript">
     var ajaxCartCfg = {
-        'removeConfirm' : '<?php echo $this-> __('Are you sure you would like to remove this item ?') ?>',
+        'removeConfirm' : '<?php echo $this-> __('Är du säker på att du vill ta bort denna produkt från varukorgen?') ?>',
     };
 </script>
