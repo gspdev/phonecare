@@ -25,6 +25,43 @@
  */
 $_footerImgSrc =Mage::getBaseUrl();
 ?>
+<script type="text/javascript">
+    /**
+     * edit by jerry , set the color and width of battery according to quality of the product.
+     * */
+    ;jQuery(document).ready(function($){
+        function ProductList(obj) {
+            this.obj = obj;
+            this.setRangeColor = function () {
+                var $t = $(obj);
+                //console.log($t.length);
+                $t.children(".item").each(function () {
+                    var $th = $(this);
+                    var $em = $th.find('em.range');
+                    var quality = parseInt($th.find(".quality").attr("data-quality"));
+                    if(quality>100){
+                        quality = 100;
+                    }
+                    setCss($em,quality);
+                });
+                function setCss(obj,quality) {
+                    var bgcolor;
+                    if(quality<=30){
+                        bgcolor = 'red';
+                    }else if((30 < quality)&&(quality <= 60)){
+                        bgcolor = 'yellow';
+                    }else if((60 <= quality)&&(quality  <= 100)){
+                        bgcolor = 'green';
+                    }
+                    obj.css({'width':(quality*0.22)+'px','background':bgcolor});
+                    //console.log(quality+'-->'+bgcolor);
+                }
+            };
+        }
+        var pro1 = new ProductList(".products-grid");
+        pro1.setRangeColor();
+    });
+</script>
 <footer class="footer-wrapper">
     <div class="container-fluid" style="padding: 0;margin: 0;">
         <div class="footer-inner">

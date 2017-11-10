@@ -259,11 +259,14 @@ $_featureImgUrl = Mage::getBaseUrl();
 				<div class="actions">
                     <div class="stock_box">
                         <span class="text">Lager</span>
-                        <span class="quality">
-                                <?php
+                        <span class="quality"
+                              data-quality="
+                              <?php
                                 $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
                                 echo $stock->getQty();
-                                ?></span>
+                                ?>">
+                            <em class="range"></em>
+                        </span>
                     </div>
 					<?php if($cart): ?>
 						<?php if($_product->isSaleable()): ?>

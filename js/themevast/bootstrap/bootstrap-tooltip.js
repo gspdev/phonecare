@@ -285,5 +285,5 @@ jQuery(document).ready(function () {
  jQuery('.btn-navbar').attr('data-original-title',jQuery('.btn-navbar').attr('title'));
  jQuery('.brand_item').attr('data-original-title',jQuery('.brand_item').attr('title'));
  jQuery('button.btn-cart,.form-search button.button,a.shopping-cart, .btn-navbar, .link-wishlist, .link-compare,a.view-detail,.email-friend-a,.brand_item').attr('rel', 'tooltip');
- jQuery("[rel=tooltip]").tooltip(); 
+ jQuery("[rel=tooltip]").tooltip();
   });

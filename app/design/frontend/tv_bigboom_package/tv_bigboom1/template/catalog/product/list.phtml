@@ -76,11 +76,14 @@
                         <div class="actions">
                             <div class="stock_box">
                                 <span class="text">Lager</span>
-                                <span class="quality">
-                                <?php
-                                $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-                                echo $stock->getQty();
-                                ?></span>
+                                <span class="quality"
+                                      data-quality="
+                                      <?php
+                                              $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+                                              echo $stock->getQty();
+                                              ?>">
+                                    <em class="range"></em>
+                                </span>
                             </div>
                             <?php if($_product->isSaleable()): ?>
                                 <button type="button" title="<?php echo $this->__('Lägg i varukorgen') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Köp') ?></span></span></button>
@@ -140,11 +143,14 @@
                     <div class="actions">
                         <div class="stock_box">
                             <span class="text">Lager</span>
-                            <span class="quality">
-                                <?php
-                                $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-                                echo $stock->getQty();
-                                ?></span>
+                            <span class="quality"
+                                  data-quality="
+                                  <?php
+                                      $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+                                      echo $stock->getQty();
+                                      ?>">
+                                <em class="range"></em>
+                            </span>
                         </div>
                          <?php if($_product->isSaleable()): ?>
                             <button type="button" title="<?php echo $this->__('Lägg i varukorgen') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Köp') ?></span></span></button>
