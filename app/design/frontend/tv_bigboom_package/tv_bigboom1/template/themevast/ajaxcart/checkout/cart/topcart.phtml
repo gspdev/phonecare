@@ -29,6 +29,7 @@ $_webMiniCartUrl = Mage::getBaseUrl();
                         <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
                         <script type="text/javascript">
                             jQuery(document).ready(function ($j) {
+
                                 $j("#cart-sidebar .item").each(function(){
                                     var $itemBox = $j(this).children(".product-details");
                                     var $qtyBox = $j(this).find(".product-qty");
@@ -36,17 +37,20 @@ $_webMiniCartUrl = Mage::getBaseUrl();
                                     var item_qty;
                                     $itemBox.find(".qtyBtn").click(function(){
                                         if($j(this).hasClass("qtyAdd")){
+                                            ajaxMiniCart(item_id,item_qty);
+                                            //after ajax
                                             item_qty = parseInt($qtyBox.text())+1;
                                             $qtyBox.text(item_qty);
-                                            ajaxMiniCart(item_id,item_qty);
                                         }else if($j(this).hasClass("qtyReduce")){
                                             item_qty = parseInt($qtyBox.text());
                                             if(item_qty <= 1){
+                                                //when qty <= 1 , show remove message
                                                 $itemBox.find(".btn-remove").click();
                                             }else if(item_qty>1){
+                                                ajaxMiniCart(item_id,item_qty);
+                                                //after ajax
                                                 item_qty -=1;
                                                 $qtyBox.text(item_qty);
-                                                ajaxMiniCart(item_id,item_qty);
                                             }
                                         }
                                     });
@@ -63,9 +67,10 @@ $_webMiniCartUrl = Mage::getBaseUrl();
                                             url:'<?php echo $_webMiniCartUrl.'/mivec/checkout/cart/update.php'?>',
                                             data:{product_id:id,qty:itemqty,method:'update'},
                                             dataType:'json',
-                                            beforeSend: function(){ loadingAjaxcart(true);},
+                                            beforeSend: function(){ loadingAjaxcart(true);//show loading
+                                            },
                                             success:function (data) {
-                                                loadingAjaxcart(false);
+                                                loadingAjaxcart(false);//hide loading
                                             },
                                             complete: function(XMLHttpRequest, textStatus) {
                                                 sumMiniCart();
@@ -80,9 +85,9 @@ $_webMiniCartUrl = Mage::getBaseUrl();
                                 function sumMiniCart() {
                                     var sumItem = 0;
                                     $j.each($j("#cart-sidebar li"),function(){
-                                        sumItem += parseInt($j(this).find(".product-qty").text());
+                                        sumItem += (parseInt($j(this).find(".product-qty").text()))*($j(this).find(".price").text().split("kr")[0].replace(',','.'));
                                     });
-                                    $j(".cart-mini-title .cart-count").text(sumItem);
+                                    $j(".cart-mini-title .cart-count").text(sumItem.toFixed(2)+ 'kr');
                                 }
                             });
                         </script>
