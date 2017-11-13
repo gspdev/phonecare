@@ -373,12 +373,12 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
 
 
 /* Pager */
-.pager {  text-align:center;padding: 12px 0; border-top: 1px solid #efefef;margin:0!important;padding:0 20px;}
+.pager {  text-align:center;border-top: 1px solid #efefef;padding:0 20px;}
 .pager .amount { float:left; margin: 16px 0 10px 0; font-size: 13px; color: #999;}
 .pager .limiter{line-height:46px;}
 .sorter .limiter { float: right; }
 .sorter .limiter label { vertical-align:middle; margin: 4px 0 0; }
-.sorter .limiter select { padding:0; margin:0 0 0 10px; vertical-align:middle; font-size: 13px; padding: 2px; border: 1px solid #e0e0e0; background: #F5F5F5;}
+.sorter .limiter select { margin:0 0 0 10px; vertical-align:middle; font-size: 13px; padding: 2px; border: 1px solid #e0e0e0; background: #F5F5F5;}
 .pager .pages { text-align: center; padding: 0; float:right;}
 .pager .pages strong { font-weight: normal; color: #666; text-transform: capitalize; font-size: 13px; margin-right: 10px;}
 .pager .pages ol { display:inline-block; margin: 12px 0;}
@@ -757,7 +757,7 @@ h1.logo{margin:0;}
 .header-toplinks .links li.login-register span { color: #888;}
 
 .header-toplinks .links li a { color: #888;}
-.header-wrapper { background: #313131;}
+.header-wrapper { /*background: #313131;*/}
 .header {background:#fff;}
 .page-header-content {  position: relative; float: left; width: 100%; }
 .header a.logo { float: left; margin-top: 15px; display:block; width:200px; height:60px;}
@@ -793,7 +793,6 @@ h1.logo{margin:0;}
 #nav_megamenu .menu_list li{float: left;display: inline-block;}
 #nav_megamenu .menu_list li a{
     display: block;
-    min-width: 180px;
     width: 100%;
     padding: 0 25px;
     font: 700 19px/1.35 Lato,Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -1705,7 +1704,10 @@ border-radius: 0 0 5px 5px;}
 }
 .products-grid .stock_box{display: inline-block;float: left;}
 .products-grid .stock_box>span{}
-.products-list .stock_box .quality,.products-grid .stock_box .quality{display: inline-block;position:relative;width: 24px;height: 14px;border:1px solid #000;}
+.products-list .stock_box .quality,.products-grid .stock_box .quality{
+    display: inline-block;position:relative;width: 24px;height: 14px;border:1px solid #000;
+    box-sizing: border-box;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;
+}
 .products-list .stock_box .quality,.products-grid .stock_box .quality:after{
     content: "";
     width: 2px;
@@ -1717,6 +1719,7 @@ border-radius: 0 0 5px 5px;}
 em.range {
     display: block;
     height: 12px;
+    max-width: 22px!important;
 }
 .products-grid li.item button.btn-cart,
 .products-list li.item button.btn-cart{
