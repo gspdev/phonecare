@@ -8,9 +8,9 @@
  * Please refer to http://www.magentocommerce.com for more information.
  *
  * @category  Mirasvit
- * @package   Search Spell-Corrector
- * @version   1.2.8
- * @build     398
+ * @package   Advanced Sphinx Search Pro
+ * @version   2.3.25
+ * @build     990
  * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
