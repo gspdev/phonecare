@@ -62,6 +62,77 @@ $_footerImgSrc =Mage::getBaseUrl();
         pro1.setRangeColor();
     });
 </script>
+<?php
+    $infopath = $this->getRequest()->getPathInfo();
+    //echo $infopath;exit;
+    if ($infopath == "/"):
+?>
+<div class="container-fluid" style="padding: 0;">
+    <!--why choose-->
+    <div class="choose">
+        <div class="overlay"></div>
+        <div class="innerContainer container"><h2>Why Choose PhoneCare</h2>
+            <div class="chooseSlide">
+                <div class="text showThisText"><h4>Reparationer på 15 min</h4>
+                    <p>Vi utför de flesta reparationer på 15 min,
+                        medan du väntar. För specifika tider, vänligen kontakta oss.</p></div>
+                <div class="text"><h4>Låga priser</h4>
+                    <p>Vi erbjuder prisvärda till konkurrenskraftiga priser.</p></div>
+                <div class="text"><h4>1-års garanti</h4>
+                    <p>Vi är så säkra på våra reparationer att vi erbjuder
+                        1-års garanti på flera av våra reparationer.</p></div>
+                <div class="text"><h4>Chip-reparationer</h4>
+                    <p>Våra tekniker är kunniga och säkra inom sitt område,
+                        och kan i flera fall reparera skador i moderkortet.</p></div>
+                <div class="text"><h4>Spara upp till 75%</h4>
+                    <p>Spara upp till 75% om du behöver reparera flera olika komponenter på en gång.</p></div>
+                <div class="text"><h4>Sekretess</h4>
+                    <p>Vi värnar om din sekretess. Vi lagrar dina uppgifter endast för garantiärenden och dylikt.</p></div>
+                <div class="text"><h4>Hög standard</h4>
+                    <p>Vi håller hög standard på våra originaldelar, och garanterar bra kvalitet.</p></div>
+                <div class="text"><h4>Proffessionellt utfört</h4>
+                    <p>Våra tekniker har en lång erfarenhet inom branschen
+                        och kan sköta de flesta reparationer.</p></div>
+                <div id="why-choose-pager" class="clear_fix">
+                    <a href="javascript:void(0)" target="_self" class="pager pageSelected" data-slide-index="1">
+                        <span class="inner"></span> <em class="icon icon1"></em> <em class="txt">Reparationer på 15 min</em>
+                    </a>
+                    <a href="javascript:void(0)" target="_self" class="pager" data-slide-index="2">
+                        <span class="inner"></span> <em class="icon icon2"></em> <em class="txt">Låga priser</em>
+                    </a>
+                    <a href="javascript:void(0)" target="_self" class="pager" data-slide-index="3">
+                        <span class="inner"></span> <em class="icon icon3"></em> <em class="txt">1-års garanti</em>
+                    </a>
+                    <a href="javascript:void(0)" target="_self" class="pager" data-slide-index="4">
+                        <span class="inner"></span> <em class="icon icon4"></em> <em class="txt">Chip-reparationer</em>
+                    </a>
+                    <a href="javascript:void(0)" target="_self" class="pager" data-slide-index="5">
+                        <span class="inner"></span> <em class="icon icon5"></em> <em class="txt">Spara upp till 75%</em>
+                    </a>
+                    <a href="javascript:void(0)" target="_self" class="pager" data-slide-index="6">
+                        <span class="inner"></span> <em class="icon icon6"></em> <em class="txt">Sekretess</em>
+                    </a>
+                    <a href="javascript:void(0)" target="_self" class="pager" data-slide-index="7">
+                        <span class="inner"></span> <em class="icon icon7"></em> <em class="txt">Hög standard</em>
+                    </a> <a href="javascript:void(0)" target="_self" class="pager" data-slide-index="8">
+                        <span class="inner"></span> <em class="icon icon8"></em> <em class="txt">Proffessionellt utfört</em>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        /*.pager selected*/
+        jQuery("#why-choose-pager .pager").mouseover(function () {
+            var tmpIndex = jQuery(this).index();
+            jQuery(this).addClass("pageSelected").siblings().removeClass("pageSelected");
+            jQuery(".chooseSlide .text").eq(tmpIndex).addClass("showThisText").siblings().removeClass("showThisText");
+        });
+    </script>
+</div>
+
+<?php endif;?>
+
 <footer class="footer-wrapper">
     <div class="container-fluid" style="padding: 0;margin: 0;">
         <div class="footer-inner">

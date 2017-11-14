@@ -1,0 +1,84 @@
+
+<div class="page-title">
+    <h1><?php echo $this->__('REPARATIONER'); ?></h1>
+</div>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="repair-form">
+<form action="<?php echo Mage::helper('repairdevice')->getSaveUrl() ?>" method="post" id="new-form" enctype="multipart/form-data" >
+<h2 class="repair-title"><span class="repair-step"><span>1</span></span><span><?php echo $this->__('Select device to repair'); ?></span></h2>
+    <div class="row">
+        <div class="col-sm-8">
+            <h4><?php echo $this->__('Make:'); ?></h4>
+            <input id="brands"/>
+        </div>
+        <div class="col-sm-8 products_listbox">
+            <h4><?php echo $this->__('Product:'); ?></h4>
+            <input id="products" disabled="disabled" />
+        </div>
+        <div class="col-sm-8 modell-list">
+            <h4><?php echo $this->__('Model:'); ?></h4>
+            <input id="modell" disabled="disabled"  />
+        </div>
+    </div>
+
+	<fieldset>
+	<?php echo $this->getBlockHtml('formkey'); ?>
+	<input type="hidden" name="customer_id" value="<?php echo $this->getCustomerId() ?>" />
+	<ul class="form-list">
+        <li style="display:none;">
+            <label for="nickname_field" class="required"><em>*</em><?php echo $this->__('Product') ?></label>
+            <div class="input-box" >
+                <?php echo $this->getOrderHtmlSelect('order'); ?>
+            </div>
+        </li>
+		<li class="fields">
+                    <div class="field">
+                    <label for="name" class="required"><em>*</em><?php echo $this->__('Serie/IMEI-nummer:');?></label>
+						<div class="input-box">
+							<input name="imei" id="imei" class="input-text required-entry" type="text" />
+						</div>
+					</div>  
+		</li>
+        <li>
+            <label for="screencode" class="required"><em>*</em><?php echo $this->__('Skärmlås:') ?></label>
+            <div class="input-box">
+                <input type="text" name="screencode" id="screencode" class="input-text " value="" />
+            </div>
+        </li>
+        <li>
+            <label for="detailed" class="required"><em>*</em><?php echo $this->__('Beskriv problemet:') ?></label>
+            <div class="input-box">
+                <textarea name="detailed" id="detailed" cols="5" rows="3" class="required-entry"></textarea>
+            </div>
+        </li>
+		<li class="fields">
+                    <div class="field">
+                    <label for="name"><?php echo $this->__('VÄLJ OM ENHETEN SKA SKICKAS ELLER LÄMNAS I BUTIK');?></label>
+						 <ul id="poll-answers">
+                            <li class="odd">
+								<input name="shipping_method" type="radio" value="1" title="New" id="1new" class="radio poll_vote">
+								<span class="label"><label for="vote_1"><?php echo $this->__('Skicka in med post');?></label></span>
+							</li>
+                            <li class="even">
+								<input name="shipping_method" type="radio" value="2" title="Existing" id="2new" class="radio poll_vote">
+								<span class="label"><label for="vote_1"><?php echo $this->__('Lämna i butik');?></label></span>
+							</li>
+						</ul>
+					</div>  
+			    </li>
+    </ul>
+	
+	<div class="buttons-set">
+	    <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+	    <button type="submit" title="<?php echo $this->__('Save') ?>" class="button"><span><span><?php echo $this->__('Save') ?></span></span></button>
+	</div>
+	</fieldset>
+</form>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    var awrmaNewForm = new VarienForm('new-form', true);
+
+//]]>
+</script>
