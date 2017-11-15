@@ -119,10 +119,10 @@ $theme = Mage::getDesign()->getTheme('frontend');
         var accept_item = document.getElementById("accept_item");
         var accept_close = document.getElementsByClassName('accept_close')[0];
         var accept_cancel = document.getElementById("accept_cancel");
-        accept_close.addEventListener('click',function(){
+        accept_close.attachEvent('click',function(){
             accept_item_box.style.display = "none";
         });
-        accept_cancel.addEventListener('click',function(){
+        accept_cancel.attachEvent('click',function(){
             accept_item_box.style.display = "none";
         })
     </script>

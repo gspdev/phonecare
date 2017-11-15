@@ -310,14 +310,14 @@ $_featureImgUrl = Mage::getBaseUrl();
 	<?php endif ?>
     <script type="text/javascript">
         //new add by jerry at 2017/09/05 18:13
-        jQuery(document).ready(function($){
-            $(".featuredproduct .bx-title .feature_title>li").mouseover(function(){
+        ;jQuery(document).ready(function($){
+            $(".featuredproduct .feature_title>li").mouseover(function(){
                 if(!$(this).hasClass("active")){
                     $(this).addClass("active").siblings().removeClass("active");
                     var tmpIndex = $(this).index();
                     $(".featuredproduct .featuredBox").eq(tmpIndex).addClass("active").siblings().removeClass("active");
                 }else {
-                    return;
+                    return false;
                 }
             });
         });
