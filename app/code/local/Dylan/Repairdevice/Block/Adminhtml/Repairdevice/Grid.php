@@ -31,8 +31,9 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Grid extends Mage_Adminhtm
       parent::__construct();
       $this->setId('webGrid');
       $this->setDefaultSort('repairdevice_id');
-      $this->setDefaultDir('ASC');
+      $this->setDefaultDir('DESC');
       $this->setSaveParametersInSession(true);
+	  
   }
  
   protected function _prepareCollection()
@@ -41,32 +42,50 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Grid extends Mage_Adminhtm
       $this->setCollection($collection);
       return parent::_prepareCollection();
   }
+  
  
   protected function _prepareColumns()
   {
+	  
       $this->addColumn('repairdevice_id', array(
           'header'    =>  Mage::helper('repairdevice')->__('ID'),
-          'align'     =>  'right',
+         // 'align'     =>  'left',
           'width'     =>  '50px',
           'index'     =>  'repairdevice_id',
       ));
 	  
-	 $this->addColumn('product_id', array(
-          'header'    =>  Mage::helper('repairdevice')->__('Product Name:'),
-          'align'     =>  'left',
-          'width'     =>  '100px',
-          'index'     =>  'product_id',
-      ));
+	  // $this->addColumn('customer_id',array(
+	  
+	     // 'header'    =>  Mage::helper('repairdevice')->__('Customer Email'),
+          // 'width'     =>  '50px',
+          // 'index'     =>  'customer_id',
+	  // ));
+	  
+	   $this->addColumn("customer" ,array(
+	   
+                "header"    => "Customer Email",
+                "align"     => "left",
+                "width"     => "50px",
+                "renderer"  => "repairdevice/adminhtml_repairdevice_renderer_customer"
+            )
+        );
+	  
+	 // $this->addColumn('product_id', array(
+          // 'header'    =>  Mage::helper('repairdevice')->__('Product Name'),
+          // 'align'     =>  'left',
+          // 'width'     =>  '100px',
+          // 'index'     =>  'product_id',
+      // ));
  
       $this->addColumn('imei', array(
-          'header'    =>  Mage::helper('repairdevice')->__('Serie/IMEI-nummer:'),
+          'header'    =>  Mage::helper('repairdevice')->__('Serie/IMEI-nummer'),
           'align'     =>  'left',
           'width'     =>  '100px',
           'index'     =>  'imei',
       ));
 	  
 	  $this->addColumn('screencode', array(
-          'header'    =>  Mage::helper('repairdevice')->__('Skärmlås:'),
+          'header'    =>  Mage::helper('repairdevice')->__('Skärmlås'),
           'align'     =>  'left',
           'width'     =>  '100px',
           'index'     =>  'screencode',
@@ -74,22 +93,42 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Grid extends Mage_Adminhtm
  
 
       $this->addColumn('detailed', array(
-          'header'    =>  Mage::helper('repairdevice')->__('Beskriv problemet:'),
+          'header'    =>  Mage::helper('repairdevice')->__('Beskriv problemet'),
           'width'     =>  '150px',
           'index'     =>  'detailed',
       ));
 	  
-      $this->addColumn('shipping_method', array(
-          'header'    =>  Mage::helper('repairdevice')->__('Shipping Method'),
-          'align'     =>  'left',
-          'width'     =>  '80px',
-          'index'     =>  'shipping_method',
-          'type'      =>  'options',
-          'options'   =>  array(
-                             1 => '1',
-                             2 => '2',
-          ),
-      ));
+	   $shipping_method = Dylan_Repairdevice_Model_Shipping_Shippingmethod::getShippingMethod();
+       $this->addColumn("shipping_method" ,
+            array(
+                "header"    => Mage::helper('repairdevice')->__('Shipping Method'),
+                "align"     => "left",
+                "width"     => "50px",
+                "type"      => "options",
+                'index'     => "shipping_method",
+                "options"   => $shipping_method
+            )
+        );
+		
+	   $this->addColumn('create_at' , array(
+            'header'    => 'Create Date',
+            'width'     => '100px',
+            'type'      => 'datetime',
+            'index'     => 'create_at'
+        ));
+
+	  
+      // $this->addColumn('shipping_method', array(
+          // 'header'    =>  Mage::helper('repairdevice')->__('Shipping Method'),
+          // 'align'     =>  'left',
+          // 'width'     =>  '80px',
+          // 'index'     =>  'shipping_method',
+          // 'type'      =>  'options',
+          // 'options'   =>  array(
+                             // 1 => '1',
+                             // 2 => '2',
+          // ),
+      // ));
 	  
 	  // $this->addColumn('administrator_id', array(
           // 'header'    =>  Mage::helper('refund')->__('admin Id'),
@@ -107,7 +146,13 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Grid extends Mage_Adminhtm
                                 'caption'   =>  Mage::helper('repairdevice')->__('Edit'),
                                 'url'       =>  array('base'=> '*/*/edit'),
                                 'field'     =>  'id'
-                             )
+                             ),
+							 array(
+								'caption'   => 'Delete',
+								'url'       => array('base'=> '*/*/delete'),
+								'field'     => 'id',
+								'confirm'   => 'Are you sure that the record will be delete?'
+							)
           ),
           'filter'    =>  false,
           'sortable'  =>  false,
@@ -119,8 +164,8 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Grid extends Mage_Adminhtm
   }
  
  
-  public function getRowUrl($row)
-  {
-      return $this->getUrl('*/*/edit', array('id' => $row->getId()));
-  }
+  // public function getRowUrl($row)
+  // {
+      // return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+  // }
 }

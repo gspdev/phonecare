@@ -29,4 +29,5 @@ class Dylan_Repairdevice_Helper_Data extends Mage_Core_Helper_Abstract
    	public function getSaveUrl(){
 		return $this->_getUrl('repairdevice/index/save/');
 	}
+	
 }

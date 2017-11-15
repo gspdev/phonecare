@@ -31,4 +31,5 @@ class Dylan_Repairdevice_Model_Mysql4_Repairdevice_Collection extends Mage_Core_
         parent::_construct();
         $this->_init('repairdevice/repairdevice');
 	}
+	
 }

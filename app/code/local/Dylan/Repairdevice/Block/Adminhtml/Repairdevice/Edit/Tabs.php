@@ -40,7 +40,14 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit_Tabs extends Mage_Adm
           'label'     => Mage::helper('repairdevice')->__('Repairdevice information'),
           'title'     => Mage::helper('repairdevice')->__('Repairdevice information'),
           'content'   => $this->getLayout()->createBlock('repairdevice/adminhtml_repairdevice_edit_tab_form')->toHtml(),
+		  'active'    => true,
       ));
+	  
+	   $this->addTab('products_section' , array(
+            'label'     => 'Product Message',
+            'title'     => 'Product Message',
+            'content'   => $this->getLayout()->createBlock('repairdevice/adminhtml_repairdevice_edit_tab_products')->toHtml(),
+        ));
 
       return parent::_beforeToHtml();
   }

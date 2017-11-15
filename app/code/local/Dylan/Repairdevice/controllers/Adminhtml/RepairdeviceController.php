@@ -28,7 +28,7 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
 {
 	protected function _initAction()
     {
-        $this->loadLayout()->_setActiveMenu('sales/repairdevice')
+        $this->loadLayout()->_setActiveMenu('repairdevice/repairdevice')
                            ->_addBreadcrumb(
                       Mage::helper('adminhtml')->__('Repairdevice Manager'),            
                       Mage::helper('adminhtml')->__('Repairdevice Manager')
@@ -56,7 +56,7 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
            }
            Mage::register('repairdevice_data', $model);
            $this->loadLayout();
-           $this->_setActiveMenu('sales/repairdevice');
+           $this->_setActiveMenu('repairdevice/repairdevice');
            $this->_addBreadcrumb(
                           Mage::helper('adminhtml')->__('Repairdevice Manager'),         
                           Mage::helper('adminhtml')->__('Repairdevice Manager')
@@ -86,17 +86,8 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
         if ($data = $this->getRequest()->getPost()) {
         	
             $model = Mage::getModel('repairdevice/repairdevice');
-            
-			if($data['status']==2&&$data['subtotal']>0){
-				$order = Mage::getModel('sales/order')->loadByIncrementId($data['order_id']);
-				$order->cancel();
-				$order->setStatus('canceled');
-	            $order->save();
-				$data['end_at'] = date('Y-m-d H:m:s');
-			}
-			$data['administrator_id'] = Mage::getSingleton('admin/session')->getUser()->getUserId();
-            $model->setData(
-                        $data)->setRepairdeviceId($this->getRequest()->getParam('id')
+
+            $model->setData($data)->setRepairdeviceId($this->getRequest()->getParam('id')
             );
            try {
                 $model->save();

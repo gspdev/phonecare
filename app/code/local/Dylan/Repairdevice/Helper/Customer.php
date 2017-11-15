@@ -24,15 +24,28 @@
  * @author     Riccardo Tempesta <tempesta@idealiagroup.com>
 */
  
-class Dylan_Repairdevice_Block_Adminhtml_Repairdevice extends Mage_Adminhtml_Block_Widget_Grid_Container
+class Dylan_Repairdevice_Helper_Customer extends Mage_Core_Helper_Abstract
 {
-	 public function __construct()
+   	
+	protected $_session;
+
+    protected function _init()
     {
-        $this->_controller     = 'adminhtml_repairdevice';
-        $this->_blockGroup     = 'repairdevice';
-        $this->_headerText     = Mage::helper('repairdevice')->__('Repairdevice Manager');
-        $this->_addButtonLabel = Mage::helper('repairdevice')->__('Add Repairdevice');
-        parent::__construct();
-	    $this->_removeButton('add');
+        $this->_session = Mage::getSingleton("customer/session");
+        return $this;
     }
+
+    public function getSession()
+    {
+        $this->_init();
+        return $this->_session;
+    }
+
+    public function getCustomer($_CustomerId)
+    {
+        $customer = Mage::getModel('customer/customer')
+            ->load($_CustomerId);
+        return $customer;
+    }
+	
 }

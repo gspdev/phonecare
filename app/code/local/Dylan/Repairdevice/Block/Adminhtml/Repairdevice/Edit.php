@@ -59,10 +59,11 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit extends Mage_Adminhtm
     }
  
     public function getHeaderText()
-    {
+    {   
+	
         if( Mage::registry('repairdevice_data') && Mage::registry('repairdevice_data')->getRepairdeviceId() ) {
-            return Mage::helper('repairdevice')->__("Edit Item '%s'", 
-                       $this->htmlEscape(Mage::registry('repairdevice_data')->getOrderId())
+            return Mage::helper('repairdevice')->__("Edit Customer Item: %s", 
+                       $this->htmlEscape(Mage::getModel('customer/customer')->load(Mage::registry('repairdevice_data')->getCustomerId())->getEmail())
                    );
         } else {
             return Mage::helper('repairdevice')->__('Add Item');

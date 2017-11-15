@@ -85,9 +85,13 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 			if (!$this->_validateFormKey()) {
 	            $this->_redirect('*/*/');
 	            return;
-	        }			
+	        }
+
+            //print_r($data);exit;			
 			$id = $this->getRequest()->getParam('id');
             $model = Mage::getModel('repairdevice/repairdevice')->load($id);
+			//$productId = $data['repairs']; 
+			
           
 				
 			//$data['status'] = 1;
@@ -97,6 +101,16 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 			try {
                 	
                 $model->save();
+				$productIdArray = $this->getRequest()->getPost('repairs');
+				foreach($productIdArray as $productId){
+					
+					$resource = Mage::getSingleton('core/resource');
+					$inster = Mage::getSingleton('core/resource')->getConnection('core_write');
+					$tablePrefix = (string) Mage::getConfig()->getTablePrefix();
+					$tableName = $resource->getTableName('repair_product');
+					$sql_inster = "INSERT INTO ".$tableName." (repair_id,product_id)VALUES('".$model->save()->getId()."','$productId')";
+					$inster->query($sql_inster);  
+				}
                 Mage::getSingleton('core/session')->
                 addSuccess(Mage::helper('repairdevice')
                 ->__('Your information was submitted successfully.'));

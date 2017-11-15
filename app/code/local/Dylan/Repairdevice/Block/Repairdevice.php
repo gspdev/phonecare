@@ -40,28 +40,20 @@ class Dylan_Repairdevice_Block_Repairdevice extends Mage_Core_Block_Template
 	}
 	
 	
-	public function getShippingMethod(){
-		if($this->getRepairdevice()->getShippingMethod()==1){
-			return Mage::helper('repairdevice')->__('Open');
-		}else{
-			return Mage::helper('repairdevice')->__('Close');
-		}
-	}
-	public function getSubtotal(){
-		
-		return Mage::helper('core')->currency($this->getRepairdevice()->getSubtotal());
-	}
-
-	public function getAddRefundUrl(){
-		
-		return $this->getUrl('repairdevice/index/new/',array('_secure'=>true));
-	}
+	// public function getShippingMethod(){
+		// if($this->getRepairdevice()->getShippingMethod()==1){
+			// return Mage::helper('repairdevice')->__('Open');
+		// }else{
+			// return Mage::helper('repairdevice')->__('Close');
+		// }
+	// }
 	
 	public function getBackUrl(){
 		return $this->getUrl('repairdevice/index/',array('_secure'=>true));
 	}
 	
 	public function getCustomerId(){
+		
 		return Mage::getSingleton('customer/session')->getId();
 	}
 	

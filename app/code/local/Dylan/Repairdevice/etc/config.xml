@@ -81,6 +81,9 @@
                     <repairdevice>
                         <table>repairdevicedata</table>
                     </repairdevice>
+					<repairproduct>
+                        <table>repair_product</table>
+                    </repairproduct>
                 </entities>
             </repairdevice_mysql4>
     	</models>

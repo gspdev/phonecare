@@ -24,15 +24,11 @@
  * @author     Riccardo Tempesta <tempesta@idealiagroup.com>
 */
  
-class Dylan_Repairdevice_Block_Adminhtml_Repairdevice extends Mage_Adminhtml_Block_Widget_Grid_Container
+class Dylan_Repairdevice_Model_Repairproduct extends Mage_Core_Model_Abstract
 {
-	 public function __construct()
+	public function _construct()
     {
-        $this->_controller     = 'adminhtml_repairdevice';
-        $this->_blockGroup     = 'repairdevice';
-        $this->_headerText     = Mage::helper('repairdevice')->__('Repairdevice Manager');
-        $this->_addButtonLabel = Mage::helper('repairdevice')->__('Add Repairdevice');
-        parent::__construct();
-	    $this->_removeButton('add');
+        parent::_construct();
+        $this->_init('repairdevice/repairproduct');
     }
 }
