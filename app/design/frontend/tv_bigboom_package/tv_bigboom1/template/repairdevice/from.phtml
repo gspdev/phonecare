@@ -337,10 +337,17 @@
                                 <input name="shipping_method" type="radio" value="2" title="Existing" id="2new"
                                        class="radio poll_vote">
                                 <span class="label"><label
-                                            for="vote_1"><?php echo $this->__('Lämna i butik'); ?></label></span>
+                                            for="vote_1"><?php echo $this->__('Kungsgatan 29, 11156 Stockholm, Sverige'); ?></label></span>
+                            </li>
+                            <li class="even">
+                                <input name="shipping_method" type="radio" value="3" title="Existing" id="3new"
+                                       class="radio poll_vote">
+                                <span class="label"><label
+                                            for="vote_1"><?php echo $this->__('Tivolivägen 2, 12631 Hägersten, Sverige'); ?></label></span>
                             </li>
                         </ul>
                     </div>
+                    <div class="shippingWarn validation-advice" style="display: none;">Detta är ett obligatoriskt fält.</div>
                 </div>
                 <button type="submit" class="k-button k-primary" id="order">Beställ</button>
 				</div>
@@ -390,6 +397,7 @@
                     data: {id: id},
                     dataType: "json",
                     beforeSend: function () {
+                        $("#repair-block").hide();
                         tbody.init();
                         selected.init();
                         $('.no-select').show();
@@ -453,6 +461,7 @@
                     data: {id: id},
                     dataType: "json",
                     beforeSend: function () {
+                        $("#repair-block").hide();
                         tbody.init();
                         selected.init();
                         $('.no-select').show();
@@ -572,7 +581,7 @@
             }
         });
         //First load categoryList
-        ajaxCategory(90, 'category', 0); //211
+        ajaxCategory(211, 'category', 0); //local -> 211 server -> 90
         $(".repairList").delegate("li","click",function () {
             var $li = $(this);
             $li.parent().parent().find(".head").html($li.html());
@@ -587,5 +596,19 @@
             }
         });
         //shipping method value = value , hide checkbox when not sign in
+        $("#order").click(function(event){
+            var event = event || window.event;
+            var $shippingMethod = $("#poll-answers .poll_vote:radio:checked");
+            awrmaNewForm.validator.validate();
+            if($shippingMethod.length<=0){
+                $(".shipping-info .shipping-methods").addClass("validation-failed");
+                $(".shippingWarn").show();
+                event.preventDefault(); // Compatible standard Browsers
+                window.event.returnValue = false; // Compatible IE6~8
+            }else if($shippingMethod.length === 1){
+                $(".shipping-info .shipping-methods").removeClass("validation-failed");
+                $(".shippingWarn").hide();
+            }
+        });
     });
 </script>
