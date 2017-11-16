@@ -82,7 +82,7 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit_Tab_Form extends Mage
 	
         $fieldset->addField('shipping_method', 'select', array(
             'name'		=> 'shipping_method',
-            'label'     => 'shipping_method',
+            'label'     => 'Shipping Method',
             'required'	=> true,
             'values'	=> $shipping_method,
             'value'		=> $formData['shipping_method']

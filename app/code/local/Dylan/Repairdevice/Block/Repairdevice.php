@@ -38,23 +38,41 @@ class Dylan_Repairdevice_Block_Repairdevice extends Mage_Core_Block_Template
 	public function getRepairdevice(){
 		return $this->_repairdevice;
 	}
-	
-	
-	// public function getShippingMethod(){
-		// if($this->getRepairdevice()->getShippingMethod()==1){
-			// return Mage::helper('repairdevice')->__('Open');
-		// }else{
-			// return Mage::helper('repairdevice')->__('Close');
-		// }
-	// }
+
+	public function getShippingMethod(){
+		
+		if($this->getRepairdevice()->getShippingMethod()==1){
+			
+			 return Mage::helper('repairdevice')->__('Skicka in med post');
+			 
+		}elseif($this->getRepairdevice()->getShippingMethod()==2){
+			
+			 return Mage::helper('repairdevice')->__('Kungsgatan 29, 11156 Stockholm, Sverige');
+			
+		}else{
+			
+			return Mage::helper('repairdevice')->__('Tivolivägen 2, 12631 Hägersten, Sverige');
+		}
+	}
 	
 	public function getBackUrl(){
-		return $this->getUrl('repairdevice/index/',array('_secure'=>true));
+		return $this->getUrl('repairdevice/content/index/',array('_secure'=>true));
 	}
 	
 	public function getCustomerId(){
 		
 		return Mage::getSingleton('customer/session')->getId();
+	}
+	
+	public function getProduct($productId)
+	{
+		$collection = Mage::getModel('repairdevice/repairproduct')
+		  ->getCollection()
+		  ->addAttributeToFilter('repair_id' , $productId)->getData();
+		  $productIds = array_column($collection, 'product_id');
+		  
+		 return $productIds;
+		  
 	}
 	
 	public function getTitle()

@@ -1,0 +1,62 @@
+<div class="page-title title-buttons">
+    <h1><?php echo $this->__('My Repair Device') ?></h1>
+</div>
+<?php $_repairList = $this->getRepairdevice(); ?>
+<?php echo $this->getPagerHtml(); ?>
+<?php if($_repairList->getSize()): ?>
+<table class="data-table" id="my-repairs-table">
+    <col width="1" />
+    <col width="1" />
+    <col />
+    <col width="1" />
+    <thead>
+        <tr>
+            <th><?php echo $this->__('ID #') ?></th>
+            <th><?php echo $this->__('Imei') ?></th>
+            <th><?php echo $this->__('Screencode') ?></th>
+            <th><?php echo $this->__('Detailed') ?></th>
+            <th><?php echo $this->__('Shipping Method') ?></th>
+            <th><?php echo $this->__('Created at') ?></th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach ($_repairList as $_item): ?>
+        <tr>
+            <td><?php echo $_item->getRepairdeviceId() ?></td>
+            <td><?php echo $_item->getImei()?></td>
+            <td><?php echo $_item->getScreencode() ?></td>
+            <td><?php echo $_item->getDetailed() ?></td>
+			<td>
+			<?php 
+			
+			    if($_item->getShippingMethod()==1){
+					
+					echo $this->__('Skicka in med post');
+					
+				}elseif($_item->getShippingMethod()==2){
+					
+					echo $this->__('Kungsgatan 29, 11156 Stockholm, Sverige');
+				}else{
+					echo $this->__('Tivolivägen 2, 12631 Hägersten, Sverige');
+				}
+			?></td>
+			
+            <td><?php echo $_item->getCreateAt()?></td>
+            <td class="a-center">
+                <span class="nobr"><a href="<?php echo $this->getViewUrl($_item) ?>"><?php echo $this->__('View Detailed') ?></a>
+
+                </span>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('my-repairs-table');</script>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have placed no repairs device product.'); ?></p>
+<?php endif ?>
+
+

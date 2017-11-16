@@ -22,5 +22,27 @@
                <block type="repairdevice/repairdevice" name="repairdevice_content" template="repairdevice/from.phtml"/>  
             </reference>
         </repairdevice_index_index>
+		
+		
+	<customer_account translate="label">
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="repairdevice"><name>repair-device customer</name><path>repairdevice/content/</path><label>My Repair Device</label></action>
+        </reference>
+    </customer_account>
+	
+    <repairdevice_content_index>
+    	<update handle="customer_account" />
+    	<reference name="my.account.wrapper">
+			<block type="repairdevice/list" name="repairdevice_content" template="repairdevice/repair_list.phtml"/>        
+    	</reference>
+    </repairdevice_content_index>
+    
+     <repairdevice_content_view>
+    	<update handle="customer_account" />
+    	<reference name="my.account.wrapper">
+			<block type="repairdevice/repairdevice" name="repairdevice_content" template="repairdevice/view.phtml"/>        
+    	</reference>
+    </repairdevice_content_view>
+		
 	
 </layout> 
