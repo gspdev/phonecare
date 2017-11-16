@@ -2189,6 +2189,149 @@ button.btn-cart:hover{text-decoration: none;}
 /* ======================================================================================= */
 
 
+/* contact us */
+
+.contact-us-title {
+    text-align: center;
+    margin-bottom: 42px;
+}
+.contact-us-title h2 {
+    font: 700 30px/1.15 Raleway, Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: #434343;
+    text-transform: uppercase;
+    display: inline-block;
+}
+.contact-us-address-city {
+    color: #434343;
+    font: 500 18px Raleway, Helvetica Neue, Helvetica, Arial, sans-serif;
+    margin-bottom: 18px;
+}
+.contact-us-content p {
+    margin-bottom: 0;
+}
+.contact-us-content p,
+.contact-us-content span,
+.contact-us-content a {
+    color: #434343;
+}
+a.contact-us-address-email {
+    color: #2db8c7;
+}
+.contact-us-column {
+    width: 49%;
+    border: 1px solid #e0e0e0;
+    float: left;
+}
+.contact-us-column:last-child {
+    margin-left: 2%;
+}
+.contact-us-address {
+    background: #f7f7f7;
+    padding: 28px;
+}
+.contact-us-address-column p {
+    margin-bottom: 15px;
+}
+.contact-us-address-column .fa {
+    color: #2db8c7;
+    margin-right: 5px;
+    font-size: 16px;
+}
+.contact-us-address-column {
+    width: 43%;
+    float: left;
+}
+.contact-us-address-column.contact-us-schedule {
+    margin-left: 14%;
+}
+.contact-us-address-email-wrap {
+    margin-bottom: 17px;
+}
+.contact-us-address-left {
+    overflow: hidden;
+    width: 69%;
+    float: left;
+}
+.contact-us-address-column-img {
+    float: left;
+    width: 29%;
+    margin-left: 1%;
+    text-align: right;
+}
+.contact-us-address-column-img span {
+    text-transform: uppercase;
+    color: #fff;
+    background: #000;
+    padding: 5px 7px;
+    display: inline-block;
+    font: 700 14px Raleway, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+.contact-us-column.contact-us-map {
+    height: 213px;
+}
+.contact-us-column.contact-us-map iframe {
+    width: 100%;
+    height: 213px;
+}
+.contact-us-raw {
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+@media (max-width: 1199px) {
+    .contact-us-column.contact-us-map,
+    .contact-us-column.contact-us-map iframe {
+        height: 189px;
+    }
+    .contact-us-address-column {
+        width: 48%;
+    }
+    .contact-us-address-column.contact-us-schedule {
+        margin-left: 3%;
+    }
+    .contact-us-address {
+        padding: 16px;
+    }
+}
+@media (max-width: 990px){
+    .contact-us-column {
+        width: 100%;
+        float: none;
+        overflow: hidden;
+    }
+    .contact-us-column:last-child {
+        margin-left: 0;
+    }
+    .contact-us-address {
+        margin-bottom: 15px;
+    }
+}
+@media (max-width: 500px){
+    .contact-us-address-left {
+        overflow: hidden;
+        width: 100%;
+        float: none;
+    }
+    .contact-us-address-column-img {
+        float: none;
+        width: 100%;
+        margin-left: 0;
+    }
+    .contact-us-address-column {
+        width: 100%;
+        float: none;
+    }
+    .contact-us-address-column.contact-us-schedule {
+        margin: 20px 0 0;
+    }
+    .contact-us-column.contact-us-map,
+    .contact-us-column.contact-us-map iframe {
+        height: 308px;
+    }
+}
+
+/* ======================================================================================= */
+
+
 /* Content Styles ================================================================= */
 .product-name { margin:0; font-size:1em;  }
 .product-name a { color:#555555; font-size: 14px; font-weight: bold;}
