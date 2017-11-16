@@ -581,7 +581,7 @@
             }
         });
         //First load categoryList
-        ajaxCategory(211, 'category', 0); //local -> 211 server -> 90
+        ajaxCategory(90, 'category', 0); //local -> 211 server -> 90
         $(".repairList").delegate("li","click",function () {
             var $li = $(this);
             $li.parent().parent().find(".head").html($li.html());
