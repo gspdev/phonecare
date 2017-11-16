@@ -32,7 +32,7 @@
         font: 700 20px/1.35 Raleway, Helvetica Neue, Helvetica, Arial, sans-serif;
         margin: 0 0 1rem;
     }
-
+    .repair-title span{font: 700 20px/1.35 Raleway, Helvetica Neue, Helvetica, Arial, sans-serif;}
     .repair-step {
         width: 40px;
         height: 40px;
@@ -236,12 +236,33 @@
         background-repeat: no-repeat;
         background-position: 50% 50%;
     }
+    #repairs td{vertical-align: middle;}
     td.img{
         padding-right: 10px;
     }
     td.price {
          padding-left: 10px;
+        font-weight: 700;
      }
+    .device-name{margin-top: 20px;}
+    #my-device .img{width: 60px;height: 60px;}
+    #my-device .name{
+        font: 700 16px/1.55 Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
+        color:#000;
+    }
+    .repair-selected{margin-top: 20px;}
+    #reapirs-selected li{line-height: 30px;}
+    #reapirs-selected li:nth-child(odd){color:#888181;}
+    #reapirs-selected li:nth-child(even){color:#333;}
+    #poll-answers input.radio{
+        float: right;
+        width: 20%;
+        margin-right: 40%;}
+    .needlogin{margin-top: 20px;
+        font: 700 16px/1.55 Lato, Helvetica Neue, Helvetica, Arial, sans-serif;}
+    .needlogin a{color: #fc6908;
+        font: 700 16px/1.55 Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
+        text-decoration: underline;}
 </style>
 <div class="page-title repair-head">
     <h1><?php echo $this->__('REPARATIONER'); ?></h1>
@@ -352,7 +373,7 @@
                 <button type="submit" class="k-button k-primary" id="order">Beställ</button>
 				</div>
 				<?php else: ?>
-	              <div>If you want to have your phone repaired, Please <span><a href="/customer/account/login/">login</a>!</span></div>
+	              <div class="needlogin">If you want to have your phone repaired, Please  <span><a href="/customer/account/login/">login</a></span>!</div>
 	            <?php endif; ?>
             </div>
         </fieldset>
@@ -478,7 +499,7 @@
                         }
                         for (var j = 0; j < len; j++) {
                             str += '<tr>' +
-                                '<td class="img"><img style="width: 25px;height: 25px;" src="' + tmpData[j].image + '" alt="' + tmpData[j].name + '"></td>' +
+                                '<td class="img"><img style="width: 30px;height: 30px;margin-bottom: 6px;" src="' + tmpData[j].image + '" alt="' + tmpData[j].name + '"></td>' +
                                 '<td class="name">' + tmpData[j].name + '</td>' +
                                 '<td class="price">' + tmpData[j].price + '</td>' +
                                 '<td class="check"><input class="my-repair" name="repairs[]" value="' + tmpData[j].id + '" title="' + tmpData[j].name + '" id="' + tmpData[j].id + '" type="checkbox"><label for="' + tmpData[j].id + '"></label></td></tr>';
@@ -511,6 +532,8 @@
         //product list
         var tbody = new RepairList("#repairs tbody", '');
         var selected = new RepairList("#reapirs-selected",'');
+        //my-device
+        var mydevice = new RepairList("#my-device",'');
         // head init
         catHead.init();
         proHead.init();
@@ -586,6 +609,9 @@
             var $li = $(this);
             $li.parent().parent().find(".head").html($li.html());
             hideRepairList();
+            if($("#proHead").find(".name").length === 1){
+                mydevice.setCtn($("#proHead").html());
+            }
         });
         $(".head").click(function(){
             var $head = $(this);
