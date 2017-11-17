@@ -1417,6 +1417,7 @@ border-radius: 0 0 5px 5px;}
     margin: 0 2px 15px 2px;
     padding: 0 5px;
     background: #fff;
+    cursor: default;
     min-height: 135px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
