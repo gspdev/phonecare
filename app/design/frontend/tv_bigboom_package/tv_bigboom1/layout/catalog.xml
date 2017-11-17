@@ -70,6 +70,13 @@ Category default layout
         <reference name="left">
             <block type="catalog/navigation" name="catalog.leftnav" before="-" template="catalog/navigation/left.phtml"/>
         </reference>
+		<!--<reference name="product_list">
+                <action method="unsetChild">
+                    <name>block_category_above_empty_collection</name>
+                </action>
+                <block type="core/template" name="block_category_above_empty_collection" template="catalog/category/sub.phtml">
+                </block>
+        </reference>-->
         <reference name="content">
             <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
                 <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
@@ -96,6 +103,8 @@ Category default layout
             </block>
         </reference>
     </catalog_category_default>
+	
+	
 
 <!--
 Category layered navigation layout
