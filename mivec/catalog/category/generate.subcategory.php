@@ -1,7 +1,7 @@
 <?php
 require 'config.php';
 
-$_log = "generate.sub.log";
+$_log = "data/generate.sub.log";
 $fp = fopen($_log , "wb");
 
 /**
