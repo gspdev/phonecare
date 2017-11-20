@@ -27,7 +27,19 @@
 class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Action
 {
 
-	 public function indexAction(){
+	 public function indexAction()
+     {
+         //$user = $_SERVER['PHP_AUTH_USER'];
+
+         //$user = 'phonecare';
+         $pass = 99;
+
+         if ($_SERVER['PHP_AUTH_PW'] != $pass) {
+             header('WWW-Authenticate: Basic realm="Reparation"');
+             header('HTTP/1.0 401 Unauthorized');
+             die("Access Denied");
+         }
+
 		$this->loadLayout();
 		$headBlock = $this->getLayout()->getBlock('head');
         if ($headBlock) {
