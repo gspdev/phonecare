@@ -72,8 +72,12 @@ $categories = $currentCategory->getCollection()
     ->addAttributeToFilter('is_active', 1)
     ->addIdFilter($currentCategory->getChildren())
     ->addAttributeToSort('position');
+	//if($currentCategory->getChildren() && ($currentCatId =='89' || $currentParentId=='89'))
+		 $_category = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
+							   //print_r($_category);exit;
 ?>
-<?php if($currentCategory->getChildren() && ($currentCatId =='22' || $currentParentId=='22')):?>
+<?php if($currentCategory->getChildren() && ($currentCatId =='89' || $currentParentId=='89' || $_category->getParentId()=='89')):?>
+
     <style>
         .category-products{margin:0 -15px;}
         .category-products li.item{
@@ -123,8 +127,15 @@ $categories = $currentCategory->getCollection()
                     <div class="box-images">
                         <a href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName() ?>" class="product-image">
                             <!--img-face-back only show at the phone model-->
-                            <img class="img-face-back" src="<?php echo $_backImgPath . 'repair_back.png'?>" alt="<?php echo $category->getName() . ' repair'?>">
+							<?php
+							   $_category = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
+							   //print_r($_category);exit;
+	                           // echo $_category->getId().'123';
 
+							?>
+							<?php if($_category->getParentId()=='89'): ?>
+                              <img class="img-face-back" src="<?php echo $_backImgPath . 'repair_back.png'?>" alt="<?php echo $category->getName() . ' repair'?>">
+                            <?php endif;?>
                             <img class="img-face" id="product-collection-image-<?php echo $category->getId(); ?>" src="<?php echo $category->getImageUrl() ?>" alt="<?php echo $category->getName() ?>"/>
                         </a>
                     </div>
