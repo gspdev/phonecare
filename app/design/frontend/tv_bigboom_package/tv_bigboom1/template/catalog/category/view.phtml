@@ -32,6 +32,7 @@
  */
 ?>
 <?php
+$_backImgPath = Mage::getBaseUrl('media') . '/catalog/category/';
 $_helper = $this->helper('catalog/output');
 $_category = $this->getCurrentCategory();
 $_imgHtml = '';
@@ -64,218 +65,78 @@ if ($_imgUrl = $_category->getImageUrl()) {
 $imgWidth = 295;
 $columnCount = 5;
 $currentCategory = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+$currentCatId = Mage::registry('current_category')->getId();
+$currentParentId = Mage::registry('current_category')->getParentId();
 $categories = $currentCategory->getCollection()
     ->addAttributeToSelect(array('name', 'image'))
     ->addAttributeToFilter('is_active', 1)
     ->addIdFilter($currentCategory->getChildren())
     ->addAttributeToSort('position');
 ?>
-<?php if ($currentCategory->getChildren()): ?>
+<?php if($currentCategory->getChildren() && ($currentCatId =='22' || $currentParentId=='22')):?>
     <style>
-        .category-products .category-products-grid{margin:0 -15px;}
-        .category-products .category-products-grid li.item{
+        .category-products{margin:0 -15px;}
+        .category-products li.item{
             display: inline-block;
             float:left;
             width:20%;
             padding: 0 15px;
-            margin-bottom: 45px;}
-        .category-products .category-products-grid li.item .product-category-wrap{
+            margin-bottom: 45px;  }
+        .category-products li.item .item-inner{
             transition: all 0.3s ease-in-out;
             -moz-transition: all 0.3s ease-in-out;
             -webkit-transition: all 0.3s ease-in-out;
             -o-transition: all 0.3s ease-in-out;
             -moz-box-shadow: 0 2px 5px rgba(0,0,0,.1);
             -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.1);
-            box-shadow: 0 2px 5px rgba(0,0,0,.1);}
-        .category-products li.item figure{
-            overflow: visible;
-            position: relative;
-            margin-bottom: 0;
-            border-bottom-left-radius: 4px;
-            border-bottom-right-radius: 4px;
-            -webkit-transition: all 0.3s;
-            -moz-transition: all 0.3s;
-            -o-transition: all 0.3s;
-            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,.1);
         }
-        .category-products figure.animated-overlay>a {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 10;
-        }
-        .category-products figure.animated-overlay img {
-            height: auto;
-            max-width: 100%;
-            transition: 1s all ease-in-out;
-            -webkit-transition: 1s all ease-in-out;
-            -moz-transition: 1s all ease-in-out;
-            -ms-transition: 1s all ease-in-out;
-            -o-transition: 1s all ease-in-out;
-            z-index: 2;
-            position: relative;
-        }
-        .category-products figure.animated-overlay figcaption{
-            -webkit-transition: all 0.4s;
-            -moz-transition: all 0.4s;
-            -o-transition: all 0.4s;
-            transition: all 0.4s;
-            opacity: 0;
-            -moz-opacity: 0;
-            filter: alpha(opacity=0);
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: block;
-            z-index: 3;
-            -webkit-backface-visibility: hidden;
-            -webkit-perspective: 1000;
-            text-align: center;
-            overflow: hidden;
-            border-radius: inherit;
-            background-color: #7eced5;
-            background: -webkit-gradient(linear,left top,left bottom,color-stop(25%,rgba(126,206,213,0.60)),to(rgba(126,206,213,1.0)));
-            background: -webkit-linear-gradient(top,rgba(126,206,213,0.60) 25%,rgba(126,206,213,1.0) 100%);
-            background: linear-gradient(to bottom,rgba(126,206,213,0.60) 25%,rgba(126,206,213,1.0) 100%);
-        }
-        .category-products li.item figure figcaption .thumb-info {
-            display: inline-block;
-            width: 98.6%;
-            margin-left: -3%;
-            margin-bottom: 30px;
-            padding: 0 30px;
-            text-align: left;
-            vertical-align: bottom;
-            color: #fff;
-            backface-visibility: hidden;
-            bottom: 0!important;
-            height: 100%!important;
-        }
-        .category-products figcaption .thumb-info-alt > i{
-            display: block;
-            text-align: center;
-            box-sizing: content-box;
-            font-size: 24px;
-            line-height: 70px;
-            height: 70px;
-            width: 70px;
-            top: 50%;
-            margin-top: -35px;
-            margin-left: -35px;
-            left: 50%;
-            position: absolute;
-            border-radius: 50%;
-            transform: translate(0,40px);
-            background-color: #fff;
-            color: #7eced5;
-            transition-duration: 500ms;
-            transition-property: transform;
-        }
-        .category-products li path{
-            stroke-dasharray: 40;
-            stroke-dashoffset: 44;
-            -moz-transform-origin: 100%;
-            -webkit-transform-origin: 100%;
-            transform-origin: 100%;
-            -webkit-transition: all 1s 0.3s cubic-bezier(0.25,0.45,0.43,0.97)!important;
-            -moz-transition: all 1s 0.3s cubic-bezier(0.25,0.45,0.43,0.97)!important;
-            -o-transition: all 1s 0.3s cubic-bezier(0.25,0.45,0.43,0.97)!important;
-            transition: all 1s 0.3s cubic-bezier(0.25,0.45,0.43,0.97)!important;
-            backface-visibility: hidden;
-            stroke: #7eced5;
-            color:#fff;
-        }
-        .category-products .product-cat-info {
-            padding: 15px;
-            border: 0;
-            border-top-width: 0;
-            border-radius: 0;
-            text-align: center;
-        }
-        .category-products .product-cat-info h3 {
-            margin: 0 0 4px;
-            padding: 0;
-            line-height: 150%;
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: normal;
-            margin-bottom: 0;
-            transition: all 0.3s ease-in-out;
-            -moz-transition: all 0.3s ease-in-out;
-            -webkit-transition: all 0.3s ease-in-out;
-            -o-transition: all 0.3s ease-in-out;
-        }
-        .category-products .product-cat-info h3 a{ text-decoration: none;}
-        .category-products li:hover figure {
-            -moz-box-shadow: none;
-            -webkit-box-shadow: none;
-            box-shadow: none;
-        }
-        .category-products figure:hover img {
-            opacity: 1!important;
-            transform: none!important;
-        }
-        .category-products  figure.animated-overlay:hover figcaption {
-            opacity: 1;
-            -moz-opacity: 1;
-            filter: alpha(opacity=100);
-        }
-        .category-products figure.animated-overlay:hover figcaption .thumb-info>i {
-             transform: translate(0,0);
-         }
-        .category-products figure:hover .sf-hover-svg path{
-            stroke-dashoffset: 0;
-            -webkit-transition: all 1.5s 0.3s cubic-bezier(0.25,0.45,0.43,0.97)!important;
-            -moz-transition: all 1.5s 0.3s cubic-bezier(0.25,0.45,0.43,0.97)!important;
-            -o-transition: all 1.5s 0.3s cubic-bezier(0.25,0.45,0.43,0.97)!important;
-            transition: all 1.5s 0.3s cubic-bezier(0.25,0.45,0.43,0.97)!important;
-        }
-        .category-products .category-products .category-products-grid li.item:hover .product-category-wrap {
+        .category-products li.item:hover .item-inner{
             -moz-box-shadow: 0 10px 20px rgba(0,0,0,.1);
             -webkit-box-shadow: 0 10px 20px rgba(0,0,0,.1);
             box-shadow: 0 10px 20px rgba(0,0,0,.1);
         }
         .category-products #narrow-by-list dt:nth-child(n+2),#narrow-by-list dd:nth-child(n+3){display: none;}
         .category-products .block-layered-nav dd{border:none;}
+        .category-products .products-grid li.item .product-image .img-face-back{
+            top:10%;
+            width: 120px;
+            height: 120px;
+            min-height: initial;
+            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=90)";
+            filter: alpha(opacity=90);
+            opacity:0.9;
+        }
         @media (min-width: 1200px){
-            .category-products .products-grid li.item{}
-            .category-products  figure.animated-overlay img{min-height: 150px;}
+            .category-products  .box-images img{min-height: 150px;}
         }
     </style>
     <div class="category-products">
-        <ul class="category-products-grid clearfix">
-            <?php foreach ($categories as $category): ?>
-                <li class="item">
-                    <div class="product-category-wrap">
-                        <figure class="animated-overlay">
-                            <a href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName() ?>"
-                               class="product-image"></a>
-                            <img id="product-collection-image-<?php echo $category->getId(); ?>"
-                                 src="<?php echo $category->getImageUrl() ?>" alt="<?php echo $category->getName() ?>"/>
-                            <figcaption>
-                                <div class="thumb-info thumb-info-alt">
-                                    <i>
-                                        <svg version="1.1" class="sf-hover-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
-                                             height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
-                                            <path fill="none" stroke="#444444" stroke-width="2" stroke-miterlimit="10" d="M2,12h20 M15,19l7-7l-7-7"></path>
-                                        </svg>
-                                    </i>
-                                </div>
-                            </figcaption>
-                        </figure>
-                        <div class="product-cat-info">
-                            <h3 class="product-name">
-                                <a href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName() ?>"><?php echo $category->getName() ?></a>
-                            </h3>
-                        </div>
+        <?php $_collectionSize = $categories->count() ?>
+        <?php $_columnCount = 5 ?>
+        <?php $i = 0; foreach ($categories as $category):?>
+        <?php if ($i++%$_columnCount==0): ?>
+        <ul class="category-products-grid products-grid clearfix">
+        <?php endif; ?>
+            <li class="item col-md-3 col-sm-6 col-sms-6 col-smb-12  <?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+                <div class="item-inner">
+                    <div class="box-images">
+                        <a href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName() ?>" class="product-image">
+                            <!--img-face-back only show at the phone model-->
+                            <img class="img-face-back" src="<?php echo $_backImgPath . 'repair_back.png'?>" alt="<?php echo $category->getName() . ' repair'?>">
+
+                            <img class="img-face" id="product-collection-image-<?php echo $category->getId(); ?>" src="<?php echo $category->getImageUrl() ?>" alt="<?php echo $category->getName() ?>"/>
+                        </a>
                     </div>
-                </li>
-            <?php endforeach; ?>
+                    <h3 class="product-name">
+                        <a href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName() ?>"><?php echo $category->getName() ?></a>
+                    </h3>
+                </div>
+            </li>
+        <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
         </ul>
+        <?php endif ?>
+        <?php endforeach; ?>
     </div>
 <?php else: ?>
 
