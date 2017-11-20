@@ -74,7 +74,7 @@ $categories = $currentCategory->getCollection()
     ->addAttributeToSort('position');
     $_category = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
 ?>
-<?php if($currentCategory->getChildren() && ($currentCatId =='2502' || $currentParentId=='2502' || $_category->getParentId()=='2502')):?>
+<?php if($currentCategory->getChildren()):?>
     <style>
         .category-products{margin:0 -15px;}
         .category-products li.item{
