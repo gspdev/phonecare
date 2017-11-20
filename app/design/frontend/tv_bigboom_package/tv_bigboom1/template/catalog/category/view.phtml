@@ -277,29 +277,6 @@ $categories = $currentCategory->getCollection()
             <?php endforeach; ?>
         </ul>
     </div>
-    <script type="text/javascript">
-        /**
-         *  set height for li.item
-         * */
-        jQuery(document).ready(function($){
-            var $categoryList = $(".category-products-grid").children("li");
-            var categoryList_len = $categoryList.length;
-            var group_len = categoryList_len / 5 ; //li.item {width:20%};
-            console.log(categoryList_len +' -> '+ group_len);
-            for(var i = 0; i < group_len ; i++){
-                var height = 0;
-                var t_index;
-                for(var j = 0; j < 5 ; j++){
-                    t_index = i * 5 + j;
-                    var t_height = $categoryList.eq(t_index).height();
-                    height = height >  t_height ? height : t_height;
-                }
-                for(var start = i*5 ; start < (i * 5 + 5);start++){
-                    $categoryList.eq(start).css({"height":height+"px"});
-                }
-            }
-        });
-    </script>
 <?php else: ?>
 
     <?php if ($this->isContentMode()): ?>
