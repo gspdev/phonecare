@@ -73,7 +73,12 @@ $categories = $currentCategory->getCollection()
 <?php if ($currentCategory->getChildren()): ?>
     <style>
         .category-products .category-products-grid{margin:0 -15px;}
-        .category-products .category-products-grid li.item{display: inline-block;float:left;width:20%;padding: 0 15px;margin-bottom: 45px;}
+        .category-products .category-products-grid li.item{
+            display: inline-block;
+            float:left;
+            width:20%;
+            padding: 0 15px;
+            margin-bottom: 45px;}
         .category-products .category-products-grid li.item .product-category-wrap{
             transition: all 0.3s ease-in-out;
             -moz-transition: all 0.3s ease-in-out;
@@ -82,7 +87,7 @@ $categories = $currentCategory->getCollection()
             -moz-box-shadow: 0 2px 5px rgba(0,0,0,.1);
             -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.1);
             box-shadow: 0 2px 5px rgba(0,0,0,.1);}
-        li.item figure{
+        .category-products li.item figure{
             overflow: visible;
             position: relative;
             margin-bottom: 0;
@@ -93,7 +98,7 @@ $categories = $currentCategory->getCollection()
             -o-transition: all 0.3s;
             transition: all 0.3s;
         }
-        figure.animated-overlay>a {
+        .category-products figure.animated-overlay>a {
             width: 100%;
             height: 100%;
             position: absolute;
@@ -101,7 +106,7 @@ $categories = $currentCategory->getCollection()
             left: 0;
             z-index: 10;
         }
-        figure.animated-overlay img {
+        .category-products figure.animated-overlay img {
             height: auto;
             max-width: 100%;
             transition: 1s all ease-in-out;
@@ -112,7 +117,7 @@ $categories = $currentCategory->getCollection()
             z-index: 2;
             position: relative;
         }
-        figure.animated-overlay figcaption{
+        .category-products figure.animated-overlay figcaption{
             -webkit-transition: all 0.4s;
             -moz-transition: all 0.4s;
             -o-transition: all 0.4s;
@@ -137,7 +142,7 @@ $categories = $currentCategory->getCollection()
             background: -webkit-linear-gradient(top,rgba(126,206,213,0.60) 25%,rgba(126,206,213,1.0) 100%);
             background: linear-gradient(to bottom,rgba(126,206,213,0.60) 25%,rgba(126,206,213,1.0) 100%);
         }
-        li.item figure figcaption .thumb-info {
+        .category-products li.item figure figcaption .thumb-info {
             display: inline-block;
             width: 98.6%;
             margin-left: -3%;
@@ -150,7 +155,7 @@ $categories = $currentCategory->getCollection()
             bottom: 0!important;
             height: 100%!important;
         }
-        figcaption .thumb-info-alt > i{
+        .category-products figcaption .thumb-info-alt > i{
             display: block;
             text-align: center;
             box-sizing: content-box;
@@ -170,7 +175,7 @@ $categories = $currentCategory->getCollection()
             transition-duration: 500ms;
             transition-property: transform;
         }
-        li path{
+        .category-products li path{
             stroke-dasharray: 40;
             stroke-dashoffset: 44;
             -moz-transform-origin: 100%;
@@ -184,14 +189,14 @@ $categories = $currentCategory->getCollection()
             stroke: #7eced5;
             color:#fff;
         }
-        .product-cat-info {
+        .category-products .product-cat-info {
             padding: 15px;
             border: 0;
             border-top-width: 0;
             border-radius: 0;
             text-align: center;
         }
-        .product-cat-info h3 {
+        .category-products .product-cat-info h3 {
             margin: 0 0 4px;
             padding: 0;
             line-height: 150%;
@@ -204,41 +209,41 @@ $categories = $currentCategory->getCollection()
             -webkit-transition: all 0.3s ease-in-out;
             -o-transition: all 0.3s ease-in-out;
         }
-        .product-cat-info h3 a{ text-decoration: none;}
-        li:hover figure {
+        .category-products .product-cat-info h3 a{ text-decoration: none;}
+        .category-products li:hover figure {
             -moz-box-shadow: none;
             -webkit-box-shadow: none;
             box-shadow: none;
         }
-        figure:hover img {
+        .category-products figure:hover img {
             opacity: 1!important;
             transform: none!important;
         }
-        figure.animated-overlay:hover figcaption {
+        .category-products  figure.animated-overlay:hover figcaption {
             opacity: 1;
             -moz-opacity: 1;
             filter: alpha(opacity=100);
         }
-        figure.animated-overlay:hover figcaption .thumb-info>i {
+        .category-products figure.animated-overlay:hover figcaption .thumb-info>i {
              transform: translate(0,0);
          }
-        figure:hover .sf-hover-svg path{
+        .category-products figure:hover .sf-hover-svg path{
             stroke-dashoffset: 0;
             -webkit-transition: all 1.5s 0.3s cubic-bezier(0.25,0.45,0.43,0.97)!important;
             -moz-transition: all 1.5s 0.3s cubic-bezier(0.25,0.45,0.43,0.97)!important;
             -o-transition: all 1.5s 0.3s cubic-bezier(0.25,0.45,0.43,0.97)!important;
             transition: all 1.5s 0.3s cubic-bezier(0.25,0.45,0.43,0.97)!important;
         }
-        .category-products .category-products-grid li.item:hover .product-category-wrap {
+        .category-products .category-products .category-products-grid li.item:hover .product-category-wrap {
             -moz-box-shadow: 0 10px 20px rgba(0,0,0,.1);
             -webkit-box-shadow: 0 10px 20px rgba(0,0,0,.1);
             box-shadow: 0 10px 20px rgba(0,0,0,.1);
         }
-        #narrow-by-list dt:nth-child(n+2),#narrow-by-list dd:nth-child(n+3){display: none;}
-        .block-layered-nav dd{border:none;}
+        .category-products #narrow-by-list dt:nth-child(n+2),#narrow-by-list dd:nth-child(n+3){display: none;}
+        .category-products .block-layered-nav dd{border:none;}
         @media (min-width: 1200px){
             .category-products .products-grid li.item{}
-            figure.animated-overlay img{min-height: 150px;}
+            .category-products  figure.animated-overlay img{min-height: 150px;}
         }
     </style>
     <div class="category-products">
@@ -271,8 +276,30 @@ $categories = $currentCategory->getCollection()
                 </li>
             <?php endforeach; ?>
         </ul>
-
     </div>
+    <script type="text/javascript">
+        /**
+         *  set height for li.item
+         * */
+        jQuery(document).ready(function($){
+            var $categoryList = $(".category-products-grid").children("li");
+            var categoryList_len = $categoryList.length;
+            var group_len = categoryList_len / 5 ; //li.item {width:20%};
+            console.log(categoryList_len +' -> '+ group_len);
+            for(var i = 0; i < group_len ; i++){
+                var height = 0;
+                var t_index;
+                for(var j = 0; j < 5 ; j++){
+                    t_index = i * 5 + j;
+                    var t_height = $categoryList.eq(t_index).height();
+                    height = height >  t_height ? height : t_height;
+                }
+                for(var start = i*5 ; start < (i * 5 + 5);start++){
+                    $categoryList.eq(start).css({"height":height+"px"});
+                }
+            }
+        });
+    </script>
 <?php else: ?>
 
     <?php if ($this->isContentMode()): ?>
