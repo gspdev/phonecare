@@ -341,16 +341,42 @@ class Mage_Catalog_Model_Config extends Mage_Eav_Model_Config
         $options = array(
             //'position'  => Mage::helper('catalog')->__('Position') //edit by mivec
         );
-
-        // edit by mivec
-        $options = array(
+		
+		
+	   $_categoryParentIdOne = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
+	  // $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+	   //print_r($_category);exit;
+		//echo $_categoryParentIdTop->getParentId();//dylan add
+		if($_categoryParentIdOne->getParentId()==2502){
+			 
+			 $options = array(
+            //'number_of_match'	=> Mage::helper('catalog')->__('Best Match'),
+            //'entity_id'  => Mage::helper('catalog')->__('Release Date'),
+			'position'  => Mage::helper('catalog')->__('Postion'),
+			'entity_id'  => Mage::helper('catalog')->__('Release Date'),
+            'price'	=> Mage::helper('catalog')->__('Price'),
+            'sort_popular'	=> Mage::helper('catalog')->__('Most Popluar'),
+            //'sort_review'	=> Mage::helper('catalog')->__('Reviews'),  //mivec add
+            'sort_seller'	=> Mage::helper('catalog')->__('Best Seller'),
+        );
+			
+		}else{
+			$options = array(
             //'number_of_match'	=> Mage::helper('catalog')->__('Best Match'),
             'entity_id'  => Mage::helper('catalog')->__('Release Date'),
             'price'	=> Mage::helper('catalog')->__('Price'),
             'sort_popular'	=> Mage::helper('catalog')->__('Most Popluar'),
             //'sort_review'	=> Mage::helper('catalog')->__('Reviews'),  //mivec add
             'sort_seller'	=> Mage::helper('catalog')->__('Best Seller'),
+			'position'  => Mage::helper('catalog')->__('Postion'),
         );
+		}
+
+		           
+               // if($_categoryParentIdOne->getParentId() == $baseCategoryId)
+
+        // edit by mivec
+        
 
         foreach ($this->getAttributesUsedForSortBy() as $attribute) {
             /* @var $attribute Mage_Eav_Model_Entity_Attribute_Abstract */
