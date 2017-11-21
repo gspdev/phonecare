@@ -117,14 +117,15 @@ $categories = $currentCategory->getCollection()
             -webkit-transition: all 0.5s ease-in-out;
         }
         .category-products .products-grid li.item:hover .product-image .img-face-back{
-            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=90)";
-            filter: alpha(opacity=90);
-            opacity:0.9;
+            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=75)";
+            filter: alpha(opacity=75);
+            opacity:0.75;
             -webkit-transform: scale(1);
             -ms-transform: scale(1);
             -o-transform: scale(1);
             transform: scale(1);
         }
+        .category-products .products-grid .product-name{text-align: center;}
         @media (min-width: 1200px){
             .category-products  .box-images{min-height: 150px;}
         }
@@ -147,8 +148,8 @@ $categories = $currentCategory->getCollection()
                             //echo $_category->getId().'123';
 
                             ?>
-                            <?php if($_category->getId()=='2502'): ?>
-                                <img class="img-face-back" src="<?php echo $_backImgPath . 'repair_back.png'?>" alt="<?php echo $category->getName() . ' repair'?>">
+                            <?php if($_category->getId()=='22'): ?> <!--server id 2502 local id 22-->
+                                <img class="img-face-back" src="<?php echo $_backImgPath . 'repair_back.png'?>" />
                             <?php endif;?>
                             <img class="img-face" id="product-collection-image-<?php echo $category->getId(); ?>" src="<?php echo $category->getImageUrl() ?>" alt="<?php echo $category->getName() ?>"/>
                         </a>
