@@ -346,7 +346,7 @@ class Mage_Catalog_Model_Config extends Mage_Eav_Model_Config
 	   $_categoryParentIdOne = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
 	   $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
 	   //print_r($_category);exit;
-		//echo $_categoryParentIdTop->getParentId();//dylan add
+		echo $_categoryParentIdTop->getParentId();//dylan add
 		if($_categoryParentIdTop->getParentId()== $baseCategoryId){
 			 
 			 $options = array(
