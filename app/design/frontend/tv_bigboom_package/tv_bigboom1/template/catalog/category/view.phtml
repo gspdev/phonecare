@@ -72,12 +72,9 @@ $categories = $currentCategory->getCollection()
     ->addAttributeToFilter('is_active', 1)
     ->addIdFilter($currentCategory->getChildren())
     ->addAttributeToSort('position');
-	//if($currentCategory->getChildren() && ($currentCatId =='89' || $currentParentId=='89'))
-		 $_category = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
-							   //print_r($_category);exit;
+    $_category = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
 ?>
-<?php if($currentCategory->getChildren() && ($currentCatId =='89' || $currentParentId=='89' || $_category->getParentId()=='89')):?>
-
+<?php if($currentCategory->getChildren()):?>
     <style>
         .category-products{margin:0 -15px;}
         .category-products li.item{
@@ -100,19 +97,37 @@ $categories = $currentCategory->getCollection()
             -webkit-box-shadow: 0 10px 20px rgba(0,0,0,.1);
             box-shadow: 0 10px 20px rgba(0,0,0,.1);
         }
-        .category-products #narrow-by-list dt:nth-child(n+2),#narrow-by-list dd:nth-child(n+3){display: none;}
-        .category-products .block-layered-nav dd{border:none;}
+        /*.category-products #narrow-by-list dt:nth-child(n+2),#narrow-by-list dd:nth-child(n+3){display: none;}
+        .category-products .block-layered-nav dd{border:none;}*/
         .category-products .products-grid li.item .product-image .img-face-back{
-            top:10%;
+            min-height: initial;
             width: 120px;
             height: 120px;
-            min-height: initial;
-            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=90)";
-            filter: alpha(opacity=90);
-            opacity:0.9;
+            left: calc(50% - 60px);
+            top:calc(50% - 60px);
+            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            filter: alpha(opacity=0);
+            opacity:0;
+            -webkit-transform: scale(0.1);
+            -ms-transform: scale(0.1);
+            -o-transform: scale(0.1);
+            transform: scale(0.1);
+            transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+            -webkit-transition: all 0.5s ease-in-out;
         }
+        .category-products .products-grid li.item:hover .product-image .img-face-back{
+            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=75)";
+            filter: alpha(opacity=75);
+            opacity:0.75;
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+            transform: scale(1);
+        }
+        .category-products .products-grid .product-name{text-align: center;}
         @media (min-width: 1200px){
-            .category-products  .box-images img{min-height: 150px;}
+            .category-products  .box-images{min-height: 150px;}
         }
     </style>
     <div class="category-products">
@@ -127,14 +142,14 @@ $categories = $currentCategory->getCollection()
                     <div class="box-images">
                         <a href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName() ?>" class="product-image">
                             <!--img-face-back only show at the phone model-->
-							<?php
-							   $_category = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
-							   //print_r($_category);exit;
-	                           // echo $_category->getId().'123';
+                            <?php
+                            $_category = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
+                            //print_r($_category);exit;
+                            //echo $_category->getId().'123';
 
-							?>
-							<?php if($_category->getParentId()=='89'): ?>
-                              <img class="img-face-back" src="<?php echo $_backImgPath . 'repair_back.png'?>" alt="<?php echo $category->getName() . ' repair'?>">
+                            ?>
+                            <?php if($_category->getId()=='2502'): ?> <!--server id 2502 local id 22-->
+                                <img class="img-face-back" src="<?php echo $_backImgPath . 'repair_back.png'?>" />
                             <?php endif;?>
                             <img class="img-face" id="product-collection-image-<?php echo $category->getId(); ?>" src="<?php echo $category->getImageUrl() ?>" alt="<?php echo $category->getName() ?>"/>
                         </a>
