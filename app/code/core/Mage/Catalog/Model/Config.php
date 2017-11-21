@@ -342,12 +342,12 @@ class Mage_Catalog_Model_Config extends Mage_Eav_Model_Config
             //'position'  => Mage::helper('catalog')->__('Position') //edit by mivec
         );
 		
-		
+	   $baseCategoryId = 2502;
 	   $_categoryParentIdOne = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
-	  // $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+	   $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
 	   //print_r($_category);exit;
 		//echo $_categoryParentIdTop->getParentId();//dylan add
-		if($_categoryParentIdOne->getParentId()==2502){
+		if($_categoryParentIdTop->getParentId()== $baseCategoryId){
 			 
 			 $options = array(
             //'number_of_match'	=> Mage::helper('catalog')->__('Best Match'),
