@@ -97,8 +97,8 @@ $categories = $currentCategory->getCollection()
             -webkit-box-shadow: 0 10px 20px rgba(0,0,0,.1);
             box-shadow: 0 10px 20px rgba(0,0,0,.1);
         }
-        .category-products #narrow-by-list dt:nth-child(n+2),#narrow-by-list dd:nth-child(n+3){display: none;}
-        .category-products .block-layered-nav dd{border:none;}
+        /*.category-products #narrow-by-list dt:nth-child(n+2),#narrow-by-list dd:nth-child(n+3){display: none;}
+        .category-products .block-layered-nav dd{border:none;}*/
         .category-products .products-grid li.item .product-image .img-face-back{
             min-height: initial;
             width: 120px;
@@ -148,7 +148,7 @@ $categories = $currentCategory->getCollection()
                             //echo $_category->getId().'123';
 
                             ?>
-                            <?php if($_category->getId()=='22'): ?> <!--server id 2502 local id 22-->
+                            <?php if($_category->getId()=='2502'): ?> <!--server id 2502 local id 22-->
                                 <img class="img-face-back" src="<?php echo $_backImgPath . 'repair_back.png'?>" />
                             <?php endif;?>
                             <img class="img-face" id="product-collection-image-<?php echo $category->getId(); ?>" src="<?php echo $category->getImageUrl() ?>" alt="<?php echo $category->getName() ?>"/>
