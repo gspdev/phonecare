@@ -149,10 +149,10 @@ $baseCategoryId = 2502;
 					   $_categoryParentIdOne = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
 					   $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
 					   //print_r($_category);exit;
-						//echo $_categoryParentIdTop->getParentId();
+						echo $_categoryParentIdTop->getParentId();
 
 		           ?>
-                <?php if($_categoryParentIdTop->getParentId()==$baseCategoryId): ?> 				   
+                <?php if($_categoryParentIdTop->getParentId() == $baseCategoryId): ?> 				   
                     <img class="repair" src="<?php echo  $_iconPath . $_product->getData("repair_part") . ".png"?>" />
 				<?php endif;?>
                     <div class="box-images">
