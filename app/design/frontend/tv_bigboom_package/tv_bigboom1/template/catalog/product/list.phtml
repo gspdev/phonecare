@@ -149,7 +149,7 @@ $baseCategoryId = 2502;
 					   $_categoryParentIdOne = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
 					   $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
 					   //print_r($_category);exit;
-						echo $_categoryParentIdTop->getParentId();
+						echo $_categoryParentIdOne->getParentId();
 
 		           ?>
                 <?php if($_categoryParentIdTop->getParentId() == $baseCategoryId): ?> 				   
