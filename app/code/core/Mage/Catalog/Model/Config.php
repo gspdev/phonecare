@@ -344,23 +344,12 @@ class Mage_Catalog_Model_Config extends Mage_Eav_Model_Config
 		
 	   $baseCategoryId = 2502;
 	   $_categoryParentIdOne = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
-	  // $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+	   $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
 	   //print_r($_category);exit;
-		//echo $_categoryParentIdOne->getParentId();//dylan add
-		if($_categoryParentIdOne->getParentId()!= $baseCategoryId){
+		//echo $_categoryParentIdTop->getParentId();//dylan add
+		if($_categoryParentIdTop->getParentId()== $baseCategoryId){
 			 
-		$options = array(
-            //'number_of_match'	=> Mage::helper('catalog')->__('Best Match'),
-            'entity_id'  => Mage::helper('catalog')->__('Release Date'),
-            'price'	=> Mage::helper('catalog')->__('Price'),
-            'sort_popular'	=> Mage::helper('catalog')->__('Most Popluar'),
-            //'sort_review'	=> Mage::helper('catalog')->__('Reviews'),  //mivec add
-            'sort_seller'	=> Mage::helper('catalog')->__('Best Seller'),
-			'position'  => Mage::helper('catalog')->__('Postion'),
-         );
-			
-		}else{
-			$options = array(
+			 $options = array(
             //'number_of_match'	=> Mage::helper('catalog')->__('Best Match'),
             //'entity_id'  => Mage::helper('catalog')->__('Release Date'),
 			'position'  => Mage::helper('catalog')->__('Postion'),
@@ -371,6 +360,16 @@ class Mage_Catalog_Model_Config extends Mage_Eav_Model_Config
             'sort_seller'	=> Mage::helper('catalog')->__('Best Seller'),
         );
 			
+		}else{
+			$options = array(
+            //'number_of_match'	=> Mage::helper('catalog')->__('Best Match'),
+            'entity_id'  => Mage::helper('catalog')->__('Release Date'),
+			//'postion'  => Mage::helper('catalog')->__('Position'),
+            'price'	=> Mage::helper('catalog')->__('Price'),
+            'sort_popular'	=> Mage::helper('catalog')->__('Most Popluar'),
+            //'sort_review'	=> Mage::helper('catalog')->__('Reviews'),  //mivec add
+            'sort_seller'	=> Mage::helper('catalog')->__('Best Seller'),
+        );
 		}
 
 		           
