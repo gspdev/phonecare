@@ -32,7 +32,11 @@
         font: 700 20px/1.35 Raleway, Helvetica Neue, Helvetica, Arial, sans-serif;
         margin: 0 0 1rem;
     }
-    .repair-title span{font: 700 20px/1.35 Raleway, Helvetica Neue, Helvetica, Arial, sans-serif;}
+
+    .repair-title span {
+        font: 700 20px/1.35 Raleway, Helvetica Neue, Helvetica, Arial, sans-serif;
+    }
+
     .repair-step {
         width: 40px;
         height: 40px;
@@ -51,7 +55,7 @@
 
     .repair-form h4 {
         margin-top: 2em;
-        color: #a1a1a1;
+        color: #fc6908;
         font: 600 16px/1.35 Raleway, Helvetica Neue, Helvetica, Arial, sans-serif;
     }
 
@@ -111,6 +115,12 @@
         overflow-y: auto;
     }
 
+    #modelList.repairList {
+        width: 550px;
+        right: 0;
+        margin-right: 40px;
+    }
+
     .repairList.active {
         display: block;
         border: 1px solid #c1c4bc;
@@ -140,6 +150,7 @@
         padding: 6px 10px;
         border: 1px solid #f0f0f0;
         color: #000;
+        height: 36px;
     }
 
     .listBox .head::after {
@@ -224,7 +235,7 @@
         margin: 20px 10px 10px 5px;
     }
 
-    .repairList .img {
+    .repairList li .img {
         -moz-box-shadow: inset 0 0 30px rgba(0, 0, 0, .3);
         -webkit-box-shadow: inset 0 0 30px rgba(0, 0, 0, .3);
         box-shadow: inset 0 0 30px rgba(0, 0, 0, .3);
@@ -236,33 +247,77 @@
         background-repeat: no-repeat;
         background-position: 50% 50%;
     }
-    #repairs td{vertical-align: middle;}
-    td.img{
-        padding-right: 10px;
+
+    #repairs td {
+        vertical-align: middle;
     }
+
+    td.img > span {
+        display: block;
+        width: 30px;
+        height: 30px;
+        margin: 0 0 8px 5px;
+    }
+
+    td.name {
+        padding: 0 12px;
+    }
+
     td.price {
-         padding-left: 10px;
+        padding-left: 10px;
         font-weight: 700;
-     }
-    .device-name{margin-top: 20px;}
-    #my-device .img{width: 60px;height: 60px;}
-    #my-device .name{
-        font: 700 16px/1.55 Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
-        color:#000;
     }
-    .repair-selected{margin-top: 20px;}
-    #reapirs-selected li{line-height: 30px;}
-    #reapirs-selected li:nth-child(odd){color:#888181;}
-    #reapirs-selected li:nth-child(even){color:#333;}
-    #poll-answers input.radio{
+
+    .device-name {
+        margin-top: 20px;
+    }
+
+    #my-device .img {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        margin-left: 20px;
+    }
+
+    #my-device .name {
+        display: inline-block;
+        font: 700 16px/1.55 Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
+        color: #000;
+        padding-left: 16px;
+    }
+
+    .repair-selected {
+        margin-top: 20px;
+    }
+
+    #reapirs-selected li {
+        line-height: 30px;
+    }
+
+    #reapirs-selected li:nth-child(odd) {
+        color: #888181;
+    }
+
+    #reapirs-selected li:nth-child(even) {
+        color: #333;
+    }
+
+    #poll-answers input.radio {
         float: right;
         width: 20%;
-        margin-right: 40%;}
-    .needlogin{margin-top: 20px;
-        font: 700 16px/1.55 Lato, Helvetica Neue, Helvetica, Arial, sans-serif;}
-    .needlogin a{color: #fc6908;
+        margin-right: 40%;
+    }
+
+    .needlogin {
+        margin-top: 20px;
         font: 700 16px/1.55 Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
-        text-decoration: underline;}
+    }
+
+    .needlogin a {
+        color: #fc6908;
+        font: 700 16px/1.55 Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
+        text-decoration: underline;
+    }
 </style>
 <div class="page-title repair-head">
     <h1><?php echo $this->__('REPARATIONER'); ?></h1>
@@ -279,19 +334,33 @@
             </h2>
             <div class="row listBox">
                 <div class="col-sm-4">
-                    <h4><?php echo $this->__('Make:'); ?></h4>
+                    <h4><?php echo $this->__('märke:'); ?></h4>
                     <div id="catHead" class="head"></div>
                     <ul id="categoryList" class="repairList"></ul>
                 </div>
                 <div class="col-sm-4 products_listbox">
-                    <h4><?php echo $this->__('Product:'); ?></h4>
+                    <h4><?php echo $this->__('Model:'); ?></h4>
                     <div id="proHead" class="head"></div>
                     <ul id="productList" class="repairList"></ul>
                 </div>
                 <div class="col-sm-4 modell-list">
-                    <h4><?php echo $this->__('Model:'); ?></h4>
+                    <h4><?php echo $this->__('Reparation:'); ?></h4>
                     <div id="modHead" class="head"></div>
-                    <ul id="modelList" class="repairList"></ul>
+                    <div id="modelList" class="repairList">
+                        <table>
+                            <thead>
+                            <tr>
+                                <td class="img"></td>
+                                <td class="name">Typ av reparation</td>
+                                <td class="price">Price</td>
+                                <td class="check">Välj</td>
+                            </tr>
+                            </thead>
+                            <!--ajax product list-->
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div id="repair-block" style="display: none">
@@ -300,81 +369,71 @@
                 <h2 class="repair-title"><span
                             class="repair-step"><span>2</span></span><span>Välj typ av reparation</span>
                 </h2>
-                <div class="repair-table">
-                    <table id="repairs">
-                        <thead>
-                        <tr>
-                            <td></td>
-                            <td class="name">Typ av reparation</td>
-                            <td class="price">Price</td>
-                            <td class="check">Välj</td>
-                        </tr>
-                        </thead>
-                        <!--ajax product list-->
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
                 <div class="repair-selected"><span>Min reparation:</span><span class="no-select">Ingen typ av reparation vald</span>
                     <!--selected list-->
-                    <ul id="reapirs-selected">
-                    </ul>
+                    <ul id="reapirs-selected"></ul>
                 </div>
-				<?php if(Mage::getSingleton('customer/session')->isLoggedIn()): ?>
-				<div class=" customerPart">	
-                <div class="device-info"><h2 class="repair-title"><span class="repair-step"><span>3</span></span><span>Enhetsinformation</span>
-                    </h2>
-                    <div class="row">
-                        <div class="col-sm-6"><h4>Serie/IMEI-nummer:</h4>
-                            <input name="imei" id="imei" class="input-text required-entry" type="text"/>
+                <?php if (Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+                    <div class=" customerPart">
+                        <div class="device-info"><h2 class="repair-title"><span
+                                        class="repair-step"><span>3</span></span><span>Enhetsinformation</span>
+                            </h2>
+                            <div class="row">
+                                <div class="col-sm-6"><h4>Serie/IMEI-nummer:</h4>
+                                    <input name="imei" id="imei" class="input-text required-entry" type="text"/>
+                                </div>
+                                <div class="col-sm-6"><h4>Skärmlås:</h4>
+                                    <input type="text" name="screencode" id="screencode"
+                                           class="input-text required-entry"
+                                           value=""/>
+                                </div>
+                                <div class="col-sm-12">
+                                    <h4><span class="req-item">*</span>Beskriv problemet:</h4>
+                                    <textarea name="detailed" id="detailed" cols="5" rows="3"
+                                              class="required-entry"></textarea>
+                                </div>
+                                <p class="req-info"><span class="req-item">*</span>Måsta vara ifyllt</p></div>
                         </div>
-                        <div class="col-sm-6"><h4>Skärmlås:</h4>
-                            <input type="text" name="screencode" id="screencode" class="input-text required-entry"
-                                   value=""/>
-                        </div>
-                        <div class="col-sm-12">
-                            <h4><span class="req-item">*</span>Beskriv problemet:</h4>
-                            <textarea name="detailed" id="detailed" cols="5" rows="3" class="required-entry"></textarea>
-                        </div>
-                        <p class="req-info"><span class="req-item">*</span>Måsta vara ifyllt</p></div>
-                </div>
-                <div class="shipping-info">
-                    <h2 class="repair-title">
+                        <div class="shipping-info">
+                            <h2 class="repair-title">
                     <span class="repair-step">
                         <span>4</span>
                     </span>
-                        <span>VÄLJ OM ENHETEN SKA SKICKAS ELLER LÄMNAS I BUTIK</span>
-                    </h2>
-                    <div class="shipping-methods">
-                        <ul id="poll-answers">
-                            <li class="odd">
-                                <input name="shipping_method" type="radio" value="1" title="New" id="1new"
-                                       class="radio poll_vote">
-                                <span class="label"><label
-                                            for="vote_1"><?php echo $this->__('Skicka in med post'); ?></label></span>
-                            </li>
-                            <li class="even">
-                                <input name="shipping_method" type="radio" value="2" title="Existing" id="2new"
-                                       class="radio poll_vote">
-                                <span class="label"><label
-                                            for="vote_1"><?php echo $this->__('Kungsgatan 29, 11156 Stockholm, Sverige'); ?></label></span>
-                            </li>
-                            <li class="even">
-                                <input name="shipping_method" type="radio" value="3" title="Existing" id="3new"
-                                       class="radio poll_vote">
-                                <span class="label"><label
-                                            for="vote_1"><?php echo $this->__('Tivolivägen 2, 12631 Hägersten, Sverige'); ?></label></span>
-                            </li>
-                        </ul>
+                                <span>VÄLJ OM ENHETEN SKA SKICKAS ELLER LÄMNAS I BUTIK</span>
+                            </h2>
+                            <div class="shipping-methods">
+                                <ul id="poll-answers">
+                                    <li class="odd">
+                                        <input name="shipping_method" type="radio" value="1" title="New" id="1new"
+                                               class="radio poll_vote">
+                                        <span class="label"><label
+                                                    for="vote_1"><?php echo $this->__('Skicka in med post'); ?></label></span>
+                                    </li>
+                                    <li class="even">
+                                        <input name="shipping_method" type="radio" value="2" title="Existing" id="2new"
+                                               class="radio poll_vote">
+                                        <span class="label"><label
+                                                    for="vote_1"><?php echo $this->__('Kungsgatan 29, 11156 Stockholm, Sverige'); ?></label></span>
+                                    </li>
+                                    <li class="even">
+                                        <input name="shipping_method" type="radio" value="3" title="Existing" id="3new"
+                                               class="radio poll_vote">
+                                        <span class="label"><label
+                                                    for="vote_1"><?php echo $this->__('Tivolivägen 2, 12631 Hägersten, Sverige'); ?></label></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="shippingWarn validation-advice" style="display: none;">Detta är ett
+                                obligatoriskt fält.
+                            </div>
+                        </div>
+                        <button type="submit" class="k-button k-primary" id="order">Beställ</button>
                     </div>
-                    <div class="shippingWarn validation-advice" style="display: none;">Detta är ett obligatoriskt fält.</div>
-                </div>
-                <button type="submit" class="k-button k-primary" id="order">Beställ</button>
-				</div>
-				<?php else: ?>
-	              <div class="needlogin">If you want to have your phone repaired, Please  <span><a href="/customer/account/login/">login</a></span>!</div>
-	            <?php endif; ?>
+                <?php else: ?>
+                    <div class="needlogin">If you want to have your phone repaired, Please <span><a
+                                    href="/customer/account/login/">login</a></span>!
+                    </div>
+                <?php endif; ?>
             </div>
         </fieldset>
     </form>
@@ -398,13 +457,7 @@
             modHead.init();
             modelList.init();
             ajaxProduct(tmpId, 'product');
-            ajaxCategory(tmpId, 'category', 2);
         });
-        $("#modelList").delegate("li", "click", function () {
-            var tmpId = $(this).attr("data-id");
-            ajaxProduct(tmpId, 'product');
-        });
-
         /**
          * Ajax by id.
          * */
@@ -419,7 +472,7 @@
                     dataType: "json",
                     beforeSend: function () {
                         $("#repair-block").hide();
-                        tbody.init();
+                        modelList.init();
                         selected.init();
                         $('.no-select').show();
                         if (mtd === 'category' && sort === 0) {
@@ -483,11 +536,13 @@
                     dataType: "json",
                     beforeSend: function () {
                         $("#repair-block").hide();
-                        tbody.init();
+                        modelList.init();
                         selected.init();
+                        modHead.loading();
                         $('.no-select').show();
                     },
                     complete: function () {
+                        modHead.loaded();
                     },
                     success: function (data) {
                         var tmpData = data;
@@ -499,7 +554,7 @@
                         }
                         for (var j = 0; j < len; j++) {
                             str += '<tr>' +
-                                '<td class="img"><img style="width: 30px;height: 30px;margin-bottom: 6px;" src="' + tmpData[j].image + '" alt="' + tmpData[j].name + '"></td>' +
+                                '<td class="img"><span><img style="width: 30px;height: 30px;margin-bottom: 6px;" src="' + tmpData[j].image + '" alt="' + tmpData[j].name + '"/></span></td>' +
                                 '<td class="name">' + tmpData[j].name + '</td>' +
                                 '<td class="price">' + tmpData[j].price + '</td>' +
                                 '<td class="check"><input class="my-repair" name="repairs[]" value="' + tmpData[j].id + '" title="' + tmpData[j].name + '" id="' + tmpData[j].id + '" type="checkbox"><label for="' + tmpData[j].id + '"></label></td></tr>';
@@ -510,7 +565,7 @@
                         } else if (mtd === 'product' && sort === 1) {
 
                         }
-                        tbody.setHtml(str);
+                        modelList.setHtml(str);
                         $("#repair-block").show();
                     }
                 });
@@ -522,23 +577,22 @@
 
         //catHead proHead modHead
         var catHead = new RepairList("#catHead", "Välj märke");
-        var proHead = new RepairList("#proHead", "Välj produkt");
-        var modHead = new RepairList("#modHead", "Välj modell");
+        var proHead = new RepairList("#proHead", "Välj model");
+        var modHead = new RepairList("#modHead", "Välj reparation");
 
         //categoryList productList modelList
         var categoryList = new RepairList("#categoryList", '');
         var productList = new RepairList("#productList", '');
-        var modelList = new RepairList("#modelList", '');
+        var modelBox = new RepairList("#modelList", "");
+        var modelList = new RepairList("#modelList tbody", '');
         //product list
-        var tbody = new RepairList("#repairs tbody", '');
-        var selected = new RepairList("#reapirs-selected",'');
+        var selected = new RepairList("#reapirs-selected", '');
         //my-device
-        var mydevice = new RepairList("#my-device",'');
+        var mydevice = new RepairList("#my-device", '');
         // head init
         catHead.init();
         proHead.init();
         modHead.init();
-        tbody.init();
         function RepairList(id, inner) {
             this.id = id;
             this.inner = inner;
@@ -572,6 +626,7 @@
                 $el.html(str);
             }
         }
+
         //update selected
         $(document).on('click', '.my-repair', function () {
             var selected = 0;
@@ -595,43 +650,48 @@
         function hideRepairList() {
             categoryList.hideList();
             productList.hideList();
-            modelList.hideList();
+            modelBox.hideList();
         }
+
         //hide all repairlist when click other elements
         $(document).click(function (e) {
-            if(!$(e.target).hasClass("head") && !$(e.target).hasClass("repairList")){
+            if (!$(e.target).hasClass("head") && !$(e.target).hasClass("repairList")) {
                 $(".repairList").removeClass("active");
             }
         });
         //First load categoryList
-        ajaxCategory(2502, 'category', 0); //local -> 211 server -> 90
-        $(".repairList").delegate("li","click",function () {
+        ajaxCategory(211, 'category', 0); //local -> 211 server -> 2502
+        $(".repairList").delegate("li", "click", function () {
             var $li = $(this);
-            $li.parent().parent().find(".head").html($li.html());
+            if (!$li.hasClass("repair")) {
+                $li.parent().parent().find(".head").html($li.html());
+            }
             hideRepairList();
-            if($("#proHead").find(".name").length === 1){
+            if ($("#proHead").find(".name").length === 1) {
                 mydevice.setCtn($("#proHead").html());
             }
         });
-        $(".head").click(function(){
+        $(".head").click(function () {
             var $head = $(this);
             var $repairList = $head.parent().find(".repairList");
             hideRepairList();
-            if($repairList.children("li").length>0){
+            if ($repairList.children("li").length > 0) {
+                $repairList.addClass("active");
+            } else if ($repairList.find("tbody").children("tr").length > 0) {
                 $repairList.addClass("active");
             }
         });
         //shipping method value = value , hide checkbox when not sign in
-        $("#order").click(function(event){
+        $("#order").click(function (event) {
             var event = event || window.event;
             var $shippingMethod = $("#poll-answers .poll_vote:radio:checked");
             awrmaNewForm.validator.validate();
-            if($shippingMethod.length<=0){
+            if ($shippingMethod.length <= 0) {
                 $(".shipping-info .shipping-methods").addClass("validation-failed");
                 $(".shippingWarn").show();
                 event.preventDefault(); // Compatible standard Browsers
                 window.event.returnValue = false; // Compatible IE6~8
-            }else if($shippingMethod.length === 1){
+            } else if ($shippingMethod.length === 1) {
                 $(".shipping-info .shipping-methods").removeClass("validation-failed");
                 $(".shippingWarn").hide();
             }
