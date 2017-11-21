@@ -35,7 +35,7 @@
 $_productCollection = $this->getLoadedProductCollection();
 $_helper = $this->helper('catalog/output');
 $helpLabels = $this->helper('themevast/labels');
-$_iconPath = Mage::getBaseDir("media") . "/repair/icon/";
+$_iconPath = Mage::getBaseUrl("media") . "/repair/icon/";
 $_testPath = Mage::getBaseUrl("media") . "/repair/icon/";
 ?>
 <?php if (!$_productCollection->count()): ?>
@@ -130,7 +130,10 @@ $_testPath = Mage::getBaseUrl("media") . "/repair/icon/";
 
             <?php $_collectionSize = $_productCollection->count() ?>
             <?php $_columnCount = 4 ?>
-            <?php $i = 0; foreach ($_productCollection as $_product): ?>
+            <?php $i = 0;
+            foreach ($_productCollection as $_item):
+            $_product = Mage::getModel('catalog/product')->load($_item->getId());
+            ?>
             <!--edit by jerry-->
             <?php //echo $_iconPath . $_product->getData("repair_part") . ".png" ?>
             <?php if ($i++ % $_columnCount == 0): ?>
