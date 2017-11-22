@@ -78,7 +78,7 @@
         height: 75px;
     }
 
-    #poll-answers li label {
+    #poll-answers li label ,#shipping-store li label{
         font: 500 14px/1.55 Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
         color: #000;
     }
@@ -245,7 +245,15 @@
         background-repeat: no-repeat;
         background-position: 50% 50%;
     }
-
+    .repair-table{
+        width: 680px;
+        height:240px;
+        border: 1px solid #c1c4bc;
+        overflow-y: auto;;
+    }
+    #repair tr{
+        height:40px;
+     }
     #repairs td {
         vertical-align: middle;
     }
@@ -304,22 +312,14 @@
         color: #333;
     }
 
-    #poll-answers input.radio {
+    #poll-answers input.radio ,#shipping-store input.radio{
         float: right;
         width: 20%;
         margin-right: 40%;
     }
 
-    .needlogin {
-        margin-top: 20px;
-        font: 700 16px/1.55 Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
-    }
-
-    .needlogin a {
-        color: #fc6908;
-        font: 700 16px/1.55 Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
-        text-decoration: underline;
-    }
+    #shipping-store{display: none;}
+    #shipping-store.loading{display: block;}
     /*loading*/
     #ajaxloading,#ajaxerror{display: none;}
     #ajaxloading.loading,
@@ -433,7 +433,6 @@
                     <!--selected list-->
                     <ul id="reapirs-selected"></ul>
                 </div>
-                <?php if (Mage::getSingleton('customer/session')->isLoggedIn()): ?>
                     <div class=" customerPart">
                         <div class="device-info"><h2 class="repair-title"><span
                                         class="repair-step"><span>3</span></span><span>Enhetsinformation</span>
@@ -463,19 +462,25 @@
                             </h2>
                             <div class="shipping-methods">
                                 <ul id="poll-answers">
-                                    <li class="odd">
+                                    <li>
                                         <input name="shipping_method" type="radio" value="1" title="New" id="1new"
                                                class="radio poll_vote">
                                         <span class="label"><label
                                                     for="vote_1"><?php echo $this->__('Skicka in med post'); ?></label></span>
                                     </li>
-                                    <li class="even">
+                                    <li>
+                                        <input name="shipping_store" type="radio" value="0" title="Existing" id="store_box" class="radio store">
+                                        <span class="label"><label for="vote_1"><?php echo $this->__('Lämna i butik'); ?></label></span>
+                                    </li>
+                                </ul>
+                                <ul id="shipping-store">
+                                    <li><span class="label"><label>Välj butik:</label></span></li>
+                                    <li>
                                         <input name="shipping_method" type="radio" value="2" title="Existing" id="2new"
                                                class="radio poll_vote">
-                                        <span class="label"><label
-                                                    for="vote_1"><?php echo $this->__('Kungsgatan 29, 11156 Stockholm, Sverige'); ?></label></span>
+                                        <span class="label"><label for="vote_1"><?php echo $this->__('Kungsgatan 29, 11156 Stockholm, Sverige'); ?></label></span>
                                     </li>
-                                    <li class="even">
+                                    <li>
                                         <input name="shipping_method" type="radio" value="3" title="Existing" id="3new"
                                                class="radio poll_vote">
                                         <span class="label"><label
@@ -489,14 +494,14 @@
                         </div>
                         <button type="submit" class="k-button k-primary" id="order">Beställ</button>
                     </div>
-                <?php else: ?>
-                    <div class="needlogin">If you want to have your phone repaired, Please <span><a
-                                    href="/customer/account/login/">login</a></span>!
-                    </div>
-                <?php endif; ?>
             </div>
         </fieldset>
     </form>
+    <?php if (Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+        <p data-status="1"></p>
+    <?php else: ?>
+        <p data-status="0"></p>
+    <?php endif; ?>
 </div>
 <script type="text/javascript">
     //<![CDATA[
@@ -505,7 +510,6 @@
 </script>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
-
 
         $("#categoryList").delegate("li", 'click', function () {
             var tmpId = $(this).attr("data-id");
@@ -651,6 +655,8 @@
         // head init
         catHead.init();
         proHead.init();
+        //ship to store
+        var shipStore = new RepairList("#shipping-store", '');
         function RepairList(id, inner) {
             this.id = id;
             this.inner = inner;
@@ -704,6 +710,18 @@
                 $(this).closest('tr').removeClass('checked');
             }
         });
+        //show shipping store
+        $(document).on('click','#poll-answers .radio',function(){
+            //#shipping-store
+            if($('#poll-answers #store_box:radio:checked').attr("checked") && $(this).hasClass("store")){
+                shipStore.loading();
+                $("#1new:radio").attr("checked",false);
+            }
+            if(!$(this).hasClass("store")){
+                shipStore.loaded();
+                $("#store_box:radio,#shipping-store input:radio").attr("checked",false);
+            }
+        });
         //hide all repairList when click element of option
         function hideRepairList() {
             categoryList.hideList();
@@ -739,8 +757,11 @@
         //shipping method value = value , hide checkbox when not sign in
         $("#order").click(function (event) {
             var event = event || window.event;
-            var $shippingMethod = $("#poll-answers .poll_vote:radio:checked");
+            var $shippingMethod = $(".shipping-methods .poll_vote:radio:checked");
+            //alert($shippingMethod.length);
             awrmaNewForm.validator.validate();
+            // show cookie when submit
+            console.log('submit: ' + document.cookie);
             if ($shippingMethod.length <= 0) {
                 $(".shipping-info .shipping-methods").addClass("validation-failed");
                 $(".shippingWarn").show();
@@ -751,5 +772,7 @@
                 $(".shippingWarn").hide();
             }
         });
+        // set cookie
+        console.log('before: ' + document.cookie);
     });
 </script>
