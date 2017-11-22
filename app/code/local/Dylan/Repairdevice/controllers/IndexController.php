@@ -49,7 +49,9 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
         
         foreach ($categoryModel->getChildrenCategories() as $categoryId) {
             $category = $categoryModel->load($categoryId->getId());
-            array_push($respone, array( "name" => $category->getName(), "id" => $category->getId(), "image" => $category->getImageUrl()));
+			$categoryData = Mage::getModel('catalog/category')->load($category->getId());
+			  array_push($respone, array( "name" => $categoryData->getName(), "id" => $categoryData->getId(), "image" => $categoryData->getImageUrl()));
+           
         }      
             
         $this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone));
