@@ -767,7 +767,9 @@ h1.logo{margin:0;}
 .header h1.logo { margin:0 0 0 0; }
 .header-quick-access .user li{display: inline-block;float:left;padding:14px;}
 .header-quick-access .social .blog{padding:14px;}
-.header-quick-access .user li>a,.header-quick-access .social .blog{
+.header-quick-access .user li>a,
+.header-quick-access .user li>span,
+.header-quick-access .social .blog{
     color: #fff;
     line-height: 30px;
     margin: 0 2px;
