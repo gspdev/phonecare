@@ -154,6 +154,7 @@
     color: #555555;
     font-family: Montserrat;
 }
+.nav_vmegamenu .itemSubMenu.level1 {height: 244px;}
 .megamenu .itemMenu a.level2:before,
 .megamenu .itemMenu a.level3:before,
 .megamenu .itemMenu a.level4:before{
