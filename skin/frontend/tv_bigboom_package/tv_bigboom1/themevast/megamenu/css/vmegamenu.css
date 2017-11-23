@@ -33,7 +33,7 @@
     backface-visibility: hidden;}
 .nav-vcontainer .vmegamenu-title.hover{
     background: #fc6908;}
-.nav-vcontainer .vmegamenu-title h2 { color: #333; text-transform:capitalize ;padding-right:15px;text-align:center;  margin: 0;font: 700 19px/1.35 Lato,Helvetica Neue, Helvetica, Arial, sans-serif; width: 180px; height: 60px;line-height: 60px;}
+.nav-vcontainer .vmegamenu-title h2 { color: #333; text-transform:capitalize ;padding-right:15px;text-align:center;  margin: 0;font: 700 19px/1.35 "SF Pro Display","Helvetica Neue","Helvetica","Arial",sans-serif; width: 180px; height: 60px;line-height: 60px;}
 .nav-vcontainer .vmegamenu-title.hover h2{
     color: #fff;}
 .nav-vcontainer .vmegamenu-title h2 i { margin-top: 0; font-size: 14px; float: right;line-height:60px;}
@@ -152,7 +152,7 @@
     /*text-transform: uppercase;*/
     font-weight: bold;
     color: #555555;
-    font-family: Montserrat;
+    font-family: "SF Pro Display","Helvetica Neue","Helvetica","Arial",sans-serif;
 }
 .nav_vmegamenu .itemSubMenu.level1 {height: 244px;}
 .megamenu .itemMenu a.level2:before,
@@ -183,7 +183,7 @@
 }
 .viewmore:hover{color:#fc6908;}
 .nav_vmegamenu .itemSubMenu a.itemMenuName {
-	font-family: Helvetica,Arial,sans-serif;
+	font-family: "SF Pro Display","Helvetica Neue","Helvetica","Arial",sans-serif;
     color: #666666;
     text-transform: none;
     font-weight: normal;
