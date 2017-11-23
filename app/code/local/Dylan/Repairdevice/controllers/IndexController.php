@@ -119,6 +119,8 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
                         if ($session->getCustomer()->getIsJustConfirmed()) {
                             $this->_welcomeCustomer($session->getCustomer(), true);
                         }
+						return json_encode(array('status'=>1));
+						//print_r($ff);exit;
 
                      }catch (Mage_Core_Exception $e) {
                         switch ($e->getCode()) {
@@ -134,8 +136,9 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
                         }
                         $session->addError($message);
                         $session->setUsername($login['username']);
+						return json_encode(array('status'=>0));
                     } catch (Exception $e) {
-                        Mage::logException($e); // PA DSS violation: this exception log can disclose customer password
+                        //Mage::logException($e); // PA DSS violation: this exception log can disclose customer password
                     }
 
 			
