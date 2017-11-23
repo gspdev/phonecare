@@ -35,9 +35,13 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
         }
     	$this->renderLayout();
 	 }
+	
+    protected function _getSession()
+    {
+        return Mage::getSingleton('customer/session');
+    }	
 	 
-	 
-	    public function categoryAction(){
+	public function categoryAction(){
 			 
         $id = (int)$this->getRequest()->getParam('id');
       
@@ -80,51 +84,119 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
         $this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone));
     }
 	
+	 public function saveLoginAction()
+    {
+      
+      if ($this->_getSession()->isLoggedIn()) {
+            $this->_redirect('*/*/');	
+            return;
+        }
+        $this->_initLayoutMessages('customer/session');
+        $session = $this->_getSession();
+        if ($this->getRequest()->isPost())
+        {
+            $login = $this->getRequest()->getPost('login');
+            if (!empty($login['username']) && !empty($login['password']))
+            {  
+		      
+		       $customer = Mage::getModel('customer/customer')
+			  ->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
+			   ->loadByEmail($login['username']);
+			    $in_id = $customer->getId();
+				$data['customer_id'] = $in_id;
+				$data['create_at'] = date('Y-m-d');
+			    $id = $this->getRequest()->getParam('id');
+				$model = Mage::getModel('repairdevice/repairdevice')->load($id);
+                //$data['create_at'] = date('Y-m-d H:m:s');
+
+				//$model->setData($data);
+					 // $model->addData($data)->setId($this->getRequest()->getParam('repairdevice_id'));
+                    try {
+						
+						//$model->save();
+						//print_r($model->save()->getId());exit;
+                        $session->login($login['username'], $login['password']);
+                        if ($session->getCustomer()->getIsJustConfirmed()) {
+                            $this->_welcomeCustomer($session->getCustomer(), true);
+                        }
+
+                     }catch (Mage_Core_Exception $e) {
+                        switch ($e->getCode()) {
+                            case Mage_Customer_Model_Customer::EXCEPTION_EMAIL_NOT_CONFIRMED://1
+                                $value = $this->_getHelper('customer')->getEmailConfirmationUrl($login['username']);
+                                $message = $this->_getHelper('customer')->__('This account is not confirmed. <a href="%s">Click here</a> to resend confirmation email.', $value);
+                                break;
+                            case Mage_Customer_Model_Customer::EXCEPTION_INVALID_EMAIL_OR_PASSWORD://2
+                                $message = $e->getMessage();
+                                break;
+                            default:
+                                $message = $e->getMessage();
+                        }
+                        $session->addError($message);
+                        $session->setUsername($login['username']);
+                    } catch (Exception $e) {
+                        Mage::logException($e); // PA DSS violation: this exception log can disclose customer password
+                    }
+
+			
+            }
+			
+			  
+        }
+	     $this->_redirect('*/*/');
+           
+		
+    }
 	
 	public function saveAction(){
-		//var_dump(__METHOD__);
-		if($data = $this->getRequest()->getPost()){
-			if (!$this->_validateFormKey()) {
-	            $this->_redirect('*/*/');
-	            return;
-	        }
-
-            //print_r($data);exit;			
-			$id = $this->getRequest()->getParam('id');
-            $model = Mage::getModel('repairdevice/repairdevice')->load($id);
-			//$productId = $data['repairs']; 
-			
-          
-				
-			//$data['status'] = 1;
-			$data['create_at'] = date('Y-m-d H:m:s');
-
-				$model->setData($data);
-			try {
-                	
-                $model->save();
-				$productIdArray = $this->getRequest()->getPost('repairs');
-				foreach($productIdArray as $productId){
-					
-					$resource = Mage::getSingleton('core/resource');
-					$inster = Mage::getSingleton('core/resource')->getConnection('core_write');
-					$tablePrefix = (string) Mage::getConfig()->getTablePrefix();
-					$tableName = $resource->getTableName('repair_product');
-					$sql_inster = "INSERT INTO ".$tableName." (repair_id,product_id)VALUES('".$model->save()->getId()."','$productId')";
-					$inster->query($sql_inster);  
+		
+		$status = Mage::getSingleton('customer/session')->isLoggedIn();
+		if($status){
+			//var_dump(__METHOD__);
+			if($data = $this->getRequest()->getPost()){
+				if (!$this->_validateFormKey()) {
+					$this->_redirect('*/*/');
+					return;
 				}
-                Mage::getSingleton('core/session')->
-                addSuccess(Mage::helper('repairdevice')
-                ->__('Your information was submitted successfully.'));
-                
-                $this->_redirect('*/*/');
-                return;
-            } catch (Exception $e) {
-              Mage::getSingleton('core/session')->addError($e->getMessage());
-              return;
-            }
 
+				//print_r($data);exit;			
+				$id = $this->getRequest()->getParam('id');
+				$model = Mage::getModel('repairdevice/repairdevice')->load($id);
+				//$productId = $data['repairs']; 
+				
+			  
+					
+				//$data['status'] = 1;
+				$data['create_at'] = date('Y-m-d H:m:s');
+
+					$model->setData($data);
+				try {
+						
+					$model->save();
+					$productIdArray = $this->getRequest()->getPost('repairs');
+					foreach($productIdArray as $productId){
+						
+						$resource = Mage::getSingleton('core/resource');
+						$inster = Mage::getSingleton('core/resource')->getConnection('core_write');
+						$tablePrefix = (string) Mage::getConfig()->getTablePrefix();
+						$tableName = $resource->getTableName('repair_product');
+						$sql_inster = "INSERT INTO ".$tableName." (repair_id,product_id)VALUES('".$model->save()->getId()."','$productId')";
+						$inster->query($sql_inster);  
+					}
+					Mage::getSingleton('core/session')->
+					addSuccess(Mage::helper('repairdevice')
+					->__('Your information was submitted successfully.'));
+					
+					$this->_redirect('*/*/');
+					return;
+				} catch (Exception $e) {
+				  Mage::getSingleton('core/session')->addError($e->getMessage());
+				  return;
+				}
+
+			}
 		}
+		
 		$this->_redirect('*/*/');	
 
 	}

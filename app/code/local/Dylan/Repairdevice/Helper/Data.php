@@ -30,4 +30,8 @@ class Dylan_Repairdevice_Helper_Data extends Mage_Core_Helper_Abstract
 		return $this->_getUrl('repairdevice/index/save/');
 	}
 	
+	public function getSaveLogUrl(){
+		
+		return $this->_getUrl('repairdevice/index/saveLogin/');
+	}
 }
