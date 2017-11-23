@@ -496,7 +496,6 @@
         </fieldset>
     </form>
     <p id="login_status" data-status="<?php if (Mage::getSingleton('customer/session')->isLoggedIn()): ?>1<?php else: ?>0<?php endif; ?>"></p>
-    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 </div>
 <style>
     #myModal .content {
@@ -539,6 +538,7 @@
                 <div class="row">
                     <div class="col-sm-6"></div>
                     <div class="col-sm-6">
+                        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
                         <form action="<?php echo Mage::helper('repairdevice')->getSaveLogUrl() ?>" method="post">
                         <div class="content">
                             <h2>Befintlig kund? Logga in</h2>
@@ -560,12 +560,11 @@
                             <p class="required">* Obligatoriska fält</p>
                         </div>
                         <div class="buttons-set">
-                            <button type="submit" class="button"  name="send" id="send2"><span><span><?php echo $this->__('Log in'); ?></span></span></button>
+                            <button type="button" class="button"  name="send" id="sendLogin"><span><span><?php echo $this->__('Log in'); ?></span></span></button>
                             <span class="hover"><a href="/customer/account/create/">Create an Account</a></span>
                         </div>
+                        </form>
                     </div>
-
-                    </form>
                 </div>
             </div>
             <div class="modal-footer">
@@ -599,7 +598,7 @@
             var mtd = method;
             if (jQuery.ajax) {
                 jQuery.ajax({
-                    type: "post",
+                    type: "get",
                     async: true,
                     url: "<?php echo $repairUrl . 'repairdevice/index/category'?>",
                     data: {id: id},
@@ -658,7 +657,7 @@
             var mtd = method;
             if (jQuery.ajax) {
                 jQuery.ajax({
-                    type: "post",
+                    type: "get",
                     async: true,
                     url: "<?php echo $repairUrl . 'repairdevice/index/product'?>",
                     data: {id: id},
@@ -845,7 +844,48 @@
                 $("#myModal").modal({show:true,keyboard: true});
                 event.preventDefault();
                 window.event.returnValue = false;
+            }else if($("#login_status").attr("data-status")>0){
+                $("#myModal").modal({show:false});
             }
         });
+        $("#sendLogin1").click(function () {
+            if (jQuery.ajax) {
+                jQuery.ajax({
+                    type: "get",
+                    async: true,
+                    url: "<?php echo Mage::helper('repairdevice')->getSaveLogUrl() ?>",
+                    data: {'username': $("input#email").val(),'password':$("input#pass").val()},
+                    dataType: "json",
+                    beforeSend: function () {},
+                    complete: function () {},
+                    error: function () {},
+                    success: function (data) {
+                        alert("yes");
+                        if(data[0].status === 1){
+                            alert("confirm");
+                        }else if(data[0].status === 0){
+                            alert("Invalid login or password.");
+                        }
+                    }
+                });
+            }
+        });
+        $("#sendLogin").click(function(){
+            $.ajax({
+                type: 'GET',
+                url: '<?php echo Mage::helper('repairdevice')->getSaveLogUrl() ?>',
+                dataType: 'json',
+                cache: false,
+                error: function(){
+                    alert('error!');
+                    return false;
+                },
+                success:function(json){
+                    var p = json.status;
+                    alert(p);
+                }
+            })
+        });
+
     });
 </script>
