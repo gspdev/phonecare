@@ -31,5 +31,5 @@ function updatePrice($_entityId , $_price)
     $sql = "UPDATE " . __TABLE_PRODUCT_PRICE__ . " SET `value`=$_price"
         ." WHERE entity_id=" . $_entityId
         ." AND attribute_id=" . __ATTR_PRICE__;
-    return $db->query($sql);
+    //return $db->query($sql);
 }
