@@ -377,6 +377,8 @@
            }
     }
 </style>
+
+<?php echo $this->getMessagesBlock()->toHtml() ?>
 <div class="page-title repair-head">
     <h1><?php echo $this->__('REPARATIONER'); ?></h1>
 </div>
@@ -538,7 +540,6 @@
                 <div class="row">
                     <div class="col-sm-6"></div>
                     <div class="col-sm-6">
-                        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
                         <form action="<?php echo Mage::helper('repairdevice')->getSaveLogUrl() ?>" method="post">
                         <div class="content">
                             <h2>Befintlig kund? Logga in</h2>
@@ -560,7 +561,7 @@
                             <p class="required">* Obligatoriska fält</p>
                         </div>
                         <div class="buttons-set">
-                            <button type="button" class="button"  name="send" id="sendLogin"><span><span><?php echo $this->__('Log in'); ?></span></span></button>
+                            <button type="submit" class="button"  name="send" id="sendLogin"><span><span><?php echo $this->__('Log in'); ?></span></span></button>
                             <span class="hover"><a href="/customer/account/create/">Create an Account</a></span>
                         </div>
                         </form>
@@ -805,7 +806,7 @@
             }
         });
         //First load categoryList
-        ajaxCategory(90, 'category', 0); //local -> 211 server -> 2502
+        ajaxCategory(211, 'category', 0); //local -> 211 server -> 2502
         $(".repairList").delegate("li", "click", function () {
             var $li = $(this);
             if (!$li.hasClass("repair")) {
@@ -842,59 +843,29 @@
             }
             if($("#login_status").attr("data-status")<1){
                 $("#myModal").modal({show:true,keyboard: true});
-                event.preventDefault();
-                window.event.returnValue = false;
+                //event.preventDefault();
+                //window.event.returnValue = false;
             }else if($("#login_status").attr("data-status")>0){
                 $("#myModal").modal({show:false});
             }
         });
         $("#sendLogin1").click(function () {
+            var e_v = $("input#email").val();
+            var p_v = $("input#pass").val();
             if (jQuery.ajax) {
                 jQuery.ajax({
-                    type: "get",
+                    type: "post",
                     async: true,
                     url: "<?php echo Mage::helper('repairdevice')->getSaveLogUrl() ?>",
-                    data: {'username': $("input#email").val(),'password':$("input#pass").val()},
+                    data: {username: e_v,password: p_v},
                     dataType: "json",
                     beforeSend: function () {},
                     complete: function () {},
                     error: function () {},
                     success: function (data) {
-                        alert("yes");
-                        if(data[0].status === 1){
-                            alert("confirm");
-                        }else if(data[0].status === 0){
-                            alert("Invalid login or password.");
-                        }
                     }
                 });
             }
         });
-	
-	var $ = jQuery.noConflict(); 
-    jQuery(function() {
-		lottery();	
-    });
-	
-	function lottery(){	
-        $("#sendLogin").click(function(){
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo Mage::helper('repairdevice')->getSaveLogUrl() ?>',
-                dataType: 'json',
-                cache: false,
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        alert(XMLHttpRequest.status);
-                        alert(XMLHttpRequest.readyState);
-                        alert(textStatus);
-                    },
-                success:function(json){
-                    var p = json.status;
-                    alert(p);
-                }
-            })
-        });
-	}
-
     });
 </script>

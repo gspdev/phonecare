@@ -119,12 +119,14 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
                         if ($session->getCustomer()->getIsJustConfirmed()) {
                             $this->_welcomeCustomer($session->getCustomer(), true);
                         }
+                        Mage::getSingleton('core/session')->
+                        addSuccess(Mage::helper('repairdevice')
+                            ->__('Login Successfully!'));
+						//$respone = array();
 						
-						$respone = array();
+                         //array_push($respone, array("status" =>1));
 						
-                        $ff = array_push($respone, array("status" =>1));
-						
-                       $this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone)); 
+                       //$this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone));
 					   //print_r($rr);exit;
 
                      }catch (Mage_Core_Exception $e) {
@@ -142,21 +144,35 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
                         $session->addError($message);
                         $session->setUsername($login['username']);
 						
-						$respone = array();
+						//$respone = array();
 						
-			            array_push($respone, array( "status" =>0));
+			            //array_push($respone, array( "status" =>0));
 						
-                       $this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone)); 
+                       //$this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone));
 						
                     } catch (Exception $e) {
                         //Mage::logException($e); // PA DSS violation: this exception log can disclose customer password
                     }
-			
             }
-			
+            /*$customer = $session->getCustomer();
+            $customerId =  $customer->getId();
+            if(isset($customerId)){
+                $respone = array();
+
+                array_push($respone, array( "status" =>1));
+
+                $this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone));
+            }else{
+                $respone = array();
+
+                array_push($respone, array( "status" =>0));
+
+                $this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone));
+            }*/
 			  
         }
 	     $this->_redirect('*/*/');
+
            
 		
     }
