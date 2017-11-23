@@ -39,7 +39,29 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
     protected function _getSession()
     {
         return Mage::getSingleton('customer/session');
-    }	
+    }
+
+    public function json($array){
+			echo $this->arrayRecursive($array, 'urlencode', true);
+			$json = json_encode($array);
+			return urldecode($json);
+     }
+    public function arrayRecursive(&$array, $function, $apply_to_keys_also = false){
+		foreach ($array as $key => $value) {
+			if (is_array($value)) {
+				arrayRecursive($array[$key], $function, $apply_to_keys_also);
+			}else{
+				$array[$key] = $function($value);
+			}
+			if ($apply_to_keys_also && is_string($key)){
+				$new_key = $function($key);
+				if ($new_key != $key){
+					$array[$new_key] = $array[$key];
+					unset($array[$key]);
+				}
+			}
+		}
+	}  	 
 	 
 	public function categoryAction(){
 			 
@@ -119,7 +141,8 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
                         if ($session->getCustomer()->getIsJustConfirmed()) {
                             $this->_welcomeCustomer($session->getCustomer(), true);
                         }
-						return json_encode(array('status'=>1));
+						$dataJson = array('status'=>1);
+						echo $this->json($dataJson);
 						//print_r($ff);exit;
 
                      }catch (Mage_Core_Exception $e) {
@@ -136,11 +159,11 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
                         }
                         $session->addError($message);
                         $session->setUsername($login['username']);
-						return json_encode(array('status'=>0));
+						$dataJson = array('status'=>0);
+						echo $this->json($dataJson);
                     } catch (Exception $e) {
                         //Mage::logException($e); // PA DSS violation: this exception log can disclose customer password
                     }
-
 			
             }
 			
