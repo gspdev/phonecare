@@ -805,7 +805,7 @@
             }
         });
         //First load categoryList
-        ajaxCategory(211, 'category', 0); //local -> 211 server -> 2502
+        ajaxCategory(90, 'category', 0); //local -> 211 server -> 2502
         $(".repairList").delegate("li", "click", function () {
             var $li = $(this);
             if (!$li.hasClass("repair")) {
@@ -870,22 +870,31 @@
                 });
             }
         });
+	
+	var $ = jQuery.noConflict(); 
+    jQuery(function() {
+		lottery();	
+    });
+	
+	function lottery(){	
         $("#sendLogin").click(function(){
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: '<?php echo Mage::helper('repairdevice')->getSaveLogUrl() ?>',
                 dataType: 'json',
                 cache: false,
-                error: function(){
-                    alert('error!');
-                    return false;
-                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert(XMLHttpRequest.status);
+                        alert(XMLHttpRequest.readyState);
+                        alert(textStatus);
+                    },
                 success:function(json){
                     var p = json.status;
                     alert(p);
                 }
             })
         });
+	}
 
     });
 </script>

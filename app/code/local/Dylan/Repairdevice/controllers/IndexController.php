@@ -40,28 +40,6 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
     {
         return Mage::getSingleton('customer/session');
     }
-
-    public function json($array){
-			echo $this->arrayRecursive($array, 'urlencode', true);
-			$json = json_encode($array);
-			return urldecode($json);
-     }
-    public function arrayRecursive(&$array, $function, $apply_to_keys_also = false){
-		foreach ($array as $key => $value) {
-			if (is_array($value)) {
-				arrayRecursive($array[$key], $function, $apply_to_keys_also);
-			}else{
-				$array[$key] = $function($value);
-			}
-			if ($apply_to_keys_also && is_string($key)){
-				$new_key = $function($key);
-				if ($new_key != $key){
-					$array[$new_key] = $array[$key];
-					unset($array[$key]);
-				}
-			}
-		}
-	}  	 
 	 
 	public function categoryAction(){
 			 
@@ -141,9 +119,13 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
                         if ($session->getCustomer()->getIsJustConfirmed()) {
                             $this->_welcomeCustomer($session->getCustomer(), true);
                         }
-						$dataJson = array('status'=>1);
-						echo $this->json($dataJson);
-						//print_r($ff);exit;
+						
+						$respone = array();
+						
+                        $ff = array_push($respone, array("status" =>1));
+						
+                       $this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone)); 
+					   //print_r($rr);exit;
 
                      }catch (Mage_Core_Exception $e) {
                         switch ($e->getCode()) {
@@ -159,8 +141,13 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
                         }
                         $session->addError($message);
                         $session->setUsername($login['username']);
-						$dataJson = array('status'=>0);
-						echo $this->json($dataJson);
+						
+						$respone = array();
+						
+			            array_push($respone, array( "status" =>0));
+						
+                       $this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone)); 
+						
                     } catch (Exception $e) {
                         //Mage::logException($e); // PA DSS violation: this exception log can disclose customer password
                     }
