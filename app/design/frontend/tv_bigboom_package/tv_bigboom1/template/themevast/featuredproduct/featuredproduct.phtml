@@ -28,8 +28,6 @@ $_featureImgUrl = Mage::getBaseUrl();
         align-items: center;}
     .featuredproduct .bx-title .feature_title li{
         float: left;
-        width: 300px;
-        height: 50px;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         font-size: 18px;
@@ -51,8 +49,12 @@ $_featureImgUrl = Mage::getBaseUrl();
         -ms-flex-align: center;
         -webkit-box-align: center;
         align-items: center;cursor: pointer;}
+    .featuredproduct .bx-title .feature_title li a{font-size: 18px;color: #010101;
+        width: 300px;height: 50px;}
     .featuredproduct .bx-title .feature_title li:hover{color: #ffffff;background-color: #fc6426;}
-    .featuredproduct .bx-title .feature_title li.active{color: #ffffff;background-color: #fc6426;cursor: default;}
+    .featuredproduct .bx-title .feature_title li.active{background-color: #fc6426;cursor: default;}
+    .featuredproduct .bx-title .feature_title li:hover a,
+    .featuredproduct .bx-title .feature_title li.active a{color: #ffffff;text-decoration: none;}
     /*featureBox*/
     .featuredproduct .featured_out{}
     .featuredproduct .featuredBox{display: none;}
@@ -180,9 +182,9 @@ $_featureImgUrl = Mage::getBaseUrl();
     <div class="bx-title featured-title">
         <!--add by jerry-->
         <ul class="feature_title clearfix">
-            <li class="active">Populart</li>
-            <li>Nytt</li>
-            <li>Rea</li>
+            <li class="active"><a href="<?php echo Mage::getBaseUrl() . "promotion/recommend.html" ?>">Populart</a></li>
+            <li><a href="<?php echo Mage::getBaseUrl() . "promotion/featured.html" ?>">Nytt</a></li>
+            <li><a href="<?php echo Mage::getBaseUrl() . "promotion/deal.html" ?>">Rea</a></li>
         </ul>
     </div>
 
