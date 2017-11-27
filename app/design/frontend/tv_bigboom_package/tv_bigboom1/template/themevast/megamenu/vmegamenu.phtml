@@ -80,7 +80,7 @@
              *set viewmore
              */
             $('.itemMenu.level2>div.itemSubMenu.level2').remove();
-            $('.itemMenu.level1').each(function(){
+            $('.newMenuBox').each(function(){
                 var $itemMenu1 = $(this);
                 var countA = $itemMenu1.find(".itemMenuName.level1").length;
                 for(var i = 0;i<countA;i++){
@@ -103,9 +103,15 @@
                 $(this).find(".itemMenu>a.itemMenuName:gt(7)").css({'display':'none'}).remove();
             });
             /**
-             * add itemSubMenu for '.itemMenuName.level1' that not have Corresponding 'div'
+             * add itemSubMenu for '.newMenuBox' that not have Corresponding 'div'
              * */
+            $(".newMenuBox").each(function () {
+                if($(this).find("div.itemSubMenu.level1").length<1){
+                    $(this).append('<div class="itemSubMenu level1 newAdd"></div>');
+                }
+            });
             $('.itemMenu.level1').each(function(){
+                return false;
                 var $el= $(this);
                 var $a = $el.find(".itemMenuName.level1");
                 var a_len = $a.length;

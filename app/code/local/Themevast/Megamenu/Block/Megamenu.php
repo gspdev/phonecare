@@ -310,6 +310,9 @@ class Themevast_Megamenu_Block_Megamenu extends Mage_Catalog_Block_Navigation
                 // --- format category name ---
                 $name = $this->escapeHtml($child->getName());
                 $name = str_replace(' ', '&nbsp;', $name);
+                if($level == 1){    //new add by jerry
+                    $html .= '<div class="newMenuBox">';
+                }
                 if( in_array($child->getId(),$arr_catsid) ){
                     $html .= '<h4 class="itemMenuName level' . $level . $active . $ClassNoChildren . '"><span>' . $name . '</span></h4>';
                 }else{
@@ -318,6 +321,9 @@ class Themevast_Megamenu_Block_Megamenu extends Mage_Catalog_Block_Navigation
                 $activeChildren = $this->getActiveChildren($child, $level);
                 if (count($activeChildren) > 0){
                     $html .= '<div class="itemSubMenu level' . $level . '">' .$this->drawMenuItem($activeChildren, $level + 1). '</div>';
+                }
+                if($level == 1) {   //new add by jerry
+                    $html .= '</div>';
                 }
             }
         }

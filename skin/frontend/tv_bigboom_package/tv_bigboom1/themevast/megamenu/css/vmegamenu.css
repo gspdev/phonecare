@@ -253,4 +253,14 @@
 .nav_vmegamenu .clearBoth {
     clear:both;
 }
-
+/*reset by jerry*/
+.nav_vmegamenu div.column.last,
+.nav_vmegamenu div.column{
+    width: 400px;
+    margin-left: 10px;
+}
+.nav_vmegamenu div.column .newMenuBox{
+    display: inline-block;
+    float: left;
+    width: 50%;
+}
