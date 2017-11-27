@@ -215,9 +215,16 @@ class Themevast_Megamenu_Block_Megamenu extends Mage_Catalog_Block_Navigation
         if($countChildren == 0) $num = 1;
 
         $count = count($target);
-        if ($count) $target = array_chunk($target, ceil($count / $num));
+		if($count>4){
+			if ($count) $target = array_chunk($target, ceil($count / $num));
         
         $target = array_pad($target, $num, array());
+		}else{
+			if ($count) $target = array_chunk($target, ceil($count / 2));
+        
+            $target = array_pad($target, $num, array());
+		}
+        
          
         if ((int)Mage::getStoreConfig('megamenu/general/integrate') && count($target)){
             // --- combine consistently numerically small column ---
@@ -298,7 +305,7 @@ class Themevast_Megamenu_Block_Megamenu extends Mage_Catalog_Block_Navigation
             if(stristr($catsid, ',') === FALSE) $arr_catsid =  array(0 => $catsid);
             else $arr_catsid = explode(",", $catsid);
         }
-
+       
         foreach ($children as $child){
             if ($child->getIsActive()){
                 $active = '';
