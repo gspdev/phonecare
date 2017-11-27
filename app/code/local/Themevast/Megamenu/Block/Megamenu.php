@@ -215,6 +215,7 @@ class Themevast_Megamenu_Block_Megamenu extends Mage_Catalog_Block_Navigation
         if($countChildren == 0) $num = 1;
 
         $count = count($target);
+		//exit by dylan
 		if($count>4){
 			if ($count) $target = array_chunk($target, ceil($count / $num));
         
