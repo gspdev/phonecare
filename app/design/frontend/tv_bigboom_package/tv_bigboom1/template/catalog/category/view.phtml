@@ -75,7 +75,7 @@ $categories = $currentCategory->getCollection()
     $_category = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
 ?>
 <?php if($currentCategory->getChildren()):?>
-    <div class="category-products">
+    <div class="category-products" id="category-model">
         <?php $_collectionSize = $categories->count() ?>
         <?php $_columnCount = 5 ?>
         <?php $i = 0; foreach ($categories as $category):?>
