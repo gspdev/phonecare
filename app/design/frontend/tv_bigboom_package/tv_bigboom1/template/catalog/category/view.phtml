@@ -75,61 +75,6 @@ $categories = $currentCategory->getCollection()
     $_category = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
 ?>
 <?php if($currentCategory->getChildren()):?>
-    <style>
-        .category-products{margin:0 -15px;}
-        .category-products li.item{
-            display: inline-block;
-            float:left;
-            width:20%;
-            padding: 0 15px;
-            margin-bottom: 45px;  }
-        .category-products li.item .item-inner{
-            transition: all 0.3s ease-in-out;
-            -moz-transition: all 0.3s ease-in-out;
-            -webkit-transition: all 0.3s ease-in-out;
-            -o-transition: all 0.3s ease-in-out;
-            -moz-box-shadow: 0 2px 5px rgba(0,0,0,.1);
-            -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.1);
-            box-shadow: 0 2px 5px rgba(0,0,0,.1);
-        }
-        .category-products li.item:hover .item-inner{
-            -moz-box-shadow: 0 10px 20px rgba(0,0,0,.1);
-            -webkit-box-shadow: 0 10px 20px rgba(0,0,0,.1);
-            box-shadow: 0 10px 20px rgba(0,0,0,.1);
-        }
-        /*.category-products #narrow-by-list dt:nth-child(n+2),#narrow-by-list dd:nth-child(n+3){display: none;}
-        .category-products .block-layered-nav dd{border:none;}*/
-        .category-products .products-grid li.item .product-image .img-face-back{
-            min-height: initial;
-            width: 120px;
-            height: 120px;
-            left: calc(50% - 60px);
-            top:calc(50% - 60px);
-            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
-            filter: alpha(opacity=0);
-            opacity:0;
-            -webkit-transform: scale(0.1);
-            -ms-transform: scale(0.1);
-            -o-transform: scale(0.1);
-            transform: scale(0.1);
-            transition: all 0.5s ease-in-out;
-            -moz-transition: all 0.5s ease-in-out;
-            -webkit-transition: all 0.5s ease-in-out;
-        }
-        .category-products .products-grid li.item:hover .product-image .img-face-back{
-            -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=75)";
-            filter: alpha(opacity=75);
-            opacity:0.75;
-            -webkit-transform: scale(1);
-            -ms-transform: scale(1);
-            -o-transform: scale(1);
-            transform: scale(1);
-        }
-        .category-products .products-grid .product-name{text-align: center;}
-        @media (min-width: 1200px){
-            .category-products  .box-images{min-height: 150px;}
-        }
-    </style>
     <div class="category-products">
         <?php $_collectionSize = $categories->count() ?>
         <?php $_columnCount = 5 ?>
