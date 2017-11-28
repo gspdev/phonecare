@@ -4519,7 +4519,7 @@ line-height: 70px;font-family: "SF Pro Display","Helvetica Neue","Helvetica","Ar
     box-sizing: border-box;
     text-align: left;
     color: #343434;
-    background: url("../skin/frontend/tv_bigboom_package/tv_bigboom1/images/icon-next.png") right 10px center no-repeat;
+    background: url("../images/icon-next.png") right 10px center no-repeat;
 }
 #info-strip .innerContainer ul li a:hover{
     text-decoration: none;
@@ -4560,5 +4560,5 @@ line-height: 70px;font-family: "SF Pro Display","Helvetica Neue","Helvetica","Ar
 .underInfo{
     margin: 10px 0;
     height:80px;
-    background: url(../skin/frontend/tv_bigboom_package/tv_bigboom1/images/underInfoStrip.jpg) center center no-repeat;
+    background: url(../images/underInfoStrip.jpg) center center no-repeat;
 }
