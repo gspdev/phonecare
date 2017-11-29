@@ -57,8 +57,11 @@ jQuery(function ($) {
                 if (width < 0) {
                     width = 20;
                 }
-                $('.UI-NAV-INPUT').css('padding-left', width + 35);
-                $('.UI-CATEGORY').css('width', width + 35);
+                //update by jerry
+                //$('.UI-NAV-INPUT').css('padding-left', width + 35);
+                //$('.UI-CATEGORY').css('width', width + 35);
+                $('.UI-NAV-INPUT').get(0).style.cssText = 'padding-left:' + (width + 35) + 'px';
+                $('.UI-CATEGORY').get(0).style.cssText = 'width:' + (width + 35) + 'px';
                 // $('.UI-NAV-INPUT').css('width', self.baseWidth -(self.$categoryText.width() + 35));
             }
 
