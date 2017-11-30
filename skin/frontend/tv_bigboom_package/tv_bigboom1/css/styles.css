@@ -1401,7 +1401,7 @@ border-radius: 0 0 5px 5px;}
 .choose .innerContainer .chooseSlide .text h4 {
     position: relative;
     margin: 0 10%;
-    font-size:20px;
+    font-size:24px;
     font-weight: 700;
     line-height: 1.7;
     color: #fc622e;
@@ -1410,8 +1410,9 @@ border-radius: 0 0 5px 5px;}
 .choose .innerContainer .chooseSlide .text p {
     position: relative;
     margin: 0 10%;
-    font-size: 16px;
+    font-size: 22px;
     line-height: 1.5;
+    text-align: left;
 }
 .choose .innerContainer .chooseSlide #why-choose-pager {
     position: relative;
@@ -1580,6 +1581,7 @@ border-radius: 0 0 5px 5px;}
     zoom: 1;
     top: -10px
 }
+.choose .innerContainer .chooseSlide .text p.h-text.hideThis{display: none;}
 /*choose phoneCare end*/
 
 /* Category Page ========================================================================= */
@@ -4584,7 +4586,7 @@ line-height: 70px;font-family: "SF Pro Display","Helvetica Neue","Helvetica","Ar
     color:#fff;
 }
 #myModal.feature .modal-dialog{
-    width: 1050px;
+    width: 780px;
 }
 @media (min-width: 768px){
     #myModal .modal-dialog {
