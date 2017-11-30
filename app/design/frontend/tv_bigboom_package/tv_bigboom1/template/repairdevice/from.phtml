@@ -151,8 +151,7 @@
         color: #000;
         height: 36px;
     }
-
-    .listBox .head::after {
+    /*.listBox .head::after {
         content: '';
         position: absolute;
         right: 6px;
@@ -160,7 +159,7 @@
         border-style: solid;
         border-width: 5px;
         border-color: #666 transparent transparent;
-    }
+    }*/
 
     .listBox .head.loading::after {
         content: '';
@@ -168,6 +167,8 @@
         width: 16px;
         height: 16px;
         top: 9px;
+        right: 6px;
+        border-style: solid;
         border-color: #2db8c7;
         border-width: 4px;
         border-radius: 50%;
@@ -218,11 +219,8 @@
         vertical-align: middle;
         width: 24px;
         height: 24px;
-        background-size: contain;
         margin-right: 5px;
         border-radius: 50%;
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
     }
 
     .repairList > span {
@@ -234,16 +232,16 @@
         margin: 20px 10px 10px 5px;
     }
     .repairList li .img {
-        -moz-box-shadow: inset 0 0 30px rgba(0, 0, 0, .3);
+        /*-moz-box-shadow: inset 0 0 30px rgba(0, 0, 0, .3);
         -webkit-box-shadow: inset 0 0 30px rgba(0, 0, 0, .3);
-        box-shadow: inset 0 0 30px rgba(0, 0, 0, .3);
+        box-shadow: inset 0 0 30px rgba(0, 0, 0, .3);*/
         margin: 10px;
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background-size: contain;
+        /*background-size: contain;
         background-repeat: no-repeat;
-        background-position: 50% 50%;
+        background-position: 50% 50%;*/
     }
     .repair-table{
         width: 680px;
@@ -322,8 +320,8 @@
     #shipping-store.loading{display: block;}
     /*loading*/
     #ajaxloading,#ajaxerror{display: none;}
-    #ajaxloading.loading,
-    #ajaxerror.loading{display: block;}
+    #ajaxloading.loading,#ajaxerror.loading{display: block;}
+    #ajaxloading,#ajaxerror.loading{display: none\9;}
     .spinner {
         margin: 100px auto;
         width: 50px;
@@ -361,7 +359,23 @@
         -webkit-animation-delay: -0.8s;
         animation-delay: -0.8s;
     }
-
+    .repair-form .nav-down-arrow{
+        display: block;
+        right: 10px;
+        top: 16px;
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 5px 4.5px 0 4.5px;
+        border-color: #000000 transparent transparent transparent;
+        line-height: 0px;
+    }
+    .head .nav-down-arrow.loading{
+        display: none;
+    }
+    #ie_ajax{display: none;}
+    #ie_ajax.loading{display: block\9;}
     @-webkit-keyframes stretchdelay {
         0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
         20% { -webkit-transform: scaleY(1.0) }
@@ -404,6 +418,9 @@
                 </div>
             </div>
             <p id="ajaxerror" style="font-size: 20px;margin:40px auto;text-align: center;">This service will be provided soon.</p>
+            <div id="ie_ajax" style="width: 60px;height: 60px;margin:40px auto;">
+                <img src="../media/repair/loading_ie.gif">
+            </div>
             <div id="ajaxloading" class="spinner">
                 <div class="rect1"></div>
                 <div class="rect2"></div>
@@ -429,6 +446,7 @@
                         <tbody></tbody>
                     </table>
                 </div>
+                <div class="validation-advice selectWarn" style="display: none;">Detta är ett obligatoriskt fält.</div>
                 <div class="repair-selected"><span>Min reparation:</span><span class="no-select">Ingen typ av reparation vald</span>
                     <!--selected list-->
                     <ul id="reapirs-selected"></ul>
@@ -615,17 +633,21 @@
                             proHead.init();
                             productList.init();
                             repairs.init();
+                            cDown.loading();
                         } else if (mtd === 'category' && sort === 1) {
                             proHead.loading();
                             proHead.init();
                             productList.init();
                             repairs.init();
+                            pDown.loading();
                         } else if (mtd === 'category' && sort === 2) {}
                     },
                     complete: function () {
                         if (mtd === 'category' && sort === 0) {
                             catHead.loaded();
+                            cDown.loaded();
                         } else if (mtd === 'category' && sort === 1) {
+                            pDown.loaded();
                             proHead.loaded();
                         } else if (mtd === 'category' && sort === 2) {}
                     },
@@ -637,7 +659,7 @@
                             return false;
                         }
                         for (var j = 0; j < len; j++) {
-                            str += '<li class="clearfix" data-id="' + tmpData[j].id + '"><span class="img" style="background-image: url(' + tmpData[j].image + ');"></span><span class="name">' + tmpData[j].name + '</span></li>';
+                            str += '<li class="clearfix" data-id="' + tmpData[j].id + '"><span class="img"><img class="img-responsive" src="'+tmpData[j].image+'"></span><span class="name">' + tmpData[j].name + '</span></li>';
                         }
                         if (mtd === 'category' && sort === 0) {
                             $("#categoryList").html(str);
@@ -670,9 +692,11 @@
                         selected.init();
                         $('.no-select').show();
                         showLoading.loading();
+                        ieLoading.loading();
                     },
                     complete: function () {
                         showLoading.loaded();
+                        ieLoading.loaded();
                     },
                     success: function (data) {
                         var tmpData = data;
@@ -684,7 +708,7 @@
                         }
                         for (var j = 0; j < len; j++) {
                             str += '<tr>' +
-                                '<td class="img"><span><img style="width: 30px;height: 30px;margin-bottom: 6px;" src="' + tmpData[j].image + '" alt="' + tmpData[j].name + '"/></span></td>' +
+                                '<td class="img"><span><img style="width: 30px;height: 30px;margin-bottom: 6px;" src="' + tmpData[j].image + '"/></span></td>' +
                                 '<td class="name">' + tmpData[j].name + '</td>' +
                                 '<td class="price">' + tmpData[j].price + '</td>' +
                                 '<td class="check"><input class="my-repair" name="repairs[]" value="' + tmpData[j].id + '" title="' + tmpData[j].name + '" id="' + tmpData[j].id + '" type="checkbox"><label for="' + tmpData[j].id + '"></label></td></tr>';
@@ -709,9 +733,10 @@
         }
 
         //catHead proHead
-        var catHead = new RepairList("#catHead", "Välj märke");
-        var proHead = new RepairList("#proHead", "Välj model");
-
+        var catHead = new RepairList("#catHead", "<span>Välj märke</span><span class='nav-down-arrow'></span>");
+        var proHead = new RepairList("#proHead", "<span>Välj model</span><span class='nav-down-arrow'></span>");
+        var cDown = new RepairList("#catHead .nav-down-arrow","");
+        var pDown = new RepairList("#proHead .nav-down-arrow","");
         //categoryList productList
         var categoryList = new RepairList("#categoryList", '');
         var productList = new RepairList("#productList", '');
@@ -721,6 +746,7 @@
         //loading
         var showLoading = new RepairList("#ajaxloading",'');
         var ajaxerror = new RepairList("#ajaxerror",'');
+        var ieLoading = new RepairList("#ie_ajax",'');
         //my-device
         var mydevice = new RepairList("#my-device", '');
         // head init
@@ -810,7 +836,7 @@
         $(".repairList").delegate("li", "click", function () {
             var $li = $(this);
             if (!$li.hasClass("repair")) {
-                $li.parent().parent().find(".head").html($li.html());
+                $li.parent().parent().find(".head").html($li.html() + '<span class="nav-down-arrow"></span>');
             }
             hideRepairList();
             if ($("#proHead").find(".name").length === 1) {
@@ -831,6 +857,17 @@
             var $shippingMethod = $(".shipping-methods .poll_vote:radio:checked");
             //alert($shippingMethod.length);
             awrmaNewForm.validator.validate();
+            //check select product
+            if($("#repairs input[type='checkbox']:checked").length <= 0){
+                $(".repair-table").addClass("validation-failed");
+                $(".selectWarn").show();
+                event.preventDefault(); // Compatible standard Browsers
+                window.event.returnValue = false; // Compatible IE6~8
+            }else{
+                $(".repair-table").removeClass("validation-failed");
+                $(".selectWarn").hide();
+            }
+            //check shipping method
             if ($shippingMethod.length <= 0) {
                 $(".shipping-info .shipping-methods").addClass("validation-failed");
                 $(".shippingWarn").show();
@@ -847,24 +884,6 @@
                 window.event.returnValue = false;
             }else if($("#login_status").attr("data-status")>0){
                 $("#myModal").modal({show:false});
-            }
-        });
-        $("#sendLogin1").click(function () {
-            var e_v = $("input#email").val();
-            var p_v = $("input#pass").val();
-            if (jQuery.ajax) {
-                jQuery.ajax({
-                    type: "post",
-                    async: true,
-                    url: "<?php echo Mage::helper('repairdevice')->getSaveLogUrl() ?>",
-                    data: {username: e_v,password: p_v},
-                    dataType: "json",
-                    beforeSend: function () {},
-                    complete: function () {},
-                    error: function () {},
-                    success: function (data) {
-                    }
-                });
             }
         });
     });
