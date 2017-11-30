@@ -838,7 +838,8 @@ h1.logo{margin:0;}
 .searchautocomplete .nav-search-in .nav-down-arrow{top:13px!important;}
 .searchautocomplete .nav-search-in{top:5px!important;}
 .form-search .dd-selected { background: #fff;border: none; text-align: center; box-shadow: none; font-weight: normal; color: #333; line-height: 20px;}
-.form-search input.input-text {display:inline-block;width: 100%;height:40px;line-height:40px;padding:0 0 0 10px; border: 0;border:none; /*border-left: 1px solid #e8e8e8;*/font-size: 13px;}
+.form-search #searchBox{display:inline-block;width: 100%;}
+.form-search input.input-text {display:inline-block;width: 100%;height:40px;line-height:40px;padding:0 0 0 1px; border: 0;border:none; /*border-left: 1px solid #e8e8e8;*/font-size: 13px;}
 .form-search button.button { position: absolute;z-index:66; top: 0; right: 0; margin: 0;
 height:40px;/*background: rgba(0, 0, 0, 0.5) url(../images/new_add/search.png) center center no-repeat;*/}
 .search-autocomplete {
