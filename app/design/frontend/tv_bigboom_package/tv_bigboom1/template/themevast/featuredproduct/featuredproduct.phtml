@@ -9,14 +9,141 @@ $_featureImgUrl = Mage::getBaseUrl();
 <div class="container" id="info-strip">
     <div class="innerContainer">
         <ul class="clear_fix">
-            <li> <a href="<?php echo Mage::getBaseUrl()."nationwide-shipping"?>"> <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\shipping.png'?>" alt="shipping" width="64"><h3>Fri frakt</h3> <span>Skickas nästa arbetsdag</span> </a></li>
-            <li> <a href="<?php echo Mage::getBaseUrl()."repair-15minutes"?>"> <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\fardigt.png'?>" alt="fardigt" width="45"><h3>Färdigt på15 min</h3> <span>påde flesta reparationer</span> </a></li>
-            <li> <a href="<?php echo Mage::getBaseUrl()."repair-saving"?>"> <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\spara.png'?>" alt="spara" width="34"><h3>Spara 50% - 75%</h3> <span>påflera reparationer påsamma enhet</span> </a></li>
+            <li> <a href="javascript:void(0);" onclick="renderPolicy('1')"> <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\shipping.png'?>" alt="shipping" width="64"><h3>Fri frakt</h3> <span>Skickas nästa arbetsdag</span> </a></li>
+            <li> <a href="javascript:void(0);" onclick="renderPolicy('2')"> <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\fardigt.png'?>" alt="fardigt" width="45"><h3>Färdigt på15 min</h3> <span>påde flesta reparationer</span> </a></li>
+            <li> <a href="javascript:void(0);" onclick="renderPolicy('3')"> <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\spara.png'?>" alt="spara" width="34"><h3>Spara 50% - 75%</h3> <span>påflera reparationer påsamma enhet</span> </a></li>
         </ul>
     </div>
 </div>
-<div class="underInfo">
-</div>
+<!-- edit by Jerry -->
+<div class="feature modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin:120px auto 0 auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <!--need output-->
+                    <p>Fri Frakt inom Sverige</p>
+                    <p>Mobil Reparationer</p>
+                    <p>Spara 50% - 75% På Flera Reparationer!</p>
+                </h4>
+            </div>
+            <!--modal-body-->
+            <div class="modal-body">
+                <!--need output-->
+                <div class="content">
+                    <div class="std"><h1><span style="font-size: xx-small;"><span style="font-family: arial black,avant garde; font-size: x-large;">Fri Frakt inom Sverige</span></span></h1>
+                        <div class="content-popup-body">
+                            <p><span style="font-family: arial,helvetica,sans-serif; font-size: medium;">Här på Phonecare vi gör det enkelt och prisvärt att få din enhet reparerad oavsett var du bor i Sverige.</span></p>
+                            <p><span style="font-family: arial,helvetica,sans-serif; font-size: medium;">När vi får din enhet diagnostiserar vi det exakta problemet eller problemen och informerar dig om kostnaden för att reparera den. Om du godkänner den föreslagna reparationen, repareras din enhet och skickas tillbaka på cirka 2/3 arbetsdagar.</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="std"><h1><span style="font-size: xx-small;"><span style="font-family: arial black,avant garde; font-size: x-large;">Mobil Reparationer</span></span></h1>
+                        <div class="content-popup-body">
+                            <p><span style="font-family: arial,helvetica,sans-serif; font-size: medium;">Vi förstår att din&nbsp;mobil är ett viktigt verktyg i ditt dagliga liv och du vill att den ska repareras så snabbt och ekonomiskt som möjligt ... vi är här för att få det att hända! På Phonecare kan vi ersätta din trasiga mobil-skärm eller någon annan trasig del på cirka 15 minuter - 60 minuter!</span></p>
+                            <p><span style="font-family: arial,helvetica,sans-serif; font-size: medium;">Om din&nbsp;mobil har ett allvarligt problem som vattenskador eller fysisk skada, kan vi vanligtvis fixa det också. Vi har tekniker som är specialiserade på reparationer av moderkort på chipnivå. Även om du har fått höra att din&nbsp;mobil inte är fixbar, ta den till Phonecare, här kan vi vanligtvis fixa den.&nbsp;mobil moderkort reparationer kan ta från några timmar till 2/3 dagar att reparera.</span></p>
+                            <p><span style="font-family: arial,helvetica,sans-serif; font-size: medium;">Välj din mobil-modell för att se alla tjänster och priser.</span></p>
+                            <p>&nbsp;</p>
+                            <span style="font-family: arial black,avant garde; font-size: x-large;">iPad Reparationer</span></div>
+                        <div class="content-popup-body">
+                            <p><span style="font-family: arial,helvetica,sans-serif; font-size: medium;">På Phonecare kan de flesta av våra iPad reparationer vara klar på så lite som några timmar, inklusive att ersätta din brutna iPad skärm, knappar eller högtalare. Vi förstår att din iPad är en viktig del av ditt dagliga liv och du vill ha det reparerat så fort som möjligt ... vi får det hända!</span></p>
+                            <p>&nbsp;&nbsp;</p>
+                            <h1><span style="font-family: arial black,avant garde; font-size: x-large;">Batteri Reparationer</span></h1>
+                            <p><span style="font-size: medium;"> Är din mobil batteri inte längre så länge det brukade? Stänger din mobil med mindre än 1% kvar på batteriet? Behöver du en snabb och prisvärd lösning för att byta ut ditt mobil batteri? Det är vad du får på Phonecare. Vi byter ut batteriet medan du väntar, vanligtvis på så lite som 10 till 15 minuter. </span></p>
+                            <p>&nbsp;</p>
+                        </div></div>
+                </div>
+                <div class="content">
+                    <div class="std">
+                        <div class="content-popup-body">
+                            <h1><span style="font-size: x-large;">Spara 50% - 75% På Flera Reparationer!</span></h1>
+                            <p><span style="font-family: arial,helvetica,sans-serif; font-size: medium;">När en enhet går sönder och behöver repareras, måste många delar i stort fall bytas ut. Vi på Phonecare förstår det, eftersom vi redan har din enhet öppen, bör ytterligare reparationer inte debiteras till full pris. Du sparar 50% av den första extra reparationen och 75% rabatt på alla ytterligare reparationer.</span></p>
+                            <p><span style="font-family: arial,helvetica,sans-serif; font-size: medium;"><strong>Så här fungerar det:</strong>Du betalar vårat vanliga pris för din första reparationstjänst, vi ger dig 50% rabatt på den andra servicen och 75% av alla andra reparationer av lika eller mindre värde.</span></p>
+                            <p><span style="font-family: arial,helvetica,sans-serif; font-size: medium;">Vi ger också rabatt på upp till 20% om du tar med flera enheter för reparation. Rabatten varierar beroende på den del eller de delar som byts ut på den extra enheten.</span></p>
+                            <h1><span style="/* font-family: arial black,avant garde; */font-size: x-large;">Provbesparingar På Din Reparation:</span></h1>
+                            <div class="clearfix">
+                                <div class="half">
+                                    <table class="second-type">
+                                        <thead>
+                                        <tr>
+                                            <td colspan="3">Detta är ett utval av besparingarna du får när du fixar din iPhone 6-Skärm, hemknapp och batteri.</td>
+                                        </tr>
+                                        <tr><th>&nbsp;</th><th>ORD. PRIS:</th><th>NEDSATT PRIS:</th></tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><img alt="" src="data:image/webp;base64,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" data-pagespeed-url-hash="416175559" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></td>
+                                            <td>Skärm:<br>&nbsp;<b>999 Kr</b></td>
+                                            <td>Skärm:<br>&nbsp;<b>999 Kr</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img alt="" src="data:image/webp;base64,UklGRrAEAABXRUJQVlA4TKQEAAAvMUAMEFVItm3btJ31bFvXd8a2bdu2bbNq206Ktm3bTkr2w91nnX1efmCfFwJJG9+/84egbdu47/hDfuXQtm1qz/1t/7HT2bZt205nJ71V2rZto7Styk7edOC2bSRZdeeeMRZp9g9KBpAJ2oN5YBM4Aa6Bm+Ac2AMWgYGgLBGyA1AXLAPnwV+AA9wFG8BAg2dAHOgBLgISgLdgJiho5A5wH5AE/AdTpA0OAgYAn0AlqT1QH7wBjCFzEvQGDAPW6hr0B7IBsF/HoDuQLYCNrEE7QB8n7LAhxw1AF7CYMUgCDwGWXFCx8AEhEFGIQSi8QAiDDbmhM0B3rcBWgCM3ciEMhKLohNnYh/O4jGNYiwGohggQHMgDvohAimjQCODIiyQQimAn0sFwF21hBiEvcoGLBVaLAne5JPkQCi8sQjp0uIwCIOQCO0ALj8EQ1gFIxXWkQ5e/aAUCkAt6LwSHuKuhiMdDpEOGBiCwD4DKRFCgHqAlF9IQgoNIhxxl4IO8ALSARURQYBG3JYyGmOwrPuEzRNRvCDlOIhCpYE6BK0RQ4BizDUMRfIMn1xs0RxACEAaBUBDc2A9hTIMXuMugHMgBXwANbvhiLYRYbUFoggHoCoEe6ItwEJ7BE+U+kpAKRmA8aAFoSYEFT+BJ9R0JKATunbNAEIuiJXzBbMA2MIlREBpACPUbdpQCp9kg7IHwgfXwAqAFXAXLlRbCDIhyohj4aS+ED9xDGkxAA7gP9igNLvhjO4zoK0ogFoAG8BKcYtZVKA7CiP6iIiLBrIJ/oX9xwN4yE0Z0HxakgrkFTOZe1AiiHCgJmRdtBPsi0JKrHCuEyvmGBBQGp7nQVE4rsJUDcsFXrjo3QEjVAoRWGIQeEOiFnFgQHsMT5RFSwFUnmEAEcJxZAaEogZ/wxHqJ+iCYvhDwgWnBLgjhZ4KQC4xABSKAxewqGwfxN/iIl3gDgdfIEaLnnEUwUsCvMtCAkfk/FMeQDjkqwAt5odMrwRFuE4IEPIKUm4PvFqBalsBQtiP5wYI7kHAnEFzgroOtEl0vGH5YCb29WygOAsA2ZNBKEGgKKO5iIgglsRvc3iN0hRkIvrOC9ZruDXawIzdUMLxQAt2xBEdxHTdxDlsxHDURDYINfPcG70GaRiAFPAb4HTdi4A1CMOKRhAh4gxACK3ID4AG9iaAFdAL0ccIKCxyQ+BcCK4jAkYveQLaQi22slbIwOheM75l29ulYqSjrH2/sMA2dcSOZ/1G2UtdKVZEGTj4kDkB+x0yzKGG+lZRhElZqlMYVk0MxW5QKyWHaEef/tdu9jlpKyhO6GKXa91rk406cRalwL/RPmDbEW2S1L3XL+LE1ngiSjKmxalgt1Lg3o3jupPmSjRXOBXfGDbtJmSjZ/ubhTa2yqFetQIRJvxhZqT41ZmCXMqor2f/t0rC3uVweFZZPbvtp5ZeFv9aJ7MYOpWywDAvsE+WXb6Xkds1nedfafNQvf9gvqW+NkbZSPWpMly6ta63d++3Wo+vTvg5t9Dexam9+adlWtFwrlOcF5UNB+fi/sLwtWZ5UKjfq9ja2rmO7v3X7vEV7vGldulidbAo=" data-pagespeed-url-hash="1013479333" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></td>
+                                            <td>Hemknapp:<br>&nbsp;<b>349 Kr</b></td>
+                                            <td>Hemknapp:<br> <span style="color: #f00;">-50% = <b>175 Kr</b></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img alt="" src="data:image/webp;base64,UklGRhQFAABXRUJQVlA4TAcFAAAvMUAMELXQ2rbNkCTl2C42yvUWZ9a2bdu2j8ZHa9u7Z7Zt27ZtbyMjoqLqF8SOvmjEMDsGLQJJG9+/84egbdt47c8fciXBtm3azv2Obdt266Vl21bPtm3btm3btm07GROgJIKUoAzoBeaBHeAYuADOggNgDRgLWoBCqgJBUtAGbAMfAWFwBYwHJcsEMoFx4BVJBPtAjXKAPuAbSZ4FQrJAKXCZyghGyAFtqbzgMEghAQyjcoNHIEdJYAKVH3wAeUpYQJUIXoLkQqAaUJnggghIDX7Ly0CMwFQBcBCQXsBwjEIeQjSfA2qQdO3DGlgKw6CFwB0OeCTNVGMgvsCf2AiDYUQINGOAeiS9CAcTUAe7OlrFwCMGOM0ycUQRQ4kJ9EfrH7AHQ6cRA3vBdICIQEWHQCmQl5gmiyAC8KHEUdDXoQ6PoCcGYSbXjzbAEIGNSikwkIhMEhF0DsOVeBc/4TsI/4gv8Bqs/Q+foHsa83t0v4N7kEMNiMB3kFApcJSI2ueEMBT6O9hbcD+E78JNsPZ1XI6H0MR+GFdhgW0PASACVR0CkAh8JcpgAI7Cq/gMn8JeCQf9INgXQ6DXw1/4F+26P+aztX4Tf8OrAhGBUQqEiCgDfQnq8AKeRtP16AMS9AJo/xb2BOgciF2Ag2NhP0W7C+xUoKWrBy5CHYbDQedjEMpDn4M6fI4ZIRhOBMPwGuxMBrgFwkAvxoWog6e/w8MQmdIPS8DavaGLANhT9K6wf6CNAd6CxGAUZ0oviKWg74N9HDoJ4qbR8RTsz2CBnyAdmC2nAAc7wNqV0RtTOO1N68P+i1/AAenBVCmmBoPxIezl0FkQT18H+yc44BfIAAZLKUJPgm2txgjwzFDM+RcC4CtIDToxLkYdfNBf4zFw2mck8CfsMdBFEHeKPgtWADwDcUAdxgWow+owP+EBcDwHV8G+ib6IwnCMHxH8DBFwziEAeV36ItTBWnsZtB/uIPTasP9gBegwfGhjB6DHwlprf8NnYIBlCkSCp0QUwsaYgHE4Dq0PoAbLwr0kongRdbgdfiyDufzFkcfz+B5foON9/IivkYULdHUIFFhDREX4oLX+FHXg/gEre0oTQASKKQWaEREZk8acw3AKzsZZ0HrW8TgD1t6BcTgHWvRMnIgT0Dr9JLSOhRcDEbjvECgFEv1PbpPHADhw94Y+BHXo6AvdA1pib6ThEYHRDoFSCixkEHnuPIZiVVi7OxyMhieViAhkdYHcHGYSffA86vAQdAIkHexQTLBeKIVq7IFHsD5m5yEPFGCBDEIZ5DBtFOa0A9LBYsUFPUSIsohinpEGPoIEPAWOCZUVVFSCIDF4VRlgiBLOUAD8r4QM81WJYUqC91n3v0zGS7DAISg5YBlH2Ina+e2VwVsYND4bpSSuJ3EzM99nf5LGk5SBF0Y1P5dzLZTcDboWwe1TYJM2ngTjzRllf3Ns3M/LqORO/gtTB2rGFd2savsbGgkYI2bSqEXQ/oAjW5bSDoH0I2r42H702H6cXb3QKt0UcL2GL7X2J25SSIOlbNRUb3+jfFuMXRuX2kfU+JP+w+Qptd8Tdlg/4tBenJ3fzOvWWsvI/Dx3knyK8T1i37sj8yPCr4j9jcz/+PwD3xZzt1b9zdui1trvTXlkL1yVfe9e+O5v3O2e3Ju8tdZ52q1Wuq/c9V2xjFxRZq76W75mWb5BGbtlbbjzm3fvN/4+NdwhKB0A" data-pagespeed-url-hash="2891588394" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></td>
+                                            <td>Batteri:<br><b>399 Kr</b></td>
+                                            <td>Battery:<br> <span style="color: #f00;">-75% = <b>100 Kr</b></span></td>
+                                        </tr>
+                                        <tr><th>&nbsp;</th>
+                                            <td class="orange-border">TOTAL: 1747 Kr</td>
+                                            <td class="orange-border">DISCOUNT TOTAL:&nbsp;1273 Kr</td>
+                                        </tr>
+                                        <tr><th>&nbsp;</th><th>&nbsp;</th>
+                                            <td class="orange-bg">DU SPARAR: 474 Kr</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="half">
+                                    <table class="second-type">
+                                        <thead>
+                                        <tr>
+                                            <td colspan="3"><span>Detta är ett urval av besparingar som du får när du fixar din iPad 4 glas, batteri och WiFi-kabel.</span></td>
+                                        </tr>
+                                        <tr><th>&nbsp;</th><th>ORD. PRIS:</th><th>NEDSATT PRIS:</th></tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><img alt="" src="data:image/webp;base64,UklGRs4FAABXRUJQVlA4TMIFAAAvMUAMEDXQ2rbNkGvV3rGT8USjnrc6mdjJZNm2bdu2bdu2cbRt2zaOtBB1qmv+wTcG0rbJ/Gv+ayBtm+y/f8mfHNq2Te25sa3KdlI66VjZtm3btm3btm3bdvJ9///PCSCJID2oCvqBpWA/OA2ugSvgBNgJZoFOoDRIwgiBB5lBV3AM/AOEwWewAdQAiQMD8oGVIAaQCD6CoSCNPJAWrARkg3+gtyzQBESAAIKHoJgUsBIIMOiiD6QDV4GAg1l6QHrwECAiFW7YYIdMSoYXHAARgWViIBW4DRBRBhwwwAsPZCpwwACAAyAiMFcI7AXqumDFGTzGj/gBEn/GI8xGLABNMEAAjAY0k1CJx6iC5NdhgAsaBCrWAyoAmhwG+PEIVQjuw2wsxVWcwGJsQN112IqN2ItbWIFF+BBVeBMmOKEFHoPkWuCsFhlQjkeownEMBQOp6AjStiEUyegHBjqPKrwBI1zQIjBZA7QFBP5HFbpgEuYhHGkYhHK4oCIYzICCRlBRhpGIB8NZCIFYkJ8RiEBCcF9sOhiuIAtxaIJOsEAFQAp8aAobmmIKHBiNLyFEYA4jEIGGgNgSMEzEDjAAbZAJBQA5UYQWCEMzfIX9mIZXIAZ+gqyMQGCPjvl4BpE4iT5g8KMcaeCgZDRDczBsww6Eg+E8xAj0YASQFUT0PAsDmuMckqCgAh5wkB3tUIAsnIQJqYjGFegARxkBNAP0MGSD1mIJGBqjGA4ACnogErNBoVARAT0gBmQH8/WpcCIZZ1EIJ/xIhYJcdEcyNiALTnihi0BtcFYfRybCMQJ7wdADuTCjLUrRBbMRjkxIAGPBBwlAJkKwH63QEoPA0BNNMRF+pAGQADaBbzI4zPBjLxpjBkLRESMwEnHIhAxwFnyWQT4wzMcadEc+OmESKpEMQAa4K4cUmLAOm9AVE9EZRmRACrgvR4WCcOTgW6zEDHCkgKSAB1J8SAJHW8RjE6rQA3FQAUgBt8A3CVkIQTtcxjpsx11UoQSJ4JADToLX+rIQg4a4iQKYwLAWv6EECVAhB6wGR3SFwAwFd1CMBISgE/5EY7RDCgA5YCiYoWcBGJJwBl0RgXiU42WsBsMkjEYIfJACqoBq+nZhBigdHhzGRFQgAek4iWKYoUIC+AGygAzgs46e6IJdCAFHHLahN1ogD16EYQLOg4FDAtjFCASWCT1CFe5gCRLhRgJGYxg4usEIFcEwvIDFCEEG9IFmjECgstB/qMLrMMAKByoxHrFohyK4oMKHSAzEy3AjDSoioQO8BmkYgQicEPkfVRgLhghEohDRiIMHDFGIRDAYgi7wIwoMdAFiYBQjEBGoKrYHFeiKMRiI1hiDYeiA0ZiMXuiNthiOcRiFvmiE5yAEvoAsdQhsE/gXVRD8Gz+gCoIioDsjaIIC4J8GRxIq8QgCj+EFw0MIvAkTnNACpxmhXtBGg4wowz8QCLaCAe9A4BUkwQ0N8BsUqo/AbA0FJqzGt3gLb0LzdXyMF3EfX+I1vAnN9/Ap+iERHBqgLiOIgl11VHgQDSPMqJc8yIAZJgQ1rYhHAjIAEBGI43RlBOEU4oFDHAARB+CCVCfc4ACIOFQibtozgl6zLrBrjBccQAA5ADt/jVqLEfRXlhbW+ZMycSqkcQTtysIrH4UZQebgNreiFw0T5xwqpHAEU1WSjy2TlWNtUkaQu6CL19a08PDeonEOxUF6OLxIVRaNZnGmX1uSEdZ38STN6RIu7+JP/s3Rxozw8SIVKXAOBSKKcqhkYtPnbwGHu9vac7qUK7r4M7r4jCB7zE28ib8ppnc5Rv3W6NTMq5BzPt579Ev6/EzX/w6izom6NOLSqHMiDv6l118O/aHM19w8aVzW9GybTPjLNeMv6fjf+IwQyMG/CYfepB/5m2NYl69vU6JjU6l509pvRhfLooKyNm9Zn19WFpa5pWVcw9KjVVOv20/Zgb+5R3bpRv4mYgTd" data-pagespeed-url-hash="4077215165" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></td>
+                                            <td>Glas:<br> <b>300Kr</b></td>
+                                            <td>Glas:<br> <b>300Kr</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img alt="" src="data:image/webp;base64,UklGRhQFAABXRUJQVlA4TAcFAAAvMUAMELXQ2rbNkCTl2C42yvUWZ9a2bdu2j8ZHa9u7Z7Zt27ZtbyMjoqLqF8SOvmjEMDsGLQJJG9+/84egbdt47c8fciXBtm3azv2Obdt266Vl21bPtm3btm3btm07GROgJIKUoAzoBeaBHeAYuADOggNgDRgLWoBCqgJBUtAGbAMfAWFwBYwHJcsEMoFx4BVJBPtAjXKAPuAbSZ4FQrJAKXCZyghGyAFtqbzgMEghAQyjcoNHIEdJYAKVH3wAeUpYQJUIXoLkQqAaUJnggghIDX7Ly0CMwFQBcBCQXsBwjEIeQjSfA2qQdO3DGlgKw6CFwB0OeCTNVGMgvsCf2AiDYUQINGOAeiS9CAcTUAe7OlrFwCMGOM0ycUQRQ4kJ9EfrH7AHQ6cRA3vBdICIQEWHQCmQl5gmiyAC8KHEUdDXoQ6PoCcGYSbXjzbAEIGNSikwkIhMEhF0DsOVeBc/4TsI/4gv8Bqs/Q+foHsa83t0v4N7kEMNiMB3kFApcJSI2ueEMBT6O9hbcD+E78JNsPZ1XI6H0MR+GFdhgW0PASACVR0CkAh8JcpgAI7Cq/gMn8JeCQf9INgXQ6DXw1/4F+26P+aztX4Tf8OrAhGBUQqEiCgDfQnq8AKeRtP16AMS9AJo/xb2BOgciF2Ag2NhP0W7C+xUoKWrBy5CHYbDQedjEMpDn4M6fI4ZIRhOBMPwGuxMBrgFwkAvxoWog6e/w8MQmdIPS8DavaGLANhT9K6wf6CNAd6CxGAUZ0oviKWg74N9HDoJ4qbR8RTsz2CBnyAdmC2nAAc7wNqV0RtTOO1N68P+i1/AAenBVCmmBoPxIezl0FkQT18H+yc44BfIAAZLKUJPgm2txgjwzFDM+RcC4CtIDToxLkYdfNBf4zFw2mck8CfsMdBFEHeKPgtWADwDcUAdxgWow+owP+EBcDwHV8G+ib6IwnCMHxH8DBFwziEAeV36ItTBWnsZtB/uIPTasP9gBegwfGhjB6DHwlprf8NnYIBlCkSCp0QUwsaYgHE4Dq0PoAbLwr0kongRdbgdfiyDufzFkcfz+B5foON9/IivkYULdHUIFFhDREX4oLX+FHXg/gEre0oTQASKKQWaEREZk8acw3AKzsZZ0HrW8TgD1t6BcTgHWvRMnIgT0Dr9JLSOhRcDEbjvECgFEv1PbpPHADhw94Y+BHXo6AvdA1pib6ThEYHRDoFSCixkEHnuPIZiVVi7OxyMhieViAhkdYHcHGYSffA86vAQdAIkHexQTLBeKIVq7IFHsD5m5yEPFGCBDEIZ5DBtFOa0A9LBYsUFPUSIsohinpEGPoIEPAWOCZUVVFSCIDF4VRlgiBLOUAD8r4QM81WJYUqC91n3v0zGS7DAISg5YBlH2Ina+e2VwVsYND4bpSSuJ3EzM99nf5LGk5SBF0Y1P5dzLZTcDboWwe1TYJM2ngTjzRllf3Ns3M/LqORO/gtTB2rGFd2savsbGgkYI2bSqEXQ/oAjW5bSDoH0I2r42H702H6cXb3QKt0UcL2GL7X2J25SSIOlbNRUb3+jfFuMXRuX2kfU+JP+w+Qptd8Tdlg/4tBenJ3fzOvWWsvI/Dx3knyK8T1i37sj8yPCr4j9jcz/+PwD3xZzt1b9zdui1trvTXlkL1yVfe9e+O5v3O2e3Ju8tdZ52q1Wuq/c9V2xjFxRZq76W75mWb5BGbtlbbjzm3fvN/4+NdwhKB0A" data-pagespeed-url-hash="3367091035" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></td>
+                                            <td>Battery:<br> <b>60Kr</b></td>
+                                            <td>Battery:<br> <span style="color: #f00;">-50% = <b>30Kr</b></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img alt="" src="data:image/webp;base64,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" data-pagespeed-url-hash="2625053815" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></td>
+                                            <td>WiFi cable:<br> <b>60Kr</b></td>
+                                            <td>WiFi cable:<br> <span style="color: #f00;">-75% = <b>15Kr</b></span></td>
+                                        </tr>
+                                        <tr><th>&nbsp;</th>
+                                            <td class="orange-border">TOTAL: 420Kr</td>
+                                            <td class="orange-border">DISCOUNT TOTAL: 345Kr</td>
+                                        </tr>
+                                        <tr><th>&nbsp;</th><th>&nbsp;</th>
+                                            <td class="orange-bg">DU SPARAR:&nbsp;75 Kr</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="underInfo"></div>
 <div class="featuredproduct">
 	<?php
     /*echo $this->getConfig('title') ? '<div class="bx-title featured-title clearfix">
@@ -38,7 +165,6 @@ $_featureImgUrl = Mage::getBaseUrl();
             <li><a href="<?php echo Mage::getBaseUrl() . "promotion/deal.html" ?>">Rea</a></li>
         </ul>
     </div>
-
     <div class="featured_out">
 	<?php
 		// getConfig
@@ -173,6 +299,12 @@ $_featureImgUrl = Mage::getBaseUrl();
                     return false;
                 }
             });
+            renderPolicy = function(sort) {
+                var sort = sort;
+                $("#myModal.feature #myModalLabel p").eq(sort - 1).addClass("active").siblings().removeClass("active");
+                $("#myModal.feature .modal-body .content").eq(sort - 1).addClass("active").siblings().removeClass("active");
+                $("#myModal.feature").modal({show:true,keyboard: true});
+            }
         });
     </script>
 </div>

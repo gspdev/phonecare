@@ -1401,6 +1401,7 @@ border-radius: 0 0 5px 5px;}
 .choose .innerContainer .chooseSlide .text h4 {
     position: relative;
     margin: 0 10%;
+    font-size:20px;
     font-weight: 700;
     line-height: 1.7;
     color: #fc622e;
@@ -1409,6 +1410,7 @@ border-radius: 0 0 5px 5px;}
 .choose .innerContainer .chooseSlide .text p {
     position: relative;
     margin: 0 10%;
+    font-size: 16px;
     line-height: 1.5;
 }
 .choose .innerContainer .chooseSlide #why-choose-pager {
@@ -4562,3 +4564,55 @@ line-height: 70px;font-family: "SF Pro Display","Helvetica Neue","Helvetica","Ar
     height:80px;
     background: url(../images/underInfoStrip.jpg) center center no-repeat;
 }
+/*myModel*/
+ #myModal .content {
+     min-height: 345px;
+     padding: 14px 21px;
+     border: 1px solid #ddd;
+     background: #ffffff;
+ }
+#myModal .buttons-set{
+    margin: 0;
+    padding: 8px 0;
+    border: 1px solid #e4e4e4;}
+#myModal .buttons-set a{
+    line-height: 40px;
+    margin-left: 20px;
+}
+#myModal .btn-default{
+    background: #fc6908;
+    color:#fff;
+}
+#myModal.feature .modal-dialog{
+    width: 1050px;
+}
+@media (min-width: 768px){
+    #myModal .modal-dialog {
+        width: 700px;
+        margin: 30px auto;}
+}
+/*#myModal.featured .content*/
+#myModal.feature .content{display:none;}
+#myModal.feature .content.active{display: block;}
+#myModal.feature .content-popup-body h2{position:relative;font-size:19px;color:#fc6908;font-weight:700;margin:20px 0}
+#myModal.feature .content-popup-body p{position:relative;font-size:13px;line-height:1.4;margin-bottom:15px;word-spacing:1px}
+#myModal.feature .content-popup-body p{position:relative;font-size:13px;line-height:1.4;margin-bottom:15px;word-spacing:1px}
+#myModal.feature .content-popup-body .subtitle{position:relative;font-size:17px;color:#414141;margin-bottom:30px;padding:11px 15px;border-bottom:1px solid #bbbcbc;border-top:1px solid #bbbcbc}
+#myModal.feature .content-popup-body .half{float:left;width:48%;margin:10px 1%}table.first-type{border-collapse:collapse;margin-bottom:3em;width:100%;background:#fff}
+#myModal.feature table.first-type td,table.first-type th{padding:.75em 1.5em;text-align:center;font-weight:bold}
+#myModal.feature table.first-type td.left,table.first-type th.left{text-align:left}
+#myModal.feature table.first-type th{background-color:#fff;font-size:14px;color:#f94007;white-space:nowrap}
+#myModal.feature table.first-type tr{color:#010101;font-size:13px}
+#myModal.feature table.first-type tr.first{background-color:#f4f5f5}
+#myModal.feature table.first-type tr.second{background-color:#eaeaea}
+#myModal.feature table.first-type tr td.orange{color:#f94007}
+#myModal.feature table.first-type tr td:not(:first-child) {border-left:1px solid #d7d7d7}
+#myModal.feature .middle .half,.content-popup-body .half{float:left;width:48%;margin:10px 1%}
+#myModal.feature table.second-type{border-spacing:10px;border-collapse:separate;width:100%;background:#f9f9f9;font-size:14px;color:#000;text-align:center}
+#myModal.feature table.second-type th,table.second-type td{padding:10px 0;vertical-align:middle}
+#myModal.feature table.second-type th{font-weight:bold}
+#myModal.feature table.second-type td.orange-border{border-top:1px solid #f94007;font-weight:bold}
+#myModal.feature table.second-type td.orange-bg{background-color:#f94007;color:#fff;text-align:center;font-weight:bold}
+#myModal.feature #myModalLabel{font-size: 20px;}
+#myModal.feature #myModalLabel p{display: none;font-size: 20px;font-weight: bold;margin: 0;}
+#myModal.feature #myModalLabel p.active{display: block;}
