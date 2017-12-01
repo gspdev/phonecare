@@ -347,31 +347,34 @@ class Mage_Catalog_Model_Config extends Mage_Eav_Model_Config
 	   $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
 	   //print_r($_category);exit;
 		//echo $_categoryParentIdOne->getParentId();//dylan add
-		if($_categoryParentIdOne->getParentId()== $baseCategoryId){
-			 
-			 $options = array(
-            //'number_of_match'	=> Mage::helper('catalog')->__('Best Match'),
-            //'entity_id'  => Mage::helper('catalog')->__('Release Date'),
-			'position'  => Mage::helper('catalog')->__('Postion'),
-			'entity_id'  => Mage::helper('catalog')->__('Release Date'),
-            'price'	=> Mage::helper('catalog')->__('Price'),
-            'sort_popular'	=> Mage::helper('catalog')->__('Most Popluar'),
-            //'sort_review'	=> Mage::helper('catalog')->__('Reviews'),  //mivec add
-            'sort_seller'	=> Mage::helper('catalog')->__('Best Seller'),
-        );
-			
-		}else{
-			$options = array(
-            //'number_of_match'	=> Mage::helper('catalog')->__('Best Match'),
-            'entity_id'  => Mage::helper('catalog')->__('Release Date'),
-			//'postion'  => Mage::helper('catalog')->__('Position'),
-            'price'	=> Mage::helper('catalog')->__('Price'),
-            'sort_popular'	=> Mage::helper('catalog')->__('Most Popluar'),
-            //'sort_review'	=> Mage::helper('catalog')->__('Reviews'),  //mivec add
-            'sort_seller'	=> Mage::helper('catalog')->__('Best Seller'),
-        );
+		if(Mage::registry('current_category')){
+			if($_categoryParentIdOne->getParentId()== $baseCategoryId){
+				 
+				 $options = array(
+				//'number_of_match'	=> Mage::helper('catalog')->__('Best Match'),
+				//'entity_id'  => Mage::helper('catalog')->__('Release Date'),
+				'repair_product_sort'	=> Mage::helper('catalog')->__('Product Sort'),  //dylan add
+				//'position'  => Mage::helper('catalog')->__('Postion'),
+				'entity_id'  => Mage::helper('catalog')->__('Release Date'),
+				'price'	=> Mage::helper('catalog')->__('Price'),
+				'sort_popular'	=> Mage::helper('catalog')->__('Most Popluar'),
+				//'sort_review'	=> Mage::helper('catalog')->__('Reviews'),  //mivec add
+				//'repair_product_sort'	=> Mage::helper('catalog')->__('Product Sort'),  //dylan add
+				'sort_seller'	=> Mage::helper('catalog')->__('Best Seller'),
+			);
+				
+			}else{
+				$options = array(
+				//'number_of_match'	=> Mage::helper('catalog')->__('Best Match'),
+				'entity_id'  => Mage::helper('catalog')->__('Release Date'),
+				//'postion'  => Mage::helper('catalog')->__('Position'),
+				'price'	=> Mage::helper('catalog')->__('Price'),
+				'sort_popular'	=> Mage::helper('catalog')->__('Most Popluar'),
+				//'sort_review'	=> Mage::helper('catalog')->__('Reviews'),  //mivec add
+				'sort_seller'	=> Mage::helper('catalog')->__('Best Seller'),
+			);
 		}
-
+     }
 		           
                // if($_categoryParentIdOne->getParentId() == $baseCategoryId)
 

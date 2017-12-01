@@ -145,15 +145,18 @@ $baseCategoryId = 2502;
                     <!--$_iconPath . $_product->getData("repair_part") . ".png"-->
                     <!--$_testPath . 'wifi.png'-->
                     <!--only show in repair product -->
-					 <?php
+					 
+				 <?php if(Mage::registry('current_category')):?>
+				   <?php
 					   $_categoryParentIdOne = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
 					  // $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
 					   //print_r($_category);exit;
 						//echo $_categoryParentIdOne->getParentId();
 
 		           ?>
-                <?php if($_categoryParentIdOne->getParentId() == $baseCategoryId): ?> 				   
-                    <img class="repair" src="<?php echo  $_iconPath . $_product->getData("repair_part") . ".png"?>" />
+					<?php if($_categoryParentIdOne->getParentId() == $baseCategoryId): ?> 				   
+						<img class="repair" src="<?php echo  $_iconPath . $_product->getData("repair_part") . ".png"?>" />
+					<?php endif;?>
 				<?php endif;?>
                     <div class="box-images">
                         <a href="<?php echo $_product->getProductUrl() ?>"
