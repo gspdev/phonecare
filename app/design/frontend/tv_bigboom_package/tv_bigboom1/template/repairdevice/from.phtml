@@ -223,6 +223,9 @@
         border-radius: 50%;
     }
 
+    .head .img>img{
+        height:100%;
+    }
     .repairList > span {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
@@ -242,6 +245,9 @@
         /*background-size: contain;
         background-repeat: no-repeat;
         background-position: 50% 50%;*/
+    }
+    .repairList li .img>img{
+        height:100%;
     }
     .repair-table{
         width: 680px;
@@ -832,7 +838,7 @@
             }
         });
         //First load categoryList
-        ajaxCategory(2502, 'category', 0); //local -> 211 server -> 2502
+        ajaxCategory(2502, 'category', 0);
         $(".repairList").delegate("li", "click", function () {
             var $li = $(this);
             if (!$li.hasClass("repair")) {

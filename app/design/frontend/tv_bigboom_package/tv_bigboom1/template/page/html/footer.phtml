@@ -58,7 +58,7 @@ $_footerImgSrc =Mage::getBaseUrl();
                 }
             };
         }
-        var pro1 = new ProductList(".products-grid");
+        var pro1 = new ProductList(".products-grid,.products-list");
         pro1.setRangeColor();
     });
 </script>
@@ -155,7 +155,7 @@ $_footerImgSrc =Mage::getBaseUrl();
                 divTyping.attr("data-status",'2').css("text-align","left");
                 if (i <= str.length) {
                     divTyping.html(str.slice(0, i++) + '_');
-                    setTimeout(typing, 40);
+                    setTimeout(typing, 15);
                 }
                 else{
                     divTyping.html(text);//end.
