@@ -45,11 +45,11 @@
                 <?php echo $this->getChildHtml('media') ?>     
             </div>
             
-            <div class="product-shop col-sm-12 col-md-7 col-sms-6 col-smb-12">
+            <div class="product-shop col-sm-12 col-md-5 col-sms-6 col-smb-12">
                 <div class="product-name">
                     <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
                 </div>
-                <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+                <?php //echo $this->getReviewsSummaryHtml($_product, false, true)?>
                 <?php echo $this->getChildHtml('product_type_data') ?>
 
                 <?php if ($_product->getShortDescription()):?>
@@ -74,27 +74,43 @@
                 <?php if (!$this->hasOptions()):?>
                     <div class="add-to-box-cart">
                         <?php if($_product->isSaleable()): ?>
+                            <!--add to cart-->
                             <?php echo $this->getChildHtml('addtocart') ?>
                         <?php endif; ?>
                         <?php //echo $this->getChildHtml('addto') ?>
                     </div>
+                    <!--extra_buttons-->
                     <?php echo $this->getChildHtml('extra_buttons') ?>     
                 <?php elseif (!$_product->isSaleable()): ?>
                 
                 
                 <?php endif; ?>
-    
+                <!--other-->
                 <?php echo $this->getChildHtml('other');?>
     
                 <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                    <!--container1-->
                     <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
                 <?php endif;?>
                 
                 <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                    <!--container2-->
                     <?php echo $this->getChildChildHtml('container2', '', true, true) ?>         
                 <?php endif;?>
-                
-                
+                <div class="addthis">
+                    <a href="javascript:void(0)">
+                        <span class="icon-facebook fa fa-facebook"></span>
+                    </a>
+                    <a href="javascript:void(0)">
+                        <span class="icon-twitter fa fa-twitter"></span>
+                    </a>
+                    <a href="javascript:void(0)">
+                        <span class="icon-pinterest fa fa-pinterest-square"></span>
+                    </a>
+                    <a href="javascript:void(0)">
+                        <span class="icon-google fa fa-google-plus"></span>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="clearer"></div>
