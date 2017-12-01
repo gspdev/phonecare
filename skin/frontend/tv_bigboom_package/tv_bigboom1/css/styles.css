@@ -2013,17 +2013,16 @@ button.btn-cart:hover{text-decoration: none;}
 /* Email to a Friend */
 .email-friend { margin:0; line-height: 15px; float: left;}
 
-.product-view .add-to-box {margin: 0 0 -40px 42%;}
+.product-view .add-to-box {}
 .product-view .add-to-cart {}
 .product-view #product_addtocart_form .add-to-cart {float: left;
-    margin: 20px 0;
-    width: 100%;
+    margin: 0;
     height:40px;border-radius: 5px;
     transition: all 500ms ease;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     white-space: nowrap;}
-.product-view .add-to-cart .input-content,.product-view .input-content{ float: left; margin-right: 15px;}
+.product-view .add-to-cart .input-content,.product-view .input-content{ float: left; margin: 4px 0 0 0;padding: 0;width: 180px;}
 .input-content .box-qty { border: 1px solid #ddd; float: left;position:relative;}
 .input-content label { margin: 0 5px 5px 0; display: none; font-weight: normal;}
 .input-content .qty {
@@ -2076,7 +2075,7 @@ button.btn-cart:hover{text-decoration: none;}
 .add-to-cart input.qty-increase { /*background-position: 0 0;*/}
 .product-view button.btn-cart {
     display: block;
-    margin:10px 0 0 0;
+    margin: 0;
     width: 100%;
     background: #fc6908;}
 .product-view #product_addtocart_form button.btn-cart{
@@ -2156,9 +2155,9 @@ button.btn-cart:hover{text-decoration: none;}
 .col3-layout .product-options-bottom .price-box { float:none; padding:0 0 5px; }
 .product-options-bottom .price-label { float:left; padding-right:5px; }
 .product-options-bottom .price-tax { float:left; }
-.product-options-bottom .add-to-cart {  margin: 10px 0 0;}
+.product-options-bottom .add-to-cart {  /*margin: 10px 0 0;*/}
 .product-shop .product-options-bottom { }
-.product-shop .product-options-bottom .price-box { margin: 10px 0 5px; }
+.product-shop .product-options-bottom .price-box { margin: 10px 0 5px; display: none;}
 .product-shop .product-options-bottom .price-label { float:none; padding-right:0; }
 .product-shop .product-options-bottom .price-tax { float:none; }
 .product-shop .product-options-bottom .add-to-cart-box { clear:both; float:left; padding-top:12px; }
