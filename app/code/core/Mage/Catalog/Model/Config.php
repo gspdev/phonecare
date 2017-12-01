@@ -342,18 +342,18 @@ class Mage_Catalog_Model_Config extends Mage_Eav_Model_Config
             //'position'  => Mage::helper('catalog')->__('Position') //edit by mivec
         );
 		
-	   $baseCategoryId = 2502;
-	   $_categoryParentIdOne = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
-	   $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
-	   //print_r($_category);exit;
-		//echo $_categoryParentIdOne->getParentId();//dylan add
 		if(Mage::registry('current_category')){
+			  $baseCategoryId = 2502;
+			   $_categoryParentIdOne = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
+			   $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+			   //print_r($_category);exit;
+				//echo $_categoryParentIdOne->getParentId();//dylan add
 			if($_categoryParentIdOne->getParentId()== $baseCategoryId){
 				 
 				 $options = array(
 				//'number_of_match'	=> Mage::helper('catalog')->__('Best Match'),
 				//'entity_id'  => Mage::helper('catalog')->__('Release Date'),
-				'repair_product_sort'	=> Mage::helper('catalog')->__('Product Sort'),  //dylan add
+				'repair_product_sort'	=> Mage::helper('catalog')->__('Position'),  //dylan add
 				//'position'  => Mage::helper('catalog')->__('Postion'),
 				'entity_id'  => Mage::helper('catalog')->__('Release Date'),
 				'price'	=> Mage::helper('catalog')->__('Price'),
