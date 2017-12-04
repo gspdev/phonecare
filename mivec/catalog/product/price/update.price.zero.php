@@ -23,7 +23,7 @@ foreach($products as $product)  {
      
 	    try {
             if (updatePrice($product->getEntityId() , $newPrice)) {
-                echo $_entityId . " Update Successfully<br>";
+                echo $product->getEntityId() . " Update Successfully<br>";
                 usleep(5);
             }
         } catch (Exception $e) {
