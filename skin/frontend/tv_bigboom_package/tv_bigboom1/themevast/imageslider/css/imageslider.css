@@ -131,7 +131,6 @@ opacity:0.6;background: #000000; display: block; position: absolute; top: 50%; c
 }
 .nivoSlider img {
 	position:absolute;
-	height:550px;
 	top:0px;
 	left:0px;
 	max-width: none;
