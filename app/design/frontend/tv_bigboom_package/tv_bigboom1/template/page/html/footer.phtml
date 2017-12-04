@@ -133,35 +133,6 @@ $_footerImgSrc =Mage::getBaseUrl();
             var $current_text = jQuery(".chooseSlide .text").eq(tmpIndex);
             jQuery(this).addClass("pageSelected").siblings().removeClass("pageSelected");
             $current_text.addClass("showThisText").siblings().removeClass("showThisText");
-            jQuery(".h-text").addClass("hideThis");//hide all p.h-text
-            var i;
-            if($current_text.find(".show-text").length < 1){
-                $current_text.append('<p class="show-text ' + 'show-text-' + tmpIndex+'" data-status="0"></p>');
-            }
-            var text = jQuery(".chooseSlide .text.showThisText p.h-text").text();
-            var status = jQuery(".showThisText p.show-text").attr("data-status");
-            if(status < 1){
-                i = 0;
-                typing();
-            }
-            if(status < 2 && status >0){
-                i = 0;
-                typing();
-            }
-            function typing(){
-                var str = text;
-                var tmp = ".show-text-" + tmpIndex;
-                var divTyping = jQuery(tmp);
-                divTyping.attr("data-status",'2').css("text-align","left");
-                if (i <= str.length) {
-                    divTyping.html(str.slice(0, i++) + '_');
-                    setTimeout(typing, 15);
-                }
-                else{
-                    divTyping.html(text);//end.
-                    divTyping.attr("data-status",'1').css("text-align","center");
-                }
-            }
         });
     </script>
 </div>
@@ -182,10 +153,10 @@ $_footerImgSrc =Mage::getBaseUrl();
                     <div class="footer">
                         <div class="container">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6">
+                            <div class="col-xs-9 col-sm-6">
                                 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_social')->toHtml() ?>
                             </div>
-							<div class="col-xs-12 col-sm-6">
+							<div class="col-xs-3 col-sm-6">
 								<div class="transport">
 									<img src="<?php echo  $_footerImgSrc . ('skin/frontend/tv_bigboom_package/tv_bigboom1/images/dhl.gif');?>" title="DHL"/>
 								</div>
@@ -203,4 +174,11 @@ $_footerImgSrc =Mage::getBaseUrl();
     </div>
     <div id="back-top" class="hidden-xs"><i class="fa fa-angle-up"></i></div>
 </footer>
+<script type="text/javascript">
+    jQuery(document).ready(function($){
+        var $footerEL =  $(".footer-information .info,.footer-information .service,.footer-information .address");
+        $footerEL.append('<span class="add">+</span>');
+        //add unfinished.
+    });
+</script>
 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('block_social_right')->toHtml() ?>
