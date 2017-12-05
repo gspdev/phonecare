@@ -71,6 +71,28 @@ $_footerImgSrc =Mage::getBaseUrl();
 <div class="container-fluid" style="padding: 0;">
     <!--why choose-->
     <div class="choose">
+        <div class="choose-bg-box">
+            <ul class="choose-bg-list">
+                <li class="first"></li>
+                <li class="second"></li>
+                <li class="third"></li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            jQuery(document).ready(function($){
+                (function(selector){
+                    var $content = $(selector);
+                    var $slider  = $('.choose-bg-list', $content);
+                    var slider 	 = $slider.bxSlider({
+                        auto: 1, speed: 500, controls: 0, pager: 0, maxSlides: 1,infiniteLoop: true,
+                        moveSlides:1,
+                        slideMargin: 10,
+                        autoHover: false, // stop while hover <=> slider.stopAuto(); + slider.startAuto();
+                    })
+
+                })(".choose");
+            });
+        </script>
         <div class="overlay"></div>
         <div class="innerContainer container"><h2>Varför välja Phonecare</h2>
             <div class="chooseSlide">

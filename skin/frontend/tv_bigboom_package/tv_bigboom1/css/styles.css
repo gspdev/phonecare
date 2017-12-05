@@ -1334,13 +1334,48 @@ border-radius: 0 0 5px 5px;}
 .choose {
     position: relative;
     padding: 35px 0;
-    background: #000 url(../images/choose/why-choose-bg.jpg) center top no-repeat;
+    /*background: #000 url(../images/choose/why-choose-bg.jpg) center top no-repeat;*/
     min-height: 423px;
-    background-size: cover;
-    -webkit-background-size: cover;
+    /*background-size: cover;
+    -webkit-background-size: cover;*/
+}
+.choose .choose-bg-box{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 60;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.choose-bg-box .bx-wrapper,.choose-bg-box .bx-viewport{
+    height: 100%;
+    padding: 0;
+}
+.choose .choose-bg-list{
+    display: block;
+    width: 300%;
+    height: 100%;
+}
+.choose .choose-bg-list li{
+    display: inline-block;
+    float: left;
+    width: 33.33%;
+    margin: 0 0.005%;
+    height: 100%;
+}
+.choose .choose-bg-list li.first{
+    background: #000000 url("../images/choose/why-choose-bg.jpg") center top repeat;
+}
+.choose .choose-bg-list li.second{
+    background: #fc6908 center top repeat;
+}
+.choose .choose-bg-list li.third{
+    background: #000000 url("../images/choose/why-choose-bg.jpg") center top repeat;
 }
 .choose .overlay {
     position: absolute;
+    z-index: 65;
     left: 0;
     top: 0;
     width: 100%;
@@ -1353,6 +1388,7 @@ border-radius: 0 0 5px 5px;}
 }
 .choose .innerContainer {
     position: relative;
+    z-index: 66;
     max-width: 1200px;
     padding: 0 10px;
 }
