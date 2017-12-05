@@ -147,7 +147,7 @@ dt, dd { line-height: 25px; }
 /* 1 Column Layout */
 .col1-layout .col-main { float:none; width:auto; margin-bottom:40px;    
 	padding: 0 20px;background: #fff;}
-.col1-layout .col-main .std{font: 500 14px/1.35  Arial,"SF Pro Display",Lato, Helvetica,sans-serif;}
+.col1-layout .col-main .std,.col1-layout .col-main .std p{font: 500 14px/1.35  Arial,"SF Pro Display",Lato, Helvetica,sans-serif;}
 .col1-layout .col-main .std>p{text-indent:20px;}
 /* 2 Columns Layout */
 .col2-left-layout .col-main { background:#ffffff;margin-bottom:40px;}
