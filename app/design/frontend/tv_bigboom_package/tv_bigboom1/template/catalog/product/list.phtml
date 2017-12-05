@@ -74,7 +74,7 @@ $baseCategoryId = 2502;
                                 <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>"
                                                             title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></a>
                                 </h2>
-                                <p class="sku">SKU:<?php echo $_product->getSku() ?></p> <!-- copy by Jerry -->
+                                <p class="sku">SKU:<?php echo $_product->getSku() ?></p>
                                 <?php if ($_product->getRatingSummary()): ?>
                                     <?php echo $this->getReviewsSummaryHtml($_product) ?>
                                 <?php endif; ?>
@@ -86,14 +86,29 @@ $baseCategoryId = 2502;
                                 <div class="actions clearfix">
                                     <div class="stock_box">
                                         <span class="text">Lager</span>
-                                        <span class="quality"
-                                              data-quality="
-                                      <?php
-                                              $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-                                              echo $stock->getQty();
-                                              ?>">
-                                    <em class="range"></em>
-                                </span>
+                                        <?php if (Mage::registry('current_category')): ?>
+                                            <?php
+                                            $_categoryParentIdOne = Mage::getModel('catalog/category')->load(Mage::registry('current_category')->getParentId());
+                                            // $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+                                            //print_r($_category);exit;
+                                            //echo $_categoryParentIdOne->getParentId();
+
+                                            ?>
+                                            <?php if ($_categoryParentIdOne->getParentId() == $baseCategoryId): ?>
+                                                <span class="quality"
+                                                      data-quality="100">
+                                                    <em class="range"></em>
+                                                </span>
+                                            <?php else: ?>
+                                                <span class="quality"
+                                                      data-quality="
+                                                      <?php $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+                                                      echo $stock->getQty();
+                                                      ?>">
+                                                    <em class="range"></em>
+                                                </span>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
                                     </div>
                                     <?php if ($_product->isSaleable()): ?>
                                         <button type="button" title="<?php echo $this->__('Lägg i varukorgen') ?>"
@@ -132,32 +147,29 @@ $baseCategoryId = 2502;
             <?php $_collectionSize = $_productCollection->count() ?>
             <?php $_columnCount = 4 ?>
             <?php $i = 0;
-            foreach ($_productCollection as $_item):
+        foreach ($_productCollection as $_item):
             $_product = Mage::getModel('catalog/product')->load($_item->getId());
             ?>
-            <!--edit by jerry-->
-            <?php //echo $_iconPath . $_product->getData("repair_part") . ".png" ?>
+            <?php //echo $_iconPath . $_product->getData("repair_part") . ".png"
+            ?>
             <?php if ($i++ % $_columnCount == 0): ?>
             <ul class="products-grid row">
         <?php endif ?>
             <li class="item col-md-3 col-sm-6 col-sms-6 col-smb-12 <?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>">
                 <div class="item-inner">
-                    <!--$_iconPath . $_product->getData("repair_part") . ".png"-->
-                    <!--$_testPath . 'wifi.png'-->
-                    <!--only show in repair product -->
-					 
-				 <?php if(Mage::registry('current_category')):?>
-				   <?php
-					   $_categoryParentIdOne = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
-					  // $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
-					   //print_r($_category);exit;
-						//echo $_categoryParentIdOne->getParentId();
+                    <?php if (Mage::registry('current_category')): ?>
+                        <?php
+                        $_categoryParentIdOne = Mage::getModel('catalog/category')->load(Mage::registry('current_category')->getParentId());
+                        // $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+                        //print_r($_category);exit;
+                        //echo $_categoryParentIdOne->getParentId();
 
-		           ?>
-					<?php if($_categoryParentIdOne->getParentId() == $baseCategoryId): ?> 				   
-						<img class="repair" src="<?php echo  $_iconPath . $_product->getData("repair_part") . ".png"?>" />
-					<?php endif;?>
-				<?php endif;?>
+                        ?>
+                        <?php if ($_categoryParentIdOne->getParentId() == $baseCategoryId): ?>
+                            <img class="repair"
+                                 src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
+                        <?php endif; ?>
+                    <?php endif; ?>
                     <div class="box-images">
                         <a href="<?php echo $_product->getProductUrl() ?>"
                            title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"
@@ -172,7 +184,8 @@ $baseCategoryId = 2502;
                             <?php endif ?>
                             <img class="img-face"
                                  src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(300, 300); ?>"
-                                 alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/></a>
+                                 alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+                        </a>
                     </div>
                     <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>"
                                                 title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a>
@@ -186,14 +199,28 @@ $baseCategoryId = 2502;
                     <div class="actions">
                         <div class="stock_box">
                             <span class="text">Lager</span>
-                            <span class="quality"
-                                  data-quality="
-                                  <?php
-                                  $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-                                  echo $stock->getQty();
-                                  ?>">
-                                <em class="range"></em>
-                            </span>
+                            <?php if (Mage::registry('current_category')): ?>
+                                <?php
+                                $_categoryParentIdOne = Mage::getModel('catalog/category')->load(Mage::registry('current_category')->getParentId());
+                                // $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+                                //print_r($_category);exit;
+                                //echo $_categoryParentIdOne->getParentId();
+
+                                ?>
+                                <?php if ($_categoryParentIdOne->getParentId() == $baseCategoryId): ?>
+                                    <span class="quality"
+                                          data-quality="100">
+                                        <em class="range"></em>
+                                    </span>
+                                <?php else: ?>
+                                    <span class="quality"
+                                          data-quality="
+                                  <?php $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+                                          echo $stock->getQty(); ?>">
+                                        <em class="range"></em>
+                                    </span>
+                                    <?php endif; ?>
+                                <?php endif; ?>
                         </div>
                         <?php if ($_product->isSaleable()): ?>
                             <button type="button" title="<?php echo $this->__('Lägg i varukorgen') ?>"
@@ -201,11 +228,11 @@ $baseCategoryId = 2502;
                                     onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
                                 <span><span><?php echo $this->__('Köp') ?></span></span></button>
                         <?php else: ?>
-                            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span>
-                            </p>
+                            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
                         <?php endif; ?>
                     </div>
-                    <?php echo $helpLabels->getLabels($_product); //Product labels ?>
+                    <?php echo $helpLabels->getLabels($_product); //Product labels
+                    ?>
                 </div>
             </li>
             <?php if ($i % $_columnCount == 0 || $i == $_collectionSize): ?>
