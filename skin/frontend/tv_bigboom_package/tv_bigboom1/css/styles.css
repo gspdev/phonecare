@@ -1428,10 +1428,13 @@ border-radius: 0 0 5px 5px;}
 }
 .choose .innerContainer .chooseSlide .text.showThisText p{
     animation: backcenter 1s linear 1;
+    -webkit-animation: backcenter 1s linear 1;
+    -moz-animation: backcenter 1s linear 1;
+    -o-animation: backcenter 1s linear 1;
 }
 @keyframes backcenter {
     0%{
-        left:-500px;
+        left:-10%;
         opacity: 0;
         -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)"\9;
         filter: alpha(opacity=0)\9;
