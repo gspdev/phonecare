@@ -1,12 +1,22 @@
 /**
-* little chubby
+* little chubby , responsive
 */
 @media only screen and (max-width: 800px) and (min-width: 680px){
 	.choose .innerContainer .chooseSlide #why-choose-pager .pager {
 		width: 15%;
 	}
 }
-
+@media (max-width: 499px){
+	#category-model li.item{width: 50%;padding: 0 2%;}
+	.search-right .head-Cart #cart_bg{display: none;}
+	.search-right .head-Cart #cart_bg_mobile{display: block;}
+}
+@media (min-width: 500px){
+	.search-right .head-Cart #cart_bg_mobile{display: none;}
+}
+@media (min-width: 500px) and (max-width: 800px){
+	#category-model li.item{width: 33%;padding: 0 2%;}
+}
 @media (max-width: 680px) {
 	.choose .innerContainer .chooseSlide #why-choose-pager .pager{
 		width: 20%;
@@ -225,7 +235,7 @@
 		width:20px;
 		height: 20px;
 		z-index: 6;
-		right:20px;
+		right:40px;
 		top:0;
 		color:#fc6908;
 		font-weight: bold;
@@ -236,7 +246,6 @@
 	}
 	.footer-static-content{display: none;}
 	.footer-static-content.active{display: block;}
-
 }
 @media (max-width: 500px) {
 	.choose .innerContainer .chooseSlide #why-choose-pager .pager{width: 35%;}

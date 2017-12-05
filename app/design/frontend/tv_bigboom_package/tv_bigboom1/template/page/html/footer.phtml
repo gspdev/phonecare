@@ -178,7 +178,9 @@ $_footerImgSrc =Mage::getBaseUrl();
     jQuery(document).ready(function($){
         var $footerEL =  $(".footer-information .info,.footer-information .service,.footer-information .address");
         $footerEL.append('<span class="add">+</span>');
-        //add unfinished.
+        $footerEL.delegate(".add","click",function () {
+            $(this).parent().find(".footer-static-content").slideToggle();
+        });
     });
 </script>
 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('block_social_right')->toHtml() ?>

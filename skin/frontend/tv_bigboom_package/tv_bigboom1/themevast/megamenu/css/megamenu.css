@@ -286,18 +286,25 @@ transform: translateZ(0);
     height: auto;
     display: none;
     float: left;
-    width: 100%;
+    width: 300px;
     margin:0;
+    position: absolute;
+    top:50px;
+    left:-4px;
+    border-radius: 5px;
+    border:1px solid #262626;
+    background: #ffffff;
+    -moz-box-shadow: 0 4px 10px rgba(0,0,0,.6);
+    -webkit-box-shadow: 0 4px 10px rgba(0,0,0,.6);
+    box-shadow: 0 4px 10px rgba(0,0,0,.6);
 }
-.nav-collapse, .nav-collapse.collapse {
-
-}
+.nav-collapse, .nav-collapse.collapse {}
 .navbar-inner {
     background:#fff;
     border: 0 !important;
     box-shadow: none !important;
     padding: 0;
-    
+    position: relative;
 }
 .menu-mobile {
 
@@ -344,7 +351,6 @@ transform: translateZ(0);
 	width: 100%;
 }
 .mobilemenu li {
-    background: #fff;
 	cursor: pointer;
 	list-style-type: none;
 	padding: 0;

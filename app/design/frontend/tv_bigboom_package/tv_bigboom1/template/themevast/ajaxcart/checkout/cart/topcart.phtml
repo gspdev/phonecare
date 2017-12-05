@@ -1,9 +1,9 @@
 <?php
 $_cartQty = $this->getSummaryCount();
-
 $_webMiniCartUrl = Mage::getBaseUrl();
 ?>
-<div id="cart_bg"></div>
+<a id="cart_bg" href="<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>"></a>
+<a id="cart_bg_mobile" href="javascript:void(0)"></a>
 <div id ="mini_cart_block">
     <div class="block-cart mini_cart_ajax">
             <div class="block-cart">

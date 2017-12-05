@@ -906,8 +906,9 @@ box-sizing:content-box;}
 .search-right .head-Cart #mini_cart_block{
     margin-right: 60px;
 }
-.search-right .head-Cart #cart_bg{
+.search-right .head-Cart #cart_bg,.search-right .head-Cart #cart_bg_mobile{
     float:right;
+    display: block;
     width:60px;
     height:60px;
     background-image: url("../images/header/cart.png");
