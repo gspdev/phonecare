@@ -35,7 +35,7 @@ if ($row = $db->fetchAll($sql)) {
 function update()
 {
     global $db;
-    $sql = "UPDATE " . __ATTR_PRODUCT_STOCK_ITEM__ . " SET `qty`=" . __ATTR_PRODUCT_QTY__.",`is_in_stock`=".__ATTR_PRODUCT_IS_IN_STOCK__.",manage_stock=1";
+    $sql = "UPDATE " . __ATTR_PRODUCT_STOCK_ITEM__ . " SET `qty`=" . __ATTR_PRODUCT_QTY__.",`is_in_stock`=".__ATTR_PRODUCT_IS_IN_STOCK__.",manage_stock=0";
     return $db->query($sql);
 	//echo " Inventory update successfully<br>";
 }
