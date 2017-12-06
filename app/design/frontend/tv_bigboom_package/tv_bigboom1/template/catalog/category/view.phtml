@@ -120,6 +120,15 @@ $categories = $currentCategory->getCollection()
                     var top = $this.height() > 120 ? ($this.height() - 120 ) / 2 : 0;
                     $this.find(".img-face-back").css({"left" : left + "px","top" : top + "px"});
                 });
+                $("#category-model li").mouseover(function () {
+                    var $this = $(this).find(".box-images");
+                    if(window.console){
+                        console.log("width: " + $this.width() + "px; height: " + $this.height() +"px;")
+                    }
+                    var left = $this.width() > 120 ? ($this.width() - 120) / 2 : 0;
+                    var top = $this.height() > 120 ? ($this.height() - 120 ) / 2 : 0;
+                    $this.find(".img-face-back").css({"left" : left + "px","top" : top + "px"});
+                });
             });
 
         };

@@ -915,6 +915,7 @@ box-sizing:content-box;}
     background-repeat: no-repeat;
     background-position: 10px 12px;
 }
+.search-right .head-Cart #cart_bg_mobile{display: none;}
 .search-right .head-Cart .cartNum {
           display: block;
           width: 35px;
