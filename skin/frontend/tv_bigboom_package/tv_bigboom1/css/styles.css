@@ -199,7 +199,7 @@ button.disabled span { border-color:#bbb !important; background:#bbb !important;
 
 button.btn-cart span .fa { margin-right: 5px;}
 button.btn-cart span span { padding: 0; background: none !important; text-transform: capitalize; color: #fff; font: 700 14px "SF Pro Display",Lato, Helvetica, Arial, sans-serif;}
-button.btn-cart:hover span span { background: none; text-decoration: underline; color: #555555;  }
+button.btn-cart:hover span span { background: none; text-decoration: underline; color:#ffffff;  }
 
 button.btn-checkout span span {  padding: 15px 25px; text-transform: uppercase; display: inline-block; background: #db4c52;}
 button.btn-checkout span span:after { background: #666;}
@@ -1463,10 +1463,10 @@ border-radius: 0 0 5px 5px;}
     transition: left 0.2s linear;
 }
 .choose .innerContainer .chooseSlide .text.showThisText p{
-    animation: backcenter 1s linear 1;
-    -webkit-animation: backcenter 1s linear 1;
-    -moz-animation: backcenter 1s linear 1;
-    -o-animation: backcenter 1s linear 1;
+    animation: backcenter 0.4s linear 1;
+    -webkit-animation: backcenter 0.4s linear 1;
+    -moz-animation: backcenter 0.4s linear 1;
+    -o-animation: backcenter 0.4s linear 1;
 }
 @keyframes backcenter {
     0%{
@@ -1766,8 +1766,8 @@ em.range {
     float: right;
     font-size: 16px;
     line-height: 20px;
-    background: #9f9f9f!important;
-    border: 1px solid #9f9f9f!important;
+    background: #9f9f9f;
+    border: 1px solid #9f9f9f;
     color: #fff;
     padding: 2px 4px;
     border-radius: 4px;
@@ -1775,6 +1775,15 @@ em.range {
     min-width: 45px;
     font-family: "SF Pro Display","Helvetica Neue","Helvetica","Arial",sans-serif;
     text-align: center;}
+.products-grid li.item button.btn-cart:hover,
+.products-list li.item button.btn-cart:hover{
+    background: #fc6908;
+    border: 1px solid #fc6908;
+}
+.products-grid li.item button.btn-cart:hover span span,
+.products-list li.item button.btn-cart:hover span span{
+    text-decoration: none;
+}
 .products-list li.item .out-of-stock,
 .products-grid li.item .out-of-stock{
     float: right;
@@ -2435,6 +2444,7 @@ a.contact-us-address-email {
 
 /* Content Styles ================================================================= */
 .product-name { margin:0; font-size:1em;  }
+.sku{text-transform: uppercase;}
 .product-name a { color:#555555; font-size: 14px; font-weight: bold;}
 .product-details .product-name {padding-right:26px;}
 .product-details .qtyBtn{display: inline;display: none;width: 20px;height: 20px;line-height:20px;background: #f8f4f4;border: 1px solid #eee;font-size:16px;}
@@ -3020,7 +3030,9 @@ a.contact-us-address-email {
 /* ============================================ *
  * Checkout - Estimate Shipping and Tax
  * ============================================ */
-.cart .crosssell { background: #fff; margin-bottom: 20px;padding:0 20px; border: 1px solid #a9a0a0;}
+.cart .crosssell { background: #fff; margin-bottom: 20px;padding:0; border: 1px solid #a9a0a0;}
+.cart .crosssell #crosssell-products-list{padding: 0 20px;}
+.cart .crosssell>p{padding: 0 20px;}
 .cart .crosssell h2.crossell-title  { padding: 17px; background: #e9e9e9; color: #525252; font-size: 20px; }
 .cart .crosssell-inner { padding: 15px;}
 .cart .crosssell .product-image { float:left; margin-right: 15px; }
@@ -3028,7 +3040,7 @@ a.contact-us-address-email {
 .cart .crosssell .product-name {  }
 .cart .crosssell .product-name a{   height: 36px;line-height: 18px;display: block;overflow: hidden;}
 .cart .crosssell li.item { padding: 15px 0; }
-
+#crosssell-products-list .btn-cart{display: none;}
 .crosssell .add-to-links li {  margin-right: 50px;}
 .crosssell .add-to-links a { color: #333;}
 .crosssell .add-to-links a:hover { color: #db4c52;}

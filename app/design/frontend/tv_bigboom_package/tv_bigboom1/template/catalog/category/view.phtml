@@ -110,6 +110,20 @@ $categories = $currentCategory->getCollection()
         <?php endif ?>
         <?php endforeach; ?>
     </div>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            jQuery(document).ready(function ($) {
+                $("#category-model .product-image").each(function(){
+                    var $this = $(this);
+                    var left = $this.width() > 120 ? ($this.width() - 120) / 2 : 0;
+                    var top = $this.height() > 120 ? ($this.height() - 120 ) / 2 : 0;
+                    $this.find(".img-face-back").css({"left" : left + "px","top" : top + "px"});
+                });
+            });
+
+        };
+    </script>
 <?php else: ?>
 
     <?php if ($this->isContentMode()): ?>

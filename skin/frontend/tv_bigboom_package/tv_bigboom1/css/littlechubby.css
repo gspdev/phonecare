@@ -168,10 +168,10 @@
 	.showBlockAcc>a:hover{text-decoration:none;}
 	.account-mask{position:absolute;z-index:-1;left:-15px;top:0;background:rgba(0,0,0,.9);transition:all 0.25s ease;opacity:0;}
 	.account-mask-show{z-index:199;opacity:.9;}
-	.block-account .block-title{padding-top:20px;}
-	.block-account .block-content{padding:0 0 15px 0;}
+	.block-account .block-title{padding-top:20px;border-radius: 12px 12px 0 0;}
+	.block-account .block-content{padding:0 15px 0 25px;}
 	.block-reorder{display:none!important;}
-	.block-account{background:#fff;padding:0 15px 0 25px;position:absolute;z-index:200;left:-767px;top:-140px;width:100%;
+	.block-account{background:#fff;padding:0;position:absolute;z-index:200;left:-767px;top:80px;width:100%;
 		border-radius:12px;transition:all 0.25s ease;}
 	.dashboard{margin-top:20px;}
 	.dashboard .welcome-msg{margin:0 0 1.5em 0;}
@@ -246,6 +246,7 @@
 	}
 	.footer-static-content{display: none;}
 	.footer-static-content.active{display: block;}
+	.form-list li.wide input.input-text{width: 254px;}
 }
 @media (max-width: 500px) {
 	.choose .innerContainer .chooseSlide #why-choose-pager .pager{width: 35%;}
