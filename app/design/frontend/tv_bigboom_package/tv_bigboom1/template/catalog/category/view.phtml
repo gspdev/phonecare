@@ -73,6 +73,7 @@ $categories = $currentCategory->getCollection()
     ->addIdFilter($currentCategory->getChildren())
     ->addAttributeToSort('position');
     $_category = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
+	//print_r(Mage::registry('current_category')->getEntityId());exit;
 ?>
 <?php if($currentCategory->getChildren()):?>
     <div class="category-products" id="category-model">
@@ -91,9 +92,9 @@ $categories = $currentCategory->getCollection()
                             $_category = Mage::getModel( 'catalog/category' )->load( Mage::registry( 'current_category' )->getParentId());
                             //print_r($_category);exit;
                             //echo $_category->getId().'123';
-
+                             $leveCategory = Mage::registry('current_category')->getEntityId();
                             ?>
-                            <?php if($_category->getId()=='2502'): ?> <!--server id 2502 local id 22-->
+                            <?php if($_category->getId()=='2502' || $leveCategory =='2502'): ?> <!--server id 2502 local id 22-->
                                 <img class="img-face-back" src="<?php echo $_backImgPath . 'repair_back.png'?>" />
                             <?php endif;?>
                             <img class="img-face" id="product-collection-image-<?php echo $category->getId(); ?>" src="<?php echo $category->getImageUrl() ?>" alt="<?php echo $category->getName() ?>"/>
