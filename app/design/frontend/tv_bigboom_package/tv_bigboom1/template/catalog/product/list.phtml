@@ -67,7 +67,11 @@ $baseCategoryId = 2502;
 									<img class="repair"
 										 src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
 								<?php endif; ?>
-							<?php endif; ?>
+							<?php else: ?>
+								<?php if($_product->getRepairPart()=='119'): ?>
+									 <img class="repair" src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
+								<?php endif;?>										
+                            <?php endif; ?>
 								
                                 <div class="box-images">
                                     <a href="<?php echo $_product->getProductUrl() ?>"
@@ -174,6 +178,7 @@ $baseCategoryId = 2502;
         <?php endif ?>
             <li class="item col-md-3 col-sm-6 col-sms-6 col-smb-12 <?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>">
                 <div class="item-inner">
+				
                     <?php if (Mage::registry('current_category')): ?>
                         <?php
                         $_categoryParentIdOne = Mage::getModel('catalog/category')->load(Mage::registry('current_category')->getParentId());
@@ -186,7 +191,12 @@ $baseCategoryId = 2502;
                             <img class="repair"
                                  src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
                         <?php endif; ?>
+                    <?php else: ?>
+								<?php if($_product->getRepairPart()=='119'): ?>
+									 <img class="repair" src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
+								<?php endif;?>										
                     <?php endif; ?>
+					
                     <div class="box-images">
                         <a href="<?php echo $_product->getProductUrl() ?>"
                            title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"
