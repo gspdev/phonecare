@@ -48,10 +48,27 @@ $baseCategoryId = 2502;
         <?php if ($this->getMode() != 'grid'): ?>
             <?php $_iterator = 0; ?>
             <ol class="products-list" id="products-list">
-                <?php foreach ($_productCollection as $_product): ?>
+                <?php foreach ($_productCollection as $_item): 
+				       $_product = Mage::getModel('catalog/product')->load($_item->getId());
+				?>
                     <li class="item<?php if (++$_iterator == sizeof($_productCollection)): ?> last<?php endif; ?>">
                         <div class="row">
                             <div class="product-images col-sm-4 col-md-4 col-sms-6 col-smb-12">
+							    
+						  <?php if (Mage::registry('current_category')): ?>
+								<?php
+								$_categoryParentIdOne = Mage::getModel('catalog/category')->load(Mage::registry('current_category')->getParentId());
+								// $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+								//print_r($_category);exit;
+								//echo $_categoryParentIdOne->getParentId();
+
+								?>
+								<?php if ($_categoryParentIdOne->getParentId() == $baseCategoryId): ?>
+									<img class="repair"
+										 src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
+								<?php endif; ?>
+							<?php endif; ?>
+								
                                 <div class="box-images">
                                     <a href="<?php echo $_product->getProductUrl() ?>"
                                        title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"
