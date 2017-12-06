@@ -1368,10 +1368,10 @@ border-radius: 0 0 5px 5px;}
     background: #000000 url("../images/choose/why-choose-bg.jpg") center top repeat;
 }
 .choose .choose-bg-list li.second{
-    background: #fc6908 center top repeat;
+    background: #000000 url("../images/choose/why-choose-bg-2.jpg") center top repeat;
 }
 .choose .choose-bg-list li.third{
-    background: #000000 url("../images/choose/why-choose-bg.jpg") center top repeat;
+    background: #000000 url("../images/choose/why-choose-bg-3.jpg") center top repeat;
 }
 .choose .overlay {
     position: absolute;
@@ -1380,7 +1380,7 @@ border-radius: 0 0 5px 5px;}
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.1) url(../images/choose/black-pattern.png) center top repeat;
+    background: rgba(192, 192, 192, 0.1) url(../images/choose/black-pattern.png) center top repeat;
     background: #000000 url(../images/choose/black-pattern.png) center top repeat\9;
     -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=60)"\9;
     filter: alpha(opacity=60)\9;
