@@ -216,28 +216,44 @@ $baseCategoryId = 2502;
                     <div class="actions">
                         <div class="stock_box">
                             <span class="text">Lager</span>
+							
                             <?php if (Mage::registry('current_category')): ?>
-                                <?php
-                                $_categoryParentIdOne = Mage::getModel('catalog/category')->load(Mage::registry('current_category')->getParentId());
-                                // $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
-                                //print_r($_category);exit;
-                                //echo $_categoryParentIdOne->getParentId();
-
-                                ?>
-                                <?php if ($_categoryParentIdOne->getParentId() == $baseCategoryId): ?>
-                                    <span class="quality"
-                                          data-quality="100">
-                                        <em class="range"></em>
-                                    </span>
-                                <?php else: ?>
-                                    <span class="quality"
-                                          data-quality="
-                                  <?php $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-                                          echo $stock->getQty(); ?>">
-                                        <em class="range"></em>
-                                    </span>
-                                    <?php endif; ?>
-                                <?php endif; ?>
+									<?php
+									$_categoryParentIdOne = Mage::getModel('catalog/category')->load(Mage::registry('current_category')->getParentId());
+									// $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+									//print_r($_category);exit;
+									//echo $_categoryParentIdOne->getParentId();
+								   
+									?>
+									<?php if ($_categoryParentIdOne->getParentId() == $baseCategoryId): ?>
+										<span class="quality"
+											  data-quality="100">
+											<em class="range"></em>
+										</span>
+									<?php else: ?>
+										<span class="quality"
+											  data-quality="
+									  <?php $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+											  echo $stock->getQty(); ?>">
+											<em class="range"></em>
+										</span>
+										<?php endif; ?>
+							<?php else: ?>
+                                		<?php if($_product->getRepairPart()=='119'): ?>
+										     <span class="quality"
+											  data-quality="100">
+											   <em class="range"></em>
+										     </span>
+                                        <?php else: ?>
+										    <span class="quality"
+											  data-quality="
+									  <?php $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+											  echo $stock->getQty(); ?>">
+											<em class="range"></em>
+										</span>
+                                        <?php endif;?>										
+                            <?php endif; ?>
+								
                         </div>
                         <?php if ($_product->isSaleable()): ?>
                             <button type="button" title="<?php echo $this->__('Lägg i varukorgen') ?>"
