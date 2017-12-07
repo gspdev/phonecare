@@ -68,7 +68,7 @@ $baseCategoryId = 2502;
 										 src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
 								<?php endif; ?>
 							<?php else: ?>
-								<?php if($_product->getRepairPart()=='119'): ?>
+								<?php if($_product->getRepairPart()): ?>
 									 <img class="repair" src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
 								<?php endif;?>										
                             <?php endif; ?>
@@ -129,7 +129,7 @@ $baseCategoryId = 2502;
 													</span>
 													<?php endif; ?>
 										<?php else: ?>
-													<?php if($_product->getRepairPart()=='119'): ?>
+													<?php if($_product->getRepairPart()): ?>
 														 <span class="quality"
 														  data-quality="100">
 														   <em class="range"></em>
@@ -205,7 +205,7 @@ $baseCategoryId = 2502;
                                  src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
                         <?php endif; ?>
                     <?php else: ?>
-								<?php if($_product->getRepairPart()=='119'): ?>
+								<?php if($_product->getRepairPart()): ?>
 									 <img class="repair" src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
 								<?php endif;?>										
                     <?php endif; ?>
@@ -262,7 +262,7 @@ $baseCategoryId = 2502;
 										</span>
 										<?php endif; ?>
 							<?php else: ?>
-                                		<?php if($_product->getRepairPart()=='119'): ?>
+                                		<?php if($_product->getRepairPart()): ?>
 										     <span class="quality"
 											  data-quality="100">
 											   <em class="range"></em>
