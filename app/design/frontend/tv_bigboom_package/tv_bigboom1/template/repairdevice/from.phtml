@@ -489,11 +489,14 @@
                     </span>
                                 <span>VÄLJ OM ENHETEN SKA SKICKAS ELLER LÄMNAS I BUTIK</span>
                             </h2>
+							
                             <div class="shipping-methods">
                                 <ul id="poll-answers">
                                     <li>
-                                        <input name="shipping_method" type="radio" value="1" title="New" id="1new"
-                                               class="radio poll_vote">
+                                        <input name="shipping_method" type="radio" value="1" title="New" id="1new" class="radio poll_vote">
+                                       <!-- <input name="shipping_address" type="text" value="" title="New" id="post_shipping_address" class="radio poll_vote">-->
+									   <?php echo $this->getChildHtml('repairdevice.billing'); ?>
+                                       
                                         <span class="label"><label
                                                     for="vote_1"><?php echo $this->__('Skicka in med post'); ?></label></span>
                                     </li>

@@ -19,7 +19,9 @@
       </default>
             <reference name="content">
 			     <!--<block  type="catalog/product_list" category_id="90" name="loproduct"  template="catalog/product/list.phtml"/>-->
-               <block type="repairdevice/repairdevice" name="repairdevice_content" template="repairdevice/from.phtml"/>  
+               <block type="repairdevice/repairdevice" name="repairdevice_content" as="billing" template="repairdevice/from.phtml">  
+			       <block type="repairdevice/billing" name="repairdevice.billing" template="repairdevice/billing.phtml"/>
+			   </block>
             </reference>
         </repairdevice_index_index>
 		
