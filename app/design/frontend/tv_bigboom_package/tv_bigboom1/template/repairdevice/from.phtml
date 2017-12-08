@@ -871,6 +871,9 @@
                     //billingNewForm.loading();
                     shipStore.loaded();
                     $("#store_box:radio,#shipping-store input:radio").attr("checked",false);
+                    /*if(!$("#billing-address-select").val()){
+                        billingNewForm.loading();
+                    }*/
                 }else{
                     //not login , without select of address
                     shipNewAddress.loading();
@@ -890,6 +893,9 @@
                     billingNewForm.loaded();
                 }
             });
+            if(!$("#billing-address-select").val()){
+                billingNewForm.loading();
+            }
         });
         $(document).on('click','#co-billing-form .bill_use_for_address',function(){
             if($(this).is(':checked')){
