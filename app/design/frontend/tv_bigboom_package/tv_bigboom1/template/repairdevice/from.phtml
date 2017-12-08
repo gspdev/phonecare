@@ -981,9 +981,9 @@
                 $(".shippingWarn").hide();
             }
             if($("#login_status").attr("data-status")<1){
-                //$("#myModal").modal({show:true,keyboard: true});
-                //event.preventDefault();
-                //window.event.returnValue = false;
+                $("#myModal").modal({show:true,keyboard: true});
+                event.preventDefault();
+                window.event.returnValue = false;
             }else if($("#login_status").attr("data-status")>0){
                 $("#myModal").modal({show:false});
             }
