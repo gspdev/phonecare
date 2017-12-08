@@ -3858,7 +3858,7 @@ footer {}
 .banner-content1-wrapper,
 .banner-content2-wrapper { margin-bottom: 30px;}
 .featuredproduct .bx-wrapper{background:#ffffff;padding:0;}
-.featuredproduct .bx-wrapper .bx-viewport{height:307px!important;}
+.featuredproduct .bx-wrapper .bx-viewport{}
 
 /*NewProduct Slider*/
 .newproductslider { margin-bottom: 20px;}
