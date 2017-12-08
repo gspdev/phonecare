@@ -645,6 +645,7 @@
 </script>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
+        $("#billing-address-select").attr("onchange",'');
 
         $("#categoryList").delegate("li", 'click', function () {
             var tmpId = $(this).attr("data-id");
@@ -865,10 +866,18 @@
                 $("#1new:radio").attr("checked",false);
             }
             if($('#poll-answers #1new:radio:checked').attr("checked")){
-                shipNewAddress.loading();
-                billingNewForm.loading();
-                shipStore.loaded();
-                $("#store_box:radio,#shipping-store input:radio").attr("checked",false);
+                if($("#billing-address-select").length>0){
+                    shipNewAddress.loading();
+                    //billingNewForm.loading();
+                    shipStore.loaded();
+                    $("#store_box:radio,#shipping-store input:radio").attr("checked",false);
+                }else{
+                    //not login , without select of address
+                    shipNewAddress.loading();
+                    billingNewForm.loading();
+                    shipStore.loaded();
+                    $("#store_box:radio,#shipping-store input:radio").attr("checked",false);
+                }
             }
         });
         //show new address
@@ -883,10 +892,9 @@
             });
         });
         $(document).on('click','#co-billing-form .bill_use_for_address',function(){
-            if($(this).attr("checked")){
+            if($(this).is(':checked')){
                 shipForm.loaded();
-            }
-            if(!$(this).attr("checked")){
+            }else{
                 shipForm.loading();
             }
         });
@@ -927,10 +935,14 @@
         $("#order").click(function (event) {
             //before submit remove some input elements
             //select address exist
-            if($("#billing-address-select").val() > 0){
+            if($("#billing-address-select").val() > 0 && $("#co-billing-form .bill_use_for_address").is(':checked')){
                 $("#billing-new-address-form").remove();
+                $("#ship-form-address").remove();
                 //select new address , and make the shipping address same as the billing address
-            }else if(!$("#billing-address-select").val() && $(".bill_use_for_address").is(':checked')){
+            }else if($("#billing-address-select").val() > 0 && !$("#co-billing-form .bill_use_for_address").is(':checked')){
+                $("#billing-new-address-form").remove();
+            }
+            else if(!$("#billing-address-select").val() && $(".bill_use_for_address").is(':checked')){
                 $("#ship-form-address").remove();
                 //select new address , and add new the shipping address
             }else if(!$("#billing-address-select").val() && !$(".bill_use_for_address").is(':checked')){

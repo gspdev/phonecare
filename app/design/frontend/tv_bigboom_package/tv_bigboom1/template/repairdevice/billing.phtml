@@ -21,14 +21,14 @@
                             <input type="text" id="billing:company" name="billing[company]" value="<?php echo $this->escapeHtml($this->getAddress()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text <?php echo $this->helper('opc')->getAttributeValidationClass('company') ?>" />
                         </div>
                     </div>
-        <?php if(!$this->isCustomerLoggedIn()): ?>
+        <?php /*if(!$this->isCustomerLoggedIn()): */?><!--
                     <div class="field">
-                        <label for="billing:email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                        <label for="billing:email" class="required"><em>*</em><?php /*echo $this->__('Email Address') */?></label>
                         <div class="input-box">
-                            <input type="text" name="billing[email]" id="billing:email" value="<?php echo $this->escapeHtml($this->getAddress()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry" />
+                            <input type="text" name="billing[email]" id="billing:email" value="<?php /*echo $this->escapeHtml($this->getAddress()->getEmail()) */?>" title="<?php /*echo $this->__('Email Address') */?>" class="input-text validate-email required-entry" />
                         </div>
                     </div>
-        <?php endif; ?>
+        --><?php /*endif; */?>
                 </li>
         <?php $_streetValidationClass = $this->helper('opc')->getAttributeValidationClass('street'); ?>
                 <li class="wide">
@@ -140,10 +140,38 @@
                 <?php else:?>
                     <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>
                 <?php endif; ?>
+
+
                 <?php echo $this->getChildHtml('form.additional.info'); ?>
             </ul>
+        </fieldset>
+    </li>
+    <?php /* Extensions placeholder */ ?>
+    <?php echo $this->getChildHtml('checkout.onepage.billing.extra')?>
+    <?php if(!$this->isCustomerLoggedIn()): ?>
+    
+    	<?php
+    	$guest_allowed = $this->getQuote()->isAllowedGuestCheckout();
+    	if($guest_allowed): ?>
+	    <li class="control">
+	            <input type="checkbox" name="billing[create_account]" id="billing:create_account" value="1" title="<?php echo  $this->__('Create an account for later use') ?>"  class="checkbox" /><label for="billing:create_account"><?php echo  $this->__('Create an account for later use') ?></label>
+	    </li>
+	    <?php else:?>
+	    	<input type="hidden" name="billing[create_account]" id="billing:create_account" value="1" />
+	    <?php endif;?>
+		<div class="clear"></div>
+    
+    <?php endif;?>
+    
+    <?php if ($this->canShip()): ?>
+        <li class="control <?php if (!Mage::helper('opc')->isShowShippingForm()):?>hidden<?php endif;?>">
+            <input type="checkbox" name="billing[use_for_shipping]" id="billing:use_for_shipping_yes" value="1" checked="checked" title="<?php echo  $this->__('Ship to this address') ?>" class="checkbox bill_use_for_address" /><label for="billing:use_for_shipping_yes"><?php echo  $this->__('Ship to this address') ?></label>
+        </li>
+    <?php endif; ?>
+        <li>
             <!--shipping address form-->
             <ul id="ship-form-address">
+                <input type="hidden" name="shipping[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="shipping:address_id" />
                 <li class="shipHead">Add Shipping Address</li>
                 <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getQuote()->getCustomer())->setForceUseCustomerRequiredAttributes(!$this->isCustomerLoggedIn())->setFieldIdFormat('shipping:%s')->setFieldNameFormat('shipping[%s]')->toHtml() ?></li>
                 <li class="fields">
@@ -274,36 +302,11 @@
                 <?php endif; ?>
                 <?php echo $this->getChildHtml('form.additional.info'); ?>
             </ul>
-        </fieldset>
-    </li>
-    <?php /* Extensions placeholder */ ?>
-    <?php echo $this->getChildHtml('checkout.onepage.billing.extra')?>
-    <?php if(!$this->isCustomerLoggedIn()): ?>
-    
-    	<?php
-    	$guest_allowed = $this->getQuote()->isAllowedGuestCheckout();
-    	if($guest_allowed): ?>
-	    <li class="control">
-	            <input type="checkbox" name="billing[create_account]" id="billing:create_account" value="1" title="<?php echo  $this->__('Create an account for later use') ?>"  class="checkbox" /><label for="billing:create_account"><?php echo  $this->__('Create an account for later use') ?></label>
-	    </li>
-	    <?php else:?>
-	    	<input type="hidden" name="billing[create_account]" id="billing:create_account" value="1" />
-	    <?php endif;?>
-
-		<div class="clear"></div>
-    
-    <?php endif;?>
-    
-    <?php if ($this->canShip()): ?>
-        <li class="control <?php if (!Mage::helper('opc')->isShowShippingForm()):?>hidden<?php endif;?>">
-            <input type="checkbox" name="billing[use_for_shipping]" id="billing:use_for_shipping_yes" value="1" checked="checked" title="<?php echo  $this->__('Ship to this address') ?>" class="checkbox bill_use_for_address" /><label for="billing:use_for_shipping_yes"><?php echo  $this->__('Ship to this address') ?></label>
         </li>
-    <?php endif; ?>
     </ul>
     <?php if (!$this->canShip()): ?>
         <input type="hidden" name="billing[use_for_shipping]" value="1" />
     <?php endif; ?>
-
 </div>
 <script type="text/javascript">
 //<![CDATA[
