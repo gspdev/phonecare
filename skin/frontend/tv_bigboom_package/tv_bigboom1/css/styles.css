@@ -2247,22 +2247,16 @@ button.btn-cart:hover{text-decoration: none;}
 
 
 .product-tabs { overflow:hidden; margin:0 0 0 0; }
-.product-tabs li { display:none;float:left; font-size:1.1em; line-height:1em;  }
-.product-tabs li.active {display: block;}
+.product-tabs li {float:left; font-size:1.1em; line-height:1em;  }
+.product-tabs li.active {}
 .product-tabs li.last {  }
 .product-tabs a { display:block; padding: 7px 20px; font-size: 14px;  border: 1px solid #e5e5e5; color: #666;   text-decoration: none; line-height: 35px; text-transform: capitalize; font-weight: bold; border-left: none;}
-.product-tabs li.first a { border-left: 1px solid #e5e5e5;border-bottom:1px solid #fff;border-radius: 5px 5px 0 0;-moz-border-radius: 5px 5px 0 0;
-    -webkit-border-radius: 5px 5px 0 0;}
+.product-tabs li.first a { border-left: 1px solid #e5e5e5;}
 .product-tabs a:hover,
-.product-tabs li.active a { /*background: #eee;*/}
+.product-tabs li.active a { background-color:#e5e5e5;}
 .product-tabs li.active a{
-    font: 500 16px/1.35 "SF Pro Display","Helvetica Neue","Helvetica","Arial",sans-serif;
     color: #f45245;
-    border-color: #e1e1e1;
-    background-color: #ffffff;
-    border-bottom-color: #ffffff;
-    font-weight: 700;
-    padding: 9px 15px;}
+    font-weight: 700;}
 .product-tabs-content h2 { }
 .product-tabs-content {  width: 100%; padding: 20px; border: 1px solid #e5e5e5; margin-top: -1px;border-radius: 0 5px 5px 5px;-webkit-border-radius: 0 -5px -5px -5px;-moz-border-radius: 0 -5px -5px -5px;}
 #product_tabs_description_contents h2 { display: none;}
