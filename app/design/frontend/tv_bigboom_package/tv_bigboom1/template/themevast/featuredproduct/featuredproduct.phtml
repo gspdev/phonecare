@@ -242,138 +242,67 @@ $_featureImgUrl = Mage::getBaseUrl();
         });
     </script>
 </div>
+
 <div class="review_block">
     <div class="bx-title">
         <h2>Customer Reviews</h2>
     </div>
+<?php
+		$reviews = Mage::getModel('review/review')->getResourceCollection();
+
+		$reviews->addStoreFilter(Mage::app()->getStore()->getId())
+
+		  ->addStatusFilter( Mage_Review_Model_Review::STATUS_APPROVED )
+
+		  ->setDateOrder()
+
+		  ->addRateVotes()
+
+		  ->load();
+
+	?>
+							
     <div class="review_box">
         <ul class="review_list clearfix">
+		<?php foreach ($reviews as $_vote): ?>
             <li>
                 <div class="review_content">
-                    <div class="ratings">
+                    <!--<div class="ratings">
                         <div class="rating-box">
                             <div class="rating" style="width:100%"></div>
                         </div>
-                    </div>
+                    </div>-->
+					<?php
+						//$_product = $_item->getProduct(); //get the product in cart
+						$storeId = Mage::app()->getStore()->getId();
+						$summaryData = Mage::getModel('review/review_summary')
+											->setStoreId($storeId)
+											->load($_vote->getEntityPkValue());
+						 
+						if ($summaryData['rating_summary']):?>
+							<div class="ratings">
+								<div class="rating-box">
+									<div class="rating" style="width:<?php echo $summaryData['rating_summary']; ?>%"></div>
+								</div>
+							</div>
+				<?php endif; ?>
                 </div>
                 <div class="testimonial-text">
                     <p class="p1">
-                        <span class="s1">"Bästa servicen, kom stressad ner med dotterns trasiga lur och fick den fixad på 15 minuter medans jag drack en kaffe på espresso house bredvid. Rekommenderar varmt!"</span>
+                        <span class="s1"><?php echo $this->escapeHtml($_vote->getDetail()); ?></span>
                     </p>
                 </div>
                 <div class="testimonial-cite">
                    <img src="<?php echo $_featureImgUrl . '\skin\frontend\tv_bigboom_package\tv_bigboom1\images\spara.png' ?>" width="70" height="70" alt="<?php echo 'Name'?>">
                     <div class="cite-text has-cite-image">
-                        <span class="cite-name">Susanne H</span>
-                        <span class="cite-subtext">Reco</span>
+                        <span class="cite-name"><?php echo $this->escapeHtml($_vote->getTitle()) ?></span>
+                        <span class="cite-subtext"><?php echo $this->escapeHtml($_vote->getNickname()) ?></span>
                     </div>
                 </div>
             </li>
-            <li>
-                <div class="review_content">
-                    <div class="ratings">
-                        <div class="rating-box">
-                            <div class="rating" style="width:100%"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    <p class="p1">
-                        <span class="s1">"Bästa servicen, kom stressad ner med dotterns trasiga lur och fick den fixad på 15 minuter medans jag drack en kaffe på espresso house bredvid. Rekommenderar varmt!"</span>
-                    </p>
-                </div>
-                <div class="testimonial-cite">
-                    <img src="<?php echo $_featureImgUrl . '\skin\frontend\tv_bigboom_package\tv_bigboom1\images\spara.png' ?>" width="70" height="70" alt="<?php echo 'Name'?>">
-                    <div class="cite-text has-cite-image">
-                        <span class="cite-name">Susanne H</span>
-                        <span class="cite-subtext">Reco</span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="review_content">
-                    <div class="ratings">
-                        <div class="rating-box">
-                            <div class="rating" style="width:100%"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    <p class="p1">
-                        <span class="s1">"Bästa servicen, kom stressad ner med dotterns trasiga lur och fick den fixad på 15 minuter medans jag drack en kaffe på espresso house bredvid. Rekommenderar varmt!"</span>
-                    </p>
-                </div>
-                <div class="testimonial-cite">
-                    <img src="<?php echo $_featureImgUrl . '\skin\frontend\tv_bigboom_package\tv_bigboom1\images\spara.png' ?>" width="70" height="70" alt="<?php echo 'Name'?>">
-                    <div class="cite-text has-cite-image">
-                        <span class="cite-name">Susanne H</span>
-                        <span class="cite-subtext">Reco</span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="review_content">
-                    <div class="ratings">
-                        <div class="rating-box">
-                            <div class="rating" style="width:100%"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    <p class="p1">
-                        <span class="s1">"Bästa servicen, kom stressad ner med dotterns trasiga lur och fick den fixad på 15 minuter medans jag drack en kaffe på espresso house bredvid. Rekommenderar varmt!"</span>
-                    </p>
-                </div>
-                <div class="testimonial-cite">
-                    <img src="<?php echo $_featureImgUrl . '\skin\frontend\tv_bigboom_package\tv_bigboom1\images\spara.png' ?>" width="70" height="70" alt="<?php echo 'Name'?>">
-                    <div class="cite-text has-cite-image">
-                        <span class="cite-name">Susanne H</span>
-                        <span class="cite-subtext">Reco</span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="review_content">
-                    <div class="ratings">
-                        <div class="rating-box">
-                            <div class="rating" style="width:100%"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    <p class="p1">
-                        <span class="s1">"Bästa servicen, kom stressad ner med dotterns trasiga lur och fick den fixad på 15 minuter medans jag drack en kaffe på espresso house bredvid. Rekommenderar varmt!"</span>
-                    </p>
-                </div>
-                <div class="testimonial-cite">
-                    <img src="<?php echo $_featureImgUrl . '\skin\frontend\tv_bigboom_package\tv_bigboom1\images\spara.png' ?>" width="70" height="70" alt="<?php echo 'Name'?>">
-                    <div class="cite-text has-cite-image">
-                        <span class="cite-name">Susanne H</span>
-                        <span class="cite-subtext">Reco</span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="review_content">
-                    <div class="ratings">
-                        <div class="rating-box">
-                            <div class="rating" style="width:100%"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    <p class="p1">
-                        <span class="s1">"Bästa servicen, kom stressad ner med dotterns trasiga lur och fick den fixad på 15 minuter medans jag drack en kaffe på espresso house bredvid. Rekommenderar varmt!"</span>
-                    </p>
-                </div>
-                <div class="testimonial-cite">
-                    <img src="<?php echo $_featureImgUrl . '\skin\frontend\tv_bigboom_package\tv_bigboom1\images\spara.png' ?>" width="70" height="70" alt="<?php echo 'Name'?>">
-                    <div class="cite-text has-cite-image">
-                        <span class="cite-name">Susanne H</span>
-                        <span class="cite-subtext">Reco</span>
-                    </div>
-                </div>
-            </li>
+			
+		<?php endforeach; ?>
+
         </ul>
     </div>
 </div>

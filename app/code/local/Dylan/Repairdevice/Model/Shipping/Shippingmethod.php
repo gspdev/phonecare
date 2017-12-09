@@ -10,4 +10,13 @@ class Dylan_Repairdevice_Model_Shipping_Shippingmethod extends Mage_Core_Model_A
         );
         return $data;
     }
+	
+	public static function getShippingType()
+    {
+        $data = array(
+            0    => "Billing Adress",
+            1    => "Shipping Adress",
+        );
+        return $data;
+    }
 }

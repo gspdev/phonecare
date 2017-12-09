@@ -187,14 +187,12 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 					$this->_redirect('*/*/');
 					return;
 				}
-
+               // $address = Mage::getModel('customer/address')->load($data['billing_address_id']);
 				//print_r($data);exit;			
 				$id = $this->getRequest()->getParam('id');
 				$model = Mage::getModel('repairdevice/repairdevice')->load($id);
 				//$productId = $data['repairs']; 
 				
-			  
-					
 				//$data['status'] = 1;
 				$data['create_at'] = date('Y-m-d H:m:s');
 
@@ -202,15 +200,209 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 				try {
 						
 					$model->save();
-					$productIdArray = $this->getRequest()->getPost('repairs');
-					foreach($productIdArray as $productId){
+					$resource = Mage::getSingleton('core/resource');
+					$inster = Mage::getSingleton('core/resource')->getConnection('core_write');
+					$tablePrefix = (string) Mage::getConfig()->getTablePrefix();
+					$type_address_billing =0; 
+					$type_address_shipping =1; 
+					
+					if(isset($data['billing']['use_for_shipping']) && $data['billing']['use_for_shipping']==1 && isset($data['billing_address_id']) && $data['billing_address_id']!=''){
 						
-						$resource = Mage::getSingleton('core/resource');
-						$inster = Mage::getSingleton('core/resource')->getConnection('core_write');
-						$tablePrefix = (string) Mage::getConfig()->getTablePrefix();
-						$tableName = $resource->getTableName('repair_product');
-						$sql_inster = "INSERT INTO ".$tableName." (repair_id,product_id)VALUES('".$model->save()->getId()."','$productId')";
-						$inster->query($sql_inster);  
+						$address = Mage::getModel('customer/address')->load($data['billing_address_id']);
+						$firstname = $address->getFirstname();
+						$lastname = $address->getLastname();
+						$company = $address->getCompany();
+						$city = $address->getCity();
+						$street = $address->getStreet()['0'].' '.$address->getStreet()['1'];
+						$country_id = $address->getCountryId();
+						$region = $address->getRegion();
+						$postcode = $address->getPostcode();
+						$telephone = $address->getTelephone();
+						$fax = $address->getFax();
+						$vat_id = $address->getVatId();
+						$region_id = $address->getRegionId();
+						
+						$tableName = $resource->getTableName('repair_address');
+						$sql_inster_address = "INSERT INTO ".$tableName." (type_address,repair_id,firstname,lastname,company,street,vat_id,city,region_id,region,postcode,country_id,telephone,fax)VALUES('$type_address_billing','".$model->save()->getId()."','$firstname','$lastname','$company','$street','$vat_id','$city','$region_id','$region','$postcode','$country_id','$telephone','$fax')";
+						$inster->query($sql_inster_address);
+						
+						$tableName = $resource->getTableName('repair_address');
+						$sql_inster_address = "INSERT INTO ".$tableName." (type_address,repair_id,firstname,lastname,company,street,vat_id,city,region_id,region,postcode,country_id,telephone,fax)VALUES('$type_address_shipping','".$model->save()->getId()."','$firstname','$lastname','$company','$street','$vat_id','$city','$region_id','$region','$postcode','$country_id','$telephone','$fax')";
+						$inster->query($sql_inster_address);
+						
+					    $productIdArray = $this->getRequest()->getPost('repairs');
+						foreach($productIdArray as $productId){
+							
+							
+							$tableName = $resource->getTableName('repair_product');
+							$sql_inster = "INSERT INTO ".$tableName." (repair_id,product_id)VALUES('".$model->save()->getId()."','$productId')";
+							$inster->query($sql_inster);  
+						}	
+					}
+					
+					if(isset($data['billing']['use_for_shipping']) && $data['billing']['use_for_shipping']==1 && isset($data['billing_address_id']) && $data['billing_address_id'] ==''){
+						
+						$billing_new_shipping = $this->getRequest()->getPost('billing');
+						
+						$firstname = $billing_new_shipping['firstname'];
+						$lastname = $billing_new_shipping['lastname'];
+						$company = $billing_new_shipping['company'];
+						$city = $billing_new_shipping['city'];
+						$street = $billing_new_shipping['street']['0'].''.$billing_new_shipping['street']['0'];
+						$country_id = $billing_new_shipping['country_id'];
+						$region = $billing_new_shipping['region'];
+						$postcode = $billing_new_shipping['postcode'];
+						$telephone = $billing_new_shipping['telephone'];
+						$fax = $billing_new_shipping['fax'];
+						$vat_id = $billing_new_shipping['vat_id'];
+						$region_id = $billing_new_shipping['region_id'];
+						
+						$tableName = $resource->getTableName('repair_address');
+						$sql_inster_address = "INSERT INTO ".$tableName." (type_address,repair_id,firstname,lastname,company,street,vat_id,city,region_id,region,postcode,country_id,telephone,fax)VALUES('$type_address_billing','".$model->save()->getId()."','$firstname','$lastname','$company','$street','$vat_id','$city','$region_id','$region','$postcode','$country_id','$telephone','$fax')";
+						$inster->query($sql_inster_address);
+						
+						$tableName = $resource->getTableName('repair_address');
+						$sql_inster_address = "INSERT INTO ".$tableName." (type_address,repair_id,firstname,lastname,company,street,vat_id,city,region_id,region,postcode,country_id,telephone,fax)VALUES('$type_address_shipping','".$model->save()->getId()."','$firstname','$lastname','$company','$street','$vat_id','$city','$region_id','$region','$postcode','$country_id','$telephone','$fax')";
+						$inster->query($sql_inster_address);
+						
+					    $productIdArray = $this->getRequest()->getPost('repairs');
+						foreach($productIdArray as $productId){
+							
+							
+							$tableName = $resource->getTableName('repair_product');
+							$sql_inster = "INSERT INTO ".$tableName." (repair_id,product_id)VALUES('".$model->save()->getId()."','$productId')";
+							$inster->query($sql_inster);  
+						}	
+					}
+					
+					if(isset($data['billing']) && isset($data['shipping']) && isset($data['billing_address_id']) && $data['billing_address_id']==''){
+						
+						$new_billing = $this->getRequest()->getPost('billing');
+						$new_shipping = $this->getRequest()->getPost('shipping');
+						
+						$firstname = $new_billing['firstname'];
+						$lastname = $new_billing['lastname'];
+						$company = $new_billing['company'];
+						$city = $new_billing['city'];
+						$street = $new_billing['street']['0'].''.$new_billing['street']['0'];
+						$country_id = $new_billing['country_id'];
+						$region = $new_billing['region'];
+						$postcode = $new_billing['postcode'];
+						$telephone = $new_billing['telephone'];
+						$fax = $new_billing['fax'];
+						$vat_id = $new_billing['vat_id'];
+						$region_id = $new_billing['region_id'];
+						
+						$firstname_new_shipping = $new_shipping['firstname'];
+						$lastname_new_shipping = $new_shipping['lastname'];
+						$company_new_shipping = $new_shipping['company'];
+						$city_new_shipping = $new_shipping['city'];
+						$street_new_shipping = $new_shipping['street']['0'].''.$new_shipping['street']['0'];
+						$country_id_new_shipping = $new_shipping['country_id'];
+						$region_new_shipping = $new_shipping['region'];
+						$postcode_new_shipping = $new_shipping['postcode'];
+						$telephone_new_shipping = $new_shipping['telephone'];
+						$fax_new_shipping = $new_shipping['fax'];
+						$vat_id_new_shipping = $new_shipping['vat_id'];
+						$region_id_new_shipping = $new_shipping['region_id'];
+						
+						$tableName = $resource->getTableName('repair_address');
+						$sql_inster_address = "INSERT INTO ".$tableName." (type_address,repair_id,firstname,lastname,company,street,vat_id,city,region_id,region,postcode,country_id,telephone,fax)VALUES('$type_address_billing','".$model->save()->getId()."','$firstname','$lastname','$company','$street','$vat_id','$city','$region_id','$region','$postcode','$country_id','$telephone','$fax')";
+						$inster->query($sql_inster_address);
+						
+						$tableName = $resource->getTableName('repair_address');
+						$sql_inster_new_shipping = "INSERT INTO ".$tableName." (type_address,repair_id,firstname,lastname,company,street,vat_id,city,region_id,region,postcode,country_id,telephone,fax)VALUES('$type_address_shipping','".$model->save()->getId()."','$firstname_new_shipping','$lastname_new_shipping','$company_new_shipping','$street_new_shipping','$vat_id_new_shipping','$city_new_shipping','$region_id_new_shipping','$region_new_shipping','$postcode_new_shipping','$country_id_new_shipping','$telephone_new_shipping','$fax_new_shipping')";
+						$inster->query($sql_inster_new_shipping);
+						
+					    $productIdArray = $this->getRequest()->getPost('repairs');
+						foreach($productIdArray as $productId){
+							
+							
+							$tableName = $resource->getTableName('repair_product');
+							$sql_inster = "INSERT INTO ".$tableName." (repair_id,product_id)VALUES('".$model->save()->getId()."','$productId')";
+							$inster->query($sql_inster);  
+						}	
+					}
+					
+					if(isset($data['shipping']) && isset($data['billing_address_id']) && $data['billing_address_id'] !=''){
+						
+						$address = Mage::getModel('customer/address')->load($data['billing_address_id']);
+						$new_shipping = $this->getRequest()->getPost('shipping');
+						
+						$firstname = $address->getFirstname();
+						$lastname = $address->getLastname();
+						$company = $address->getCompany();
+						$city = $address->getCity();
+						$street = $address->getStreet()['0'].' '.$address->getStreet()['1'];
+						$country_id = $address->getCountryId();
+						$region = $address->getRegion();
+						$postcode = $address->getPostcode();
+						$telephone = $address->getTelephone();
+						$fax = $address->getFax();
+						$vat_id = $address->getVatId();
+						$region_id = $address->getRegionId();
+						
+						
+						$firstname_new_shipping = $new_shipping['firstname'];
+						$lastname_new_shipping = $new_shipping['lastname'];
+						$company_new_shipping = $new_shipping['company'];
+						$city_new_shipping = $new_shipping['city'];
+						$street_new_shipping = $new_shipping['street']['0'].''.$new_shipping['street']['0'];
+						$country_id_new_shipping = $new_shipping['country_id'];
+						$region_new_shipping = $new_shipping['region'];
+						$postcode_new_shipping = $new_shipping['postcode'];
+						$telephone_new_shipping = $new_shipping['telephone'];
+						$fax_new_shipping = $new_shipping['fax'];
+						$vat_id_new_shipping = $new_shipping['vat_id'];
+						$region_id_new_shipping = $new_shipping['region_id'];
+						
+						
+						$tableName = $resource->getTableName('repair_address');
+						$sql_inster_address = "INSERT INTO ".$tableName." (type_address,repair_id,firstname,lastname,company,street,vat_id,city,region_id,region,postcode,country_id,telephone,fax)VALUES('$type_address_billing','".$model->save()->getId()."','$firstname','$lastname','$company','$street','$vat_id','$city','$region_id','$region','$postcode','$country_id','$telephone','$fax')";
+						$inster->query($sql_inster_address);
+						
+						$tableName = $resource->getTableName('repair_address');
+						$sql_inster_new_shipping = "INSERT INTO ".$tableName." (type_address,repair_id,firstname,lastname,company,street,vat_id,city,region_id,region,postcode,country_id,telephone,fax)VALUES('$type_address_shipping','".$model->save()->getId()."','$firstname_new_shipping','$lastname_new_shipping','$company_new_shipping','$street_new_shipping','$vat_id_new_shipping','$city_new_shipping','$region_id_new_shipping','$region_new_shipping','$postcode_new_shipping','$country_id_new_shipping','$telephone_new_shipping','$fax_new_shipping')";
+						$inster->query($sql_inster_new_shipping);
+						
+						
+					    $productIdArray = $this->getRequest()->getPost('repairs');
+						foreach($productIdArray as $productId){
+							
+							
+							$tableName = $resource->getTableName('repair_product');
+							$sql_inster = "INSERT INTO ".$tableName." (repair_id,product_id)VALUES('".$model->save()->getId()."','$productId')";
+							$inster->query($sql_inster);  
+						}	
+					}
+					
+					
+					
+					// $address = Mage::getModel('customer/address')->load($data['billing_address_id']);
+					// $firstname = $address->getFirstname();
+					// $lastname = $address->getLastname();
+					// $company = $address->getCompany();
+					// $city = $address->getCity();
+					// $street = $address->getStreet();
+					// $country_id = $address->getCountryId();
+					// $region = $address->getRegion();
+					// $postcode = $address->getPostcode();
+					// $telephone = $address->getTelephone();
+					// $fax = $address->getFax();
+					// $vat_id = $address->getVatId();
+					// $region_id = $address->getRegionId();
+					
+					if(isset($data['shipping_store']) && $data['shipping_store']==0){
+						$productIdArray = $this->getRequest()->getPost('repairs');
+						foreach($productIdArray as $productId){
+							
+							$resource = Mage::getSingleton('core/resource');
+							$inster = Mage::getSingleton('core/resource')->getConnection('core_write');
+							$tablePrefix = (string) Mage::getConfig()->getTablePrefix();
+							$tableName = $resource->getTableName('repair_product');
+							$sql_inster = "INSERT INTO ".$tableName." (repair_id,product_id)VALUES('".$model->save()->getId()."','$productId')";
+							$inster->query($sql_inster);  
+						}
 					}
 					Mage::getSingleton('core/session')->
 					addSuccess(Mage::helper('repairdevice')
