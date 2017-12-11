@@ -978,19 +978,22 @@
                     $("#billing-new-address-form").remove();
                     $("#billing-address-select").remove();
                     $("#ship-form-address").remove();
+                    $(".bill_use_for_address").remove();
                 }
-                //old bill , same shipping
-                if($("#billing-address-select").val() > 0 && $("#co-billing-form .bill_use_for_address").is(':checked')){
-                    $("#billing-new-address-form").remove();
-                    $("#ship-form-address").remove();
-                    //old bill , new shipping
-                }else if($("#billing-address-select").val() > 0 && !$("#co-billing-form .bill_use_for_address").is(':checked')){
-                    $("#billing-new-address-form").remove();
-                    //new bill , same shipping
-                } else if(!$("#billing-address-select").val() && $(".bill_use_for_address").is(':checked')){
-                    $("#ship-form-address").remove();
-                    //new bill , new shipping
-                }else if(!$("#billing-address-select").val() && !$(".bill_use_for_address").is(':checked')){
+                if(!$('#poll-answers #store_box:radio:checked').attr("checked")) {
+                    //old bill , same shipping
+                    if ($("#billing-address-select").val() > 0 && $("#co-billing-form .bill_use_for_address").is(':checked')) {
+                        $("#billing-new-address-form").remove();
+                        $("#ship-form-address").remove();
+                        //old bill , new shipping
+                    } else if ($("#billing-address-select").val() > 0 && !$("#co-billing-form .bill_use_for_address").is(':checked')) {
+                        $("#billing-new-address-form").remove();
+                        //new bill , same shipping
+                    } else if (!$("#billing-address-select").val() && $(".bill_use_for_address").is(':checked')) {
+                        $("#ship-form-address").remove();
+                        //new bill , new shipping
+                    } else if (!$("#billing-address-select").val() && !$(".bill_use_for_address").is(':checked')) {
+                    }
                 }
             }
             //consoele.log new-form
