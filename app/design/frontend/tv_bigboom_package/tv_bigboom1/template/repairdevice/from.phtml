@@ -817,7 +817,9 @@
         //init
         catHead.init();
         proHead.init();
-
+        if(sessionStorage.getItem("repair") && $("#login_status").attr("data-status")<1){
+            console.log(sessionStorage.getItem("repair"));
+        }
         $("#billing-address-select").attr("onchange",''); // billing address select onchange initialize
         ajaxCategory(2502, 'category', 0);//First load categoryList
 
@@ -908,7 +910,7 @@
                 billingNewForm.loading();
             }
         });
-        //make change on use-bill-address-as-ship-addresss
+        //make change on use-bill-address-as-ship-address
         $("#co-billing-form .bill_use_for_address").attr("checked",true); addShipAddress.loaded(); //initialize use-bill-address-as-ship-addresss and set it checked
         $(document).on('click','#co-billing-form .bill_use_for_address',function(){
             if($(this).is(':checked')){
@@ -961,43 +963,49 @@
                 $(".selectWarn").hide();
             }
 
-            //2 , when user sign in or not
+            //2 , validate success , update form by remove some elements
+
+            // before submit remove some input elements
+
+            if($('#poll-answers #store_box:radio:checked').attr("checked")){//customer choose store
+                $("#billing-new-address-form").remove();
+                $("#billing-address-select").remove();
+                $("#ship-form-address").remove();
+                $(".bill_use_for_address").remove();
+            }
+            if(!$('#poll-answers #store_box:radio:checked').attr("checked")) {
+                //old bill , same shipping
+                if ($("#billing-address-select").val() > 0 && $("#co-billing-form .bill_use_for_address").is(':checked')) {
+                    $("#billing-new-address-form").remove();
+                    $("#ship-form-address").remove();
+                    //old bill , new shipping
+                } else if ($("#billing-address-select").val() > 0 && !$("#co-billing-form .bill_use_for_address").is(':checked')) {
+                    $("#billing-new-address-form").remove();
+                    //new bill , same shipping
+                } else if (!$("#billing-address-select").val() && $(".bill_use_for_address").is(':checked')) {
+                    $("#ship-form-address").remove();
+                    //new bill , new shipping
+                } else if (!$("#billing-address-select").val() && !$(".bill_use_for_address").is(':checked')) {
+                }
+            }
+
+            //when user sign in or not
             if($("#login_status").attr("data-status")<1){
+
+                // console.log new-form
+                var tmpForm = $("#new-form").serialize();
+                console.log('NewAddress: ' + tmpForm);
+                //save repair message at sessionStorage
+                sessionStorage.setItem("repair" , tmpForm);
+                console.log(sessionStorage.getItem("repair"));
+
+
                 $("#myModal").modal({show:true,keyboard: true});
                 event.preventDefault();
                 window.event.returnValue = false;
             }else if($("#login_status").attr("data-status")>0){
                 $("#myModal").modal({show:false});
             }
-
-            //3 , validate success , update form by remove some elements
-
-            // before submit remove some input elements
-            if(awrmaNewForm.validator.validate()){ // form has been validated.
-                if($('#poll-answers #store_box:radio:checked').attr("checked")){//customer choose store
-                    $("#billing-new-address-form").remove();
-                    $("#billing-address-select").remove();
-                    $("#ship-form-address").remove();
-                    $(".bill_use_for_address").remove();
-                }
-                if(!$('#poll-answers #store_box:radio:checked').attr("checked")) {
-                    //old bill , same shipping
-                    if ($("#billing-address-select").val() > 0 && $("#co-billing-form .bill_use_for_address").is(':checked')) {
-                        $("#billing-new-address-form").remove();
-                        $("#ship-form-address").remove();
-                        //old bill , new shipping
-                    } else if ($("#billing-address-select").val() > 0 && !$("#co-billing-form .bill_use_for_address").is(':checked')) {
-                        $("#billing-new-address-form").remove();
-                        //new bill , same shipping
-                    } else if (!$("#billing-address-select").val() && $(".bill_use_for_address").is(':checked')) {
-                        $("#ship-form-address").remove();
-                        //new bill , new shipping
-                    } else if (!$("#billing-address-select").val() && !$(".bill_use_for_address").is(':checked')) {
-                    }
-                }
-            }
-            //consoele.log new-form
-            // console.log('NewAddress: ' + $("#new-form").serialize());
         });
     });
 </script>
