@@ -432,8 +432,7 @@
         <fieldset>
             <?php echo $this->getBlockHtml('formkey'); ?>
             <input type="hidden" name="customer_id" value="<?php echo $this->getCustomerId() ?>"/>
-            <h2 class="repair-title"><span
-                        class="repair-step"><span>1</span></span><span><?php echo $this->__('Välj modell att laga'); ?></span>
+            <h2 class="repair-title"><span class="repair-step"><span>1</span></span><span><?php echo $this->__('Välj modell att laga'); ?></span>
             </h2>
             <div class="row listBox">
                 <div class="col-sm-5">
@@ -486,22 +485,18 @@
                 </div>
                     <div class=" customerPart">
                         <div class="device-info">
-                            <h2 class="repair-title"><span
-                                        class="repair-step"><span>3</span></span><span>Enhetsinformation</span>
+                            <h2 class="repair-title"><span class="repair-step"><span>3</span></span><span>Enhetsinformation</span>
                             </h2>
                             <div class="row">
                                 <div class="col-sm-6"><h4>Serie/IMEI-nummer:</h4>
                                     <input name="imei" id="imei" class="input-text required-entry" type="text"/>
                                 </div>
                                 <div class="col-sm-6"><h4>Skärmlås:</h4>
-                                    <input type="text" name="screencode" id="screencode"
-                                           class="input-text required-entry"
-                                           value=""/>
+                                    <input type="text" name="screencode" id="screencode" class="input-text required-entry" value=""/>
                                 </div>
                                 <div class="col-sm-12">
                                     <h4><span class="req-item">*</span>Beskriv problemet:</h4>
-                                    <textarea name="detailed" id="detailed" cols="5" rows="3"
-                                              class="required-entry"></textarea>
+                                    <textarea name="detailed" id="detailed" cols="5" rows="3" class="required-entry"></textarea>
                                 </div>
                                 <p class="req-info"><span class="req-item">*</span>Måsta vara ifyllt</p></div>
                         </div>
@@ -522,15 +517,12 @@
                                         <ul id="shipping-store">
                                             <li><span class="label"><label>Välj butik:</label></span></li>
                                             <li>
-                                                <input name="shipping_method" type="radio" value="2" title="Existing" id="2new"
-                                                       class="radio poll_vote">
+                                                <input name="shipping_method" type="radio" value="2" title="Existing" id="2new" class="radio poll_vote">
                                                 <span class="label"><label for="vote_1"><?php echo $this->__('Kungsgatan 29, 11156 Stockholm, Sverige'); ?></label></span>
                                             </li>
                                             <li>
-                                                <input name="shipping_method" type="radio" value="3" title="Existing" id="3new"
-                                                       class="radio poll_vote">
-                                                <span class="label"><label
-                                                            for="vote_1"><?php echo $this->__('Tivolivägen 2, 12631 Hägersten, Sverige'); ?></label></span>
+                                                <input name="shipping_method" type="radio" value="3" title="Existing" id="3new" class="radio poll_vote">
+                                                <span class="label"><label for="vote_1"><?php echo $this->__('Tivolivägen 2, 12631 Hägersten, Sverige'); ?></label></span>
                                             </li>
                                         </ul>
                                     </li>
@@ -645,20 +637,8 @@
 </script>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
-        $("#billing-address-select").attr("onchange",'');
-
-        $("#categoryList").delegate("li", 'click', function () {
-            var tmpId = $(this).attr("data-id");
-            ajaxCategory(tmpId, 'category', 1);
-            $("#repair-block").hide();
-        });
-        $("#productList").delegate("li", "click", function () {
-            var tmpId = $(this).attr("data-id");
-            repairs.init();
-            ajaxProduct(tmpId, 'product');
-        });
         /**
-         * Ajax by id.
+         * Ajax category by id.
          * */
         function ajaxCategory(id, method, sort) {
             var mtd = method;
@@ -719,10 +699,12 @@
                 });
             } else {
                 if (window.console.log)
-                    console.log("error : not supported ajax.");
+                    console.log("error : your browser not supported ajax.");
             }
         }
-
+        /**
+         * Ajax product by id.
+         * */
         function ajaxProduct(id, method, sort) {
             var mtd = method;
             if (jQuery.ajax) {
@@ -761,11 +743,7 @@
                                 '<td class="check"><input class="my-repair" name="repairs[]" value="' + tmpData[j].id + '" title="' + tmpData[j].name + '" id="' + tmpData[j].id + '" type="checkbox"><label for="' + tmpData[j].id + '"></label></td></tr>';
 
                         }
-                        if (mtd === 'product' && sort === 0) {
-
-                        } else if (mtd === 'product' && sort === 1) {
-
-                        }
+                        if (mtd === 'product' && sort === 0) {} else if (mtd === 'product' && sort === 1) {}
                         repairs.setHtml(str);
                         $("#repair-block").show();
                     },
@@ -775,10 +753,9 @@
                 });
             } else {
                 if (window.console.log)
-                    console.log("error : not supported ajax.");
+                    console.log("error : your browser not supported ajax.");
             }
         }
-
         //catHead proHead
         var catHead = new RepairList("#catHead", "<span>Välj märke</span><span class='nav-down-arrow'></span>");
         var proHead = new RepairList("#proHead", "<span>Välj model</span><span class='nav-down-arrow'></span>");
@@ -796,14 +773,12 @@
         var ieLoading = new RepairList("#ie_ajax",'');
         //my-device
         var mydevice = new RepairList("#my-device", '');
-        // head init
-        catHead.init();
-        proHead.init();
         //ship to store
         var shipStore = new RepairList("#shipping-store", '');
-        var shipNewAddress = new RepairList("#shipNewAddress",'');
+        var newAddress = new RepairList("#shipNewAddress",'');
         var billingNewForm = new RepairList("#billing-new-address-form",'');
-        var shipForm = new RepairList("#ship-form-address",'');
+        var addShipAddress = new RepairList("#ship-form-address",'');
+        //create object 'RepairList'
         function RepairList(id, inner) {
             this.id = id;
             this.inner = inner;
@@ -838,7 +813,47 @@
             }
         }
 
-        //update selected
+
+        //init
+        catHead.init();
+        proHead.init();
+
+        $("#billing-address-select").attr("onchange",''); // billing address select onchange initialize
+        ajaxCategory(2502, 'category', 0);//First load categoryList
+
+        // show option list when click head
+        $(".head").click(function () {
+            var $head = $(this);
+            var $repairList = $head.parent().find(".repairList");
+            hideRepairList();
+            if ($repairList.children("li").length > 0) {
+                $repairList.addClass("active");
+            }
+        });
+
+        // set head when click category box and model box
+        $(".repairList").delegate("li", "click", function () {
+            var $li = $(this);
+            if (!$li.hasClass("repair")) {
+                $li.parent().parent().find(".head").html($li.html() + '<span class="nav-down-arrow"></span>');
+            }
+            hideRepairList();
+            if ($("#proHead").find(".name").length === 1) {
+                mydevice.setCtn($("#proHead").html());
+            }
+        });
+
+        $("#categoryList").delegate("li", 'click', function () {
+            var tmpId = $(this).attr("data-id");
+            ajaxCategory(tmpId, 'category', 1);// ajax model
+            $("#repair-block").hide();// hide repair block
+        });
+        $("#productList").delegate("li", "click", function () {
+            var tmpId = $(this).attr("data-id");
+            repairs.init();// repair product initialize
+            ajaxProduct(tmpId, 'product');// ajax products
+        });
+        //select product => add to "selected box" ($('#reapirs-selected'))
         $(document).on('click', '.my-repair', function () {
             var selected = 0;
             $('#reapirs-selected').empty();
@@ -852,60 +867,54 @@
             }
             if ($(this).is(':checked')) {
                 $(this).closest('tr').addClass('checked');
-            }
-            else {
+            }else {
                 $(this).closest('tr').removeClass('checked');
             }
         });
-        //show shipping store
+        //choose shipping method
         $(document).on('click','#poll-answers .radio',function(){
             //shipping-store checked , and choose store  #store_box
             if($('#poll-answers #store_box:radio:checked').attr("checked") && $(this).hasClass("store")){
-                //alert("line 864");
-                shipNewAddress.loaded();
-                shipStore.loading();
-                $("#1new:radio").attr("checked",false);
+                newAddress.loaded();//hide shipping address
+                shipStore.loading();//show shipping store-list
+                $("#1new:radio").attr("checked",false);//set method post false
             }
+            //user post checked , value = 1
             if($('#poll-answers #1new:radio:checked').attr("checked") && !$(this).hasClass("store")){
-                //user has login
+                //user login successfully , there exist option 'new address' and 'exist address'
                 if($("#billing-address-select").length>0){
-                    //alert("line873");
-                    shipNewAddress.loading();
-                    //billingNewForm.loading();
-                    shipStore.loaded();
-                    $("#store_box:radio,#shipping-store input:radio").attr("checked",false);
-                    /*if(!$("#billing-address-select").val()){
-                        billingNewForm.loading();
-                    }*/
-                }else if($("#billing-address-select").length === 0){
-                    //alert("line880");
-                    //not login , without select of address
-                    shipNewAddress.loading();
-                    billingNewForm.loading();
-                    shipStore.loaded();
-                    $("#store_box:radio,#shipping-store input:radio").attr("checked",false);
+                    newAddress.loading();//show new address box
+                    shipStore.loaded();//hide store box
+                    $("#store_box:radio,#shipping-store input:radio").attr("checked",false);//set store input false
+                }else if($("#billing-address-select").length === 0){ //user not login , there not exist address-select box
+                    newAddress.loading();//show new address box
+                    billingNewForm.loading();//show billing new address
+                    shipStore.loaded();//hide store box
+                    $("#store_box:radio,#shipping-store input:radio").attr("checked",false);//set store input false
                 }
             }
         });
-        //show new address
-        $(document).on('click','#poll-answers .radio',function(){
+        //make change between new address and old address
+        $(document).on('click','#billing-address-select',function(){
             $("#billing-address-select").change(function () {
-                if(!$(this).val()){
+                if(!$(this).val()){ // choose new address
                     billingNewForm.loading();
                 }
-                if($(this).val()>0){
+                if($(this).val()>0){// choose exist address
                     billingNewForm.loaded();
                 }
             });
-            if(!$("#billing-address-select").val()){
+            if(!$("#billing-address-select").val()){ // no old address , so show the new address
                 billingNewForm.loading();
             }
         });
+        //make change on use-bill-address-as-ship-addresss
+        $("#co-billing-form .bill_use_for_address").attr("checked",true); addShipAddress.loaded(); //initialize use-bill-address-as-ship-addresss and set it checked
         $(document).on('click','#co-billing-form .bill_use_for_address',function(){
             if($(this).is(':checked')){
-                shipForm.loaded();
+                addShipAddress.loaded();
             }else{
-                shipForm.loading();
+                addShipAddress.loading();
             }
         });
         //hide all repairList when click element of option
@@ -920,66 +929,18 @@
                 $(".repairList").removeClass("active");
             }
         });
-        //First load categoryList
-        ajaxCategory(2502, 'category', 0);
-        $(".repairList").delegate("li", "click", function () {
-            var $li = $(this);
-            if (!$li.hasClass("repair")) {
-                $li.parent().parent().find(".head").html($li.html() + '<span class="nav-down-arrow"></span>');
-            }
-            hideRepairList();
-            if ($("#proHead").find(".name").length === 1) {
-                mydevice.setCtn($("#proHead").html());
-            }
-        });
-        $(".head").click(function () {
-            var $head = $(this);
-            var $repairList = $head.parent().find(".repairList");
-            hideRepairList();
-            if ($repairList.children("li").length > 0) {
-                $repairList.addClass("active");
-            }
-        });
 
-        //shipping method value = value , hide checkbox when not sign in
+        //form validate and submit
         $("#order").click(function (event) {
-            //before submit remove some input elements
-            if($('#poll-answers #store_box:radio:checked').attr("checked")){
-                $("#billing-new-address-form").remove();
-                $("#billing-address-select").remove();
-                $("#ship-form-address").remove();
-            }
-            //exist bill , same shipping
-            if($("#billing-address-select").val() > 0 && $("#co-billing-form .bill_use_for_address").is(':checked')){
-                $("#billing-new-address-form").remove();
-                $("#ship-form-address").remove();
-                //exist bill , new shipping
-            }else if($("#billing-address-select").val() > 0 && !$("#co-billing-form .bill_use_for_address").is(':checked')){
-                $("#billing-new-address-form").remove();
-                //new bill , same shipping
-            } else if(!$("#billing-address-select").val() && $(".bill_use_for_address").is(':checked')){
-                $("#ship-form-address").remove();
-                //new bill , new shipping
-            }else if(!$("#billing-address-select").val() && !$(".bill_use_for_address").is(':checked')){
-            }
-            //consoele.log new-form
-           // console.log('NewAddress: ' + $("#new-form").serialize());
+            //1 , first , form validate
             var event = event || window.event;
-            var $shippingMethod = $(".shipping-methods .poll_vote:radio:checked");
-            //alert($shippingMethod.length);
-            awrmaNewForm.validator.validate();
-            //check select product
-            if($("#repairs input[type='checkbox']:checked").length <= 0){
-                $(".repair-table").addClass("validation-failed");
-                $(".selectWarn").show();
-                event.preventDefault(); // Compatible standard Browsers
-                window.event.returnValue = false; // Compatible IE6~8
-            }else{
-                $(".repair-table").removeClass("validation-failed");
-                $(".selectWarn").hide();
-            }
-            //check shipping method
-            if ($shippingMethod.length <= 0) {
+
+            awrmaNewForm.validator.validate();// form validate
+
+            var $shippingMethod = $(".shipping-methods .poll_vote:radio:checked");//get shipping method
+            //alert("$shippingMethod.val" + $shippingMethod.val());
+
+            if ($shippingMethod.length <= 0) { //validate if there exist shipping method
                 $(".shipping-info .shipping-methods").addClass("validation-failed");
                 $(".shippingWarn").show();
                 event.preventDefault(); // Compatible standard Browsers
@@ -989,6 +950,18 @@
                 $(".shipping-info .shipping-methods").removeClass("validation-failed");
                 $(".shippingWarn").hide();
             }
+
+            if($("#repairs input[type='checkbox']:checked").length <= 0){ //validate product list if there exist products selected by customer
+                $(".repair-table").addClass("validation-failed");
+                $(".selectWarn").show();
+                event.preventDefault(); // Compatible standard Browsers
+                window.event.returnValue = false; // Compatible IE6~8
+            }else{
+                $(".repair-table").removeClass("validation-failed");
+                $(".selectWarn").hide();
+            }
+
+            //2 , when user sign in or not
             if($("#login_status").attr("data-status")<1){
                 $("#myModal").modal({show:true,keyboard: true});
                 event.preventDefault();
@@ -996,6 +969,32 @@
             }else if($("#login_status").attr("data-status")>0){
                 $("#myModal").modal({show:false});
             }
+
+            //3 , validate success , update form by remove some elements
+
+            // before submit remove some input elements
+            if(awrmaNewForm.validator.validate()){ // form has been validated.
+                if($('#poll-answers #store_box:radio:checked').attr("checked")){//customer choose store
+                    $("#billing-new-address-form").remove();
+                    $("#billing-address-select").remove();
+                    $("#ship-form-address").remove();
+                }
+                //old bill , same shipping
+                if($("#billing-address-select").val() > 0 && $("#co-billing-form .bill_use_for_address").is(':checked')){
+                    $("#billing-new-address-form").remove();
+                    $("#ship-form-address").remove();
+                    //old bill , new shipping
+                }else if($("#billing-address-select").val() > 0 && !$("#co-billing-form .bill_use_for_address").is(':checked')){
+                    $("#billing-new-address-form").remove();
+                    //new bill , same shipping
+                } else if(!$("#billing-address-select").val() && $(".bill_use_for_address").is(':checked')){
+                    $("#ship-form-address").remove();
+                    //new bill , new shipping
+                }else if(!$("#billing-address-select").val() && !$(".bill_use_for_address").is(':checked')){
+                }
+            }
+            //consoele.log new-form
+            // console.log('NewAddress: ' + $("#new-form").serialize());
         });
     });
 </script>
