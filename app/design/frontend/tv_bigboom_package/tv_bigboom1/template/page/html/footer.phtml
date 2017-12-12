@@ -39,8 +39,11 @@ $_footerImgSrc =Mage::getBaseUrl();
                     var $th = $(this);
                     var $em = $th.find('em.range');
                     var quality = parseInt($th.find(".quality").attr("data-quality"));
-                    if(quality>100){
+                    if(quality > 100){
                         quality = 100;
+                    }
+                    if(quality < 0){
+                        quality = 0;
                     }
                     setCss($em,quality);
                 });
@@ -68,7 +71,7 @@ $_footerImgSrc =Mage::getBaseUrl();
     //echo $infopath;exit;
     if ($infopath == "/"):
 ?>
-<div class="container-fluid" style="padding: 0;">
+<div class="container-fluid" style="padding: 0;width: 100%;">
     <!--why choose-->
     <div class="choose">
         <div class="choose-bg-box">

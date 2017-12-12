@@ -46,7 +46,10 @@ $_url             = $this->getAjaxUrl();
             <input id="search" type="text" autocomplete="off"  name="<?php echo $_helper->getQueryParamName() ?>" value="<?php echo $_helper->getEscapedQueryText() ?>" class="input-text UI-SEARCH UI-NAV-INPUT" maxlength="<?php echo $_helper->getMaxQueryLength();?>" />
         </div>
 
-        <button type="submit" title="<?php echo $this->__('Search') ?>" class="button search-button"><span><span><?php echo $this->__('Search') ?></span></span></button>
+        <button type="submit" title="<?php echo $this->__('Search') ?>" class="button search-button">
+            <span class="hidden-xs"><span><?php echo $this->__('Search') ?></span></span>
+            <span class="search_icon visible-xs hidden-sm"><span>&nbsp;</span></span>
+        </button>
 
         <div class="searchautocomplete-loader UI-LOADER">
             <div id="g01"></div>

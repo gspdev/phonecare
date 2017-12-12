@@ -41,11 +41,11 @@
     <div class="product-essential">
     <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
         <div class="row">
-            <div class="product-img-box col-sm-12 col-md-5 col-sms-6 col-smb-12">
+            <div class="product-img-box col-sm-12 col-md-5 col-smb-12">
                 <?php echo $this->getChildHtml('media') ?>     
             </div>
             
-            <div class="product-shop col-sm-12 col-md-5 col-sms-6 col-smb-12">
+            <div class="product-shop col-sm-12 col-md-5 col-smb-12">
                 <div class="product-name">
                     <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
                 </div>
