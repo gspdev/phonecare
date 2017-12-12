@@ -799,19 +799,17 @@ h1.logo{margin:0;}
     text-align: right;
     display: inline-block;
 }
-.social .social_icon{
+.social .fa{
     width: 40px;
     height: 40px;
-    margin-top: 10px;
-    display: block;
+    margin: 12px 0 0 0;
+    padding:10px;
     cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;}
-.social .social_icon.facebook{background-image:url("../images/social-icon-fb.png")}
-.social .social_icon.facebook:hover{background-image:url("../images/social-icon-fb-hover.png")}
-.social .social_icon.instagram{background-image:url("../images/social-icon-i.png")}
-.social .social_icon.instagram:hover{background-image:url("../images/social-icon-h.png")}
-
+    color:#fff;
+    font: 16px/1 FontAwesome;
+    text-align: center;
+    text-decoration: none;}
+.social .fa:hover{color:#fc6908;}
 #nav_megamenu .menu_list li{float: left;display: inline-block;}
 #nav_megamenu .menu_list li a{
     display: block;
