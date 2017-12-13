@@ -256,7 +256,7 @@
 	.review_block{margin: 20px 0;}
 	.review_block .bx-wrapper .bx-controls-direction a{top:50%;}
 	#headerHeight {
-		height: 186px;
+		height: 188px;
 	}
 }
 @media (max-width: 500px) {
@@ -264,7 +264,7 @@
 	.social li{width: 24%;margin-left: 1%;}
 	.search-right .head-Cart .top-cart-content{width: 350px;}
 	.header-quick-access .user li{padding: 14px 4px;}
-	.small-screen .menu_list li a { padding: 0 10px;}
+	.small-screen .menu_list li a { padding: 0 4px;}
 	.logo-box .logo {margin-top: 22px;}
 }
 @media (max-width: 400px) {
