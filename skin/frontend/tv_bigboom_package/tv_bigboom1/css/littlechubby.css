@@ -26,6 +26,9 @@
 @media (max-width: 900px){
 	#myModal.feature .modal-dialog{width: 80%;}
 }
+@media (max-width: 991px) and (min-width: 768px){
+	#headerHeight{height: 186px;}
+}
 @media (max-width: 767px) {
 /*homePage*/
 	/*header*/
@@ -252,13 +255,17 @@
 	.products-grid li.item .item-inner .repair{width: 60px;height: 60px;}
 	.review_block{margin: 20px 0;}
 	.review_block .bx-wrapper .bx-controls-direction a{top:50%;}
+	#headerHeight {
+		height: 186px;
+	}
 }
 @media (max-width: 500px) {
 	.choose .innerContainer .chooseSlide #why-choose-pager .pager{width: 35%;}
 	.social li{width: 24%;margin-left: 1%;}
 	.search-right .head-Cart .top-cart-content{width: 350px;}
 	.header-quick-access .user li{padding: 14px 4px;}
-
+	.small-screen .menu_list li a { padding: 0 10px;}
+	.logo-box .logo {margin-top: 22px;}
 }
 @media (max-width: 400px) {
 	.search-right .head-Cart .top-cart-content{width: 300px;}
@@ -270,7 +277,7 @@
 @media (max-width: 450px){
 	.nav-container-box .search-box{width:55%;}
 }
-@media (max-width: 992px) and (min-width: 768px){
+@media (max-width: 991px) and (min-width: 768px){
 	.header-toplinks .links>li>a{padding:0 2px;}
 	.drop-lang .drop-trigger:hover .sub-lang, .drop-currency .currency-trigger:hover .sub-currency{top:30px;}
 	.drop-currency .currency-trigger .sub-currency{left:initial;right:0;}
@@ -299,7 +306,7 @@
 	.featuredBox .products-grid .stock_box>span.text{display: none;}
 	.products-list .stock_box, .products-grid .stock_box {margin: 6px 0 0;}
 }
-@media (max-width: 992px){
+@media (max-width: 991px){
 	.header-left.text-right .social{display: none;}
 	.search-right .head-Cart{width: 100%;}
 	.nav-container-box .nav-inner .nav-container{/*width: 100%;*/}
@@ -308,12 +315,13 @@
 		word-wrap: break-word;
 		line-height: initial;
 	}
-	.navbar{margin:7px 0 0 0;min-height:initial;border-radius: 5px;height: 46px;
+	.navbar{margin:10px 0 0 0;min-height:initial;border-radius: 5px;height: 42px;
 		-webkit-border-radius: 5px;
 		-moz-border-radius: 5px;
 		-o-border-radius: 5px;
 	}
 	.underInfo{display: none;}
+	.small-screen .menu_list{margin:0 auto;text-align: center;}
 }
 @media (max-width: 1200px){
 	.featuredproduct .products-grid>li{margin-bottom: 20px;}
@@ -342,7 +350,7 @@
 
 }
 @media(min-width: 992px) and (max-width: 1200px){
-	#nav_megamenu .menu_list li:last-child{display: none;}
+	#nav_megamenu .menu_list li:last-child{/*display: none;*/}
 }
 @media (min-width:768px){
 	.drop-currency .currency-trigger .sub-currency{left:initial;right:0;}
