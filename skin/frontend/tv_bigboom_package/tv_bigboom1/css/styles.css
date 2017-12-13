@@ -1358,6 +1358,7 @@ border-radius: 0 0 5px 5px;}
     display: block;
     width: 300%;
     height: 100%;
+    background: #000;
 }
 .choose .choose-bg-list li{
     display: inline-block;
@@ -1367,13 +1368,13 @@ border-radius: 0 0 5px 5px;}
     height: 100%;
 }
 .choose .choose-bg-list li.first{
-    background: #000000 url("../images/choose/why-choose-bg.jpg") center top repeat;
+    background: #000000 url("../images/choose/why-choose-bg.png") center top repeat;
 }
 .choose .choose-bg-list li.second{
-    background: #000000 url("../images/choose/why-choose-bg-2.jpg") center top repeat;
+    background: #000000 url("../images/choose/why-choose-bg-2.png") center top repeat;
 }
 .choose .choose-bg-list li.third{
-    background: #000000 url("../images/choose/why-choose-bg-3.jpg") center top repeat;
+    background: #000000 url("../images/choose/why-choose-bg-3.png") center top repeat;
 }
 .choose .overlay {
     position: absolute;
@@ -3643,7 +3644,7 @@ footer {}
     transition: none;
 }
 .footer-static-content ul li a:hover {
-    color: #ff8400;
+    color: #fc6908;
 }
 .footer-information .info{ width:20.83%;}
 .footer-information .service{ width: 16.66%}
