@@ -34,19 +34,20 @@ abstract class Svea_WebPay_Model_Abstract extends Mage_Payment_Model_Method_Abst
      * There is no point of having the svea methods available when
      * grand total is 0
      */
-    public function isAvailable($quote = null)
-    {
-        if (!parent::isAvailable($quote)) {
-            return false;
-        }
+	 //edit by dyaln 20171215
+    // public function isAvailable($quote = null)
+    // {
+        // if (!parent::isAvailable($quote)) {
+            // return false;
+        // }
 
-        $grandTotal = (float)$quote->getGrandTotal();
-        if ($grandTotal === 0.0) {
-            return false;
-        }
+        // $grandTotal = (float)$quote->getGrandTotal();
+        // if ($grandTotal === 0.0) {
+            // return false;
+        // }
 
-        return true;
-    }
+        // return true;
+    // }
 
     public function isTest()
     {
