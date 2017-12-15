@@ -213,7 +213,12 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $address->getLastname();
 						$company = $address->getCompany();
 						$city = $address->getCity();
-						$street = $address->getStreet()['0'].' '.$address->getStreet()['1'];
+						if($address->getStreet()['1']!='' && isset($address->getStreet()['1'])){
+							$street = $address->getStreet()['0'].' '.$address->getStreet()['1'];
+						}else{
+							$street = $address->getStreet()['0'];
+						}
+						
 						$country_id = $address->getCountryId();
 						$region = $address->getRegion();
 						$postcode = $address->getPostcode();
@@ -248,7 +253,11 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $billing_new_shipping['lastname'];
 						$company = $billing_new_shipping['company'];
 						$city = $billing_new_shipping['city'];
-						$street = $billing_new_shipping['street']['0'].''.$billing_new_shipping['street']['0'];
+						if($billing_new_shipping['street']['0'] !='' && isset($billing_new_shipping['street']['1'])){
+							 $street = $billing_new_shipping['street']['0'].''.$billing_new_shipping['street']['1'];
+						}else{
+							 $street = $billing_new_shipping['street']['0'];
+						}
 						$country_id = $billing_new_shipping['country_id'];
 						$region = $billing_new_shipping['region'];
 						$postcode = $billing_new_shipping['postcode'];
@@ -283,7 +292,11 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $billing_new_shipping['lastname'];
 						$company = $billing_new_shipping['company'];
 						$city = $billing_new_shipping['city'];
-						$street = $billing_new_shipping['street']['0'].''.$billing_new_shipping['street']['0'];
+						if($billing_new_shipping['street']['1'] !='' && isset(!billing_new_shipping['street']['1'])){
+							$street = $billing_new_shipping['street']['0'].''.$billing_new_shipping['street']['1'];
+						}else{
+							$street = $billing_new_shipping['street']['0'];
+						}
 						$country_id = $billing_new_shipping['country_id'];
 						$region = $billing_new_shipping['region'];
 						$postcode = $billing_new_shipping['postcode'];
@@ -319,7 +332,11 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $new_billing['lastname'];
 						$company = $new_billing['company'];
 						$city = $new_billing['city'];
-						$street = $new_billing['street']['0'].''.$new_billing['street']['0'];
+						if($new_billing['street']['1'] !='' && isset($new_billing['street']['1'])){
+							$street = $new_billing['street']['0'].''.$new_billing['street']['1'];
+						}else{
+							$street = $new_billing['street']['0'];
+						}
 						$country_id = $new_billing['country_id'];
 						$region = $new_billing['region'];
 						$postcode = $new_billing['postcode'];
@@ -332,7 +349,11 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname_new_shipping = $new_shipping['lastname'];
 						$company_new_shipping = $new_shipping['company'];
 						$city_new_shipping = $new_shipping['city'];
-						$street_new_shipping = $new_shipping['street']['0'].''.$new_shipping['street']['0'];
+						if($new_shipping['street']['1']!='' && isset($new_shipping['street']['1'])){
+							$street_new_shipping = $new_shipping['street']['0'].''.$new_shipping['street']['1'];
+						}else{
+							$street_new_shipping = $new_shipping['street']['0'];
+						}
 						$country_id_new_shipping = $new_shipping['country_id'];
 						$region_new_shipping = $new_shipping['region'];
 						$postcode_new_shipping = $new_shipping['postcode'];
@@ -368,7 +389,11 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $new_billing['lastname'];
 						$company = $new_billing['company'];
 						$city = $new_billing['city'];
-						$street = $new_billing['street']['0'].''.$new_billing['street']['0'];
+						if($new_billing['street']['1']!='' && isset($new_billing['street']['1'])){
+							$street = $new_billing['street']['0'].''.$new_billing['street']['1'];
+						}else{
+							$street = $new_billing['street']['0'];
+						}
 						$country_id = $new_billing['country_id'];
 						$region = $new_billing['region'];
 						$postcode = $new_billing['postcode'];
@@ -381,7 +406,12 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname_new_shipping = $new_shipping['lastname'];
 						$company_new_shipping = $new_shipping['company'];
 						$city_new_shipping = $new_shipping['city'];
-						$street_new_shipping = $new_shipping['street']['0'].''.$new_shipping['street']['0'];
+						if($new_shipping['street']['1']!='' && isset($new_shipping['street']['1'])){
+							$street_new_shipping = $new_shipping['street']['0'].''.$new_shipping['street']['1'];
+						}else{
+							$street_new_shipping = $new_shipping['street']['0'];
+						}
+						
 						$country_id_new_shipping = $new_shipping['country_id'];
 						$region_new_shipping = $new_shipping['region'];
 						$postcode_new_shipping = $new_shipping['postcode'];
@@ -417,7 +447,11 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $address->getLastname();
 						$company = $address->getCompany();
 						$city = $address->getCity();
-						$street = $address->getStreet()['0'].' '.$address->getStreet()['1'];
+						if($address->getStreet()['1']!='' && isset($address->getStreet()['1'])){
+							$street = $address->getStreet()['0'].' '.$address->getStreet()['1'];
+						}else{
+							$street = $address->getStreet()['0'];
+						}
 						$country_id = $address->getCountryId();
 						$region = $address->getRegion();
 						$postcode = $address->getPostcode();
@@ -431,7 +465,11 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname_new_shipping = $new_shipping['lastname'];
 						$company_new_shipping = $new_shipping['company'];
 						$city_new_shipping = $new_shipping['city'];
-						$street_new_shipping = $new_shipping['street']['0'].''.$new_shipping['street']['0'];
+						if($new_shipping['street']['1']!='' && isset($new_shipping['street']['1'])){
+							$street_new_shipping = $new_shipping['street']['0'].''.$new_shipping['street']['1'];
+						}else{
+							$street_new_shipping = $new_shipping['street']['0'];
+						}
 						$country_id_new_shipping = $new_shipping['country_id'];
 						$region_new_shipping = $new_shipping['region'];
 						$postcode_new_shipping = $new_shipping['postcode'];
