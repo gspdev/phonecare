@@ -292,7 +292,7 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $billing_new_shipping['lastname'];
 						$company = $billing_new_shipping['company'];
 						$city = $billing_new_shipping['city'];
-						if($billing_new_shipping['street']['1'] !='' && isset(!billing_new_shipping['street']['1'])){
+						if($billing_new_shipping['street']['1'] !='' && isset($billing_new_shipping['street']['1'])){
 							$street = $billing_new_shipping['street']['0'].''.$billing_new_shipping['street']['1'];
 						}else{
 							$street = $billing_new_shipping['street']['0'];
