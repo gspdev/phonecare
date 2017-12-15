@@ -97,7 +97,7 @@ class Mage_XmlConnect_Adminhtml_Connect_UserController extends Mage_XmlConnect_C
                 } else {
                     $this->_message(
                         Mage_XmlConnect_Model_Simplexml_Message_Error::ERROR_USER_SPACE_DEFAULT,
-                        $this->__('Invalid login or password.')
+                        $this->__('invalid login or password')
                     );
                     return;
                 }

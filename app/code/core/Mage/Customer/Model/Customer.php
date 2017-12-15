@@ -173,7 +173,7 @@ class Mage_Customer_Model_Customer extends Mage_Core_Model_Abstract
             );
         }
         if (!$this->validatePassword($password)) {
-            throw Mage::exception('Mage_Core', Mage::helper('customer')->__('Invalid login or password.'),
+            throw Mage::exception('Mage_Core', Mage::helper('customer')->__('invalid login or password'),
                 self::EXCEPTION_INVALID_EMAIL_OR_PASSWORD
             );
         }

@@ -56,7 +56,7 @@ class Mage_XmlConnect_CustomerController extends Mage_XmlConnect_Controller_Acti
                     }
                     $this->_message($this->__('Authentication complete.'), self::MESSAGE_STATUS_SUCCESS);
                 } else {
-                    $this->_message($this->__('Invalid login or password.'), self::MESSAGE_STATUS_ERROR);
+                    $this->_message($this->__('invalid login or password'), self::MESSAGE_STATUS_ERROR);
                 }
             } catch (Mage_Core_Exception $e) {
                 switch ($e->getCode()) {
