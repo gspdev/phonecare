@@ -9,18 +9,18 @@ define("__ATTR_PRODUCT_STATUS_DISABLED__" , 2);
 
 
 
-$cat = Mage::getModel('catalog/category')->load(2505);
+//$cat = Mage::getModel('catalog/category')->load(2505);
 
 
 /*Returns comma separated ids*/
 //$subcats = $cat->getChildren();
-//$subcats = '2511,2512,2513,2504,2514,2515,2516,2517,2518,2519,2520,2521,2522,2523,2524';
+$subcats = '2511,2512,2513,2504,2514,2515,2516,2517,2518,2519,2520,2521,2522,2523,2524';
 //print_r($subcats);exit;
-if(!$cat->getChildren()){
-		$subcats = $cat->getEntityId();
-	}else{
-		$subcats = $cat->getChildren().','.$cat->getEntityId();
-	}
+// if(!$cat->getChildren()){
+		// $subcats = $cat->getEntityId();
+	// }else{
+		// $subcats = $cat->getChildren().','.$cat->getEntityId();
+	// }
 //Print out categories string
 #print_r($subcats);
 
@@ -126,6 +126,7 @@ foreach(explode(',',$subcats) as $subCatid){
 											   // echo   $_product->getId();
 											    $desc = $_product->getDescription();
 												$descUp = '<p>Om din iPhone inte håller laddning kan problemet vara en trasig laddningsport. Ta med dig telefonen till oss på Phonecare för en åtgärd på plats! </p><h3>Garantitiden</h3><p>3 månader</P>';
+												//$descUp = '<p>Om din cell phone inte håller laddning kan problemet vara en trasig laddningsport. Ta med dig telefonen till oss på Phonecare för en åtgärd på plats! </p><h3>Garantitiden</h3><p>3 månader</P>';
 												$update->setDescription($descUp);
 												 try {
 													 $update->save();
@@ -192,7 +193,8 @@ foreach(explode(',',$subcats) as $subCatid){
 											   $update = Mage::getModel('catalog/product')->loadByAttribute('sku',$_product->getSku());
 											   // echo   $_product->getId();
 											    $desc = $_product->getDescription();
-												$descUp = '<p>Har mikrofonen slutat fungera på din cell phone? Denna funktion kan påverka både telefonsamtal, röststyrning och inspelningar. Vänta inte med att få din mikrofon reparerad!</p>';
+												$descUp = '<p>Har mikrofonen slutat fungera på din cell iPhone? Denna funktion kan påverka både telefonsamtal, röststyrning och inspelningar. Vänta inte med att få din mikrofon reparerad!</p>';
+												//$descUp = '<p>Har mikrofonen slutat fungera på din cell phone? Denna funktion kan påverka både telefonsamtal, röststyrning och inspelningar. Vänta inte med att få din mikrofon reparerad!</p>';
 												$update->setDescription($descUp);
 												 try {
 													 $update->save();
@@ -219,8 +221,8 @@ foreach(explode(',',$subcats) as $subCatid){
 											   $update = Mage::getModel('catalog/product')->loadByAttribute('sku',$_product->getSku());
 											   // echo   $_product->getId();
 											    $desc = $_product->getDescription();
-												//$descUp = '<p>iPhones som inte är vattentäta bör inte kombineras med simning. På Phonecare erbjuder vi en fullständig diagnos service för vattenskador för att vi ska kunna se vad din mobil behöver för att kunna bli frisk och jobba som ny igen. Från att göra en noggrann torknings- och rengöringsprocess till att kontrollera varje enskild komponent i din telefon för skador.</p><br/><p>När denna process är klar kontaktar vi dig för att meddela dig om vad som behöver bytas ut, samt reparationskostnad och omställningstid. Kom ihåg att om du inte skulle vilja fortsätta med reparationen eller om vi inte kan lösa problemet, så debiteras du aldrig för servicekostnader!</p>';
-												$descUp = '<p>Mobile phone som inte är vattentäta bör inte kombineras med simning. På Phonecare erbjuder vi en fullständig diagnos service för vattenskador för att vi ska kunna se vad din mobil behöver för att kunna bli frisk och jobba som ny igen. Från att göra en noggrann torknings- och rengöringsprocess till att kontrollera varje enskild komponent i din telefon för skador.</p><br/><p>När denna process är klar kontaktar vi dig för att meddela dig om vad som behöver bytas ut, samt reparationskostnad och omställningstid. Kom ihåg att om du inte skulle vilja fortsätta med reparationen eller om vi inte kan lösa problemet, så debiteras du aldrig för servicekostnader!</p>';
+												$descUp = '<p>iPhones som inte är vattentäta bör inte kombineras med simning. På Phonecare erbjuder vi en fullständig diagnos service för vattenskador för att vi ska kunna se vad din mobil behöver för att kunna bli frisk och jobba som ny igen. Från att göra en noggrann torknings- och rengöringsprocess till att kontrollera varje enskild komponent i din telefon för skador.</p><br/><p>När denna process är klar kontaktar vi dig för att meddela dig om vad som behöver bytas ut, samt reparationskostnad och omställningstid. Kom ihåg att om du inte skulle vilja fortsätta med reparationen eller om vi inte kan lösa problemet, så debiteras du aldrig för servicekostnader!</p>';
+												//$descUp = '<p>Mobile phone som inte är vattentäta bör inte kombineras med simning. På Phonecare erbjuder vi en fullständig diagnos service för vattenskador för att vi ska kunna se vad din mobil behöver för att kunna bli frisk och jobba som ny igen. Från att göra en noggrann torknings- och rengöringsprocess till att kontrollera varje enskild komponent i din telefon för skador.</p><br/><p>När denna process är klar kontaktar vi dig för att meddela dig om vad som behöver bytas ut, samt reparationskostnad och omställningstid. Kom ihåg att om du inte skulle vilja fortsätta med reparationen eller om vi inte kan lösa problemet, så debiteras du aldrig för servicekostnader!</p>';
 												$update->setDescription($descUp);
 												 try {
 													 $update->save();
@@ -234,8 +236,98 @@ foreach(explode(',',$subcats) as $subCatid){
 											   $update = Mage::getModel('catalog/product')->loadByAttribute('sku',$_product->getSku());
 											   // echo   $_product->getId();
 											    $desc = $_product->getDescription();
+												$descUp = '<p>Till alla iPhones har vi olika kvaliteter när det kommer till skärmbyte, detta för att man ska få frihet att välja kvalitet själv samt för att alla ska ha möjlighet att reparera sina telefoner. Det som skiljer skärmarna åt är ljusstyrka, skärpa på bild, ömtålighet, touch känsla och tjocklek på skärm samt garantitid.</p><br/><p>Det är lätt hänt att mobiltelefonen åker i golvet. I vissa fall är det glaset som går sönder, i andra fall går även LCD-displayen sönder. I båda fallen behöver både glaset och displayen bytas ut. Kom in redan idag och få tillbaka din telefon medan du väntar!</p><br/><h3>Garantitiden</h3><p>Kvalitet (Original LCD): 12 månaders garanti</p><p>Kvalitet (Ersättnings-LCD): 3 månaders garanti</p>';
+												//$descUp = '<p>Till alla cell phone har vi olika kvaliteter när det kommer till skärmbyte, detta för att man ska få frihet att välja kvalitet själv samt för att alla ska ha möjlighet att reparera sina telefoner. Det som skiljer skärmarna åt är ljusstyrka, skärpa på bild, ömtålighet, touch känsla och tjocklek på skärm samt garantitid.</p><br/><p>Det är lätt hänt att mobiltelefonen åker i golvet. I vissa fall är det glaset som går sönder, i andra fall går även LCD-displayen sönder. I båda fallen behöver både glaset och displayen bytas ut. Kom in redan idag och få tillbaka din telefon medan du väntar!</p><br/><h3>Garantitiden</h3><p>Kvalitet (Original LCD): 12 månaders garanti</p><p>Kvalitet (Ersättnings-LCD): 3 månaders garanti</p>';
+												$update->setDescription($descUp);
+												 try {
+													 $update->save();
+													 echo "<pre>".$_product->getId(). " successfully</pre>";
+												} catch (Exception $e) {
+													$e->getMessage();
+												}
+										   }
+										   
+										   if($attribute->getFrontend()->getValue($_product)=="Replacing sensor"){
+											   $update = Mage::getModel('catalog/product')->loadByAttribute('sku',$_product->getSku());
+											   // echo   $_product->getId();
+											    $desc = $_product->getDescription();
 												//$descUp = '<p>Till alla iPhones har vi olika kvaliteter när det kommer till skärmbyte, detta för att man ska få frihet att välja kvalitet själv samt för att alla ska ha möjlighet att reparera sina telefoner. Det som skiljer skärmarna åt är ljusstyrka, skärpa på bild, ömtålighet, touch känsla och tjocklek på skärm samt garantitid.</p><br/><p>Det är lätt hänt att mobiltelefonen åker i golvet. I vissa fall är det glaset som går sönder, i andra fall går även LCD-displayen sönder. I båda fallen behöver både glaset och displayen bytas ut. Kom in redan idag och få tillbaka din telefon medan du väntar!</p><br/><h3>Garantitiden</h3><p>Kvalitet (Original LCD): 12 månaders garanti</p><p>Kvalitet (Ersättnings-LCD): 3 månaders garanti</p>';
-												$descUp = '<p>Till alla cell phone har vi olika kvaliteter när det kommer till skärmbyte, detta för att man ska få frihet att välja kvalitet själv samt för att alla ska ha möjlighet att reparera sina telefoner. Det som skiljer skärmarna åt är ljusstyrka, skärpa på bild, ömtålighet, touch känsla och tjocklek på skärm samt garantitid.</p><br/><p>Det är lätt hänt att mobiltelefonen åker i golvet. I vissa fall är det glaset som går sönder, i andra fall går även LCD-displayen sönder. I båda fallen behöver både glaset och displayen bytas ut. Kom in redan idag och få tillbaka din telefon medan du väntar!</p><br/><h3>Garantitiden</h3><p>Kvalitet (Original LCD): 12 månaders garanti</p><p>Kvalitet (Ersättnings-LCD): 3 månaders garanti</p>';
+												$descUp = '<p> Är det störande att prata i telefon när sensor inte funkar som det ska. Ja då ska du komma in till oss på Phonecare vi löser problemet på 10 minuter</p>';
+												$update->setDescription($descUp);
+												 try {
+													 $update->save();
+													 echo "<pre>".$_product->getId(). " successfully</pre>";
+												} catch (Exception $e) {
+													$e->getMessage();
+												}
+										   }
+										   
+										   if($attribute->getFrontend()->getValue($_product)=="powerbutton"){
+											   $update = Mage::getModel('catalog/product')->loadByAttribute('sku',$_product->getSku());
+											   // echo   $_product->getId();
+											    $desc = $_product->getDescription();
+												//$descUp = '<p>Till alla iPhones har vi olika kvaliteter när det kommer till skärmbyte, detta för att man ska få frihet att välja kvalitet själv samt för att alla ska ha möjlighet att reparera sina telefoner. Det som skiljer skärmarna åt är ljusstyrka, skärpa på bild, ömtålighet, touch känsla och tjocklek på skärm samt garantitid.</p><br/><p>Det är lätt hänt att mobiltelefonen åker i golvet. I vissa fall är det glaset som går sönder, i andra fall går även LCD-displayen sönder. I båda fallen behöver både glaset och displayen bytas ut. Kom in redan idag och få tillbaka din telefon medan du väntar!</p><br/><h3>Garantitiden</h3><p>Kvalitet (Original LCD): 12 månaders garanti</p><p>Kvalitet (Ersättnings-LCD): 3 månaders garanti</p>';
+												$descUp = '<p>Funkar inte ström knappen på din mobil? inga problem för på Phonecare löser vi det och dessutom på samma dag du lämnar in mobil på.</p>';
+												$update->setDescription($descUp);
+												 try {
+													 $update->save();
+													 echo "<pre>".$_product->getId(). " successfully</pre>";
+												} catch (Exception $e) {
+													$e->getMessage();
+												}
+										   }
+										   
+										   if($attribute->getFrontend()->getValue($_product)=="Replacement of home button"){
+											   $update = Mage::getModel('catalog/product')->loadByAttribute('sku',$_product->getSku());
+											   // echo   $_product->getId();
+											    $desc = $_product->getDescription();
+												//$descUp = '<p>Till alla iPhones har vi olika kvaliteter när det kommer till skärmbyte, detta för att man ska få frihet att välja kvalitet själv samt för att alla ska ha möjlighet att reparera sina telefoner. Det som skiljer skärmarna åt är ljusstyrka, skärpa på bild, ömtålighet, touch känsla och tjocklek på skärm samt garantitid.</p><br/><p>Det är lätt hänt att mobiltelefonen åker i golvet. I vissa fall är det glaset som går sönder, i andra fall går även LCD-displayen sönder. I båda fallen behöver både glaset och displayen bytas ut. Kom in redan idag och få tillbaka din telefon medan du väntar!</p><br/><h3>Garantitiden</h3><p>Kvalitet (Original LCD): 12 månaders garanti</p><p>Kvalitet (Ersättnings-LCD): 3 månaders garanti</p>';
+												$descUp = '<p>Trasig hemknapp kan vara vdldigt irriterande se kom in till oss och fe den lagat pe 15 minuter bara. </p>';
+												$update->setDescription($descUp);
+												 try {
+													 $update->save();
+													 echo "<pre>".$_product->getId(). " successfully</pre>";
+												} catch (Exception $e) {
+													$e->getMessage();
+												}
+										   }
+										   
+										   if($attribute->getFrontend()->getValue($_product)=="wifi"){
+											   $update = Mage::getModel('catalog/product')->loadByAttribute('sku',$_product->getSku());
+											   // echo   $_product->getId();
+											    $desc = $_product->getDescription();
+												//$descUp = '<p>Till alla iPhones har vi olika kvaliteter när det kommer till skärmbyte, detta för att man ska få frihet att välja kvalitet själv samt för att alla ska ha möjlighet att reparera sina telefoner. Det som skiljer skärmarna åt är ljusstyrka, skärpa på bild, ömtålighet, touch känsla och tjocklek på skärm samt garantitid.</p><br/><p>Det är lätt hänt att mobiltelefonen åker i golvet. I vissa fall är det glaset som går sönder, i andra fall går även LCD-displayen sönder. I båda fallen behöver både glaset och displayen bytas ut. Kom in redan idag och få tillbaka din telefon medan du väntar!</p><br/><h3>Garantitiden</h3><p>Kvalitet (Original LCD): 12 månaders garanti</p><p>Kvalitet (Ersättnings-LCD): 3 månaders garanti</p>';
+												$descUp = '<p>Vi alla vet att en mobil utan internet är inget roligt. Kom in till oss på Phonecare så lagar vi din mobil på samma dag.</p>';
+												$update->setDescription($descUp);
+												 try {
+													 $update->save();
+													 echo "<pre>".$_product->getId(). " successfully</pre>";
+												} catch (Exception $e) {
+													$e->getMessage();
+												}
+										   }
+										   
+										   if($attribute->getFrontend()->getValue($_product)=="Soldering in the motherboard"){
+											   $update = Mage::getModel('catalog/product')->loadByAttribute('sku',$_product->getSku());
+											   // echo   $_product->getId();
+											    $desc = $_product->getDescription();
+												//$descUp = '<p>Till alla iPhones har vi olika kvaliteter när det kommer till skärmbyte, detta för att man ska få frihet att välja kvalitet själv samt för att alla ska ha möjlighet att reparera sina telefoner. Det som skiljer skärmarna åt är ljusstyrka, skärpa på bild, ömtålighet, touch känsla och tjocklek på skärm samt garantitid.</p><br/><p>Det är lätt hänt att mobiltelefonen åker i golvet. I vissa fall är det glaset som går sönder, i andra fall går även LCD-displayen sönder. I båda fallen behöver både glaset och displayen bytas ut. Kom in redan idag och få tillbaka din telefon medan du väntar!</p><br/><h3>Garantitiden</h3><p>Kvalitet (Original LCD): 12 månaders garanti</p><p>Kvalitet (Ersättnings-LCD): 3 månaders garanti</p>';
+												$descUp = '<p>Är det så att du har en ovanlig skada på mobil. På phonecare hittar vi problemet. Du får all information du behöver veta om din mobil. Våra tekniker är kunniga och säkra inom sitt område, och kan i flera fall reparera skador i moderkortet</p>';
+												$update->setDescription($descUp);
+												 try {
+													 $update->save();
+													 echo "<pre>".$_product->getId(). " successfully</pre>";
+												} catch (Exception $e) {
+													$e->getMessage();
+												}
+										   }
+										   
+										   if($attribute->getFrontend()->getValue($_product)=="Replacement of SIM card reader"){
+											   $update = Mage::getModel('catalog/product')->loadByAttribute('sku',$_product->getSku());
+											   // echo   $_product->getId();
+											    $desc = $_product->getDescription();
+												//$descUp = '<p>Till alla iPhones har vi olika kvaliteter när det kommer till skärmbyte, detta för att man ska få frihet att välja kvalitet själv samt för att alla ska ha möjlighet att reparera sina telefoner. Det som skiljer skärmarna åt är ljusstyrka, skärpa på bild, ömtålighet, touch känsla och tjocklek på skärm samt garantitid.</p><br/><p>Det är lätt hänt att mobiltelefonen åker i golvet. I vissa fall är det glaset som går sönder, i andra fall går även LCD-displayen sönder. I båda fallen behöver både glaset och displayen bytas ut. Kom in redan idag och få tillbaka din telefon medan du väntar!</p><br/><h3>Garantitiden</h3><p>Kvalitet (Original LCD): 12 månaders garanti</p><p>Kvalitet (Ersättnings-LCD): 3 månaders garanti</p>';
+												$descUp = '<p>Har du dålig täckning eller ingen täckning överhuvetaget? Du kan vara lugn kom in till oss på Phonecare så löser vi det åt dig.</p>';
 												$update->setDescription($descUp);
 												 try {
 													 $update->save();
