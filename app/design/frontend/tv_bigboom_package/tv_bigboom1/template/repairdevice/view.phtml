@@ -37,8 +37,33 @@
         <li>
             <label for="ShippingMethod" class="required"><em></em><?php echo $this->__('Shipping Method:') ?></label>
             <div class="input-box">
-                <?php echo $this->getShippingMethod(); ?>
+                <h4><?php echo $this->getShippingMethod(); ?></h4>
             </div>
+			<?php 
+			   $getAddressIds = $this->getAddress($this->getRepairdevice()->getRepairdeviceId());
+			   foreach($getAddressIds as $itemId):?>
+			     <?php $address = Mage::getModel('repairdevice/repairaddress')->load($itemId); ?>
+				 <?php if($address->getTypeAddress()==0): ?>
+				    <div>
+				       <h6><?php echo $this->__('Billing Adress'); ?>:</h6>
+					   Country: &nbsp; &nbsp;<?php echo $address->getCountryId(); ?>
+					   Street: &nbsp; &nbsp;<?php echo $address->getStreet(); ?>
+					   City: &nbsp; &nbsp;<?php echo $address->getCity(); ?>
+					   Postcode: &nbsp; &nbsp;<?php echo $address->getPostcode(); ?>
+					   Telephone: &nbsp; &nbsp;<?php echo $address->getTelephone(); ?>
+                    </div>
+				 <?php else:?>
+				    <div>
+				       <h6><?php echo $this->__('Shipping Adress'); ?>:</h6>
+					   Country: &nbsp; &nbsp;<?php echo $address->getCountryId(); ?>
+					   Street: &nbsp; &nbsp;<?php echo $address->getStreet(); ?>
+					   City: &nbsp; &nbsp;<?php echo $address->getCity(); ?>
+					   Postcode: &nbsp; &nbsp;<?php echo $address->getPostcode(); ?>
+					   Telephone: &nbsp; &nbsp;<?php echo $address->getTelephone(); ?>
+				    </div>
+				 <?php endif;?>
+				  
+               <?php endforeach; ?>			
         </li>
 		<li>
 		<label for="ProductList" class="required"><em></em><?php echo $this->__('Repair Device Product:') ?>&nbsp;&nbsp;</label>

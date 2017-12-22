@@ -74,6 +74,16 @@ class Dylan_Repairdevice_Block_Repairdevice extends Mage_Core_Block_Template
 		 return $productIds;
 		  
 	}
+	public function getAddress($repairId)
+	{
+		$collection = Mage::getModel('repairdevice/repairaddress')
+		  ->getCollection()
+		  ->addAttributeToFilter('repair_id' , $repairId)->getData();
+		  $Ids = array_column($collection, 'id');
+		  
+		 return $Ids;
+		  
+	}
 	
 	public function getTitle()
     {
