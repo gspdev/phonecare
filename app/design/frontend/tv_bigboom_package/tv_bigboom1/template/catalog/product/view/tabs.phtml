@@ -53,7 +53,7 @@ Varien.Tabs.prototype = {
 
   initTab: function(el) {
       el.href = 'javascript:void(0)';
-      if ($(el.parentNode).hasClassName('active')) {
+      if ($(el.parentNode).hasClassName('active') && document.body.offsetWidth > 767) {
         this.showContent(el);
       }
       el.observe('click', this.showContent.bind(this, el));
@@ -65,6 +65,7 @@ Varien.Tabs.prototype = {
       var contents = $(el.id+'_contents');
       if (el==li) {
         el.addClassName('active');
+        contents.addClassName("active");
         contents.show();
       } else {
         el.removeClassName('active');
@@ -72,7 +73,7 @@ Varien.Tabs.prototype = {
       }
     });
   }
-}
+};
 new Varien.Tabs('.product-tabs');
 //]]>
 </script>

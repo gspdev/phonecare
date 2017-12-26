@@ -87,7 +87,7 @@
                 </ul>
             </div>
             <div class="row">
-                <div class="col-xs-2 col-sm-2 col-md-6 col-lg-6 nav-inner">
+                <div class="col-xs-4 col-sm-2 col-md-6 col-lg-6 nav-inner">
                     <!--vmegamenu-menu-->
                     <div class="vmegamenu-menu">
                         <div class="block-position">
@@ -101,10 +101,13 @@
                     </div>
                     <?php echo $this->getChildHtml('topMenu') ?>
                 </div>
-                <div class="col-xs-7 col-sm-7 col-md-4 col-lg-4 search-box">
+                <div class="col-xs-4 search-trigger visible-xs hidden-md">
+                    <div class="mobile-img"></div>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4 search-box">
                     <?php echo $this->getChildHtml('topSearch') ?>
                 </div>
-                <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 f-right search-right-box">
+                <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 f-right search-right-box">
                     <div class="search-right clear_fix">
                         <div class="head-Cart f-right">
                             <a id="cart_bg" href="<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>"></a>
@@ -123,6 +126,30 @@
     <?php echo $this->getChildHtml('topContainer'); ?>
 
 </header>
+<script type="text/javascript">
+    jQuery(document).ready(function($){
+        $(".search-trigger").click(function () {
+            if($("#navbar-inner").hasClass("navbar-active")){
+                $("#navbar-inner .btn-navbar").click();
+            }
+            $(".nav-container-box .search-box").slideToggle();
+        });
+        $("#navbar-inner .btn-navbar").click(function () {
+            $(".nav-container-box .search-box").hide();
+        });
+        $("#cart_bg_mobile").click(function(){
+            if(!$("#mini_cart_block .top-cart-content").hasClass("show")){
+                $(".nav-container-box .search-box").hide();
+                if($("#navbar-inner").hasClass("navbar-active")){
+                    $("#navbar-inner .btn-navbar").click();
+                }
+                $("#mini_cart_block .top-cart-content").addClass("show");
+            }else{
+                $("#mini_cart_block .top-cart-content").removeClass("show");
+            }
+        });
+    });
+</script>
 <div id="headerHeight" style="opacity: 0;z-index: 0;background: none;"></div>
 
 

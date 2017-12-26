@@ -38,7 +38,7 @@ if ( count($this->getGalleryImages()) > 0 ): ?>
 	?>
 		<div class="more-views more-images">
 			<h2><?php echo $this->__('More Views') ?></h2>
-			<ul>
+			<ul class="img-list">
 			<?php foreach ($this->getGalleryImages() as $_image): ?>
 				<li>
 					<a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(600,600); ?>" class="cloud-zoom-gallery" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>" name="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize($_lightbox_w, $_lightbox_h); ?>"
