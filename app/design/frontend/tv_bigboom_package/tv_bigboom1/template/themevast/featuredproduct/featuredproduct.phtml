@@ -242,11 +242,6 @@ $_featureImgUrl = Mage::getBaseUrl();
         });
     </script>
 </div>
-
-<div class="review_block">
-    <div class="bx-title">
-        <h2>Customer Reviews</h2>
-    </div>
 <?php
 		$reviews = Mage::getModel('review/review')->getResourceCollection();
 
@@ -261,6 +256,11 @@ $_featureImgUrl = Mage::getBaseUrl();
 		  ->load();
 
 	?>
+<?php if($reviews->getData()): ?>	
+<div class="review_block">
+    <div class="bx-title">
+        <h2>Customer Reviews</h2>
+    </div>
 							
     <div class="review_box">
         <ul class="review_list clearfix">
@@ -306,6 +306,7 @@ $_featureImgUrl = Mage::getBaseUrl();
         </ul>
     </div>
 </div>
+<?php endif;?>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
         (function(selector){
