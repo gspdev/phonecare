@@ -1,6 +1,7 @@
 /**
 * little chubby , responsive
 */
+.mobile-direction{display: none;}
 @media only screen and (max-width: 800px) and (min-width: 680px){
 	.choose .innerContainer .chooseSlide #why-choose-pager .pager {
 		width: 15%;
@@ -8,11 +9,9 @@
 }
 @media (max-width: 499px){
 	#category-model li.item{width: 50%;padding: 0 2%;}
-	.search-right .head-Cart #cart_bg{display: none;}
-	.search-right .head-Cart #cart_bg_mobile{display: block;}
 }
 @media screen and(min-width: 500px){
-	.search-right .head-Cart #cart_bg_mobile{display: none;}
+	/*.search-right .head-Cart #cart_bg_mobile{display: none;}*/
 }
 @media (min-width: 500px) and (max-width: 800px){
 	#category-model li.item{width: 33%;padding: 0 2%;}
@@ -51,7 +50,7 @@
 	.nav-container-box{height: auto!important;}
 	.form-search .dd-select{display:none!important}
 	.search-input-box{margin:0;}
-	.searchautocomplete .nav-search-in{}
+	.searchautocomplete .nav-search-in{display: none;}
 	.form-search input.input-text{width:100%;padding-right:72px;}
 	.page-header-content .search-right-box{height:initial;padding:0 15px;margin-top:10px;}
 	.search-right> div{margin:0;}
@@ -246,7 +245,6 @@
 	}
 	.footer-static-content{display: none;}
 	.footer-static-content.active{display: block;}
-	.form-list li.wide input.input-text{width: 254px;}
 	.products-list .product-images .repair,
 	.products-grid li.item .item-inner .repair{width: 60px;height: 60px;}
 	.review_block{margin: 20px 0;display: none;}
@@ -260,7 +258,7 @@
 	/*product detail img*/
 	.img-list{display: none;}
 	.product-img-box{position: relative;}
-	.mobile-direction{}
+	.mobile-direction{display: block;}
 	.mobile-direction a{
 		margin: -40px 0 0;width: 36px;height: 58px;
 		-ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=30)";filter: alpha(opacity=30);opacity: 0.3;
@@ -301,10 +299,10 @@
 	#myModal.feature .content-popup-body .half{width: 100%;}
 	/*mobile menu*/
 	.nav-container-box .search-box{display: none;position: absolute;z-index: 10086;
-	bottom:-50px;width: 100%;height:50px;background: rgba(255,255,255,0.8);}
+	bottom:-50px;width: 100%;height:50px;background: rgba(0,0,0,0.1);}
 	.form-search{margin: 5px 0 0 0;background: #fff;}
 	.search-trigger{color:#fff;}
-	.nav-container-box .nav-inner,.search-trigger,.search-right-box{background-color: #333333/*#fafafa*/;}
+	.nav-container-box .nav-inner,.search-trigger,.search-right-box{background-color: #333333;z-index: 10087;}
 	.nav-container-box .nav-inner .nav-container{display:block;float: none;margin:0 auto;}
 	/*menu btn*/
 	#navbar-inner{background: none;}
@@ -320,7 +318,13 @@
 	.mini-products-list .product-details .sku{width: 50%;}
 	.search-right .head-Cart:hover .top-cart-content{display: none;}
 	.search-right .head-Cart .top-cart-content{display:none;top:48px;right: -60px;}
-	.search-right .head-Cart .top-cart-content.show{display: block;}
+	.breadcrumbs,.searchindex-related-terms{padding: 0 0 0 20px;}
+	#poll-answers input.radio, #shipping-store input.radio{margin-right: 20%!important;;}
+	.form-list .field,.form-list .input-box,.form-list input.input-text,.form-list li.wide input.input-text,.form-list select{width: 100%;}
+
+	.search-right .head-Cart #cart_bg{display: none;}
+	.search-right .head-Cart #cart_bg_mobile{display: block;}
+	.product-view .product-img-box .product-image{margin: 0 auto;}
 }
 @media (max-width: 500px) {
 	.choose .innerContainer .chooseSlide #why-choose-pager .pager{width: 35%;}
@@ -362,6 +366,8 @@
 	.products-grid li.item .item-inner{padding: 0 10px;}
 	.featuredBox .products-grid .stock_box>span.text{display: none;}
 	.products-list .stock_box, .products-grid .stock_box {margin: 6px 0 0;}
+	.navbar{margin: 10px 0 0 0;}
+
 }
 @media (max-width: 991px){
 	.header-left.text-right .social{display: none;}
@@ -411,6 +417,8 @@
 }
 @media (min-width:768px){
 	.drop-currency .currency-trigger .sub-currency{left:initial;right:0;}
+	.search-right .head-Cart #cart_bg{display: block;}
+	.search-right .head-Cart #cart_bg_mobile{display: none;}
 }
 @media (max-width: 420px){
 	.featuredBox .products-grid .stock_box>span.text{display: none;}

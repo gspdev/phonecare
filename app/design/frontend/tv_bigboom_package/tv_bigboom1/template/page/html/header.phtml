@@ -124,30 +124,30 @@
 		</div>
 	</div>
     <?php echo $this->getChildHtml('topContainer'); ?>
-
 </header>
 <script type="text/javascript">
     jQuery(document).ready(function($){
+        //seach-trigger
         $(".search-trigger").click(function () {
             if($("#navbar-inner").hasClass("navbar-active")){
                 $("#navbar-inner .btn-navbar").click();
             }
             $(".nav-container-box .search-box").slideToggle();
         });
+        //click menu and hide seach-box
         $("#navbar-inner .btn-navbar").click(function () {
             $(".nav-container-box .search-box").hide();
         });
+
         $("#cart_bg_mobile").click(function(){
-            if(!$("#mini_cart_block .top-cart-content").hasClass("show")){
-                $(".nav-container-box .search-box").hide();
-                if($("#navbar-inner").hasClass("navbar-active")){
-                    $("#navbar-inner .btn-navbar").click();
-                }
-                $("#mini_cart_block .top-cart-content").addClass("show");
-            }else{
-                $("#mini_cart_block .top-cart-content").removeClass("show");
-            }
+            $("#mini_cart_block .top-cart-content").toggle();
         });
+        /*$(document).click(function (e) {
+            if ($(e.target).hasClass("mini-cart")) {
+                $("#mini_cart_block .top-cart-content").removeClass("show");
+                $("#cart_bg_mobile").removeClass("mini-cart");
+            }
+        });*/
     });
 </script>
 <div id="headerHeight" style="opacity: 0;z-index: 0;background: none;"></div>

@@ -911,10 +911,10 @@ box-sizing:content-box;}
     display: block;
     width:60px;
     height:60px;
-    background-image: url("../images/header/cart.png");
     background-repeat: no-repeat;
     background-position: 10px 12px;
 }
+.search-right .head-Cart #cart_bg{ background-image: url("../images/header/cart.png");}
 .search-right .head-Cart #cart_bg_mobile{display: none;}
 .search-right .head-Cart .cartNum {
           display: block;
