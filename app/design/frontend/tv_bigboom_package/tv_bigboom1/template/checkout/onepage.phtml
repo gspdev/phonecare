@@ -58,3 +58,20 @@
     );
 //]]>
 </script>
+<script type="text/javascript">
+    jQuery(document).ready(function($){
+        hideAllImg();
+       $(".sp-methods").delegate("input",'click',function(){
+            hideAllImg();
+           if($(this).attr('id') == 'p_method_svea_cardpayment'){
+               $(".svea-payment-logos").show();
+           }else if($(this).attr('id') == 'p_method_banktransfer'){
+               $("#payment_form_banktransfer").show();
+           }
+       });
+       function hideAllImg() {
+            $(".svea-payment-logos").hide();
+            $("#payment_form_banktransfer").hide();
+       }
+    });
+</script>
