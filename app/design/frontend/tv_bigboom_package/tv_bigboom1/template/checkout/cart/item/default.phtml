@@ -205,7 +205,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <?php endif; ?>
     <?php endif; ?>
     <td class="product-cart-actions" data-rwd-label="<?php echo $this->__('Qty'); ?>">
-	   <p>Max quantity: <?php
+	   <?php
 		   $productId =  $this->escapeHtml($_item->getProductId());
 		   $_productqty = Mage::getModel('catalog/product')->load($productId);
 		   
@@ -215,10 +215,10 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
 			if($manage_stock==1){
 				$cartQty = (int)Mage::getModel('cataloginventory/stock_item')
                 ->loadByProduct($_productqty)->getQty();
-			    echo $cartQty; 
+			    echo '<p>Max quantity: '.$cartQty.'</p>';
 			}	
 		   	
-		 ?></p>
+		 ?>
 		<input type="button" value="-" class="qtyBtn qtyReduce"/>
         <input type="text" pattern="\d*" name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="4" title="<?php echo $this->__('Qty') ?>" class="input-text qty" maxlength="12" />
 		<input type="button" value="+" class="qtyBtn qtyAdd">
