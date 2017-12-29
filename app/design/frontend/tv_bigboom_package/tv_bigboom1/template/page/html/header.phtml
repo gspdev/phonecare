@@ -111,7 +111,7 @@
                     <div class="search-right clear_fix">
                         <div class="head-Cart f-right">
                             <a id="cart_bg" href="<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>"></a>
-                            <a id="cart_bg_mobile" href="javascript:void(0)"></a>
+                            <p id="cart_bg_mobile"></p>
                             <div class="header-cart-mini">
                                 <div class="topcart-mini-container">
                                     <?php echo $this->getChildHtml('top_cart_mini') ?>
@@ -129,24 +129,34 @@
     jQuery(document).ready(function($){
         //seach-trigger
         $(".search-trigger").click(function () {
-            if($("#navbar-inner").hasClass("navbar-active")){
-                $("#navbar-inner .btn-navbar").click();
+            if($("#navbar-inner").hasClass("navbar-active")){   //menu active
+                $("#navbar-inner .btn-navbar").click(); //set menu hide
+            }
+            if($("#mini_cart_block .top-cart-content").hasClass("cart-active")){ //cart active
+                $("#mini_cart_block .top-cart-content").removeClass("cart-active");//set cart hide
             }
             $(".nav-container-box .search-box").slideToggle();
         });
-        //click menu and hide seach-box
+        //click menu , hide seach-box and mini-cart
         $("#navbar-inner .btn-navbar").click(function () {
             $(".nav-container-box .search-box").hide();
+            $("#mini_cart_block .top-cart-content").removeClass("cart-active");
         });
-
+        //click cart
         $("#cart_bg_mobile").click(function(){
-            $("#mini_cart_block .top-cart-content").toggle();
+            if($("#navbar-inner").hasClass("navbar-active")){   //menu active
+                $("#navbar-inner .btn-navbar").click(); //set menu hide
+            }
+            $(".nav-container-box .search-box").hide();
+            var $cart_content = $("#mini_cart_block .top-cart-content");
+            if(!$cart_content.hasClass("cart-active")){
+                $cart_content.addClass("cart-active");
+            }else{
+                $cart_content.removeClass("cart-active");
+            }
         });
         /*$(document).click(function (e) {
-            if ($(e.target).hasClass("mini-cart")) {
-                $("#mini_cart_block .top-cart-content").removeClass("show");
-                $("#cart_bg_mobile").removeClass("mini-cart");
-            }
+            if ($(e.target).hasClass("unselected")) {}
         });*/
     });
 </script>
