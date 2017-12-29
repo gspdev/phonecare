@@ -88,7 +88,7 @@ class Themevast_Ajaxcart_AjaxcartController extends Mage_Checkout_CartController
             } else {
                 $messages = array_unique(explode("\n", $e->getMessage()));
                 foreach ($messages as $message) {
-                    $msg .= $message . '<br/>';
+                    $msg .= $message;
                 }
             }
             $ajaxData['status'] = 0;
