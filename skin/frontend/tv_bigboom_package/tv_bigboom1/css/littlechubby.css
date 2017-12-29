@@ -72,7 +72,9 @@
 	.icon-new, .icon-sale{right:0;}
 	.searchautocomplete .searchautocomplete-placeholder{left:0;min-width:initial;max-width:initial;}
 	/*megamenu*/
-	.mobilemenu a{text-transform:initial;}
+	.mobilemenu a{text-transform:initial;margin:0;padding: 0 15px;}
+	.mobilemenu li.level0.active>a{background-color:#adadad;}
+	.mobilemenu li.level1.active>a{background-color:#dadada;}
 	.banner-content1-wrapper{display:none;}
 	.form-search input.input-text{/*height:30px;line-height:30px;*/}
 	.form-search button.button{/*height:30px;line-height:30px;*/overflow:hidden!important;}
