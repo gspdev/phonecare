@@ -11,7 +11,7 @@ $sql = "SELECT a.entity_id,a.sku,b.`value` as status,b.attribute_id FROM "
     . __TABLE_PRODUCT__." a"
     ." LEFT JOIN ".__TABLE_PRODUCT_INT__." b ON(a.entity_id=b.entity_id)"
     ." WHERE b.attribute_id=".__ATTR_PRODUCT_STATUS__
-    //." AND a.entity_id=1920"
+    ." AND b.value=".__ATTR_PRODUCT_STATUS_DISABLED__
     ." ORDER BY entity_id ASC";
 
 echo $sql . "</p>";
