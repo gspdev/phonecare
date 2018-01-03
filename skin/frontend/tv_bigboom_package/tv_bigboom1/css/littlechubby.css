@@ -340,6 +340,11 @@
 		-o-transition: all 0.6s ease;
 	}
 	.products-grid li.item .ratings{display: none;}
+	#shopping-cart-table .cart-footer-actions button.button span span{padding: 10px 5px;}
+	#checkout-step-login .col2-set .col-1{padding: 0;}
+	#opc-login h3{height: 37px;display:block; }
+	#checkout-step-login #onepage-guest-register-button{margin:20px 0 0 0;}
+	#login-form .validation-advice{display: none;}
 }
 @media (max-width: 500px) {
 	.choose .innerContainer .chooseSlide #why-choose-pager .pager{width: 35%;}
