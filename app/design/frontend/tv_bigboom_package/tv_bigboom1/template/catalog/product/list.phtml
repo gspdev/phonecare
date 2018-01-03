@@ -205,7 +205,16 @@ $baseCategoryId = 2502;
                                  src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
                         <?php endif; ?>
                     <?php else: ?>
-								<?php if($_product->getRepairPart()): ?>
+							<?php  
+								$cats = $_product->getCategoryIds();
+								foreach ($cats as $category_id) {
+									
+										   $_cat = Mage::getModel('catalog/category')->load($category_id);
+										   $echoId = Mage::getModel('catalog/category')->load($_cat->getParentId());
+										  // echo $echoId->getParentId();
+								}  
+							?>
+								<?php if($_product->getRepairPart()&& $echoId->getParentId()== $baseCategoryId): ?>
 									 <img class="repair" src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
 								<?php endif;?>										
                     <?php endif; ?>
