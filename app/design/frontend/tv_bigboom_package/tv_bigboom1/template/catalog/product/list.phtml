@@ -58,12 +58,12 @@ $baseCategoryId = 2502;
 						  <?php if (Mage::registry('current_category')): ?>
 								<?php
 								$_categoryParentIdOne = Mage::getModel('catalog/category')->load(Mage::registry('current_category')->getParentId());
-								// $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+								 $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
 								//print_r($_category);exit;
 								//echo $_categoryParentIdOne->getParentId();
 
 								?>
-								<?php if ($_categoryParentIdOne->getParentId() == $baseCategoryId): ?>
+								 <?php if (($_categoryParentIdOne->getParentId() == $baseCategoryId) || ($_categoryParentIdTop->getParentId()==$baseCategoryId)): ?>
 									<img class="repair"
 										 src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
 								<?php endif; ?>
@@ -110,12 +110,12 @@ $baseCategoryId = 2502;
                                         <?php if (Mage::registry('current_category')): ?>
 												<?php
 												$_categoryParentIdOne = Mage::getModel('catalog/category')->load(Mage::registry('current_category')->getParentId());
-												// $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+												 $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
 												//print_r($_category);exit;
 												//echo $_categoryParentIdOne->getParentId();
 											   
 												?>
-												<?php if ($_categoryParentIdOne->getParentId() == $baseCategoryId): ?>
+												 <?php if (($_categoryParentIdOne->getParentId() == $baseCategoryId) || ($_categoryParentIdTop->getParentId()==$baseCategoryId)): ?>
 													<span class="quality"
 														  data-quality="100">
 														<em class="range"></em>
@@ -195,12 +195,12 @@ $baseCategoryId = 2502;
                     <?php if (Mage::registry('current_category')): ?>
                         <?php
                         $_categoryParentIdOne = Mage::getModel('catalog/category')->load(Mage::registry('current_category')->getParentId());
-                        // $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
-                        //print_r($_category);exit;
+                         $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+                       // print_r($_categoryParentIdTop->getParentId());exit;
                         //echo $_categoryParentIdOne->getParentId();
 
                         ?>
-                        <?php if ($_categoryParentIdOne->getParentId() == $baseCategoryId): ?>
+                        <?php if (($_categoryParentIdOne->getParentId() == $baseCategoryId) || ($_categoryParentIdTop->getParentId()==$baseCategoryId)): ?>
                             <img class="repair"
                                  src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
                         <?php endif; ?>
@@ -252,12 +252,12 @@ $baseCategoryId = 2502;
                             <?php if (Mage::registry('current_category')): ?>
 									<?php
 									$_categoryParentIdOne = Mage::getModel('catalog/category')->load(Mage::registry('current_category')->getParentId());
-									// $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
+									 $_categoryParentIdTop = Mage::getModel( 'catalog/category' )->load($_categoryParentIdOne->getParentId());
 									//print_r($_category);exit;
 									//echo $_categoryParentIdOne->getParentId();
 								   
 									?>
-									<?php if ($_categoryParentIdOne->getParentId() == $baseCategoryId): ?>
+								    <?php if (($_categoryParentIdOne->getParentId() == $baseCategoryId) || ($_categoryParentIdTop->getParentId()==$baseCategoryId)): ?>
 										<span class="quality"
 											  data-quality="100">
 											<em class="range"></em>
