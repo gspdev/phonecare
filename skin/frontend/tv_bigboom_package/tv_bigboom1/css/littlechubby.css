@@ -341,10 +341,30 @@
 	}
 	.products-grid li.item .ratings{display: none;}
 	#shopping-cart-table .cart-footer-actions button.button span span{padding: 10px 5px;}
-	#checkout-step-login .col2-set .col-1{padding: 0;}
 	#opc-login h3{height: 37px;display:block; }
-	#checkout-step-login #onepage-guest-register-button{margin:20px 0 0 0;}
+	#checkout-step-login #onepage-guest-register-button{margin:0;}
 	#login-form .validation-advice{display: none;}
+	#checkout-step-login .form.col2-set .col-1,#checkout-step-login .form.col2-set .col-2{width:100%;padding: 0;}
+	#checkout-step-login .button-group .col-1,#checkout-step-login .button-group .col-2{padding: 0;}
+	#checkout-step-login .button-group .buttons-set{padding: 0;text-align: left;}
+	#checkout-step-login .button-group .buttons-set button.button,#checkout-step-login .button-group .buttons-set a.f-left
+	,#checkout-step-login .button-group p.required{float: none!important;margin:0;padding: 0;}
+	#checkout-step-login .register{display: none;}
+	.cart .crosssell{display: none;}
+	.cart-table .product-cart-image .cart-links{display: none;}
+	.cart-table .product-cart-actions .qtyBtn{line-height: 20px;}
+	.cart-table .product-cart-sku .label{color:#292929;padding: 0;}
+	.cart-table .product-cart-image{border-right: none;}
+	.toolbar .pager{padding: 0;margin: 10px 0;}
+	.sorter .view-mode .grid{display: none;}
+	.sorter .limiter,.sorter .sort-by,.sorter .view-mode{float: none;}
+	.pager .pages,.pager .amount{float: left;margin:0 0 0 10px;}
+	/*top cart*/
+	#cart-sidebar{display: block;height: 300px;padding: 5px;border: 1px solid #dcdcdc;overflow: hidden;overflow-y: scroll;}
+	.top-cart-content li.item{padding: 0 0 20px;margin:4px 0;border-bottom: 1px solid #e8e7e7;}
+	.top-cart-content .btn-remove{top:initial;bottom:10px;width:auto;font-size: 12px;line-height: 12px;text-indent: 20px;}
+	/*.wrapper_inboxCart*/
+	.wrapper_inboxCart{width:50%;margin:-100px 0 0 0;left:25%;}
 }
 @media (max-width: 500px) {
 	.choose .innerContainer .chooseSlide #why-choose-pager .pager{width: 35%;}
