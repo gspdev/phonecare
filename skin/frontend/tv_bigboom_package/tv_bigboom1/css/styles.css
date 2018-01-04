@@ -4809,6 +4809,8 @@ line-height: 70px;font-family: "SF Pro Display","Helvetica Neue","Helvetica","Ar
         box-shadow: none;
     }
 }
+.cart-table .product-cart-sku .label{color:#666;}
+.email-friend .fa.fa-envelope{margin:14px 0 0 0;}
 /*svea*/
 .svea-payment-logos .svea-method-logo:last-child{display: none;}
 .featuredBox .ratings{display: none;}

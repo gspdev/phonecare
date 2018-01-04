@@ -400,11 +400,8 @@
     .control input.checkbox{
         width: auto;
     }
-
-
-
-
-
+    .other_outer{display: none;}
+    .other_outer.loading{display: block;}
     #ie_ajax{display: none;}
     #ie_ajax.loading{display: block\9;}
     @-webkit-keyframes stretchdelay {
@@ -445,6 +442,12 @@
                     <h4><?php echo $this->__('Model:'); ?></h4>
                     <div id="proHead" class="head"></div>
                     <ul id="productList" class="repairList"></ul>
+                </div>
+                <div class="col-sm-6"></div>
+                <div class="col-sm-5 other_outer">
+                    <h4><?php echo $this->__(''); ?></h4>
+                    <div id="otherHead" class="head"></div>
+                    <ul id="otherList" class="repairList"></ul>
                 </div>
             </div>
             <p id="ajaxerror" style="font-size: 20px;margin:40px auto;text-align: center;">This service will be provided soon.</p>
@@ -662,12 +665,24 @@
                             repairs.init();
                             cDown.loading();
                         } else if (mtd === 'category' && sort === 1) {
+                            otherBox.loaded();
                             proHead.loading();
                             proHead.init();
                             productList.init();
                             repairs.init();
                             pDown.loading();
-                        } else if (mtd === 'category' && sort === 2) {}
+                        } else if (mtd === 'category' && sort === 2) {
+                            /*
+                            *when choose 'mac'
+                            *show other box
+                            * */
+                            otherHead.loading();
+                            otherHead.init();
+                            otherList.init();
+                            repairs.init();
+                            oDown.loading();
+                            otherBox.loading();
+                        }
                     },
                     complete: function () {
                         if (mtd === 'category' && sort === 0) {
@@ -676,12 +691,21 @@
                         } else if (mtd === 'category' && sort === 1) {
                             pDown.loaded();
                             proHead.loaded();
-                        } else if (mtd === 'category' && sort === 2) {}
+                        } else if (mtd === 'category' && sort === 2) {
+                            oDown.loaded();
+                            otherHead.loaded();
+                        }
                     },
                     success: function (data) {
                         var tmpData = data;
                         var len = tmpData.length;
                         var str = '';
+                        if(len <= 0 && sort === 2){
+                            otherBox.loaded();
+                            otherHead.setCtn("För närvarande finns inget val!");
+                            ajaxerror.loading();
+                            return false;
+                        }
                         if (len <= 0) {
                             return false;
                         }
@@ -693,7 +717,7 @@
                         } else if (mtd === 'category' && sort === 1) {
                             $("#productList").html(str);
                         } else if (mtd === 'category' && sort === 2) {
-                            $("#repairs").html(str);
+                            $("#otherList").html(str);
                         }
                     }
                 });
@@ -759,11 +783,14 @@
         //catHead proHead
         var catHead = new RepairList("#catHead", "<span>Välj märke</span><span class='nav-down-arrow'></span>");
         var proHead = new RepairList("#proHead", "<span>Välj model</span><span class='nav-down-arrow'></span>");
+        var otherHead = new RepairList("#otherHead","<span>Välj</span><span class='nav-down-arrow'></span>");
         var cDown = new RepairList("#catHead .nav-down-arrow","");
         var pDown = new RepairList("#proHead .nav-down-arrow","");
+        var oDown = new RepairList("#otherHead .nav-down-arrow","");
         //categoryList productList
         var categoryList = new RepairList("#categoryList", '');
         var productList = new RepairList("#productList", '');
+        var otherList = new RepairList("#otherList",'');
         var repairs = new RepairList("#repairs tbody", '');
         //product list
         var selected = new RepairList("#reapirs-selected", '');
@@ -778,6 +805,8 @@
         var newAddress = new RepairList("#shipNewAddress",'');
         var billingNewForm = new RepairList("#billing-new-address-form",'');
         var addShipAddress = new RepairList("#ship-form-address",'');
+        //var other box
+        var otherBox = new RepairList(".other_outer","");
         //create object 'RepairList'
         function RepairList(id, inner) {
             this.id = id;
@@ -817,6 +846,8 @@
         //init
         catHead.init();
         proHead.init();
+        otherHead.init();
+        otherBox.loaded();
         if(sessionStorage.getItem("repair") && $("#login_status").attr("data-status")<1){
             console.log(sessionStorage.getItem("repair"));
         }
@@ -838,6 +869,8 @@
             var $li = $(this);
             if (!$li.hasClass("repair")) {
                 $li.parent().parent().find(".head").html($li.html() + '<span class="nav-down-arrow"></span>');
+
+                $li.parent().parent().find(".img").attr('data-id',$li.attr("data-id"));
             }
             hideRepairList();
             if ($("#proHead").find(".name").length === 1) {
@@ -851,6 +884,20 @@
             $("#repair-block").hide();// hide repair block
         });
         $("#productList").delegate("li", "click", function () {
+            var tmpId = $(this).attr("data-id");
+            repairs.init();// repair product initialize
+
+            /*
+            *show more choice when choose mac
+            * Category id of Mac : 2636
+            */
+            if($("#catHead .img").attr("data-id") === "2636" ){
+                ajaxCategory(tmpId,'category',2);
+            }else{
+                ajaxProduct(tmpId, 'product');// ajax products
+            }
+        });
+        $("#otherList").delegate("li","click",function () {
             var tmpId = $(this).attr("data-id");
             repairs.init();// repair product initialize
             ajaxProduct(tmpId, 'product');// ajax products
@@ -923,6 +970,7 @@
         function hideRepairList() {
             categoryList.hideList();
             productList.hideList();
+            otherList.hideList();
         }
 
         //hide all repairlist when click other elements
