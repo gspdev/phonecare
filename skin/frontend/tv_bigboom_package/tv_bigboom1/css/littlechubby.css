@@ -371,7 +371,7 @@
 	.choose .innerContainer .chooseSlide #why-choose-pager .pager{width: 35%;}
 	.social li{width: 24%;margin-left: 1%;}
 	.search-right .head-Cart .top-cart-content{width: 350px;}
-	.header-quick-access .user li{padding: 14px 4px;}
+	.header-quick-access .user li{padding: 14px 0px;}
 	.small-screen .menu_list li a { padding: 0 4px;}
 	.logo-box .logo {margin-top: 22px;}
 }
