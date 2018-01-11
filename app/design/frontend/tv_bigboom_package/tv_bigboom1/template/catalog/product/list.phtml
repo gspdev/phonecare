@@ -228,7 +228,7 @@ $baseCategoryId = 2502;
 										  // echo $echoParentId->getParentId();
 								}  
 							?>
-								<?php if(($_product->getRepairPart()&& $echoId->getParentId()== $baseCategoryId && $echoParentId !='') || ($echoParentId->getParentId()==$baseCategoryId)): ?>
+								<?php if(($_product->getRepairPart()&& $echoId->getParentId()== $baseCategoryId) || (isset($echoParentId) && $echoParentId->getParentId()==$baseCategoryId)): ?>
 									 <img class="repair" src="<?php echo $_iconPath . $_product->getData("repair_part") . ".png" ?>"/>
 								<?php endif;?>										
                     <?php endif; ?>
