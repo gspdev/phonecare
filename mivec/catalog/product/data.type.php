@@ -24,6 +24,7 @@ define("__ATTR_PRODUCT_STOCK_ITEM__" , "cataloginventory_stock_item");
 	}else{
 		$subcats = $cat->getChildren();
 	}
+	echo ('Produktnamn;Kategori;Artikelnnr;Pris;URL;Tillgänglighet;Skick;Image_URL').'<br/>';	
 	foreach(explode(',',$subcats) as $subCatid){
 	
 	      $_category = Mage::getModel('catalog/category')->load($subCatid);
@@ -33,7 +34,7 @@ define("__ATTR_PRODUCT_STOCK_ITEM__" , "cataloginventory_stock_item");
           ->addAttributeToFilter('visibility', 4)//optional for products only visible in catalog and search
           ->addAttributeToSelect('*');
 	
-    echo ('Produktnamn;Kategori;Artikelnnr;Pris;URL;Tillgänglighet;Skick;Image_URL').'<br/>';	
+   
    // print_r(count($collection));
 	foreach($products as $_product)  {
 		
