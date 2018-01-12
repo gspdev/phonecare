@@ -10,16 +10,32 @@ define("__ATTR_PRODUCT_STOCK_ITEM__" , "cataloginventory_stock_item");
 
 //set product status is `Enabled`
 	  
-    $categoryid = 2658;
-	$category = new Mage_Catalog_Model_Category();
-	$category->load($categoryid);
-	$collection = $category->getProductCollection();
-	$collection->addAttributeToFilter('status', 1);//optional for only enabled products
-    $collection->addAttributeToFilter('visibility', 4);//optional for products only visible in catalog and search
-	$collection->addAttributeToSelect('*');    
+    // $categoryid = 2658;
+	// $category = new Mage_Catalog_Model_Category();
+	// $category->load($categoryid);
+	// $collection = $category->getProductCollection();
+	// $collection->addAttributeToFilter('status', 1);//optional for only enabled products
+    // $collection->addAttributeToFilter('visibility', 4);//optional for products only visible in catalog and search
+	// $collection->addAttributeToSelect('*');    
+	$cat = Mage::getModel('catalog/category')->load(2659);
+//$cat = Mage::getModel('catalog/category')->load(173);
+	if(!$cat->getChildren()){
+		$subcats = $cat->getEntityId();
+	}else{
+		$subcats = $cat->getChildren();
+	}
+	foreach(explode(',',$subcats) as $subCatid){
+	
+	      $_category = Mage::getModel('catalog/category')->load($subCatid);
+          $products = Mage::getModel('catalog/category')->load($_category->getEntityId())
+          ->getProductCollection()
+		  ->addAttributeToFilter('status', 1)//optional for only enabled products
+          ->addAttributeToFilter('visibility', 4)//optional for products only visible in catalog and search
+          ->addAttributeToSelect('*');
+	
     echo ('Produktnamn;Kategori;Artikelnnr;Pris;URL;Tillgänglighet;Skick;Image_URL').'<br/>';	
    // print_r(count($collection));
-	foreach($collection as $_product)  {
+	foreach($products as $_product)  {
 		
 		  
 		    $name = trim($_product->getName());
@@ -53,7 +69,7 @@ define("__ATTR_PRODUCT_STOCK_ITEM__" , "cataloginventory_stock_item");
       
 }
 		  
-		  
+}		  
 
 // function update($_entityId)
 // {
