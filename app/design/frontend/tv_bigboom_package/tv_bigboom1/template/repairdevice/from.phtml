@@ -864,6 +864,11 @@
             }
         });
 
+        // set nav-down-arrow when click
+        $(".head").delegate(".nav-down-arrow","click",function(){
+            $(this).parent(".head").click();
+        });
+
         // set head when click category box and model box
         $(".repairList").delegate("li", "click", function () {
             var $li = $(this);
@@ -975,7 +980,7 @@
 
         //hide all repairlist when click other elements
         $(document).click(function (e) {
-            if (!$(e.target).hasClass("head") && !$(e.target).hasClass("repairList")) {
+            if (!$(e.target).hasClass("head") && !$(e.target).hasClass("repairList")&&!$(e.target).hasClass("nav-down-arrow")) {
                 $(".repairList").removeClass("active");
             }
         });
