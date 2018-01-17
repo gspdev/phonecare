@@ -32,6 +32,9 @@
  */
 /** @var $this Mage_Customer_Block_Form_Register */
 ?>
+<?php 
+  $baseUrl = Mage::getBaseUrl();
+?>
 <div class="account-create account_consumer">
     <div class="page-title">
         <h1><?php echo $this->__('Create an Account') ?></h1>
@@ -188,7 +191,7 @@
     </div>
     <?php echo $this->getChildHtml('form_fields_before')?>
     <?php echo $this->getMessagesBlock()->toHtml() ?>
-    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate">
+    <form action="<?php echo $this->getPostCompanyActionUrl() ?>" method="post" id="form-validate">
         <!--validate company-->
         <div class="fieldset">
             <h3 style="font-size: 19px;color:#333;">Company details</h3>
@@ -212,6 +215,13 @@
                 </div>
                 <div id="companyName"></div>
             </div>
+			<input type="hidden" name="create_address" value="1" />
+			<div class="input-box">
+				<label for="company"><?php echo $this->__('Company Name') ?></label><br/>
+				<input type="text" name="company" id="company" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company Name') ?>" class="input-text" />
+            </div>
+			<input type="hidden" name="default_billing" value="1" />
+                    <input type="hidden" name="default_shipping" value="1" />
         </div>
         <div class="disable_block">
             <div class="fieldset">
@@ -396,7 +406,7 @@
                 jQuery.ajax({
                     type: "get",
                     async: true,
-                    url: "<?php echo 'repairdevice/index/product'?>",
+                    url: "<?php echo $baseUrl.'repairdevice/index/organisationvalidate'?>",
                     data: {number: orgName},
                     dataType: "json",
                     beforeSend: function () {},

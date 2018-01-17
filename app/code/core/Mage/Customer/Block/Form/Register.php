@@ -53,6 +53,11 @@ class Mage_Customer_Block_Form_Register extends Mage_Directory_Block_Data
     {
         return $this->helper('customer')->getRegisterPostUrl();
     }
+	
+	public function getPostCompanyActionUrl()
+    {
+        return $this->helper('customer')->getRegisterPostCompanyUrl();
+    }
 
     /**
      * Retrieve back url

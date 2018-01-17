@@ -272,6 +272,11 @@ class Mage_Customer_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return $this->_getUrl('customer/account/createpost');
     }
+	
+	public function getRegisterPostCompanyUrl()
+    {
+        return $this->_getUrl('customer/account/createcompany');
+    }
 
     /**
      * Retrieve customer account edit form url
