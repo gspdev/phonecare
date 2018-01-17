@@ -4852,7 +4852,10 @@ line-height: 70px;font-family: "SF Pro Display","Helvetica Neue","Helvetica","Ar
 .account_consumer,.account_business{display: none;}
 .account_consumer.active,.account_business.active{display: block;}
 .account_business .fieldset{border-width: 1px;}
-#companyName{margin:12px 0 0 0;font-size: 14px;font-weight: 500;text-indent: 12px;}
+#companyName{display:none; margin:12px 0 0 0;font-size: 14px;font-weight: 500;}
+#companyName.active{display: block;}
+#companyName label{}
+#companyName .name{}
 .disable_block input[disabled]{
     cursor: not-allowed;
     background-color: #eee;
