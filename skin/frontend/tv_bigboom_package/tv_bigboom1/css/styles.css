@@ -1700,7 +1700,7 @@ border-radius: 0 0 5px 5px;}
     -webkit-box-shadow: 0 10px 20px rgba(0,0,0,.1);
     box-shadow: 0 10px 20px rgba(0,0,0,.1);}
 .products-list .product-images .repair,
-.products-grid li.item .item-inner .repair{position: absolute;z-index: 10;display:block;width: 90px;height: 90px;left: -20px;
+.products-grid li.item .item-inner .repair{position: absolute;z-index: 10;display:none;width: 90px;height: 90px;left: -20px;
     top: -20px;-ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=75)";
     filter: alpha(opacity=75);
     opacity: 0.75;}
