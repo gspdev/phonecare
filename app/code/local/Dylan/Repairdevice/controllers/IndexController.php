@@ -177,46 +177,6 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 		
     }
 	
-	public function organisationValidateAction(){
-		
-		$client = new Varien_Http_Client ();
-
-        //$url = $this->getProfileEndPoint ();
-		//$params ['schema'] = 'openid';
-		$organisationNumber = $this->getRequest()->getParam('number');
-		//$requestUrl = "https://api.roaring.io/company/company-overview?countryCode=se&companyId=7696245120";
-		$requestUrl = "https://api.roaring.io/company/company-overview?countryCode=se&companyId=".$organisationNumber."";
-		$_config = array (
-				'maxredirects' => 5,
-				'timeout' => 5 
-		);
-		$heard = array(
-		   'cache-control' => 'no-cache',
-
-		  'content-type' => 'application/json',
-
-		//  'authorization' => 'Bearer ACCESS_TOKEN'
-		);
-		//$_token = "c5b191bb-cbfd-373a-8c14-941bcfbc570d";
-		$_token = "b231c912-af1f-394b-8999-0559d5a2f002";
-		$debugData = array (
-				'url' => $requestUrl,
-				//'params' => $params,
-				'access_token' => $_token
-		);
-	//	$this->_debug ( $debugData );
-		//$client->setUri ( $requestUrl )->setConfig ( $_config )->setMethod ( Zend_Http_Client::GET )->setHeaders ($heard)->setHeaders ('Authorization: Bearer ' . $_token);
-		$client->setUri ( $requestUrl )->setConfig ( $_config )->setMethod ( Zend_Http_Client::GET )->setHeaders ($heard)->setHeaders ('Authorization: Bearer ' . $_token);
-	
-		$response = $client->setUrlEncodeBody (true)->request();
-		
-		$body = $response->getBody();
-        echo $body;
-        //print_r($body);exit;
-		
-	}
-
-	
 	public function saveAction(){
 		
 		$status = Mage::getSingleton('customer/session')->isLoggedIn();
