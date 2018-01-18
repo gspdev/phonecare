@@ -138,11 +138,6 @@
     }
 //]]>
 </script>
-<script type="text/javascript">
-    jQuery("#onepage-guest-register-button").click(function(){
-        localStorage.register="";
-    });
-</script>
 <?php
     $registerParam = $this->getRequest()->getParam('register');
     if ($registerParam || $registerParam === ''):

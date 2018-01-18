@@ -181,57 +181,6 @@
             }
         });*/
 
-        /*register modal*/
-        $(".user .register").click(function(e){
-            if ( e && e.preventDefault ){
-                e.preventDefault();
-            }else{
-                window.event.returnValue = false;
-            }
-            $("#registerModel.register").modal({show: true, keyboard: true});
-        });
     });
 </script>
 <div id="headerHeight" style="opacity: 0;z-index: 0;background: none;"></div>
-<!--regeister modal-->
-<div class="register modal fade" id="registerModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog" style="margin:120px auto 0 auto;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel_register" style="font-size: 20px;">Registrera</h4>
-            </div>
-            <!--modal-body-->
-            <div class="modal-body">
-                <!--need output-->
-                <div class="content">
-                    <div class="std register_link clearfix">
-                        <div class="col-md-6">
-                            <a class="consumer" href="<?php echo $this->getUrl('customer/account/create')?>" title="Register as a consumer">Register as a consumer</a>
-                        </div>
-                        <div class="col-md-6">
-                            <a class="business" href="<?php echo $this->getUrl('customer/account/create')?>" title="Register as a business">Register as a business</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" style="color: #fff;background: #fc6908;">Close</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-<script type="text/javascript">
-    jQuery(document).ready(function($){
-
-        //save register option at sessionStorage
-        $(".register_link a").click(function(){
-            if($(this).hasClass("consumer")){
-                localStorage.register="0";
-            }else if($(this).hasClass("business")){
-                localStorage.register="1";
-            }
-        });
-
-    });
-</script>
