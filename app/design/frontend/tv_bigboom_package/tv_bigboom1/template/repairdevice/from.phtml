@@ -722,8 +722,6 @@
                         log(step+', default');
                         break;
                 }
-            }else{
-                log("There are no repair message.")
             }
         }
         function log(msg) {
@@ -1177,7 +1175,8 @@
                 window.event.returnValue = false;
             }else if($("#login_status").attr("data-status")>0){
 
-                sessionStorage._repair = "";//init _repair
+                //sessionStorage._repair = "";//init _repair
+                sessionStorage.removeItem("_repair");
                 $("#myModal").modal({show:false});
             }
         });
