@@ -677,7 +677,7 @@
                         });
                         break;
                     case 2:
-                        log(step+', load modal.');
+                        log(step+', load model.');
                         repair_val = reloading_obj.model;
                         $("#productList li").each(function(){
                             if($(this).attr("data-id") === repair_val)
@@ -977,7 +977,7 @@
             if (!$li.hasClass("repair")) {
                 $li.parent().parent().find(".head").html($li.html() + '<span class="nav-down-arrow"></span>');
 
-                $li.parent().parent().find(".img").attr('data-id',$li.attr("data-id"));
+                $li.parent().parent().find(".head>.img").attr('data-id',$li.attr("data-id"));
             }
             hideRepairList();
             if ($("#proHead").find(".name").length === 1) {
