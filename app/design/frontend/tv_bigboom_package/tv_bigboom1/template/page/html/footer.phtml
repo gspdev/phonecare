@@ -49,7 +49,10 @@ $_footerImgSrc =Mage::getBaseUrl();
                 });
                 function setCss(obj,quality) {
                     var bgcolor;
-                    if(quality<=30){
+                    if(0 < quality &&quality < 5){
+                        quality = 5;
+                        bgcolor = 'red';
+                    }else if(5 <= quality && quality <= 30){
                         bgcolor = 'red';
                     }else if((30 < quality)&&(quality <= 60)){
                         bgcolor = 'yellow';
