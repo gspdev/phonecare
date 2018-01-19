@@ -333,6 +333,7 @@
     /*loading*/
     #ajaxloading,#ajaxerror{display: none;}
     #ajaxloading.loading,#ajaxerror.loading{display: block;}
+    #ajaxloading.loading{margin-left: -50px;}
     #ajaxloading,#ajaxloading.loading{display: none\9;}
     .spinner {
         margin: 100px auto;
@@ -454,12 +455,14 @@
             <div id="ie_ajax" style="width: 60px;height: 60px;margin:40px auto;">
                 <img src="/media/repair/loading_ie.gif">
             </div>
-            <div id="ajaxloading" class="spinner">
-                <div class="rect1"></div>
-                <div class="rect2"></div>
-                <div class="rect3"></div>
-                <div class="rect4"></div>
-                <div class="rect5"></div>
+            <div id="ajaxloading">
+                <div class="spinner">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
             </div>
             <div id="repair-block" style="display: none">
                 <div id="product-image"></div>
@@ -700,6 +703,13 @@
                                     $(this).click();
                             });
                         }
+                        $('#reapirs-selected').empty();
+                        var selected = 0;
+                        jQuery('input.my-repair:checkbox:checked').each(function () {
+                            selected++;
+                            $('#reapirs-selected').append('<li>' + selected + '. ' + jQuery(this).attr('title') + '</li>');
+                            $('.no-select').hide();
+                        });
 
                         //other info
                         $("#imei").val(reloading_obj.imei);
