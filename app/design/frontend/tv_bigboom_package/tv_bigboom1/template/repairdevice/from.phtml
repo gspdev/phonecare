@@ -452,7 +452,7 @@
             </div>
             <p id="ajaxerror" style="font-size: 20px;margin:40px auto;text-align: center;">This service will be provided soon.</p>
             <div id="ie_ajax" style="width: 60px;height: 60px;margin:40px auto;">
-                <img src="../media/repair/loading_ie.gif">
+                <img src="/media/repair/loading_ie.gif">
             </div>
             <div id="ajaxloading" class="spinner">
                 <div class="rect1"></div>
@@ -595,7 +595,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <h5>If you want to have your phone repaired , please login in at first:</h5>
+                <h3>If you want to have your phone repaired , please login in at first:</h3>
                 <div class="row">
                     <div class="col-sm-6"></div>
                     <div class="col-sm-6">
@@ -848,9 +848,10 @@
         proHead.init();
         otherHead.init();
         otherBox.loaded();
-        if(sessionStorage.getItem("repair") && $("#login_status").attr("data-status")<1){
-            console.log(sessionStorage.getItem("repair"));
-        }
+
+        //handle sessionStorage
+
+
         $("#billing-address-select").attr("onchange",''); // billing address select onchange initialize
         ajaxCategory(2502, 'category', 0);//First load categoryList
 
@@ -1044,19 +1045,33 @@
 
             //when user sign in or not
             if($("#login_status").attr("data-status")<1){
+                //1，create repair obj to save user's option
+                var repair_obj = {
+                    "status":"0",
+                    "brand":$("#catHead>.img").attr("data-id"),
+                    "model":$("#proHead>.img").attr("data-id"),
+                    "repair_list":[],
+                    "IMEI":$("#imei").val(),
+                    "screen_code":$("#screencode").val(),
+                    "detailed":$("#detailed").val()
+                };
+                var $selected_list = $('#repairs input.my-repair:checkbox:checked');
+                for(var l = 0;l < $selected_list.length;l++){
+                    repair_obj.repair_list[l] =  $selected_list.eq(l).val();
+                }
 
-                // console.log new-form
-                var tmpForm = $("#new-form").serialize();
-                console.log('NewAddress: ' + tmpForm);
-                //save repair message at sessionStorage
-                sessionStorage.setItem("repair" , tmpForm);
-                console.log(sessionStorage.getItem("repair"));
+                //2，save repair message at sessionStorage
+                var repair_str = JSON.stringify(repair_obj);
+                sessionStorage._repair = repair_str;
 
-
+                //3,show login and register
                 $("#myModal").modal({show:true,keyboard: true});
+
                 event.preventDefault();
                 window.event.returnValue = false;
             }else if($("#login_status").attr("data-status")>0){
+
+                sessionStorage._repair = "";//init _repair
                 $("#myModal").modal({show:false});
             }
         });
