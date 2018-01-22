@@ -969,6 +969,7 @@
 
 
         $("#billing-address-select").attr("onchange",''); // billing address select onchange initialize
+        $("#poll-answers input").attr("checked",false);
         ajaxCategory(2502, 'category', 0);//First load categoryList
         //2,*****handle sessionStorage*****
 
@@ -1068,6 +1069,29 @@
             }
             if(($('#poll-answers #1new:radio:checked').attr("checked") && !$(this).hasClass("store"))
                 && ($("#login_status").attr("data-status") < 1)){
+                //1，create repair obj to save user's option
+                var repair_obj2 = {
+                    "status":"0",
+                    "brand":$("#catHead>.img").attr("data-id"),
+                    "model":$("#proHead>.img").attr("data-id"),
+                    "other":"0",
+                    "repair_list":[],
+                    "imei":$("#imei").val(),
+                    "screen_code":$("#screencode").val(),
+                    "detailed":$("#detailed").val()
+                };
+
+                if($("#otherHead>.img").length > 0){
+                    repair_obj2.other = $("#otherHead>.img").attr("data-id");
+                }
+                var $selected_list = $('#repairs input.my-repair:checkbox:checked');
+                for(var l = 0;l < $selected_list.length;l++){
+                    repair_obj2.repair_list[l] =  $selected_list.eq(l).val();
+                }
+
+                //2，save repair message at sessionStorage
+                var repair_str2 = JSON.stringify(repair_obj2);
+                sessionStorage._repair = repair_str2;
                 $("#myModal").modal({show: true, keyboard: true});
             }
         });

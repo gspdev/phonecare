@@ -188,7 +188,7 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 					return;
 				}
                // $address = Mage::getModel('customer/address')->load($data['billing_address_id']);
-				//print_r($data);exit;			
+				//print_r($data);exit;
 				$id = $this->getRequest()->getParam('id');
 				$model = Mage::getModel('repairdevice/repairdevice')->load($id);
 				//$productId = $data['repairs']; 
@@ -213,7 +213,7 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $address->getLastname();
 						$company = $address->getCompany();
 						$city = $address->getCity();
-						if($address->getStreet()['1']!='' && isset($address->getStreet()['1'])){
+						if(isset($address->getStreet()['1']) && $address->getStreet()['1']!='' ){
 							$street = $address->getStreet()['0'].' '.$address->getStreet()['1'];
 						}else{
 							$street = $address->getStreet()['0'];
@@ -253,7 +253,7 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $billing_new_shipping['lastname'];
 						$company = $billing_new_shipping['company'];
 						$city = $billing_new_shipping['city'];
-						if($billing_new_shipping['street']['0'] !='' && isset($billing_new_shipping['street']['1'])){
+						if(isset($billing_new_shipping['street']['1']) && $billing_new_shipping['street']['0'] !=''){
 							 $street = $billing_new_shipping['street']['0'].''.$billing_new_shipping['street']['1'];
 						}else{
 							 $street = $billing_new_shipping['street']['0'];
@@ -292,7 +292,7 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $billing_new_shipping['lastname'];
 						$company = $billing_new_shipping['company'];
 						$city = $billing_new_shipping['city'];
-						if($billing_new_shipping['street']['1'] !='' && isset($billing_new_shipping['street']['1'])){
+						if(isset($billing_new_shipping['street']['1']) && $billing_new_shipping['street']['1'] !='' ){
 							$street = $billing_new_shipping['street']['0'].''.$billing_new_shipping['street']['1'];
 						}else{
 							$street = $billing_new_shipping['street']['0'];
@@ -332,7 +332,7 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $new_billing['lastname'];
 						$company = $new_billing['company'];
 						$city = $new_billing['city'];
-						if($new_billing['street']['1'] !='' && isset($new_billing['street']['1'])){
+						if(isset($new_billing['street']['1']) && $new_billing['street']['1'] !=''){
 							$street = $new_billing['street']['0'].''.$new_billing['street']['1'];
 						}else{
 							$street = $new_billing['street']['0'];
@@ -349,7 +349,7 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname_new_shipping = $new_shipping['lastname'];
 						$company_new_shipping = $new_shipping['company'];
 						$city_new_shipping = $new_shipping['city'];
-						if($new_shipping['street']['1']!='' && isset($new_shipping['street']['1'])){
+						if(isset($new_shipping['street']['1']) && $new_shipping['street']['1']!=''){
 							$street_new_shipping = $new_shipping['street']['0'].''.$new_shipping['street']['1'];
 						}else{
 							$street_new_shipping = $new_shipping['street']['0'];
@@ -389,7 +389,7 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $new_billing['lastname'];
 						$company = $new_billing['company'];
 						$city = $new_billing['city'];
-						if($new_billing['street']['1']!='' && isset($new_billing['street']['1'])){
+						if(isset($new_billing['street']['1']) && $new_billing['street']['1']!=''){
 							$street = $new_billing['street']['0'].''.$new_billing['street']['1'];
 						}else{
 							$street = $new_billing['street']['0'];
@@ -447,7 +447,7 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname = $address->getLastname();
 						$company = $address->getCompany();
 						$city = $address->getCity();
-						if($address->getStreet()['1']!='' && isset($address->getStreet()['1'])){
+						if(isset($address->getStreet()['1']) && $address->getStreet()['1']!=''){
 							$street = $address->getStreet()['0'].' '.$address->getStreet()['1'];
 						}else{
 							$street = $address->getStreet()['0'];
@@ -465,7 +465,7 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 						$lastname_new_shipping = $new_shipping['lastname'];
 						$company_new_shipping = $new_shipping['company'];
 						$city_new_shipping = $new_shipping['city'];
-						if($new_shipping['street']['1']!='' && isset($new_shipping['street']['1'])){
+						if(isset($new_shipping['street']['1']) && $new_shipping['street']['1']!=''){
 							$street_new_shipping = $new_shipping['street']['0'].''.$new_shipping['street']['1'];
 						}else{
 							$street_new_shipping = $new_shipping['street']['0'];
