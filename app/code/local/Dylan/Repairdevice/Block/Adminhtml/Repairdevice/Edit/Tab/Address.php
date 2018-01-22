@@ -61,7 +61,13 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit_Tab_Address extends M
 			'index'     => 'company',
 			'sortable' => true,
         ));
-		
+		$this->addColumn('city' , array(
+            'header'	=> 'City',
+            'type'      => 'content',
+			//'renderer'  => 'repairdevice/adminhtml_repairdevice_renderer_productname',
+			'index'     => 'city',
+			'sortable' => true,
+        ));
 		$this->addColumn('street' , array(
             'header'	=> 'street',
             'type'      => 'content',
@@ -70,11 +76,11 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit_Tab_Address extends M
 			'sortable' => true,
         ));
 		
-		$this->addColumn('city' , array(
+		$this->addColumn('vat_id' , array(
             'header'	=> 'Vat',
             'type'      => 'content',
 			//'renderer'  => 'repairdevice/adminhtml_repairdevice_renderer_productname',
-			'index'     => 'city',
+			'index'     => 'vat_id',
 			'sortable' => true,
         ));
 		
