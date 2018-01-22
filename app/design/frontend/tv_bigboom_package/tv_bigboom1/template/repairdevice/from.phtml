@@ -384,6 +384,11 @@
         border-color: #000000 transparent transparent transparent;
         line-height: 0px;
     }
+
+    .form-list .notice{
+        color: #2db8c7;
+        font-size: 14px;
+    }
     .head .nav-down-arrow.loading{
         display: none;
     }
@@ -562,6 +567,11 @@
         border-bottom: 0;
         background: #ffffff;
     }
+    #myModal .modal-body>h3{
+        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: normal;
+    }
     #myModal .buttons-set{
         margin: 0;
         padding: 8px 0;
@@ -586,6 +596,7 @@
             top:-100px;
         }
     }
+    #myModalLabel{font-weight: normal;font-size: 20px;}
     #reloading_modal.fade.in{opacity: 0.5;background: #000;}
     #reloading_modal .modal-dialog{width:40px;margin:400px auto 0 auto;}
     #reloading_modal .modal-content{border:none;background: none;box-shadow: none;}
@@ -608,13 +619,21 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
-                    Please Login In At First
+                    Please login in at first
                 </h4>
             </div>
             <div class="modal-body">
                 <h3>If you want to have your phone repaired , please login in at first:</h3>
                 <div class="row">
-                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <div class="content">
+                            <h2><?php echo $this->__('New Customers') ?></h2>
+                            <p><?php echo $this->__('By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.') ?></p>
+                        </div>
+                        <div class="buttons-set">
+                            <button type="button" title="<?php echo $this->__('Create an Account') ?>" class="button" onclick="window.location='<?php echo $repairUrl.'/customer/account/create/'?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
+                        </div>
+                    </div>
                     <div class="col-sm-6">
                         <form action="<?php echo Mage::helper('repairdevice')->getSaveLogUrl() ?>" method="post">
                         <div class="content">
@@ -637,8 +656,8 @@
                             <p class="required">* Obligatoriska fält</p>
                         </div>
                         <div class="buttons-set">
-                            <button type="submit" class="button"  name="send" id="sendLogin"><span><span><?php echo $this->__('Log in'); ?></span></span></button>
-                            <span class="hover"><a href="/customer/account/create/">Create an Account</a></span>
+                            <button type="submit" class="button"  name="send" id="sendLogin" title="<?php echo $this->__('Log in'); ?>"><span><span><?php echo $this->__('Log in'); ?></span></span></button>
+                            <span class="f-left"><a href="/customer/account/forgotpassword/"><?php echo $this->__('Forgot Your Password?') ?></a></span>
                         </div>
                         </form>
                     </div>
@@ -1036,16 +1055,20 @@
             //user post checked , value = 1
             if($('#poll-answers #1new:radio:checked').attr("checked") && !$(this).hasClass("store")){
                 //user login successfully , there exist option 'new address' and 'exist address'
-                if($("#billing-address-select").length>0){
+                if ($("#billing-address-select").length > 0  && $("#login_status").attr("data-status") === '1') {
                     newAddress.loading();//show new address box
                     shipStore.loaded();//hide store box
-                    $("#store_box:radio,#shipping-store input:radio").attr("checked",false);//set store input false
-                }else if($("#billing-address-select").length === 0){ //user not login , there not exist address-select box
+                    $("#store_box:radio,#shipping-store input:radio").attr("checked", false);//set store input false
+                } else if ($("#billing-address-select").length === 0  && $("#login_status").attr("data-status") === '1') { //user not login , there not exist address-select box
                     newAddress.loading();//show new address box
                     billingNewForm.loading();//show billing new address
                     shipStore.loaded();//hide store box
-                    $("#store_box:radio,#shipping-store input:radio").attr("checked",false);//set store input false
+                    $("#store_box:radio,#shipping-store input:radio").attr("checked", false);//set store input false
                 }
+            }
+            if(($('#poll-answers #1new:radio:checked').attr("checked") && !$(this).hasClass("store"))
+                && ($("#login_status").attr("data-status") < 1)){
+                $("#myModal").modal({show: true, keyboard: true});
             }
         });
         //make change between new address and old address
@@ -1117,33 +1140,8 @@
             }
 
             //2 , validate success , update form by remove some elements
-
-            // before submit remove some input elements
-
-            if($('#poll-answers #store_box:radio:checked').attr("checked")){//customer choose store
-                $("#billing-new-address-form").remove();
-                $("#billing-address-select").remove();
-                $("#ship-form-address").remove();
-                $(".bill_use_for_address").remove();
-            }
-            if(!$('#poll-answers #store_box:radio:checked').attr("checked")) {
-                //old bill , same shipping
-                if ($("#billing-address-select").val() > 0 && $("#co-billing-form .bill_use_for_address").is(':checked')) {
-                    $("#billing-new-address-form").remove();
-                    $("#ship-form-address").remove();
-                    //old bill , new shipping
-                } else if ($("#billing-address-select").val() > 0 && !$("#co-billing-form .bill_use_for_address").is(':checked')) {
-                    $("#billing-new-address-form").remove();
-                    //new bill , same shipping
-                } else if (!$("#billing-address-select").val() && $(".bill_use_for_address").is(':checked')) {
-                    $("#ship-form-address").remove();
-                    //new bill , new shipping
-                } else if (!$("#billing-address-select").val() && !$(".bill_use_for_address").is(':checked')) {
-                }
-            }
-
-            //when user sign in or not
-            if($("#login_status").attr("data-status")<1){
+            //deal with sessionStorage
+            if($("#login_status").attr("data-status") < 1){
                 //1，create repair obj to save user's option
                 var repair_obj = {
                     "status":"0",
@@ -1173,11 +1171,36 @@
 
                 event.preventDefault();
                 window.event.returnValue = false;
-            }else if($("#login_status").attr("data-status")>0){
+            }
+
+            // before submit remove some input elements , when customer have signed in.
+            if($("#login_status").attr("data-status") === '1'){
 
                 //sessionStorage._repair = "";//init _repair
                 sessionStorage.removeItem("_repair");
                 $("#myModal").modal({show:false});
+
+                if($('#poll-answers #store_box:radio:checked').attr("checked")){//customer choose store
+                    $("#billing-new-address-form").remove();
+                    $("#billing-address-select").remove();
+                    $("#ship-form-address").remove();
+                    $(".bill_use_for_address").remove();
+                }
+                if(!$('#poll-answers #store_box:radio:checked').attr("checked")) {
+                    //old bill , same shipping
+                    if ($("#billing-address-select").val() > 0 && $("#co-billing-form .bill_use_for_address").is(':checked')) {
+                        $("#billing-new-address-form").remove();
+                        $("#ship-form-address").remove();
+                        //old bill , new shipping
+                    } else if ($("#billing-address-select").val() > 0 && !$("#co-billing-form .bill_use_for_address").is(':checked')) {
+                        $("#billing-new-address-form").remove();
+                        //new bill , same shipping
+                    } else if (!$("#billing-address-select").val() && $(".bill_use_for_address").is(':checked')) {
+                        $("#ship-form-address").remove();
+                        //new bill , new shipping
+                    } else if (!$("#billing-address-select").val() && !$(".bill_use_for_address").is(':checked')) {
+                    }
+                }
             }
         });
     });
