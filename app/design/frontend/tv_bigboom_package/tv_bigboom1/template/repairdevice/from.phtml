@@ -559,6 +559,9 @@
     <p id="login_status" data-status="<?php if (Mage::getSingleton('customer/session')->isLoggedIn()): ?>1<?php else: ?>0<?php endif; ?>"></p>
 </div>
 <style>
+
+    #reloading_modal .modal-content>img{margin-left: -20px;}
+    #myModal .login{float: right;}
     #myModal .modal-dialog{margin:200px auto 0 auto;}
     #myModal .content {
         min-height: 345px;
@@ -573,7 +576,7 @@
         font-weight: normal;
     }
     #myModal .buttons-set{
-        margin: 0;
+        margin: 0 0 10px 0;
         padding: 8px 0;
         border: 1px solid #e4e4e4;}
     #myModal .buttons-set a{
@@ -589,18 +592,21 @@
             margin: 30px auto;}
     }
     @media (max-width: 767px){
+        #myModal .login{float: none;}
+        #myModal .content{min-height: initial;}
         #myModal .modal-dialog {
-            width: 90%;
-            margin: 30px auto;}
+            width: 96%;
+            margin: 120px auto 40px auto;}
         #myModal{
             top:-100px;
         }
+        .modal-content{border-radius: 2px;}
+        #reloading_modal .modal-content>img{margin-left:0;}
     }
     #myModalLabel{font-weight: normal;font-size: 20px;}
     #reloading_modal.fade.in{opacity: 0.5;background: #000;}
     #reloading_modal .modal-dialog{width:40px;margin:400px auto 0 auto;}
     #reloading_modal .modal-content{border:none;background: none;box-shadow: none;}
-    #reloading_modal .modal-content>img{margin-left: -20px;}
 </style>
 <!-- edit by Jerry -->
 <!-- reloading（Modal） -->
@@ -625,16 +631,7 @@
             <div class="modal-body">
                 <h3>If you want to have your phone repaired , please login in at first:</h3>
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="content">
-                            <h2><?php echo $this->__('New Customers') ?></h2>
-                            <p><?php echo $this->__('By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.') ?></p>
-                        </div>
-                        <div class="buttons-set">
-                            <button type="button" title="<?php echo $this->__('Create an Account') ?>" class="button" onclick="window.location='<?php echo $repairUrl.'/customer/account/create/'?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 login">
                         <form action="<?php echo Mage::helper('repairdevice')->getSaveLogUrl() ?>" method="post">
                         <div class="content">
                             <h2>Befintlig kund? Logga in</h2>
@@ -660,6 +657,15 @@
                             <span class="f-left"><a href="/customer/account/forgotpassword/"><?php echo $this->__('Forgot Your Password?') ?></a></span>
                         </div>
                         </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="content">
+                            <h2><?php echo $this->__('New Customers') ?></h2>
+                            <p><?php echo $this->__('By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.') ?></p>
+                        </div>
+                        <div class="buttons-set">
+                            <button type="button" title="<?php echo $this->__('Create an Account') ?>" class="button" onclick="window.location='<?php echo $repairUrl.'/customer/account/create/'?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
+                        </div>
                     </div>
                 </div>
             </div>
