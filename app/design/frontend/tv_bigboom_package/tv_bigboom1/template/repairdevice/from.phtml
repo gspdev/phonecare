@@ -1054,13 +1054,14 @@
                 $("#1new:radio").attr("checked",false);//set method post false
             }
             //user post checked , value = 1
-            if($('#poll-answers #1new:radio:checked').attr("checked") && !$(this).hasClass("store")){
+            if($('#poll-answers #1new:radio:checked').attr("checked") && !$(this).hasClass("store")
+                && $("#login_status").attr("data-status") === '1'){
                 //user login successfully , there exist option 'new address' and 'exist address'
-                if ($("#billing-address-select").length > 0  && $("#login_status").attr("data-status") === '1') {
+                if ($("#billing-address-select").length > 0 ) {
                     newAddress.loading();//show new address box
                     shipStore.loaded();//hide store box
                     $("#store_box:radio,#shipping-store input:radio").attr("checked", false);//set store input false
-                } else if ($("#billing-address-select").length === 0  && $("#login_status").attr("data-status") === '1') { //user not login , there not exist address-select box
+                } else if ($("#billing-address-select").length === 0) { //user not login , there not exist address-select box
                     newAddress.loading();//show new address box
                     billingNewForm.loading();//show billing new address
                     shipStore.loaded();//hide store box
@@ -1069,6 +1070,10 @@
             }
             if(($('#poll-answers #1new:radio:checked').attr("checked") && !$(this).hasClass("store"))
                 && ($("#login_status").attr("data-status") < 1)){
+
+                shipStore.loaded();//hide store box
+                $("#store_box:radio,#shipping-store input:radio").attr("checked", false);//set store input false
+
                 //1，create repair obj to save user's option
                 var repair_obj2 = {
                     "status":"0",
