@@ -43,7 +43,7 @@
         </div>
     </div>
     <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
-        <?php echo $this->getBlockHtml('formkey'); ?>
+        <?php //echo $this->getBlockHtml('formkey'); ?>
         <div class="col2-set">
             <div class="col-1 new-users">
                 <div class="content">
@@ -75,6 +75,7 @@
                         </li>
                         <?php echo $this->getChildHtml('form.additional.info'); ?>
                         <?php echo $this->getChildHtml('persistent.remember.me'); ?>
+						<input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
                     </ul>
                     <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
                     <p class="required"><?php echo $this->__('* Required Fields') ?></p>
