@@ -107,14 +107,9 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 				$data['create_at'] = date('Y-m-d');
 			    $id = $this->getRequest()->getParam('id');
 				$model = Mage::getModel('repairdevice/repairdevice')->load($id);
-                //$data['create_at'] = date('Y-m-d H:m:s');
-
-				//$model->setData($data);
-					 // $model->addData($data)->setId($this->getRequest()->getParam('repairdevice_id'));
                     try {
 						
-						//$model->save();
-						//print_r($model->save()->getId());exit;
+						
                         $session->login($login['username'], $login['password']);
                         if ($session->getCustomer()->getIsJustConfirmed()) {
                             $this->_welcomeCustomer($session->getCustomer(), true);
@@ -122,54 +117,17 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
                         Mage::getSingleton('core/session')->
                         addSuccess(Mage::helper('repairdevice')
                             ->__('Login Successfully!'));
-						//$respone = array();
 						
-                         //array_push($respone, array("status" =>1));
-						
-                       //$this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone));
-					   //print_r($rr);exit;
 
                      }catch (Mage_Core_Exception $e) {
-                        switch ($e->getCode()) {
-                            case Mage_Customer_Model_Customer::EXCEPTION_EMAIL_NOT_CONFIRMED://1
-                                $value = $this->_getHelper('customer')->getEmailConfirmationUrl($login['username']);
-                                $message = $this->_getHelper('customer')->__('This account is not confirmed. <a href="%s">Click here</a> to resend confirmation email.', $value);
-                                break;
-                            case Mage_Customer_Model_Customer::EXCEPTION_INVALID_EMAIL_OR_PASSWORD://2
-                                $message = $e->getMessage();
-                                break;
-                            default:
-                                $message = $e->getMessage();
-                        }
-                        $session->addError($message);
-                        $session->setUsername($login['username']);
-						
-						//$respone = array();
-						
-			            //array_push($respone, array( "status" =>0));
-						
-                       //$this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone));
-						
-                    } catch (Exception $e) {
-                        //Mage::logException($e); // PA DSS violation: this exception log can disclose customer password
+						 
+						  Mage::getSingleton('core/session')->
+                        addError(Mage::helper('repairdevice')
+                            ->__('invalid login or password!'));
                     }
+					
             }
-            /*$customer = $session->getCustomer();
-            $customerId =  $customer->getId();
-            if(isset($customerId)){
-                $respone = array();
-
-                array_push($respone, array( "status" =>1));
-
-                $this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone));
-            }else{
-                $respone = array();
-
-                array_push($respone, array( "status" =>0));
-
-                $this->getResponse()->clearHeaders()->setHeader('Content-Type', 'application/json')->setBody(Mage::helper('core')->jsonEncode($respone));
-            }*/
-			  
+           
         }
 	     $this->_redirect('*/*/');
 
@@ -192,10 +150,9 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 				$id = $this->getRequest()->getParam('id');
 				$model = Mage::getModel('repairdevice/repairdevice')->load($id);
 				//$productId = $data['repairs']; 
-				
-				//$data['status'] = 1;
+				$data['invoice_id'] = 'rep'.date("Ymdhis");
+				$data['status'] = 1;
 				$data['create_at'] = date('Y-m-d H:m:s');
-
 					$model->setData($data);
 				try {
 						
@@ -497,22 +454,6 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 							$inster->query($sql_inster);  
 						}	
 					}
-					
-					
-					
-					// $address = Mage::getModel('customer/address')->load($data['billing_address_id']);
-					// $firstname = $address->getFirstname();
-					// $lastname = $address->getLastname();
-					// $company = $address->getCompany();
-					// $city = $address->getCity();
-					// $street = $address->getStreet();
-					// $country_id = $address->getCountryId();
-					// $region = $address->getRegion();
-					// $postcode = $address->getPostcode();
-					// $telephone = $address->getTelephone();
-					// $fax = $address->getFax();
-					// $vat_id = $address->getVatId();
-					// $region_id = $address->getRegionId();
 					
 					if(isset($data['shipping_store']) && $data['shipping_store']==0){
 						$productIdArray = $this->getRequest()->getPost('repairs');
