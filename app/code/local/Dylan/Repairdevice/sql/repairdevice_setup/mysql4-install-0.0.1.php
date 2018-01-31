@@ -11,6 +11,7 @@ CREATE TABLE {$this->getTable('repairdevicedata')} (
   `detailed` text NOT NULL,
   `shipping_method` int(1) NOT NULL DEFAULT '0',
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `invoice_status` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`repairdevice_id`,`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 

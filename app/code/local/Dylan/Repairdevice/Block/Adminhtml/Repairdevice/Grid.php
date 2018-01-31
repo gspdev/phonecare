@@ -54,6 +54,13 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Grid extends Mage_Adminhtm
           'index'     =>  'repairdevice_id',
       ));
 	  
+	  $this->addColumn('invoice_id', array(
+          'header'    =>  Mage::helper('repairdevice')->__('Invoice Id'),
+         // 'align'     =>  'left',
+          'width'     =>  '50px',
+          'index'     =>  'invoice_id',
+      ));
+	  
 	  // $this->addColumn('customer_id',array(
 	  
 	     // 'header'    =>  Mage::helper('repairdevice')->__('Customer Email'),
@@ -110,6 +117,18 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Grid extends Mage_Adminhtm
             )
         );
 		
+	   $invoice_status = Dylan_Repairdevice_Model_Status_Status::getStatus();
+       $this->addColumn("invoice_status" ,
+            array(
+                "header"    => Mage::helper('repairdevice')->__('Status'),
+                "align"     => "left",
+                "width"     => "50px",
+                "type"      => "options",
+                'index'     => "invoice_status",
+                "options"   => $invoice_status
+            )
+        );	
+		
 	   $this->addColumn('create_at' , array(
             'header'    => 'Create Date',
             'width'     => '100px',
@@ -162,6 +181,11 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Grid extends Mage_Adminhtm
        
       return parent::_prepareColumns();
   }
+  
+  public function getInvoiceUrl($order)
+    {
+        return Mage::getUrl('*/*/invoice', array('id' => $order->getId()));
+    }
  
  
   // public function getRowUrl($row)

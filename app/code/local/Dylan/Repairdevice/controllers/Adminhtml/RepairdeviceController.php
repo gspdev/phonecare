@@ -79,12 +79,93 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
            $this->_redirect('*/*/');
         }
     }
+	
+	 public function newInvoiceAction()
+    {
+         $id    = $this->getRequest()->getParam('id');
+		 
+		// $data = $this->getRequest()->getPost();
+		// print_r($data);exit;
+		 
+        $model = Mage::getModel('repairdevice/repairdevice')->load($id);
+        if ($model->getRepairdeviceId() || $id == 0) {
+           $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
+		  // print_r($model);exit;
+           if (!empty($data)) {
+               $model->setData($data);
+           }
+           Mage::register('repairdevice_data', $model);
+           $this->loadLayout();
+           $this->_setActiveMenu('repairdevice/repairdevice');
+           $this->_addBreadcrumb(
+                          Mage::helper('adminhtml')->__('Repairdevice Manager'),         
+                          Mage::helper('adminhtml')->__('Repairdevice Manager')
+           );
+           $this->_addBreadcrumb(
+                          Mage::helper('adminhtml')->__('Repairdevice News'),    
+                          Mage::helper('adminhtml')->__('Repairdevice News')
+           );
+           $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
+           $this->_addContent(
+           		$this->getLayout()->createBlock('repairdevice/adminhtml_invoice')
+		   )->_addLeft(
+		   		$this->getLayout()->createBlock('repairdevice/adminhtml_invoice')
+		   );
+           $this->renderLayout();
+        } else {
+           Mage::getSingleton('adminhtml/session')->addError(
+                          Mage::helper('repairdevice')->__('Item does not exist')
+           );
+           $this->_redirect('*/*/');
+        }
+    }
+	
+	public function saveInvoiceAction()
+    {
+         $id    = $this->getRequest()->getParam('id');
+		 
+		 $data = $this->getRequest()->getPost();
+		 print_r($data);exit;
+		 
+        $model = Mage::getModel('repairdevice/repairdevice')->load($id);
+		print_r($model);exit;
+        if ($model->getRepairdeviceId() || $id == 0) {
+           $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
+		   print_r($model);exit;
+           if (!empty($data)) {
+               $model->setData($data);
+           }
+           Mage::register('repairdevice_data', $model);
+           $this->loadLayout();
+           $this->_setActiveMenu('repairdevice/repairdevice');
+           $this->_addBreadcrumb(
+                          Mage::helper('adminhtml')->__('Repairdevice Manager'),         
+                          Mage::helper('adminhtml')->__('Repairdevice Manager')
+           );
+           $this->_addBreadcrumb(
+                          Mage::helper('adminhtml')->__('Repairdevice News'),    
+                          Mage::helper('adminhtml')->__('Repairdevice News')
+           );
+           $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
+           $this->_addContent(
+           		$this->getLayout()->createBlock('repairdevice/adminhtml_invoice')
+		   )->_addLeft(
+		   		$this->getLayout()->createBlock('repairdevice/adminhtml_invoice')
+		   );
+           $this->renderLayout();
+        } else {
+           Mage::getSingleton('adminhtml/session')->addError(
+                          Mage::helper('repairdevice')->__('Item does not exist')
+           );
+           $this->_redirect('*/*/');
+        }
+    }
 
 	
 	public function saveAction()
     {
         if ($data = $this->getRequest()->getPost()) {
-        	
+        	//print_r($data);exit;
             $model = Mage::getModel('repairdevice/repairdevice');
 
             $model->setData($data)->setRepairdeviceId($this->getRequest()->getParam('id')
@@ -118,7 +199,7 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
     }
 	
 	 public function deleteAction() 
-	    {
+	{
 	        if( $this->getRequest()->getParam('id') > 0 ) {
 	            try {
 	                $model = Mage::getModel('repairdevice/repairdevice');
@@ -136,7 +217,7 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
 	            }
 	        }
 	        $this->_redirect('*/*/');
-	    }
+	}
 	
 
 

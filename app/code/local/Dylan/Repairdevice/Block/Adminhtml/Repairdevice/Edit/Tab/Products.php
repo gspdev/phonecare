@@ -9,7 +9,7 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit_Tab_Products extends 
         $this->setDefaultSort('id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
-        //$this->setUseAjax(true);
+        $this->setUseAjax(true);
     }
 
     protected function _prepareCollection()

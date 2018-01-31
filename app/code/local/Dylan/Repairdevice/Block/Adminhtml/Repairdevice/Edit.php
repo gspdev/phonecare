@@ -34,9 +34,42 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit extends Mage_Adminhtm
         $this->_blockGroup = 'repairdevice';
         $this->_controller = 'adminhtml_repairdevice';
          
+		// $this->_addButton('invoice', array(
+            // 'label'     => Mage::helper('repairdevice')->__('Invoice'),
+            // 'onclick'   => 'setLocation(\'' . $this->getInvoiceUrl() . '\')',
+            // 'class'     => 'invoice',
+        // ), -1);
+		
+		 // $this->_addButton('invoice', array(
+            // 'class' => 'save',
+            // 'label' => Mage::helper('repairdevice')->__('Invoice'),
+            // 'onclick' => "$('rule_auto_generate_deal').value=1; editForm.submit()",
+        // ));
+		
+            // $this->_addButton('invoice', array(
+                // 'label'     => Mage::helper('adminhtml')->__('Create Invoice'),
+                // 'onclick'   => 'setLocation(\'' . $this->getInvoiceUrl() . '\')',
+                // 'class'     => 'go'
+            // ));
+			
+		 if ($this->getRequest()->getParam('id')) {
+            $this->_addButton(
+                'invoice',
+                array(
+                     'label'   => Mage::helper('repairdevice')->__('Create Invoice'),
+                     'onclick' => 'createinvoice()',
+                     'class'   => 'go'
+                ),
+                0
+            );
+        }
+	
+        
+
         $this->_updateButton('save', 'label', Mage::helper('repairdevice')->__('Save Item'));
         $this->_updateButton('delete', 'label', Mage::helper('repairdevice')->__('Delete Item'));
-         
+        
+        		
         $this->_addButton('saveandcontinue', array(
             'label'     => Mage::helper('adminhtml')->__('Save And Continue Edit'),
             'onclick'   => 'saveAndContinueEdit()',
@@ -55,8 +88,20 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit extends Mage_Adminhtm
             function saveAndContinueEdit(){
                 editForm.submit($('edit_form').action+'back/edit/');
             }
+			
+			function createinvoice() {
+                $(editForm.formId).action = '" . $this->getUrl('*/*/newinvoice',array('id'=>$this->getRequest()->getParam('id'))) . "';
+                editForm.submit();
+            }
+			
         ";
     }
+
+	
+	 // public function getInvoiceUrl()
+    // {
+        // return $this->getUrl('*/*/add');
+    // }
  
     public function getHeaderText()
     {   

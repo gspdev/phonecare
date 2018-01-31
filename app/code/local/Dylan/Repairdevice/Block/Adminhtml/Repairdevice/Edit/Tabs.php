@@ -53,6 +53,13 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit_Tabs extends Mage_Adm
 			'title'     => 'Address Message',
 			'content'   => $this->getLayout()->createBlock('repairdevice/adminhtml_repairdevice_edit_tab_address')->toHtml(),
 		));
+		
+	    $this->addTab('manageproducts_section' , array(
+			'label'     => 'Manage Products',
+			'title'     => 'Manage Products',
+			'content'   => $this->getLayout()->createBlock('repairdevice/adminhtml_repairdevice_edit_tab_manageproducts')->toHtml(),
+		));	
+		
 
       return parent::_beforeToHtml();
   }

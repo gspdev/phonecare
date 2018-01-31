@@ -150,8 +150,8 @@ class Dylan_Repairdevice_IndexController extends Mage_Core_Controller_Front_Acti
 				$id = $this->getRequest()->getParam('id');
 				$model = Mage::getModel('repairdevice/repairdevice')->load($id);
 				//$productId = $data['repairs']; 
-				$data['invoice_id'] = 'rep'.date("Ymdhis");
-				$data['status'] = 1;
+				$data['invoice_id'] = 'rep'.$data['customer_id'].date("Ymdhis");
+				//$data['invoice_status'] = 1;
 				$data['create_at'] = date('Y-m-d H:m:s');
 					$model->setData($data);
 				try {

@@ -104,6 +104,17 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit_Tab_Form extends Mage
 	          // ),
 	      // ));
 	      
+	    $invoice_status = Dylan_Repairdevice_Model_Status_Status::getStatus();
+		//print_r($formData);exit;
+		$fieldset->addField('invoice_status', 'select', array(
+		
+            'name'		=> 'invoice_status',
+            'label'     => 'Status',
+            'required'	=> true,
+            'values'	=> $invoice_status,
+            'value'		=> $formData['invoice_status'],
+        ));
+		
 	      $fieldset->addField('detailed', 'editor', array(
 	          'name'      => 'detailed',
 	          'label'     => Mage::helper('repairdevice')->__('Beskriv problemet'),
