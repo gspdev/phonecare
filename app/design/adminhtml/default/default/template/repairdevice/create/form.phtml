@@ -255,13 +255,14 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
         <tbody class="list"></tbody>
     </table>
     <div class="clear"></div>
-    <div class="entry-edit">
-        <div class="entry-edit-head">
-            <h4 class="icon-head head-products"><?php echo Mage::helper('repairdevice')->__('%s', 'Items to Invoice') ?></h4>
+    <div class="entry-edit grid">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-products"><?php echo Mage::helper('repairdevice')->__('%s', 'Items to Invoice') ?></h4>
 
+            </div>
         </div>
-    </div>
-    <div id="invoice_item_container">
+        <div id="invoice_item_container">
         <div class="grid np">
             <div class="hor-scroll">
                 <table cellspacing="0" class="data order-tables" id="invoice_list">
@@ -281,6 +282,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
             </div>
         </div>
         <br/>
+    </div>
     </div>
     <div>
         <div class="clear"></div>
@@ -431,7 +433,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                 var tmp_index = $ji(this).attr("data-index");
                 in_html += '<tbody class="orderedList"><tr class="border">' +
                     '<td class="a-center">'+data_invoice[tmp_index].sku+'</td>'+
-                    '<td class="a-center"><span>'+data_invoice[tmp_index].name+'</span></td>' +
+                    '<td class="a-left"><h5><span>'+data_invoice[tmp_index].name+'</span></h5></td>' +
                     '<td class="a-center"><h5><span>'+data_invoice[tmp_index].price+'</span></h5></td>' +
                     '</tr></tbody>';
             });
