@@ -26,180 +26,200 @@
 ?>
 
 <style>
-#anchor-content .columns{background:none;}
-#anchor-content .columns .main-col{margin:0;padding:0;}
+    #anchor-content .columns {
+        background: none;
+    }
+    #anchor-content .columns .main-col {
+        margin: 0;
+        padding: 0;
+    }
+    .orderedList td{padding: 6px 2px;}
+    .orderedList:nth-child(even){background: #f6f6f6;}
+    .orderedList:nth-child(odd){background: #ffffff;}
+    #show_invoice_list,#invoice_list_box{display:block;margin:0 0 20px 0;}
+    #show_invoice_list{font-size: 16px;font-weight: bold;text-transform: capitalize;}
+    #invoice_list_box{display: none;padding: 0 20px;font-size: 13px;}
+    #invoice_list_box .check{margin: 0 12px 0 0;}
+    #invoice_list_box .count{display:inline-block;width: 24px;text-align: right;}
+    #invoice_list_box .sku{margin: 0 10px;display:inline-block;width: 100px;}
+    #invoice_list_box .name{font-size: 14px;font-weight: bold;}
+    #invoice_list_box .price{margin: 0 0 0 20px;}
+    #invoice_list_box .title{font-size: 14px;font-weight:bold;color:#ea7601;text-transform: capitalize;text-indent: -20px;}
+    #invoice_list_box .list{display:block;border: 1px solid #d6d6d6;background: #fafafa;padding: 4px 20px;max-height: 300px;overflow: hidden;overflow-y: scroll;}
 </style>
-
 <div class="form-buttons" style="text-align: right;margin-bottom: 11px;padding-right: 4px;">
-  <button  title="Back" type="button" class="scalable back" onclick="setLocation('<?php echo $this->getBackUrl() ?>')" style="">
-     <span><span><span>Back</span></span></span>
-  </button>
+    <button title="Back" type="button" class="scalable back" onclick="setLocation('<?php echo $this->getBackUrl() ?>')">
+        <span><span><span>Back</span></span></span>
+    </button>
 </div>
-<?php 
- $invoiceData = $this->getRepairdevice()->getData();
- $customerData = $this->getCustomer($invoiceData['customer_id']);
- $groupCustomerName = Mage::getModel('customer/group')->load($customerData['group_id']);
- $addressData = $this->getAddress($invoiceData['repairdevice_id']);
-
+<?php
+$invoiceData = $this->getRepairdevice()->getData();
+$customerData = $this->getCustomer($invoiceData['customer_id']);
+$groupCustomerName = Mage::getModel('customer/group')->load($customerData['group_id']);
+$addressData = $this->getAddress($invoiceData['repairdevice_id']);
 ?>
 
 <form id="edit_form" method="post" action="<?php echo $this->getSaveInvoiceUrl() ?>">
-
-    <?php echo $this->getBlockHtml('formkey')?>
+    <?php echo $this->getBlockHtml('formkey') ?>
     <?php //$_order = $this->getInvoice()->getOrder() ?>
-	
-	
-		<div class="box-left">
-		<!--Order Information-->
-		<div class="entry-edit">
-		
-			<div class="entry-edit-head">
-				<h4 class="icon-head head-account"><?php echo Mage::helper('repairdevice')->__('Invoice Information') ?></h4>
-			</div>
-			<div class="fieldset">
-				<table cellspacing="0" class="form-list">
-				<tr>
-					<td class="label"><label><?php echo Mage::helper('repairdevice')->__('Invoice ID') ?></label></td>
-					<td class="value"><strong><?php echo $invoiceData['invoice_id'] ?></strong></td>
-				</tr>
-				<tr>
-					<td class="label"><label><?php echo Mage::helper('repairdevice')->__('Invoice Date') ?></label></td>
-					<td class="value"><strong><?php echo $this->formatDate($invoiceData['create_at'], 'medium', true) ?></strong></td>
-				</tr>
-				<tr>
-					<td class="label"><label><?php echo Mage::helper('repairdevice')->__('Invoice Status') ?></label></td>
-					<td class="value"><strong><span id="order_status"><?php echo $this->getStatus()[$invoiceData['invoice_status']] ?></span></strong></td>
-				</tr>
+    <div class="box-left">
+        <!--Order Information-->
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-account"><?php echo Mage::helper('repairdevice')->__('Invoice Information') ?></h4>
+            </div>
+            <div class="fieldset">
+                <table cellspacing="0" class="form-list">
+                    <tr>
+                        <td class="label"><label><?php echo Mage::helper('repairdevice')->__('Invoice ID') ?></label>
+                        </td>
+                        <td class="value"><strong><?php echo $invoiceData['invoice_id'] ?></strong></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label><?php echo Mage::helper('repairdevice')->__('Invoice Date') ?></label>
+                        </td>
+                        <td class="value">
+                            <strong><?php echo $this->formatDate($invoiceData['create_at'], 'medium', true) ?></strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            <label><?php echo Mage::helper('repairdevice')->__('Invoice Status') ?></label></td>
+                        <td class="value"><strong><span id="order_status"><?php echo $this->getStatus()[$invoiceData['invoice_status']] ?></span></strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="box-right">
+        <!--Account Information-->
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-account"><?php echo Mage::helper('repairdevice')->__('Account Information') ?></h4>
+            </div>
+            <div class="fieldset">
+                <div class="hor-scroll">
+                    <table cellspacing="0" class="form-list">
+                        <tr>
+                            <td class="label">
+                                <label><?php echo Mage::helper('repairdevice')->__('Customer Name') ?></label></td>
+                            <td class="value">
+                                <strong><?php echo $this->escapeHtml($customerData['firstname'] . ' ' . $customerData['lastname']) ?></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label"><label><?php echo Mage::helper('repairdevice')->__('Email') ?></label>
+                            </td>
+                            <td class="value"><a href="mailto:<?php echo $customerData['email']; ?>"><strong><?php echo $customerData['email']; ?></strong></a>
+                            </td>
+                            <input type="hidden" name="customer_email" value="<?php echo $customerData['email'] ?>">
+                        </tr>
+                        <?php if ($groupCustomerName->getCode()) : ?>
+                            <tr>
+                                <td class="label">
+                                    <label><?php echo Mage::helper('repairdevice')->__('Customer Group') ?></label></td>
+                                <td class="value"><strong><?php echo $groupCustomerName->getCode() ?></strong></td>
+                            </tr>
+                        <?php endif; ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
 
-				</table>
-			</div>
-		</div>
-	</div>
-	
-	<div class="box-right">
-		<!--Account Information-->
-		<div class="entry-edit">
-			<div class="entry-edit-head">
-				<h4 class="icon-head head-account"><?php echo Mage::helper('repairdevice')->__('Account Information') ?></h4>
-			</div>
-			<div class="fieldset">
-				<div class="hor-scroll">
-					<table cellspacing="0" class="form-list">
-					<tr>
-						<td class="label"><label><?php echo Mage::helper('repairdevice')->__('Customer Name') ?></label></td>
-						<td class="value">
-							<strong><?php echo $this->escapeHtml($customerData['firstname'].' '.$customerData['lastname']) ?></strong>
-						</td>
-					</tr>
-					<tr>
-						<td class="label"><label><?php echo Mage::helper('repairdevice')->__('Email') ?></label></td>
-						<td class="value"><a href="mailto:<?php echo $customerData['email']; ?>"><strong><?php echo $customerData['email']; ?></strong></a></td>
-					    <input type="hidden" name="customer_email" value="<?php echo $customerData['email'] ?>"> 
-					</tr>
-					<?php if ($groupCustomerName->getCode()) : ?>
-					<tr>
-						<td class="label"><label><?php echo Mage::helper('repairdevice')->__('Customer Group') ?></label></td>
-						<td class="value"><strong><?php echo $groupCustomerName->getCode() ?></strong></td>
-					</tr>
-					<?php endif; ?>
-					
-					
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="clear"></div>
+    <div class="box-left">
+        <!--Billing Address-->
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-billing-address"><?php echo Mage::helper('repairdevice')->__('Billing Address') ?></h4>
+            </div>
+            <fieldset>
+                <address>
+                    <?php if ($this->getRepairdevice()->getShippingMethod() == 1): ?>
+                        <?php echo $this->escapeHtml($customerData['firstname'] . ' ' . $customerData['lastname']) ?>
 
-	<div class="box-left">
-		<!--Billing Address-->
-		<div class="entry-edit">
-			<div class="entry-edit-head">
-				<h4 class="icon-head head-billing-address"><?php echo Mage::helper('repairdevice')->__('Billing Address') ?></h4>
-			</div>
-			<fieldset>
+                        <?php foreach ($addressData as $itemId): ?>
+                            <?php $address = Mage::getModel('repairdevice/repairaddress')->load($itemId); ?>
+                            <?php if ($address->getTypeAddress() == 0): ?>
+                                <div>
+                                    <?php if ($address->getCompany()): ?>
+                                        <?php echo $address->getCompany(); ?><br/>
+                                    <?php endif; ?>
+                                    <?php echo $address->getStreet(); ?><br/>
+                                    <?php echo $address->getCity(); ?>
+                                    ,<?php if ($address->getRegion()): ?><?php echo $address->getRegion(); ?><?php endif; ?>
+                                    ,<?php echo $address->getPostcode(); ?><br/>
+                                    <?php echo Mage::getModel('directory/country')->load($address->getCountryId())->getName(); ?>
+                                    <br/>
+                                    T: <?php echo $address->getTelephone(); ?><br/>
+                                    <?php if ($address->getFax()): ?>
+                                        F: <?php echo $address->getFax(); ?><br/>
+                                    <?php endif; ?>
+                                    <?php if ($address->getVatId()): ?>
+                                        VAT: <?php echo $address->getVatId(); ?><br/>
+                                    <?php endif; ?>
+                                </div>
 
-				<address>
-				<?php if($this->getRepairdevice()->getShippingMethod()==1): ?>
-						<?php echo $this->escapeHtml($customerData['firstname'].' '.$customerData['lastname']) ?>
-					
-						<?php  foreach($addressData as $itemId):?>
-						 <?php $address = Mage::getModel('repairdevice/repairaddress')->load($itemId); ?>
-						 <?php if($address->getTypeAddress()==0): ?>
-							<div>
-							   <?php if($address->getCompany()): ?>
-								 <?php echo $address->getCompany(); ?><br/>
-							   <?php endif;?>
-							   <?php echo $address->getStreet(); ?><br/>
-							   <?php echo $address->getCity(); ?>,<?php if($address->getRegion()): ?><?php echo $address->getRegion(); ?><?php endif; ?>,<?php echo $address->getPostcode(); ?><br/>
-							   <?php echo Mage::getModel('directory/country')->load($address->getCountryId())->getName(); ?><br/>
-							   T: <?php echo $address->getTelephone(); ?><br/>
-							   <?php if($address->getFax()): ?>
-							   F: <?php echo $address->getFax(); ?><br/>
-							   <?php  endif;?>
-							   <?php if($address->getVatId()): ?>
-							   VAT: <?php echo $address->getVatId(); ?><br/>
-							   <?php  endif;?>
-							</div>
-						
-						 <?php endif;?>
-						  
-					   <?php endforeach; ?>			
-				<?php elseif($this->getRepairdevice()->getShippingMethod()==2): ?>
-				    <?php echo Mage::helper('repairdevice')->__('Kungsgatan 29, 11156 Stockholm, Sverige'); ?>
-                <?php else:?>
-				    <?php echo Mage::helper('repairdevice')->__('Tivolivägen 2, 12631 Hägersten, Sverige'); ?>
-                <?php endif;?>				
-				</address>
-			</fieldset>
-		</div>
-	</div>
-	
-	<div class="box-right">
-		<!--Shipping Address-->
-		<div class="entry-edit">
-			<div class="entry-edit-head">
-				<h4 class="icon-head head-shipping-address"><?php echo Mage::helper('repairdevice')->__('Shipping Address') ?></h4>
-			</div>
-			<fieldset>
-				<address>
-				<?php if($this->getRepairdevice()->getShippingMethod()==1): ?>
-						<?php echo $this->escapeHtml($customerData['firstname'].' '.$customerData['lastname']) ?>
-					
-						<?php  foreach($addressData as $itemId):?>
-						 <?php $address = Mage::getModel('repairdevice/repairaddress')->load($itemId); ?>
-						 <?php if($address->getTypeAddress()==1): ?>
-							<div>
-							   <?php if($address->getCompany()): ?>
-								 <?php echo $address->getCompany(); ?><br/>
-							   <?php endif;?>
-							   <?php echo $address->getStreet(); ?><br/>
-							   <?php echo $address->getCity(); ?>,<?php if($address->getRegion()): ?><?php echo $address->getRegion(); ?><?php endif; ?>,<?php echo $address->getPostcode(); ?><br/>
-							   <?php echo Mage::getModel('directory/country')->load($address->getCountryId())->getName(); ?><br/>
-							   T: <?php echo $address->getTelephone(); ?><br/>
-							   <?php if($address->getFax()): ?>
-							   F: <?php echo $address->getFax(); ?><br/>
-							   <?php  endif;?>
-							   <?php if($address->getVatId()): ?>
-							   VAT: <?php echo $address->getVatId(); ?><br/>
-							   <?php  endif;?>
-							</div>
-						
-						 <?php endif;?>
-						  
-					   <?php endforeach; ?>			
-				<?php elseif($this->getRepairdevice()->getShippingMethod()==2): ?>
-				    <?php echo Mage::helper('repairdevice')->__('Kungsgatan 29, 11156 Stockholm, Sverige'); ?>
-                <?php else:?>
-				    <?php echo Mage::helper('repairdevice')->__('Tivolivägen 2, 12631 Hägersten, Sverige'); ?>
-                <?php endif;?>				
-				</address>
-			</fieldset>
-		</div>
-	</div>
-	<div class="clear"></div>
+                            <?php endif; ?>
 
-  
+                        <?php endforeach; ?>
+                    <?php elseif ($this->getRepairdevice()->getShippingMethod() == 2): ?>
+                        <?php echo Mage::helper('repairdevice')->__('Kungsgatan 29, 11156 Stockholm, Sverige'); ?>
+                    <?php else: ?>
+                        <?php echo Mage::helper('repairdevice')->__('Tivolivägen 2, 12631 Hägersten, Sverige'); ?>
+                    <?php endif; ?>
+                </address>
+            </fieldset>
+        </div>
+    </div>
+    <div class="box-right">
+        <!--Shipping Address-->
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-shipping-address"><?php echo Mage::helper('repairdevice')->__('Shipping Address') ?></h4>
+            </div>
+            <fieldset>
+                <address>
+                    <?php if ($this->getRepairdevice()->getShippingMethod() == 1): ?>
+                        <?php echo $this->escapeHtml($customerData['firstname'] . ' ' . $customerData['lastname']) ?>
+
+                        <?php foreach ($addressData as $itemId): ?>
+                            <?php $address = Mage::getModel('repairdevice/repairaddress')->load($itemId); ?>
+                            <?php if ($address->getTypeAddress() == 1): ?>
+                                <div>
+                                    <?php if ($address->getCompany()): ?>
+                                        <?php echo $address->getCompany(); ?><br/>
+                                    <?php endif; ?>
+                                    <?php echo $address->getStreet(); ?><br/>
+                                    <?php echo $address->getCity(); ?>
+                                    ,<?php if ($address->getRegion()): ?><?php echo $address->getRegion(); ?><?php endif; ?>
+                                    ,<?php echo $address->getPostcode(); ?><br/>
+                                    <?php echo Mage::getModel('directory/country')->load($address->getCountryId())->getName(); ?>
+                                    <br/>
+                                    T: <?php echo $address->getTelephone(); ?><br/>
+                                    <?php if ($address->getFax()): ?>
+                                        F: <?php echo $address->getFax(); ?><br/>
+                                    <?php endif; ?>
+                                    <?php if ($address->getVatId()): ?>
+                                        VAT: <?php echo $address->getVatId(); ?><br/>
+                                    <?php endif; ?>
+                                </div>
+
+                            <?php endif; ?>
+
+                        <?php endforeach; ?>
+                    <?php elseif ($this->getRepairdevice()->getShippingMethod() == 2): ?>
+                        <?php echo Mage::helper('repairdevice')->__('Kungsgatan 29, 11156 Stockholm, Sverige'); ?>
+                    <?php else: ?>
+                        <?php echo Mage::helper('repairdevice')->__('Tivolivägen 2, 12631 Hägersten, Sverige'); ?>
+                    <?php endif; ?>
+                </address>
+            </fieldset>
+        </div>
+    </div>
+    <div class="clear"></div>
     <div class="box-left">
         <div class="entry-edit">
             <div class="entry-edit-head">
@@ -210,7 +230,7 @@
                 <div><?php echo Mage::helper('repairdevice')->__('Order was placed using %s') ?></div>
             </fieldset>
         </div>
-   </div>
+    </div>
     <div class="box-right">
         <!--Shipping Address-->
         <div class="entry-edit">
@@ -218,174 +238,205 @@
                 <h4 class="icon-head head-shipping-method"><?php echo Mage::helper('repairdevice')->__('Shipping Information') ?></h4>
             </div>
             <fieldset>
-                
-             
             </fieldset>
         </div>
     </div>
-   
-    <div class="clear"></div>
 
+    <div class="clear"></div>
+    <!--link -> show more items-->
+    <p><a id="show_invoice_list" href="javascript:;">Show more items</a></p>
+    <!--box -> show more items-->
+    <table id="invoice_list_box" cellspacing="0" class="grid">
+        <tbody>
+            <tr>
+                <td colspan="3"><p class="title">Choose the recommended product to the invoice list</p></td>
+            </tr>
+        </tbody>
+        <tbody class="list"></tbody>
+    </table>
+    <div class="clear"></div>
     <div class="entry-edit">
         <div class="entry-edit-head">
-            
             <h4 class="icon-head head-products"><?php echo Mage::helper('repairdevice')->__('%s', 'Items to Invoice') ?></h4>
-			
+
         </div>
     </div>
     <div id="invoice_item_container">
-         
-		 <div class="grid np">
-  <div class="hor-scroll">
-    <table cellspacing="0" class="data order-tables">
-        <col />
-        <col width="1" />
-        <col width="1" />
-        <col width="1" />
-        <col width="1" />
-        <col width="1" />
-        <col width="1" />
-        <col width="1" />
-        <col width="1" />
-        <col width="1" />
-        <thead>
-            <tr class="headings">
-                <th><?php echo $this->helper('repairdevice')->__('Product') ?></th>
-                <th><span class="nobr"><?php echo $this->helper('repairdevice')->__('Item Status') ?></span></th>
-                <th><span class="nobr"><?php echo $this->helper('repairdevice')->__('Original Price') ?></span></th>
-                <th><?php echo $this->helper('repairdevice')->__('Price') ?></th>
-                <th class="a-center"><?php echo $this->helper('repairdevice')->__('Qty') ?></th>
-                <th><?php echo $this->helper('repairdevice')->__('Subtotal') ?></th>
-                <th><span class="nobr"><?php echo $this->helper('repairdevice')->__('Tax Amount') ?></span></th>
-                <th><span class="nobr"><?php echo $this->helper('repairdevice')->__('Tax Percent') ?></span></th>
-                <th><span class="nobr"><?php echo $this->helper('repairdevice')->__('Discount Amount') ?></span></th>
-                <th class="last"><span class="nobr"><?php echo $this->helper('repairdevice')->__('Row Total') ?></span></th>
-            </tr>
-        </thead>
-       
-
-	   
-    </table>
-  </div>
-</div>
-<br />
-		 
-    </div>
-	
-	<div>
-
-    <div class="clear"></div>
-    <?php echo $this->getGiftOptionsHtml() ?>
-    <div class="clear"></div>
-    <div class="entry-edit" style="margin-bottom:20px;">
-        <div class="entry-edit-head">
-            <h4 class="icon-head head-products"><?php echo Mage::helper('repairdevice')->__('Items Ordered') ?></h4>
-        </div>
-		<?php 
-		   // $products = $this->getProductForCategory($invoiceData['repairdevice_id']);
-		   // print_r($products);exit;
-		
-		  $_productIds = $this->getProduct($invoiceData['repairdevice_id']);
-		  foreach($_productIds as $productId): ?>
-		     <?php $product = Mage::getModel('catalog/product')->load($productId); ?>
-		         <div>
-					    Product Id:&nbsp;&nbsp;<?php echo $product->getId(); ?>&nbsp;&nbsp;&nbsp;&nbsp;
-						Product Sku:&nbsp;&nbsp;<span><?php echo $product->getSku(); ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
-					    Product Name:&nbsp;&nbsp;<span><?php echo $product->getName(); ?> </span>
-				 </div>
-				  
-		 <?php endforeach; ?>
-			
-    </div>
-    <?php echo $this->getItemsHtml() ?>
-    <div class="clear"></div>
-
-    <div class="box-left">
-        <div class="entry-edit">
-            <div class="entry-edit-head">
-                <h4><?php echo Mage::helper('repairdevice')->__('Comments History') ?></h4>
+        <div class="grid np">
+            <div class="hor-scroll">
+                <table cellspacing="0" class="data order-tables" id="invoice_list">
+                    <colgroup>
+                        <col width="1">
+                        <col>
+                        <col width="1">
+                    </colgroup>
+                    <thead>
+                    <tr class="headings">
+                        <th><?php echo $this->helper('repairdevice')->__('Product Sku') ?></th>
+                        <th><?php echo $this->helper('repairdevice')->__('Product Name') ?></th>
+                        <th class="last"><?php echo $this->helper('repairdevice')->__('Product Price') ?></th>
+                    </tr>
+                    </thead>
+                </table>
             </div>
-            <fieldset>
-			
-			    <div id="order_history_block">
-    
-    <div id="history_form" class="order-history-form">
-        <div><?php echo Mage::helper('repairdevice')->__('Add Order Comments') ?></div>
-        <span class="field-row">
-            <label class="normal" for="history_status"><?php echo Mage::helper('repairdevice')->__('Status') ?></label><br/>
-            
-        </span>
-        <span class="field-row">
-            <label class="normal" for="history_comment"><?php echo Mage::helper('repairdevice')->__('Comment') ?></label>
-            <textarea name="history[comment]" rows="3" cols="5" style="height:6em; width:99%;" id="history_comment"></textarea>
-        </span>
-        
-       
+        </div>
+        <br/>
+    </div>
+    <div>
+        <div class="clear"></div>
+        <?php echo $this->getGiftOptionsHtml() ?>
+        <div class="clear"></div>
+        <div class="entry-edit grid" style="margin-bottom:20px;">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-products"><?php echo Mage::helper('repairdevice')->__('Items Ordered') ?></h4>
+            </div>
+            <table cellspacing="0" class="data order-tables">
+                <colgroup>
+                    <col width="1">
+                    <col width="1">
+                    <col>
+                </colgroup><thead>
+                <tr class="headings">
+                    <th>Product Id</th>
+                    <th><span class="nobr">Product Sku</span></th>
+                    <th class="last"><span class="nobr">Product Name</span></th>
+                </tr>
+                </thead>
+                    <?php
+                    //$products = $this->getProductForCategory($invoiceData['repairdevice_id']);
+                    //print_r($products);exit;
+
+                    $_productIds = $this->getProduct($invoiceData['repairdevice_id']);
+                    foreach ($_productIds as $productId): ?>
+                        <?php $product = Mage::getModel('catalog/product')->load($productId); ?>
+                        <tbody class="orderedList">
+                            <tr class="border">
+                                <td class="a-center"><?php echo $product->getId(); ?></td>
+                                <td class="a-center"><span><?php echo $product->getSku(); ?></span></td>
+                                <td class="title"><h5><span><?php echo $product->getName(); ?> </span></h5></td>
+                            </tr>
+                        </tbody>
+                    <?php endforeach; ?>
+            </table>
+        </div>
+        <?php echo $this->getItemsHtml() ?>
+        <div class="clear"></div>
+
+        <div class="box-left">
+            <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4><?php echo Mage::helper('repairdevice')->__('Comments History') ?></h4>
+                </div>
+                <fieldset>
+                    <div id="order_history_block">
+                        <div id="history_form" class="order-history-form">
+                            <div><?php echo Mage::helper('repairdevice')->__('Add Order Comments') ?></div>
+                            <span class="field-row">
+                                <label class="normal" for="history_status">
+                                    <?php echo Mage::helper('repairdevice')->__('Status') ?></label><br/>
+                            </span>
+                            <span class="field-row"><label class="normal" for="history_comment">
+                                    <?php echo Mage::helper('repairdevice')->__('Comment') ?></label>
+                                <textarea name="history[comment]" rows="3" cols="5" style="height:6em; width:99%;" id="history_comment"></textarea>
+                            </span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="divider"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="box-right entry-edit">
+            <div class="entry-edit-head"><h4><?php echo Mage::helper('repairdevice')->__('Order Totals') ?></h4></div>
+            <div class="order-totals">
+                <table cellspacing="0" width="100%">
+                    <colgroup>
+                        <col>
+                        <col width="1">
+                    </colgroup>
+                    <tfoot>
+                    <tr class="0">
+                        <td class="label">
+                            <strong>Grand Total</strong>
+                        </td>
+                        <td class="emph">
+                            <strong><span class="price">SEK76.20</span></strong>
+                        </td>
+                    </tr>
+                    </tfoot>
+
+                    <tbody>
+                    <tr class="0">
+                        <td class="label">Subtotal</td>
+                        <td><span class="price">SEK0.20</span></td>
+                    </tr>
+                    <tr class="1">
+                        <td class="label">Shipping &amp; Handling</td>
+                        <td><span class="price">SEK76.00</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="order-totals-bottom">
+                    <div class="divider"></div>
+                    <p>
+                        <label class="normal" for="send_email">Email Copy of Invoice</label>
+                        <input id="send_email" name="invoice[send_email]" value="1" type="checkbox">
+                    </p>
+                    <div class="a-right">
+                        <button title="Submit Invoice" type="button" class="scalable save submit-button" onclick="$('edit_form').submit()">
+                            <span><span><span>Submit Invoice</span></span></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="clear"></div>
     </div>
-    <div class="divider"></div>
-    
-
-</div>
-			
-			
-			</fieldset>
-        </div>
-    </div>
-    <div class="box-right entry-edit">
-        <div class="entry-edit-head"><h4><?php echo Mage::helper('repairdevice')->__('Order Totals') ?></h4></div>
-        <div class="order-totals">
-		     <table cellspacing="0" width="100%">
-    <colgroup><col>
-    <col width="1">
-            </colgroup><tfoot>
-                    <tr class="0">
-            <td class="label">
-                <strong>Grand Total</strong>
-            </td>
-            <td class="emph">
-                <strong><span class="price">SEK76.20</span></strong>
-            </td>
-        </tr>
-                </tfoot>
-    
-            <tbody>
-                    <tr class="0">
-            <td class="label">
-                                Subtotal                            </td>
-                        <td>
-                <span class="price">SEK0.20</span>                        </td>
-        </tr>
-                            <tr class="1">
-            <td class="label">
-                                Shipping &amp; Handling                            </td>
-                        <td>
-                <span class="price">SEK76.00</span>                        </td>
-        </tr>
-                </tbody>
-    </table>
-	
-	<div class="order-totals-bottom">
-          <div class="divider"></div>
-           
-          <p>
-                <label class="normal" for="send_email">Email Copy of Invoice</label>
-                <input id="send_email" name="invoice[send_email]" value="1" type="checkbox">
-          </p>
-          <div class="a-right">
-               <button  title="Submit Invoice" type="button" class="scalable save submit-button" onclick="$('edit_form').submit()" style=""><span><span><span>Submit Invoice</span></span></span></button>          
-		  </div>
-        </div>
-		
-		</div>
-    </div>
-    <div class="clear"></div>
-</div>
-
-
 </form>
 
 <script type="text/javascript">
-	;window.onload = function(){    var child=document.getElementById("page:left");    child.parentNode.removeChild(child);};
+    ;window.onload = function () {
+
+        //fix column,remove col_left
+        var child = document.getElementById("page:left");
+        child.parentNode.removeChild(child);
+
+        //save invoice data
+        var invoice_html = '';
+        var data_invoice  = <?php echo $this->getProductForCategory($invoiceData['repairdevice_id'])?>;
+
+        //load invoice item list
+        $ji("#show_invoice_list").click(function(){
+            invoice_html = '';
+            var tmp_len = data_invoice.length;
+            for(var i = 0;i < tmp_len;i++){
+                invoice_html += '<tr>' +
+                    '<td><span class="check"><input type="checkbox" class="check_item" value="'+data_invoice[i].sku+'" name="invoice[]"  data-index="'+i+'"></span></td>'+
+                    '<td><span class="sku">'+data_invoice[i].sku+'</span></td>'+
+                    '<td><span class="name">'+data_invoice[i].name+'</td>' +
+                    '<td><span class="price">'+data_invoice[i].price+'</span></td>' +
+                    '</tr>';
+            }
+            $ji("#invoice_list_box").find(".list").html(invoice_html).end().show();
+            $ji("#show_invoice_list").hide();
+        });
+
+        /*
+        * add items with 'checked' to invoice list
+        * */
+        $ji("#invoice_list_box").delegate(".check_item","click",function () {
+            $ji('#invoice_list .orderedList').remove();
+            var in_html = '';
+            $ji('#invoice_list_box .check_item:checkbox:checked').each(function () {
+                var tmp_index = $ji(this).attr("data-index");
+                in_html += '<tbody class="orderedList"><tr class="border">' +
+                    '<td class="a-center">'+data_invoice[tmp_index].sku+'</td>'+
+                    '<td class="a-center"><span>'+data_invoice[tmp_index].name+'</span></td>' +
+                    '<td class="a-center"><h5><span>'+data_invoice[tmp_index].price+'</span></h5></td>' +
+                    '</tr></tbody>';
+            });
+            $ji("#invoice_list").append(in_html);
+        });
+    };
 </script>
 
