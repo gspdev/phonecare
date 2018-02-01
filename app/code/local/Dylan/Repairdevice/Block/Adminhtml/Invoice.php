@@ -119,11 +119,12 @@ class Dylan_Repairdevice_Block_Adminhtml_Invoice extends Mage_Adminhtml_Block_Te
 		 
 		  //  $dataArr =array();
 			foreach ($products as $product){
-					$dataArr[] = array(
-					 'sku'=>trim($product->getSku()),
-					 'name' =>trim($product->getName()),
-					 'price'=>$product->getPrice()
-				   );	
+					// $dataArr[] = array(
+					 // 'sku'=>trim($product->getSku()),
+					 // 'name' =>trim($product->getName()),
+					 // 'price'=>$product->getPrice()
+				   // );
+                   $dataArr[]=$product->getData();				   
 					 
 				}
 			return json_encode($dataArr);
@@ -131,6 +132,5 @@ class Dylan_Repairdevice_Block_Adminhtml_Invoice extends Mage_Adminhtml_Block_Te
        } 
 		
 	}
-	
 
 }
