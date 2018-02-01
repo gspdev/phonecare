@@ -33,19 +33,15 @@
         margin: 0;
         padding: 0;
     }
-    .orderedList td{padding: 6px 2px;}
+    .orderedList td,#invoice_list_box td{padding: 6px 2px;}
     .orderedList:nth-child(even){background: #f6f6f6;}
     .orderedList:nth-child(odd){background: #ffffff;}
-    #show_invoice_list,#invoice_list_box{display:block;margin:0 0 20px 0;}
+    #show_invoice_list{display:block;margin:0 0 20px 0;}
     #show_invoice_list{font-size: 16px;font-weight: bold;text-transform: capitalize;}
-    #invoice_list_box{display: none;padding: 0 20px;font-size: 13px;}
-    #invoice_list_box .check{margin: 0 12px 0 0;}
-    #invoice_list_box .count{display:inline-block;width: 24px;text-align: right;}
-    #invoice_list_box .sku{margin: 0 10px;display:inline-block;width: 100px;}
-    #invoice_list_box .name{font-size: 14px;font-weight: bold;}
-    #invoice_list_box .price{margin: 0 0 0 20px;}
-    #invoice_list_box .title{font-size: 14px;font-weight:bold;color:#ea7601;text-transform: capitalize;text-indent: -20px;}
-    #invoice_list_box .list{display:block;border: 1px solid #d6d6d6;background: #fafafa;padding: 4px 20px;max-height: 300px;overflow: hidden;overflow-y: scroll;}
+    #invoice_list_box{display: none;margin-bottom: 25px;}
+    #invoice_list_box .check{display:block;width: 50px;text-align: center;}
+    #invoice_list_box span.name{font-weight: bold;}
+    #invoice_list_box .list>.checked{background: #afafaf;}
 </style>
 <div class="form-buttons" style="text-align: right;margin-bottom: 11px;padding-right: 4px;">
     <button title="Back" type="button" class="scalable back" onclick="setLocation('<?php echo $this->getBackUrl() ?>')">
@@ -245,15 +241,33 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
     <div class="clear"></div>
     <!--link -> show more items-->
     <p><a id="show_invoice_list" href="javascript:;">Show more items</a></p>
-    <!--box -> show more items-->
-    <table id="invoice_list_box" cellspacing="0" class="grid">
-        <tbody>
-            <tr>
-                <td colspan="3"><p class="title">Choose the recommended product to the invoice list</p></td>
+    <div class="entry-edit grid" id="invoice_list_box">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-products">Choose the recommended product to the invoice list</h4>
+            </div>
+        </div>
+        <!--box -> show more items-->
+        <table cellspacing="0">
+            <colgroup>
+                <col width="1">
+                <col width="1">
+                <col width="1">
+                <col>
+                <col width="1">
+            </colgroup>
+            <thead>
+            <tr class="headings">
+                <th><span class="check"><input type="checkbox" disabled></span></th>
+                <th><?php echo $this->helper('repairdevice')->__('Product Id') ?></th>
+                <th><?php echo $this->helper('repairdevice')->__('Product Sku') ?></th>
+                <th><?php echo $this->helper('repairdevice')->__('Product Name') ?></th>
+                <th class="last"><?php echo $this->helper('repairdevice')->__('Product Price') ?></th>
             </tr>
-        </tbody>
-        <tbody class="list"></tbody>
-    </table>
+            </thead>
+            <tbody class="list"></tbody>
+        </table>
+    </div>
     <div class="clear"></div>
     <div class="entry-edit grid">
         <div class="entry-edit">
@@ -268,11 +282,13 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                 <table cellspacing="0" class="data order-tables" id="invoice_list">
                     <colgroup>
                         <col width="1">
+                        <col width="1">
                         <col>
                         <col width="1">
                     </colgroup>
                     <thead>
                     <tr class="headings">
+                        <th><?php echo $this->helper('repairdevice')->__('Product Id') ?></th>
                         <th><?php echo $this->helper('repairdevice')->__('Product Sku') ?></th>
                         <th><?php echo $this->helper('repairdevice')->__('Product Name') ?></th>
                         <th class="last"><?php echo $this->helper('repairdevice')->__('Product Price') ?></th>
@@ -370,7 +386,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                     <tbody>
                     <tr class="0">
                         <td class="label">Subtotal</td>
-                        <td><span class="price">SEK0.20</span></td>
+                        <td><span class="price subtotal">SEK0.20</span></td>
                     </tr>
                     <tr class="1">
                         <td class="label">Shipping &amp; Handling</td>
@@ -413,10 +429,11 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
             var tmp_len = data_invoice.length;
             for(var i = 0;i < tmp_len;i++){
                 invoice_html += '<tr>' +
-                    '<td><span class="check"><input type="checkbox" class="check_item" value="'+data_invoice[i].sku+'" name="invoice[]"  data-index="'+i+'"></span></td>'+
-                    '<td><span class="sku">'+data_invoice[i].sku+'</span></td>'+
-                    '<td><span class="name">'+data_invoice[i].name+'</td>' +
-                    '<td><span class="price">'+data_invoice[i].price+'</span></td>' +
+                    '<td class="a-center"><span class="check"><input type="checkbox" class="check_item" value="'+data_invoice[i].sku+'" name="invoice[]"  data-index="'+i+'"></span></td>'+
+                    '<td class="a-center"><span class="id">'+data_invoice[i].entity_id+'</span></td>'+
+                    '<td class="a-center"><span class="sku">'+data_invoice[i].sku+'</td>'+
+                    '<td class="title"><span class="name">'+data_invoice[i].name+'</td>' +
+                    '<td class="a-center"><span class="price">'+data_invoice[i].price+'</span></td>' +
                     '</tr>';
             }
             $ji("#invoice_list_box").find(".list").html(invoice_html).end().show();
@@ -428,17 +445,28 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
         * */
         $ji("#invoice_list_box").delegate(".check_item","click",function () {
             $ji('#invoice_list .orderedList').remove();
+            $ji("tr.checked").removeClass("checked");
             var in_html = '';
             $ji('#invoice_list_box .check_item:checkbox:checked').each(function () {
                 var tmp_index = $ji(this).attr("data-index");
+                $ji(this).parent().parent().parent("tr").addClass("checked");
                 in_html += '<tbody class="orderedList"><tr class="border">' +
+                    '<td class="a-center"><span class="id">'+data_invoice[tmp_index].entity_id+'</span></td>'+
                     '<td class="a-center">'+data_invoice[tmp_index].sku+'</td>'+
                     '<td class="a-left"><h5><span>'+data_invoice[tmp_index].name+'</span></h5></td>' +
-                    '<td class="a-center"><h5><span>'+data_invoice[tmp_index].price+'</span></h5></td>' +
+                    '<td class="a-center"><h5><span class="price">'+data_invoice[tmp_index].price+'</span></h5></td>' +
                     '</tr></tbody>';
             });
             $ji("#invoice_list").append(in_html);
+            countSubtotal();
         });
+        function countSubtotal() {
+            var t_sub = parseFloat(0).toFixed(2);
+            $ji("#invoice_list .price").each(function(){
+                t_sub = (parseFloat(t_sub) + parseFloat($ji(this).text())).toFixed(2);
+            });
+            $ji(".order-totals .subtotal").text("SEK"+t_sub);
+        }
     };
 </script>
 
