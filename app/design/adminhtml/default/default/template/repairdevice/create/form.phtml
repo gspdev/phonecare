@@ -33,7 +33,13 @@
         margin: 0;
         padding: 0;
     }
-    .orderedList td,#invoice_list_box td{padding: 6px 2px;}
+    .shipping_method .text{padding: 0 0 0 10px;}
+    .shipping_input{margin:10px 0 0 0;}
+    .shipping_input input::-webkit-outer-spin-button,
+    .shipping_input input::-webkit-inner-spin-button{
+        -webkit-appearance: none !important;
+        -moz-appearance: textfield;}
+    .orderedList td,#invoice_list_box td{/*padding: 6px 2px;*/}
     .orderedList:nth-child(even){background: #f6f6f6;}
     .orderedList:nth-child(odd){background: #ffffff;}
     #show_invoice_list{display:block;margin:0 0 20px 0;}
@@ -234,6 +240,20 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                 <h4 class="icon-head head-shipping-method"><?php echo Mage::helper('repairdevice')->__('Shipping Information') ?></h4>
             </div>
             <fieldset>
+                <div class="box-left">
+                    <strong>Select Shipping Method</strong>
+                    <ul class="shipping_method">
+                        <li><label><input type="radio" name="shipping method"><span class="text">DHL</span></label></li>
+                        <li><label><input type="radio" name="shipping method"><span class="text">EMS</span></label></li>
+                    </ul>
+                </div>
+                <div class="box-right">
+                    <strong>Enter Shipping & Handling fee</strong>
+                    <div class="shipping_input">
+                        <input type="number" name="shipping fee" title="shipping fee" class="fee">
+                    </div>
+                </div>
+                <div class="clear"></div>
             </fieldset>
         </div>
     </div>
@@ -378,7 +398,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                             <strong>Grand Total</strong>
                         </td>
                         <td class="emph">
-                            <strong><span class="price">SEK76.20</span></strong>
+                            <strong><span class="price grandtotal">SEK0.00</span></strong>
                         </td>
                     </tr>
                     </tfoot>
@@ -386,11 +406,11 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                     <tbody>
                     <tr class="0">
                         <td class="label">Subtotal</td>
-                        <td><span class="price subtotal">SEK0.20</span></td>
+                        <td><span class="price subtotal">SEK0.00</span></td>
                     </tr>
                     <tr class="1">
                         <td class="label">Shipping &amp; Handling</td>
-                        <td><span class="price">SEK76.00</span></td>
+                        <td><span class="price shippingtotal">SEK0.00</span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -433,7 +453,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                     '<td class="a-center"><span class="id">'+data_invoice[i].entity_id+'</span></td>'+
                     '<td class="a-center"><span class="sku">'+data_invoice[i].sku+'</td>'+
                     '<td class="title"><span class="name">'+data_invoice[i].name+'</td>' +
-                    '<td class="a-center"><span class="price">'+data_invoice[i].price+'</span></td>' +
+                    '<td class="a-center"><span class="price">'+data_invoice[i].currency+'</span></td>' +
                     '</tr>';
             }
             $ji("#invoice_list_box").find(".list").html(invoice_html).end().show();
@@ -454,7 +474,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                     '<td class="a-center"><span class="id">'+data_invoice[tmp_index].entity_id+'</span></td>'+
                     '<td class="a-center">'+data_invoice[tmp_index].sku+'</td>'+
                     '<td class="a-left"><h5><span>'+data_invoice[tmp_index].name+'</span></h5></td>' +
-                    '<td class="a-center"><h5><span class="price">'+data_invoice[tmp_index].price+'</span></h5></td>' +
+                    '<td class="a-center"><h5><span class="price" data-price="'+data_invoice[tmp_index].price+'">'+data_invoice[tmp_index].currency+'</span></h5></td>' +
                     '</tr></tbody>';
             });
             $ji("#invoice_list").append(in_html);
@@ -462,10 +482,19 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
         });
         function countSubtotal() {
             var t_sub = parseFloat(0).toFixed(2);
+            var t_shipping = parseFloat($ji(".shipping_input .fee").val()).toFixed(2);
+            if( isNaN(t_shipping) ){
+                t_shipping = parseFloat(0).toFixed(2);
+            }
+            var t_grand = parseFloat(0).toFixed(2);
             $ji("#invoice_list .price").each(function(){
-                t_sub = (parseFloat(t_sub) + parseFloat($ji(this).text())).toFixed(2);
+                t_sub = (parseFloat(t_sub) + parseFloat($ji(this).attr("data-price"))).toFixed(2);
             });
+            t_grand = (parseFloat(t_sub) + parseFloat(t_shipping)).toFixed(2);
+            alert(t_sub +'>'+t_shipping+'>'+t_grand);
             $ji(".order-totals .subtotal").text("SEK"+t_sub);
+            $ji(".order-totals .shippingtotal").text("SEK"+t_shipping);
+            $ji(".order-totals .grandtotal").text("SEK"+t_grand);
         }
     };
 </script>
