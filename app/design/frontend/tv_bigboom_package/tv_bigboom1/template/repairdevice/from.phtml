@@ -54,10 +54,11 @@
     }
 
     .repair-form h4 {
-        margin-top: 2em;
+        margin-top: 1.6em;
         color: #333333;
         font: 600 16px/1.35 "SF Pro Display","Helvetica Neue","Helvetica","Arial",sans-serif;
     }
+    .listBox{padding: 0 0 40px 0;background: #f9f9f9;border:1px solid #fc6908;border-radius: 2px;}
     .listBox h4{color: #fc6908;}
     .repair-form button {
         margin-top: 2em;
@@ -147,9 +148,11 @@
     .listBox .head {
         position: relative;
         padding: 6px 10px;
-        border: 1px solid #f0f0f0;
+        border: 1px solid #cccccc;
         color: #000;
         height: 36px;
+        background: #ffffff;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
     /*.listBox .head::after {
         content: '';
@@ -438,12 +441,13 @@
             <h2 class="repair-title"><span class="repair-step"><span>1</span></span><span><?php echo $this->__('Välj modell att laga'); ?></span>
             </h2>
             <div class="row listBox">
-                <div class="col-sm-5">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5 fs_box">
                     <h4><?php echo $this->__('märke:'); ?></h4>
                     <div id="catHead" class="head"></div>
                     <ul id="categoryList" class="repairList"></ul>
+                    <div class="first_step"></div>
                 </div>
-                <div class="col-sm-1"></div>
                 <div class="col-sm-5 products_listbox">
                     <h4><?php echo $this->__('Model:'); ?></h4>
                     <div id="proHead" class="head"></div>
@@ -829,10 +833,13 @@
                         }
                         if (mtd === 'category' && sort === 0) {
                             $("#categoryList").html(str);
+
                         } else if (mtd === 'category' && sort === 1) {
                             $("#productList").html(str);
+                            productList.showList();
                         } else if (mtd === 'category' && sort === 2) {
                             $("#otherList").html(str);
+                            otherList.showList();
                         }
                         if(sort === 0){
                             step = 1;
@@ -1139,7 +1146,12 @@
 
         //hide all repairlist when click other elements
         $(document).click(function (e) {
-            if (!$(e.target).hasClass("head") && !$(e.target).hasClass("repairList")&&!$(e.target).hasClass("nav-down-arrow")) {
+            if (!$(e.target).hasClass("head") &&
+                !$(e.target).hasClass("repairList") &&
+                !$(e.target).parent().hasClass("head") &&
+                !$(e.target).hasClass("nav-down-arrow")&&!$(e.target).hasClass("img") &&
+                !$(e.target).hasClass("name")&&!$(e.target).parent().hasClass("img")
+            ){
                 $(".repairList").removeClass("active");
             }
         });

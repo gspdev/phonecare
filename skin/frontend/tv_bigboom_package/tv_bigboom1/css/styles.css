@@ -4831,3 +4831,13 @@ line-height: 70px;font-family: "SF Pro Display","Helvetica Neue","Helvetica","Ar
 #product_tabs_description_contents table tr td:nth-child(1) *{font-size:16px!important;}
 #product_tabs_description_contents table tr td:nth-child(2){}
 #product_tabs_description_contents table tr td:nth-child(2) *{font-weight:normal;font-size:14px!important;color:#666!important;}
+/*repariton*/
+.fs_box{position: relative;}
+.fs_box .first_step{
+    position: absolute;
+    z-index: 6;
+    width: 165px;
+    height: 60px;
+    left: -120px;
+    bottom: -70px;
+    background: url(../images/first_step.png) 0 0 no-repeat;}
