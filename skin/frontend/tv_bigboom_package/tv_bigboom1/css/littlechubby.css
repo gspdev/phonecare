@@ -146,7 +146,7 @@
 	.product-view .product-shop{padding:0 25px;}
 	.short-description .std p{margin:0;}
 	.product-tabs a{font-weight:normal;padding: 4px 0;}
-	.product-tabs li.active a{color: #666;font-weight: normal;background-color: #fff;}
+	.product-tabs li.active a{font-weight: normal;background-color: #ececec;}
 	.product-tabs li{width:50%;text-align:center;}
 	.product-tabs a{ border-left: 1px solid #e5e5e5;}
 /*Login or Create an Account*/
@@ -269,7 +269,8 @@
 	}
 	.mobile-direction .prevNav{left: 0;}
 	.mobile-direction .nextNav{right: 0;}
-	.col1-layout .product-view .product-shop{padding: 10px 10px 107px 10px;}
+	.col1-layout .product-view .product-shop{padding: 10px 10px 10px 10px;}
+	.addthis{display: none;}
 	.product-view .product-shop .dlist{display: none;}
 	.product-collateral{margin:30px -15px 0 -15px;}
 	.footer-static-content ul li a{display: inline;}
