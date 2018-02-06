@@ -42,12 +42,17 @@
     .orderedList td,#invoice_list_box td{/*padding: 6px 2px;*/}
     .orderedList:nth-child(even){background: #f6f6f6;}
     .orderedList:nth-child(odd){background: #ffffff;}
-    #show_invoice_list{display:block;margin:0 0 20px 0;}
-    #show_invoice_list{font-size: 16px;font-weight: bold;text-transform: capitalize;}
+    .shipping_input .fee{width:60px;}
+    #update_shipping{display:none;margin: 0 0 0 10px;}
+    button#update_shipping span{line-height: 1.2em;}
+    #show_invoice_list{margin: 0 0 20px 0;text-transform: capitalize;}
     #invoice_list_box{display: none;margin-bottom: 25px;}
     #invoice_list_box .check{display:block;width: 50px;text-align: center;}
     #invoice_list_box span.name{font-weight: bold;}
     #invoice_list_box .list>.checked{background: #afafaf;}
+    #update_grand{margin:0 20px 0 0;}
+    #update_group{display:none;margin: 0 20px 0 0;}
+    #grandTotal{width: 100px;}
 </style>
 <div class="form-buttons" style="text-align: right;margin-bottom: 11px;padding-right: 4px;">
     <button title="Back" type="button" class="scalable back" onclick="setLocation('<?php echo $this->getBackUrl() ?>')">
@@ -251,6 +256,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                     <strong>Enter Shipping & Handling fee</strong>
                     <div class="shipping_input">
                         <input type="number" name="shipping fee" title="shipping fee" class="fee">
+                        <button id="update_shipping"><span><span>Confirm This</span></span></button>
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -260,7 +266,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
 
     <div class="clear"></div>
     <!--link -> show more items-->
-    <p><a id="show_invoice_list" href="javascript:;">Show more items</a></p>
+    <button id="show_invoice_list"><span><span>Show more items</span></span></button>
     <div class="entry-edit grid" id="invoice_list_box">
         <div class="entry-edit">
             <div class="entry-edit-head">
@@ -395,10 +401,15 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                     <tfoot>
                     <tr class="0">
                         <td class="label">
+                            <span id="update_group">
+                                <input type="number" name="grandTotal" value="0.00" id="grandTotal">
+                                <button id="confirm_grand"><span><span>Confirm</span></span></button>
+                            </span>
+                            <button id="update_grand"><span><span>Update Total</span></span></button>
                             <strong>Grand Total</strong>
                         </td>
-                        <td class="emph">
-                            <strong><span class="price grandtotal">SEK0.00</span></strong>
+                        <td class="emph a-left">
+                            <strong><span>SEK</span><span class="price grandtotal">0.00</span></strong>
                         </td>
                     </tr>
                     </tfoot>
@@ -406,11 +417,11 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                     <tbody>
                     <tr class="0">
                         <td class="label">Subtotal</td>
-                        <td><span class="price subtotal">SEK0.00</span></td>
+                        <td class="a-left"><span class="price subtotal">SEK0.00</span></td>
                     </tr>
                     <tr class="1">
                         <td class="label">Shipping &amp; Handling</td>
-                        <td><span class="price shippingtotal">SEK0.00</span></td>
+                        <td class="a-left"><span class="price shippingtotal">SEK0.00</span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -438,6 +449,8 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
         //fix column,remove col_left
         var child = document.getElementById("page:left");
         child.parentNode.removeChild(child);
+        // define shipping fee
+        var t_shipping = parseFloat(0).toFixed(2);
 
         //save invoice data
         var invoice_html = '';
@@ -445,6 +458,8 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
 
         //load invoice item list
         $ji("#show_invoice_list").click(function(){
+            event.preventDefault(); // Compatible standard Browsers
+            window.event.returnValue = false; // Compatible IE6~8
             invoice_html = '';
             var tmp_len = data_invoice.length;
             for(var i = 0;i < tmp_len;i++){
@@ -459,8 +474,23 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
             $ji("#invoice_list_box").find(".list").html(invoice_html).end().show();
             $ji("#show_invoice_list").hide();
         });
+        /**
+        *   confirm shipping input
+        * */
+        $ji(".shipping_input .fee").focus(function(){
+            $ji("#update_shipping").show();
+        });
+        $ji("#update_shipping").click(function(){
+            event.preventDefault(); // Compatible standard Browsers
+            window.event.returnValue = false; // Compatible IE6~8
+            $ji(".shipping_input .fee").val(parseFloat($ji(".shipping_input .fee").val()).toFixed(2));
+            t_shipping = parseFloat($ji(".shipping_input .fee").val()).toFixed(2);
+            $ji(".order-totals .shippingtotal").text("SEK"+t_shipping);
+            countSubtotal();
+            $ji("#update_shipping").hide();
+        });
 
-        /*
+        /**
         * add items with 'checked' to invoice list
         * */
         $ji("#invoice_list_box").delegate(".check_item","click",function () {
@@ -480,9 +510,26 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
             $ji("#invoice_list").append(in_html);
             countSubtotal();
         });
+        /**
+         * update total
+         * */
+        $ji("#update_grand").click(function(){
+            event.preventDefault(); // Compatible standard Browsers
+            window.event.returnValue = false; // Compatible IE6~8
+
+            $ji("#update_group").show();
+            $ji("#update_grand").hide();
+        });
+        $ji("#confirm_grand").click(function(){
+            event.preventDefault(); // Compatible standard Browsers
+            window.event.returnValue = false; // Compatible IE6~8
+
+            $ji(".order-totals .grandtotal").text(parseFloat($ji("#grandTotal").val()).toFixed(2));
+            $ji("#update_group").hide();
+            $ji("#update_grand").show();
+        });
         function countSubtotal() {
             var t_sub = parseFloat(0).toFixed(2);
-            var t_shipping = parseFloat($ji(".shipping_input .fee").val()).toFixed(2);
             if( isNaN(t_shipping) ){
                 t_shipping = parseFloat(0).toFixed(2);
             }
@@ -491,10 +538,9 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                 t_sub = (parseFloat(t_sub) + parseFloat($ji(this).attr("data-price"))).toFixed(2);
             });
             t_grand = (parseFloat(t_sub) + parseFloat(t_shipping)).toFixed(2);
-            alert(t_sub +'>'+t_shipping+'>'+t_grand);
             $ji(".order-totals .subtotal").text("SEK"+t_sub);
-            $ji(".order-totals .shippingtotal").text("SEK"+t_shipping);
-            $ji(".order-totals .grandtotal").text("SEK"+t_grand);
+            $ji(".order-totals .grandtotal").text(t_grand);
+            $ji("#grandTotal").val(t_grand);
         }
     };
 </script>
