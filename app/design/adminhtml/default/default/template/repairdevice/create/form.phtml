@@ -238,8 +238,8 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                 <h4 class="icon-head head-payment-method"><?php echo Mage::helper('repairdevice')->__('Payment Information') ?></h4>
             </div>
             <fieldset>
-                <div><?php echo Mage::helper('repairdevice')->__('Blank Payment:454815165448451') ?></div>
-				<input type="hidden" name="payment" value="Blank Payment:454815165448451" />
+                <div><?php echo Mage::helper('repairdevice')->__('Bank Payment:test test test') ?></div>
+				<input type="hidden" name="payment" value="Bank Payment:test test test" />
             </fieldset>
         </div>
     </div>
@@ -252,13 +252,14 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
             <fieldset>
                 <div class="box-left">
                     <strong>Select Shipping Method</strong>
-                    <ul class="shipping_method">
+                    <ul class="shipping_method" id="shipping_method">
                         <li><label><input type="radio" name="shipping[]" value="DHL"><span class="text">DHL</span></label></li>
                         <li><label><input type="radio" name="shipping[]" value="EMS"><span class="text">EMS</span></label></li>
+                        <li><label><input type="radio" name="shipping[]" value="STORE"><span class="text">STORE Free</span></label></li>
                     </ul>
                 </div>
                 <div class="box-right">
-                    <strong>Enter Shipping & Handling fee</strong>
+                    <strong>Enter Shipping & Handling Cost</strong>
                     <div class="shipping_input">
                         <input type="number" name="shipping_cost" title="shipping fee" class="fee">
                         <button id="update_shipping"><span><span>Confirm This</span></span></button>
@@ -473,7 +474,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                     </p>-->
 					<?php if(!$_productIdsInvoice): ?>
 					   <div class="a-right">
-                            <button title="Submit Invoice" type="button" class="scalable save submit-button" onclick="$('edit_form').submit()">
+                            <button title="Submit Invoice" type="button" class="scalable save submit-button" onclick=""><!--$('edit_form').submit()-->
                             <span><span><span>Submit Invoice</span></span></span></button>
                        </div>
 					<?php endif;?>
@@ -496,6 +497,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
 
         //save invoice data
         var invoice_html = '';
+        var count_invoice_item = 0;
         var data_invoice  = <?php echo $this->getProductForCategory($invoiceData['repairdevice_id'])?>;
 
         //load invoice item list
@@ -521,6 +523,17 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
         * */
         $ji(".shipping_input .fee").focus(function(){
             $ji("#update_shipping").show();
+        }).blur(function(){
+            $ji("#update_shipping").hide();
+            $ji(".shipping_input .fee").val(parseFloat($ji(".shipping_input .fee").val()).toFixed(2));
+            t_shipping = parseFloat($ji(".shipping_input .fee").val()).toFixed(2);
+            $ji(".order-totals .shippingtotal").text("SEK"+t_shipping);
+            countSubtotal();
+        });
+        $ji("#shipping_method input").click(function(){
+            if($ji(this).val() === "STORE"){
+                $ji(".shipping_input .fee").val("0.00");
+            }
         });
         $ji("#update_shipping").click(function(){
             event.preventDefault(); // Compatible standard Browsers
@@ -540,6 +553,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
             $ji("tr.checked").removeClass("checked");
             var in_html = '';
             $ji('#invoice_list_box .check_item:checkbox:checked').each(function () {
+                count_invoice_item++;
                 var tmp_index = $ji(this).attr("data-index");
                 $ji(this).parent().parent().parent("tr").addClass("checked");
                 in_html += '<tbody class="orderedList"><tr class="border">' +
@@ -569,6 +583,28 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
             $ji(".order-totals .grandtotal").text(parseFloat($ji("#grandTotal").val()).toFixed(2));
             $ji("#update_group").hide();
             $ji("#update_grand").show();
+        });
+        $ji(".submit-button").click(function(event){
+            var event = event || window.event;
+            var count_radio = 0;
+            $ji('#shipping_method li').each(function(){
+                if($ji(this).find("input:radio:checked").is(":checked")){
+                    count_radio++;
+                }
+            });
+            if(count_radio < 1 || $ji(".shipping_input .fee").val().length == 0){
+                alert("Please select shipping method and enter shipping cost!");
+                event.preventDefault(); // Compatible standard Browsers
+                window.event.returnValue = false; // Compatible IE6~8
+                return false;
+            }
+            if(count_invoice_item == 0){
+                alert("Please select items to invoice!");
+                event.preventDefault(); // Compatible standard Browsers
+                window.event.returnValue = false; // Compatible IE6~8
+                return false;
+            }
+            $ji("#edit_form").submit();
         });
         function countSubtotal() {
             var t_sub = parseFloat(0).toFixed(2);

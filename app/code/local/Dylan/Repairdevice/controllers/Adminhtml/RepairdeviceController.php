@@ -163,9 +163,9 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
 								<br>F: '.$resAddress['fax'].'
 								<br>VAT: '.$resAddress['vat_id'].'</p>';
 		 }else if($res['shipping_method']==2){
-			  $dataShipping[] = '<p>'.Mage::helper('repairdevice')->__('Kungsgatan 29, 11156 Stockholm, Sverige').'</p>';
+			  $dataShipping[] = '<p style="margin:0;">'.Mage::helper('repairdevice')->__('Kungsgatan 29, 11156 Stockholm, Sverige').'</p>';
 		 }else{
-			  $dataShipping[] = '<p>'.Mage::helper('repairdevice')->__('Tivolivägen 2, 12631 Hägersten, Sverige').'</p>';
+			  $dataShipping[] = '<p style="margin:0;">'.Mage::helper('repairdevice')->__('Tivolivägen 2, 12631 Hägersten, Sverige').'</p>';
 		 }
 
 		 return implode('',$dataShipping); 
@@ -257,7 +257,7 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
                             <td valign="top" style="vertical-align: top;padding-top: 20px;">
                             <div style="padding-left:10px">
 								<a href="https://www.phonecare.se/" style="display: block;">
-									<img src="https://www.phonecare.se/skin/frontend/tv_bigboom_package/tv_bigboom1/images/logo_email.gif" alt="GSP" width="165" height="48" style="margin-left:10px;">
+									<img src="https://www.phonecare.se/skin/frontend/tv_bigboom_package/tv_bigboom1/images/logo_email.gif" alt="PhoneCare" width="165" style="margin-left:10px;">
 								</a>
                               </div>
                                 <!--head-left-->
@@ -289,17 +289,19 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
                                                 <tr>
                                                     <td style="vertical-align: top;">
                                                       <div style="font-size: 12px;">
-                                                        <p style="margin: 0;font-weight:bold;">Date</p>
+                                                        <p style="margin: 0 0 4px 0;font-weight:bold;">Date</p>
                                                         <p style="margin: 0;">'.$res['create_at'].'</p>
                                                         </div>
                                                       <div style="font-size: 12px;padding-right:20px;">
-                                                        <h3> Invoice Id:'.$res['invoice_id'].'</h3>
+                                                        <p style="margin: 10px 0 4px 0;font-weight:bold;"> Invoice id</p>
+                                                        <p style="margin:0;">'.$res['invoice_id'].'</p>
                                                         </div>
                                                     </td>
                                               </tr>
                                                 <tr>
-                                                    <td style="vertical-align: top;"><h5 style="text-transform: uppercase;padding: 25px 0 0 6px;margin:0 0 10px 0">Shipping address</h5>
-                                                        <div style="font-size: 12px;padding:0 12px;">
+                                                    <td style="vertical-align: top;font-size: 12px;">
+                                                        <p style="margin:10px 0 4px 0;font-weight:bold;">Shipping address</p>
+                                                        <div style="font-size: 12px;padding:0;margin:0;">
                                                             '.$this->_getShipping($repaire_id).'
                                                         </div>
                                                     </td>
@@ -318,7 +320,7 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
                             </td>
                             <td width="291">
                                 <div style="float:right;width: 200px;font-size:14px;">
-                                    <p style="font-weight: bold;margin: 0;padding: 10px 10px;text-transform: uppercase"> Total: <span style="font-weight: normal;text-align: right;float: right;text-transform: none">'.Mage::helper('core')->currency($dataPost['grandTotal'], true, false).'</span></p>
+                                    <p style="margin: 0;padding: 10px 10px;text-align: right;"> Total: <span style="font-weight: bold;">'.Mage::helper('core')->currency($dataPost['grandTotal'], true, false).'</span></p>
                                 </div>
                             </td>
                         </tr>
@@ -336,7 +338,7 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
 										</tr>
 									</thead>
 									
-									<tbody bgcolor="#F6F6F6">
+									<tbody>
 									
 									 '.$this->_getProduct($productIdArray).'
 										
@@ -344,16 +346,16 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
 							
 									<tfoot>
 										<tr class="subtotal">
-											<td colspan="3" align="right" style="padding:3px 9px">Summa (ex.moms)</td>
+											<td colspan="3" align="right" style="padding:3px 9px"><p style="margin:0;">Summa (ex.moms)</p></td>
 											<td align="right" style="padding:3px 9px"><span class="price">'.Mage::helper('core')->currency($dataPost['subTotal'], true, false).'</span></td>
 										</tr>
 										<tr class="shipping_cost">
-											<td colspan="3" align="right" style="padding:3px 9px">Shipping Cost</td>
-											<td align="right" style="padding:3px 9px"><span class="price">'.$dataShppingTitle.'('.$dataSppingCost.')</td>
+											<td colspan="3" align="right" style="padding:3px 9px"><p style="margin:0;">Shipping Cost</p></td>
+											<td align="right" style="padding:3px 9px"><span class="price">'.$dataShppingTitle.'(SEK'.$dataSppingCost.')</td>
 										</tr>
 										<tr class="grand_total">
 											<td colspan="3" align="right" style="padding:3px 9px">
-												<strong>Totalt</strong>
+												<strong>Total</strong>
 											</td>
 											<td align="right" style="padding:3px 9px">
 												<strong><span class="price">'.Mage::helper('core')->currency($dataPost['grandTotal'], true, false).'</span></strong>
@@ -374,8 +376,8 @@ class  Dylan_Repairdevice_Adminhtml_RepairdeviceController extends Mage_Adminhtm
                             <td width="450" style="vertical-align: top;">
                                 <h5 style="text-transform: uppercase;padding: 25px 0 0 10px;">Order info:</h5>
                                 <div style="font-size: 12px;padding:0 12px;">
-                                    <p>Grand Total:'.Mage::helper('core')->currency($dataPost['grandTotal'], true, false).'</p>
-                                    <p>Due Date:'.$duedate.'</p>
+                                    <p>Grand Total: <span style="font-weight: bold;">'.Mage::helper('core')->currency($dataPost['grandTotal'], true, false).'</span></p>
+                                    <p>Due Date: '.$duedate.'</p>
                                 </div>
                             </td>
                             <td width="450" style="vertical-align: top;">
