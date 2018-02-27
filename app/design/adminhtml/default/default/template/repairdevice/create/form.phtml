@@ -224,8 +224,10 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                         <?php endforeach; ?>
                     <?php elseif ($this->getRepairdevice()->getShippingMethod() == 2): ?>
                         <?php echo Mage::helper('repairdevice')->__('Kungsgatan 29, 11156 Stockholm, Sverige'); ?>
+                        <p id="shipping_store" style="display: none"></p>
                     <?php else: ?>
                         <?php echo Mage::helper('repairdevice')->__('Tivolivägen 2, 12631 Hägersten, Sverige'); ?>
+                        <p id="shipping_store" style="display: none"></p>
                     <?php endif; ?>
                 </address>
             </fieldset>
@@ -499,7 +501,12 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
         var invoice_html = '';
         var count_invoice_item = 0;
         var data_invoice  = <?php echo $this->getProductForCategory($invoiceData['repairdevice_id'])?>;
-
+        //init shipping store
+        if($ji("#shipping_store").length > 0){
+            $ji("#shipping_method li").hide().last().show().find("input").attr("checked",true);
+            $ji(".shipping_input .fee").val("0.00").attr("disabled",true);
+        }
+        
         //load invoice item list
         $ji("#show_invoice_list").click(function(){
             event.preventDefault(); // Compatible standard Browsers
