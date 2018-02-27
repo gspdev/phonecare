@@ -77,10 +77,12 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
             </div>
             <div class="fieldset">
                 <table cellspacing="0" class="form-list">
+				<input type="hidden" name="repairdevice_id" value="<?php echo $invoiceData['repairdevice_id']; ?>" />
                     <tr>
                         <td class="label"><label><?php echo Mage::helper('repairdevice')->__('Invoice ID') ?></label>
                         </td>
                         <td class="value"><strong><?php echo $invoiceData['invoice_id'] ?></strong></td>
+						<input type="hidden" name="invoice_id" value="<?php echo $invoiceData['invoice_id'] ?>" />
                     </tr>
                     <tr>
                         <td class="label"><label><?php echo Mage::helper('repairdevice')->__('Invoice Date') ?></label>
@@ -88,12 +90,14 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                         <td class="value">
                             <strong><?php echo $this->formatDate($invoiceData['create_at'], 'medium', true) ?></strong>
                         </td>
+						<input type="hidden" name="create_at"/>
                     </tr>
                     <tr>
                         <td class="label">
                             <label><?php echo Mage::helper('repairdevice')->__('Invoice Status') ?></label></td>
-                        <td class="value"><strong><span id="order_status"><?php echo $this->getStatus()[$invoiceData['invoice_status']] ?></span></strong>
+                        <td class="value"><strong><span id="invoice_status"><?php echo $this->getStatus()[$invoiceData['invoice_status']] ?></span></strong>
                         </td>
+						<input type="hidden" name="invoice_status" value="<?php echo $this->getStatus()[$invoiceData['invoice_status']] ?>" />
                     </tr>
                 </table>
             </div>
@@ -108,6 +112,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
             <div class="fieldset">
                 <div class="hor-scroll">
                     <table cellspacing="0" class="form-list">
+					  <input type="hidden" name="customer_id" value="<?php echo $customerData['entity_id'] ?>" />
                         <tr>
                             <td class="label">
                                 <label><?php echo Mage::helper('repairdevice')->__('Customer Name') ?></label></td>
@@ -233,8 +238,8 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                 <h4 class="icon-head head-payment-method"><?php echo Mage::helper('repairdevice')->__('Payment Information') ?></h4>
             </div>
             <fieldset>
-                <div><?php echo $this->getChildHtml('order_payment') ?></div>
-                <div><?php echo Mage::helper('repairdevice')->__('Order was placed using %s') ?></div>
+                <div><?php echo Mage::helper('repairdevice')->__('Blank Payment:454815165448451') ?></div>
+				<input type="hidden" name="payment" value="Blank Payment:454815165448451" />
             </fieldset>
         </div>
     </div>
@@ -248,14 +253,14 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                 <div class="box-left">
                     <strong>Select Shipping Method</strong>
                     <ul class="shipping_method">
-                        <li><label><input type="radio" name="shipping method"><span class="text">DHL</span></label></li>
-                        <li><label><input type="radio" name="shipping method"><span class="text">EMS</span></label></li>
+                        <li><label><input type="radio" name="shipping[]" value="DHL"><span class="text">DHL</span></label></li>
+                        <li><label><input type="radio" name="shipping[]" value="EMS"><span class="text">EMS</span></label></li>
                     </ul>
                 </div>
                 <div class="box-right">
                     <strong>Enter Shipping & Handling fee</strong>
                     <div class="shipping_input">
-                        <input type="number" name="shipping fee" title="shipping fee" class="fee">
+                        <input type="number" name="shipping_cost" title="shipping fee" class="fee">
                         <button id="update_shipping"><span><span>Confirm This</span></span></button>
                     </div>
                 </div>
@@ -363,25 +368,58 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                     <?php endforeach; ?>
             </table>
         </div>
+		<?php
+           $_productIdsInvoice = $this->getProductInvoice($invoiceData['repairdevice_id']);
+		   if($_productIdsInvoice):?>
+		 <div class="entry-edit grid" style="margin-bottom:20px;">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-products"><?php echo Mage::helper('repairdevice')->__('Items Invoiced') ?></h4>
+            </div>
+            <table cellspacing="0" class="data order-tables">
+                <colgroup>
+                    <col width="1">
+                    <col width="1">
+                    <col>
+                </colgroup><thead>
+                <tr class="headings">
+                    <th>Product Id</th>
+                    <th><span class="nobr">Product Sku</span></th>
+                    <th class="last"><span class="nobr">Product Name</span></th>
+                </tr>
+                </thead>
+                    <?php
+                    //$products = $this->getProductForCategory($invoiceData['repairdevice_id']);
+                    //print_r($products);exit;
+
+                   
+                    foreach ($_productIdsInvoice as $productId): ?>
+                        <?php $product = Mage::getModel('catalog/product')->load($productId); ?>
+                        <tbody class="orderedList">
+                            <tr class="border">
+                                <td class="a-center"><?php echo $product->getId(); ?></td>
+                                <td class="a-center"><span><?php echo $product->getSku(); ?></span></td>
+                                <td class="title"><h5><span><?php echo $product->getName(); ?> </span></h5></td>
+                            </tr>
+                        </tbody>
+                    <?php endforeach; ?>
+            </table>
+        </div>
+		<?php endif;?>
         <?php echo $this->getItemsHtml() ?>
         <div class="clear"></div>
 
         <div class="box-left">
             <div class="entry-edit">
                 <div class="entry-edit-head">
-                    <h4><?php echo Mage::helper('repairdevice')->__('Comments History') ?></h4>
+                    <h4><?php echo Mage::helper('repairdevice')->__('Comments') ?></h4>
                 </div>
                 <fieldset>
                     <div id="order_history_block">
                         <div id="history_form" class="order-history-form">
-                            <div><?php echo Mage::helper('repairdevice')->__('Add Order Comments') ?></div>
-                            <span class="field-row">
-                                <label class="normal" for="history_status">
-                                    <?php echo Mage::helper('repairdevice')->__('Status') ?></label><br/>
-                            </span>
+                        
                             <span class="field-row"><label class="normal" for="history_comment">
                                     <?php echo Mage::helper('repairdevice')->__('Comment') ?></label>
-                                <textarea name="history[comment]" rows="3" cols="5" style="height:6em; width:99%;" id="history_comment"></textarea>
+                                <textarea name="comment" rows="3" cols="5" style="height:6em; width:99%;" id="history_comment"></textarea>
                             </span>
                             <div class="clear"></div>
                         </div>
@@ -402,6 +440,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                     <tr class="0">
                         <td class="label">
                             <span id="update_group">
+								<input type="number" name="subTotal" value="0.00" id="subTotal" style="display:none;">
                                 <input type="number" name="grandTotal" value="0.00" id="grandTotal">
                                 <button id="confirm_grand"><span><span>Confirm</span></span></button>
                             </span>
@@ -427,15 +466,18 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
                 </table>
 
                 <div class="order-totals-bottom">
-                    <div class="divider"></div>
+                    <!--<div class="divider"></div>
                     <p>
                         <label class="normal" for="send_email">Email Copy of Invoice</label>
                         <input id="send_email" name="invoice[send_email]" value="1" type="checkbox">
-                    </p>
-                    <div class="a-right">
-                        <button title="Submit Invoice" type="button" class="scalable save submit-button" onclick="$('edit_form').submit()">
+                    </p>-->
+					<?php if(!$_productIdsInvoice): ?>
+					   <div class="a-right">
+                            <button title="Submit Invoice" type="button" class="scalable save submit-button" onclick="$('edit_form').submit()">
                             <span><span><span>Submit Invoice</span></span></span></button>
-                    </div>
+                       </div>
+					<?php endif;?>
+                    
                 </div>
             </div>
         </div>
@@ -464,7 +506,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
             var tmp_len = data_invoice.length;
             for(var i = 0;i < tmp_len;i++){
                 invoice_html += '<tr>' +
-                    '<td class="a-center"><span class="check"><input type="checkbox" class="check_item" value="'+data_invoice[i].sku+'" name="invoice[]"  data-index="'+i+'"></span></td>'+
+                    '<td class="a-center"><span class="check"><input type="checkbox" class="check_item" value="'+data_invoice[i].entity_id+'" name="invoice_products[]"  data-index="'+i+'"></span></td>'+
                     '<td class="a-center"><span class="id">'+data_invoice[i].entity_id+'</span></td>'+
                     '<td class="a-center"><span class="sku">'+data_invoice[i].sku+'</td>'+
                     '<td class="title"><span class="name">'+data_invoice[i].name+'</td>' +
@@ -540,6 +582,7 @@ $addressData = $this->getAddress($invoiceData['repairdevice_id']);
             t_grand = (parseFloat(t_sub) + parseFloat(t_shipping)).toFixed(2);
             $ji(".order-totals .subtotal").text("SEK"+t_sub);
             $ji(".order-totals .grandtotal").text(t_grand);
+			$ji("#subTotal").val(t_sub);
             $ji("#grandTotal").val(t_grand);
         }
     };

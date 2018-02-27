@@ -15,7 +15,7 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit_Tab_Products extends 
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('repairdevice/repairproduct')
-            ->getCollection()
+            ->getCollection()->addFieldToFilter('if_invoice', 0)
             ->addAttributeToFilter('repair_id' , $this->getRequest()->getParam('id'));
 
         $this->setCollection($collection);
@@ -33,6 +33,13 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit_Tab_Products extends 
             'type'  => 'number',
             'sortable' => true,
         ));
+		
+		$this->addColumn('product_sku' , array(
+            'header'	=> 'Product Sku',
+            'type'      => 'content',
+			'renderer'  => 'repairdevice/adminhtml_repairdevice_renderer_productsku'
+        ));
+		
 		
 		$this->addColumn('product_name' , array(
             'header'	=> 'Product Name',

@@ -11,11 +11,13 @@
     <col width="1" />
     <thead>
         <tr>
-            <th><?php echo $this->__('ID #') ?></th>
+            
+			<th><?php echo $this->__('Invoice ID #') ?></th>
             <th><?php echo $this->__('Imei') ?></th>
             <th><?php echo $this->__('Screencode') ?></th>
             <th><?php echo $this->__('Detailed') ?></th>
             <th><?php echo $this->__('Shipping Method') ?></th>
+            <th><?php echo $this->__('Status') ?></th>
             <th><?php echo $this->__('Created at') ?></th>
             <th>&nbsp;</th>
         </tr>
@@ -24,7 +26,7 @@
         <?php $_odd = ''; ?>
         <?php foreach ($_repairList as $_item): ?>
         <tr>
-            <td><?php echo $_item->getRepairdeviceId() ?></td>
+            <td><?php echo $_item->getInvoiceId() ?></td>
             <td><?php echo $_item->getImei()?></td>
             <td><?php echo $_item->getScreencode() ?></td>
             <td><?php echo $_item->getDetailed() ?></td>
@@ -42,7 +44,27 @@
 					echo $this->__('Tivolivägen 2, 12631 Hägersten, Sverige');
 				}
 			?></td>
-			
+			<td>
+			   <?php
+                 if($_item->getInvoiceStatus()==1){
+					  echo $this->__('Pending');
+				 }elseif($_item->getInvoiceStatus()==2){
+					  echo $this->__('Received');
+				 }
+				 elseif($_item->getInvoiceStatus()==3){
+					  echo $this->__('Invoice');
+				 }
+				 elseif($_item->getInvoiceStatus()==4){
+					  echo $this->__('Processing');
+				 }
+				 elseif($_item->getInvoiceStatus()==5){
+					  echo $this->__('Complete');
+				 }
+				 else{
+					 echo $this->__('Canceled');
+				 }
+			   ?>
+			</td>
             <td><?php echo $_item->getCreateAt()?></td>
             <td class="a-center">
                 <span class="nobr"><a href="<?php echo $this->getViewUrl($_item) ?>"><?php echo $this->__('View Detailed') ?></a>

@@ -66,13 +66,25 @@ class Dylan_Repairdevice_Block_Adminhtml_Invoice extends Mage_Adminhtml_Block_Te
 	public function getProduct($productId)
 	{
 		$collection = Mage::getModel('repairdevice/repairproduct')
-		  ->getCollection()
+		  ->getCollection()->addFieldToFilter('if_invoice', 0)
 		  ->addAttributeToFilter('repair_id' , $productId)->getData();
 		  $productIds = array_column($collection, 'product_id');
 		  
 		 return $productIds;
 		  
 	}
+	
+	public function getProductInvoice($productId)
+	{
+		$collection = Mage::getModel('repairdevice/repairproduct')
+		  ->getCollection()->addFieldToFilter('if_invoice', 1)
+		  ->addAttributeToFilter('repair_id' , $productId)->getData();
+		  $productIds = array_column($collection, 'product_id');
+		  
+		 return $productIds;
+		  
+	}
+	
 	public function getAddress($repairId)
 	{
 		$collection = Mage::getModel('repairdevice/repairaddress')
@@ -125,6 +137,7 @@ class Dylan_Repairdevice_Block_Adminhtml_Invoice extends Mage_Adminhtml_Block_Te
 					 'name' =>trim($product->getName()),
 					 'price'=>$product->getPrice(),
 					 'currency' => Mage::helper('core')->currency($product->getPrice(), true, false)
+					//'currency' => Mage::app()->getStore()->getCurrentCurrencyCode()
 				   );
                    //$dataArr[]=$product->getData();				   
 					 

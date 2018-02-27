@@ -32,4 +32,5 @@
             <block type="repairdevice/adminhtml_repairdevice" name="repairdevice"></block>
         </reference>
     </repairdevice_adminhtml_repairdevice_index>
+	
 </layout>

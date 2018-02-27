@@ -66,7 +66,7 @@
                <?php endforeach; ?>			
         </li>
 		<li>
-		<label for="ProductList" class="required"><em></em><?php echo $this->__('Repair Device Product:') ?>&nbsp;&nbsp;</label>
+		<label for="ProductList" class="required"><em></em><?php echo $this->__('Customer Repair Items Products:') ?>&nbsp;&nbsp;</label>
 
 		<?php 
 		  $_productIds = $this->getProduct($this->getRepairdevice()->getRepairdeviceId());
@@ -80,6 +80,26 @@
 				  
 		 <?php endforeach; ?>
         </li>
+		
+		
+		
+		<?php $_productIds = $this->getProductInvoice($this->getRepairdevice()->getRepairdeviceId());
+		if($_productIds):?>
+		   <li>
+			<label for="ProductList" class="required"><em></em><?php echo $this->__('Repair Invocie Products:') ?>&nbsp;&nbsp;</label>
+			<?php 
+			  
+			  foreach($_productIds as $productId): ?>
+				 <?php $product = Mage::getModel('catalog/product')->load($productId); ?>
+					 <div>
+							Product Id:&nbsp;&nbsp;<?php echo $product->getId(); ?>&nbsp;&nbsp;&nbsp;&nbsp;
+							Product Sku:&nbsp;&nbsp;<span><?php echo $product->getSku(); ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+							Product Name:&nbsp;&nbsp;<span><?php echo $product->getName(); ?> </span>
+					 </div>
+					  
+			 <?php endforeach; ?>
+        </li>
+		<?php endif;?>
     </ul>
 	
 	<div class="buttons-set">

@@ -10,4 +10,5 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Renderer_Productname exten
 	    return $productName;
 		
 	}
+
 }

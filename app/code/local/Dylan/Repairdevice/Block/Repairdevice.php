@@ -67,13 +67,25 @@ class Dylan_Repairdevice_Block_Repairdevice extends Mage_Core_Block_Template
 	public function getProduct($productId)
 	{
 		$collection = Mage::getModel('repairdevice/repairproduct')
-		  ->getCollection()
+		  ->getCollection()->addFieldToFilter('if_invoice', 0)
 		  ->addAttributeToFilter('repair_id' , $productId)->getData();
 		  $productIds = array_column($collection, 'product_id');
 		  
 		 return $productIds;
 		  
 	}
+	
+	public function getProductInvoice($productId)
+	{
+		$collection = Mage::getModel('repairdevice/repairproduct')
+		  ->getCollection()->addFieldToFilter('if_invoice', 1)
+		  ->addAttributeToFilter('repair_id' , $productId)->getData();
+		  $productIds = array_column($collection, 'product_id');
+		  
+		 return $productIds;
+		  
+	}
+	
 	public function getAddress($repairId)
 	{
 		$collection = Mage::getModel('repairdevice/repairaddress')

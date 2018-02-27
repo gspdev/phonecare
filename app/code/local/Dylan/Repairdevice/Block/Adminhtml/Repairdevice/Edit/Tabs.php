@@ -44,8 +44,8 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit_Tabs extends Mage_Adm
       ));
 	  
 	   $this->addTab('products_section' , array(
-            'label'     => 'Product Message',
-            'title'     => 'Product Message',
+            'label'     => 'Customer Item Products',
+            'title'     => 'Customer Item Products',
             'content'   => $this->getLayout()->createBlock('repairdevice/adminhtml_repairdevice_edit_tab_products')->toHtml(),
         ));
 		$this->addTab('address_section' , array(
@@ -54,9 +54,15 @@ class Dylan_Repairdevice_Block_Adminhtml_Repairdevice_Edit_Tabs extends Mage_Adm
 			'content'   => $this->getLayout()->createBlock('repairdevice/adminhtml_repairdevice_edit_tab_address')->toHtml(),
 		));
 		
+		$this->addTab('invoiceinfo_section' , array(
+			'label'     => 'Invoice Info',
+			'title'     => 'Invoice Info',
+			'content'   => $this->getLayout()->createBlock('repairdevice/adminhtml_repairdevice_edit_tab_invoiceinfo')->toHtml(),
+		));	
+		
 	    $this->addTab('manageproducts_section' , array(
-			'label'     => 'Manage Products',
-			'title'     => 'Manage Products',
+			'label'     => ' Invoice Item  Products',
+			'title'     => 'Invoice Item Products',
 			'content'   => $this->getLayout()->createBlock('repairdevice/adminhtml_repairdevice_edit_tab_manageproducts')->toHtml(),
 		));	
 		

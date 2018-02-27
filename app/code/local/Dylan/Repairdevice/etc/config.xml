@@ -87,6 +87,9 @@
 					<repairaddress>
                         <table>repair_address</table>
                     </repairaddress>
+					<repairdeviceinvoice>
+                        <table>repairdevice_invoice</table>
+                    </repairdeviceinvoice>
                 </entities>
             </repairdevice_mysql4>
     	</models>
