@@ -27,7 +27,7 @@
  * @var Mage_Page_Block_Html_Header $this
  */
 ?>
-<?php 
+<?php
 	$session = Mage::getSingleton('customer/session');
 	$status = $session->isLoggedIn();
 	$customer_data = Mage::getModel('customer/customer')->load($session->id);
@@ -60,7 +60,7 @@
                                     <li><a href="<?php echo $this->getUrl('customer/account/login')?>" title="Sign in" class="signin">Logga in</a></li>
                                     <li><a class="head-Join register" href="<?php echo $this->getUrl("customer/account/create")?>" title="Join">Registrera</a></li>
                                 <?php else:?>
-                                    <li><span>Hi,</span><a title="My Account" href="<?php echo $this->getUrl('customer/account/')?>"><span style="margin-right: 10px;"><?php echo $customer_data->getFirstname()?></span></a></li>
+                                    <li><span>Welcome,</span><a title="My Account" href="<?php echo $this->getUrl('customer/account/')?>"><span style="margin-right: 10px;"><?php echo $customer_data->getFirstname()?></span></a></li>
                                     <li><a href="<?php echo $this->getUrl('customer/account/logout')?>">Logout</a></li>
 								<?php endif;?>
                                 <li class="hidden-xs"><a href="<?php echo $this->getUrl("contact-us")?>">Kontakta oss</a></li>
